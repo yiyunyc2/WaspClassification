@@ -1,0 +1,29 @@
+taxonomy 2020 Current
+(Microgastrine A Agupta_FernandezTriana Austinocotesia_FernandezTriana Billmasonius_FernandezTriana Carlmuesebeckius_FernandezTriana Eripnopelta_Xiong_van_Achterberg_and_Chen Gilbertnixonius_FernandezTriana Janhalacaste_FernandezTriana Jenopappius_FernandezTriana Jimwhitfieldius_FernandezTriana Kotenkosius_FernandezTriana Markshawius_FernandezTriana Notogaster_FernandezTriana_and_Ward Ohenri_FernandezTriana Qrocodiledundee_FernandezTriana Silvaspinosus_FernandezTriana Tobleronius_FernandezTriana Ungunicus_FernandezTriana Ypsilonogaster_FernandezTriana Zachterbergius_FernandezTriana Teremys_Mason)
+
+taxonomy 2018 Whitfield
+(Microgastrine A Other)
+
+articulations 2020 2018
+[2020.A equals 2018.A]
+[2020.Agupta_FernandezTriana is_included_in 2018.Other]
+[2020.Austinocotesia_FernandezTriana is_included_in 2018.Other]
+[2020.Billmasonius_FernandezTriana is_included_in 2018.Other]
+[2020.Carlmuesebeckius_FernandezTriana is_included_in 2018.Other]
+[2020.Eripnopelta_Xiong_van_Achterberg_and_Chen is_included_in 2018.Other]
+[2020.Gilbertnixonius_FernandezTriana is_included_in 2018.Other]
+[2020.Janhalacaste_FernandezTriana is_included_in 2018.Other]
+[2020.Jenopappius_FernandezTriana is_included_in 2018.Other]
+[2020.Jimwhitfieldius_FernandezTriana is_included_in 2018.Other]
+[2020.Kotenkosius_FernandezTriana is_included_in 2018.Other]
+[2020.Markshawius_FernandezTriana is_included_in 2018.Other]
+[2020.Notogaster_FernandezTriana_and_Ward is_included_in 2018.Other]
+[2020.Ohenri_FernandezTriana is_included_in 2018.Other]
+[2020.Qrocodiledundee_FernandezTriana is_included_in 2018.Other]
+[2020.Silvaspinosus_FernandezTriana is_included_in 2018.Other]
+[2020.Tobleronius_FernandezTriana is_included_in 2018.Other]
+[2020.Ungunicus_FernandezTriana is_included_in 2018.Other]
+[2020.Ypsilonogaster_FernandezTriana is_included_in 2018.Other]
+[2020.Zachterbergius_FernandezTriana is_included_in 2018.Other]
+[2020.Teremys_Mason is_included_in 2018.Other]
+[2020.Microgastrine equals 2018.Microgastrine]
