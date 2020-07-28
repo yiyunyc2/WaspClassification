@@ -1,0 +1,37 @@
+##### Executing command:
+
+/Users/jessicacheng/EulerX/src-el/euler2 align Microgastrine_abbrev.txt -r clingo 
+
+
+##### Euler version:
+
+master
+49e63e6a27be97ab30832180a47d214494388e15
+
+
+##### GraphViz version:
+
+dot - graphviz version 2.36.0 (20140111.2315)
+
+
+##### DLV version:
+
+DLV [build BEN/Dec 17 2012   gcc 4.2.1 (Apple Inc. build 5666) (dot 3)]
+
+usage: dlv {FRONTEND} {OPTIONS} [filename [filename [...]]]
+
+Specify -help for more detailed usage information.
+
+
+##### Running User, Host and Date:
+User:	jessicacheng
+Host:	JessicatekiMacBook-Air.local
+Date:	2020-07-27-21:22:25
+
+
+##### Euler Outputs:
+******* You are running example Microgastrine_abbrev *******
+
+Possible world 0:
+{2020.Jimwhitfieldius_FernandezTriana"<"2018.Microgastrine, 2020.Jimwhitfieldius_FernandezTriana"<"2018.Other, 2020.Billmasonius_FernandezTriana"<"2018.Microgastrine, 2020.Billmasonius_FernandezTriana"<"2018.Other, 2020.Janhalacaste_FernandezTriana"<"2018.Microgastrine, 2020.Janhalacaste_FernandezTriana"<"2018.Other, 2020.Gilbertnixonius_FernandezTriana"<"2018.Microgastrine, 2020.Gilbertnixonius_FernandezTriana"<"2018.Other, 2020.Markshawius_FernandezTriana"<"2018.Microgastrine, 2020.Markshawius_FernandezTriana"<"2018.Other, 2020.Jenopappius_FernandezTriana"<"2018.Microgastrine, 2020.Jenopappius_FernandezTriana"<"2018.Other, 2020.Tobleronius_FernandezTriana"<"2018.Microgastrine, 2020.Tobleronius_FernandezTriana"<"2018.Other, 2020.Eripnopelta_Xiong_van_Achterberg_and_Chen"<"2018.Microgastrine, 2020.Eripnopelta_Xiong_van_Achterberg_and_Chen"<"2018.Other, 2020.A"<"2018.Microgastrine, 2020.Austinocotesia_FernandezTriana"<"2018.Microgastrine, 2020.Austinocotesia_FernandezTriana"<"2018.Other, 2020.Ypsilonogaster_FernandezTriana"<"2018.Microgastrine, 2020.Ypsilonogaster_FernandezTriana"<"2018.Other, 2020.Silvaspinosus_FernandezTriana"<"2018.Microgastrine, 2020.Silvaspinosus_FernandezTriana"<"2018.Other, 2020.Ohenri_FernandezTriana"<"2018.Microgastrine, 2020.Ohenri_FernandezTriana"<"2018.Other, 2020.Notogaster_FernandezTriana_and_Ward"<"2018.Microgastrine, 2020.Notogaster_FernandezTriana_and_Ward"<"2018.Other, 2020.Zachterbergius_FernandezTriana"<"2018.Microgastrine, 2020.Zachterbergius_FernandezTriana"<"2018.Other, 2020.Qrocodiledundee_FernandezTriana"<"2018.Microgastrine, 2020.Qrocodiledundee_FernandezTriana"<"2018.Other, 2020.Carlmuesebeckius_FernandezTriana"<"2018.Microgastrine, 2020.Carlmuesebeckius_FernandezTriana"<"2018.Other, 2020.Teremys_Mason"<"2018.Microgastrine, 2020.Teremys_Mason"<"2018.Other, 2020.Ungunicus_FernandezTriana"<"2018.Microgastrine, 2020.Ungunicus_FernandezTriana"<"2018.Other, 2020.Kotenkosius_FernandezTriana"<"2018.Microgastrine, 2020.Kotenkosius_FernandezTriana"<"2018.Other, 2020.Agupta_FernandezTriana"<"2018.Microgastrine, 2020.Agupta_FernandezTriana"<"2018.Other, 2020.Microgastrine"="2018.Microgastrine, 2020.A"="2018.A, 2020.Microgastrine">"2018.A, 2020.Microgastrine">"2018.Other, 2020.Jimwhitfieldius_FernandezTriana"!"2018.A, 2020.Billmasonius_FernandezTriana"!"2018.A, 2020.Janhalacaste_FernandezTriana"!"2018.A, 2020.Gilbertnixonius_FernandezTriana"!"2018.A, 2020.Markshawius_FernandezTriana"!"2018.A, 2020.Jenopappius_FernandezTriana"!"2018.A, 2020.Tobleronius_FernandezTriana"!"2018.A, 2020.Eripnopelta_Xiong_van_Achterberg_and_Chen"!"2018.A, 2020.A"!"2018.Other, 2020.Austinocotesia_FernandezTriana"!"2018.A, 2020.Ypsilonogaster_FernandezTriana"!"2018.A, 2020.Silvaspinosus_FernandezTriana"!"2018.A, 2020.Ohenri_FernandezTriana"!"2018.A, 2020.Notogaster_FernandezTriana_and_Ward"!"2018.A, 2020.Zachterbergius_FernandezTriana"!"2018.A, 2020.Qrocodiledundee_FernandezTriana"!"2018.A, 2020.Carlmuesebeckius_FernandezTriana"!"2018.A, 2020.Teremys_Mason"!"2018.A, 2020.Ungunicus_FernandezTriana"!"2018.A, 2020.Kotenkosius_FernandezTriana"!"2018.A, 2020.Agupta_FernandezTriana"!"2018.A}
+
