@@ -331,21 +331,21 @@ node[shape=box]
 <TR> <TD COLSPAN="2"><font face="Arial Black"> Nodes</font></TD> </TR> 
 <TR> 
  <TD bgcolor="#FFFFCC" fontname="helvetica">2003</TD> 
- <TD>10</TD> 
+ <TD>48</TD> 
  </TR> 
 <TR> 
  <TD bgcolor="#CCFFCC" fontname="helvetica">2020</TD> 
- <TD>15</TD> 
+ <TD>85</TD> 
  </TR> 
 <TR> <TD COLSPAN="2"><font face = "Arial Black"> Edges </font></TD> </TR> 
 <TR> 
- <TD><font color ="#000000">is_a (2003)</font></TD><TD>9</TD>
+ <TD><font color ="#000000">is_a (2003)</font></TD><TD>47</TD>
 </TR>
 <TR> 
- <TD><font color ="#000000">is_a (2020)</font></TD><TD>14</TD>
+ <TD><font color ="#000000">is_a (2020)</font></TD><TD>84</TD>
 </TR>
 <TR> 
- <TD><font color ="#AA00FF">articulations</font></TD><TD>9</TD>
+ <TD><font color ="#AA00FF">articulations</font></TD><TD>47</TD>
 </TR>
 </TABLE> 
  >] } 
