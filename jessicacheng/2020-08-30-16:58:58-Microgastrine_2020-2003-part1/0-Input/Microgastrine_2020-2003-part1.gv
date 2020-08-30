@@ -1,0 +1,94 @@
+digraph{
+rankdir=LR
+node[shape=circle style=filled fillcolor="#FFFFFF"] 
+node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"] 
+"2003.Miropotes_Nixon"
+"2003.Exix_Mason"
+"2003.ParoplitisMason"
+"2003.Fornicia_Brulle"
+"2003.Microgastrine"
+"2003.Parenion_Nixon"
+"2003.Hygroplitis_Thomson"
+"2003.Microgaster_Latreille"
+"2003.Apanteles_Forster"
+"2003.Hypomicrogaster_Ashmead"
+node[shape=circle style=filled fillcolor="#FFFFFF"] 
+node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"] 
+"2020.Microgaster_Latreille"
+"2020.Hypomicrogaster_Ashmead"
+"2020.Illidops_Mason"
+"2020.ParoplitisMason"
+"2020.Fornicia_Brulle"
+"2020.Exix_Mason"
+"2020.Parenion_Nixon"
+"2020.Exoryza_Mason"
+"2020.Miropotes_Nixon"
+"2020.Choeras_Mason"
+"2020.Microgastrine"
+"2020.Apanteles_Forster"
+"2020.Hygroplitis_Thomson"
+"2020.Iconella_Mason"
+"2020.Dolichogenidea_Viereck"
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+"2003.Hypomicrogaster_Ashmead" -> "2003.Microgastrine"
+"2003.Parenion_Nixon" -> "2003.Microgastrine"
+"2003.Apanteles_Forster" -> "2003.Microgastrine"
+"2003.Hygroplitis_Thomson" -> "2003.Microgastrine"
+"2003.Exix_Mason" -> "2003.Microgastrine"
+"2003.Miropotes_Nixon" -> "2003.Microgastrine"
+"2003.Microgaster_Latreille" -> "2003.Microgastrine"
+"2003.Fornicia_Brulle" -> "2003.Microgastrine"
+"2003.ParoplitisMason" -> "2003.Microgastrine"
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+"2020.Microgastrine" -> "2020.Dolichogenidea_Viereck" [dir=back]
+"2020.Microgastrine" -> "2020.Microgaster_Latreille" [dir=back]
+"2020.Microgastrine" -> "2020.Hygroplitis_Thomson" [dir=back]
+"2020.Microgastrine" -> "2020.Illidops_Mason" [dir=back]
+"2020.Microgastrine" -> "2020.Exix_Mason" [dir=back]
+"2020.Microgastrine" -> "2020.Hypomicrogaster_Ashmead" [dir=back]
+"2020.Microgastrine" -> "2020.Miropotes_Nixon" [dir=back]
+"2020.Microgastrine" -> "2020.Fornicia_Brulle" [dir=back]
+"2020.Microgastrine" -> "2020.Apanteles_Forster" [dir=back]
+"2020.Microgastrine" -> "2020.Parenion_Nixon" [dir=back]
+"2020.Microgastrine" -> "2020.ParoplitisMason" [dir=back]
+"2020.Microgastrine" -> "2020.Iconella_Mason" [dir=back]
+"2020.Microgastrine" -> "2020.Choeras_Mason" [dir=back]
+"2020.Microgastrine" -> "2020.Exoryza_Mason" [dir=back]
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+edge[style=dashed color="#AA00FF" constraint=true penwidth=2 dir=both]
+"2020.Miropotes_Nixon" -> "2003.Miropotes_Nixon" [label="="]
+"2020.Hygroplitis_Thomson" -> "2003.Hygroplitis_Thomson" [label="="]
+"2020.Fornicia_Brulle" -> "2003.Fornicia_Brulle" [label="="]
+"2020.ParoplitisMason" -> "2003.ParoplitisMason" [label="="]
+"2020.Apanteles_Forster" -> "2003.Apanteles_Forster" [label="="]
+"2020.Hypomicrogaster_Ashmead" -> "2003.Hypomicrogaster_Ashmead" [label="="]
+"2020.Microgaster_Latreille" -> "2003.Microgaster_Latreille" [label="="]
+"2020.Parenion_Nixon" -> "2003.Parenion_Nixon" [label="="]
+"2020.Exix_Mason" -> "2003.Exix_Mason" [label="="]
+node[shape=box] 
+{rank=source Legend [fillcolor= white margin=0 label=< 
+ <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> 
+<TR> <TD COLSPAN="2"><font face="Arial Black"> Nodes</font></TD> </TR> 
+<TR> 
+ <TD bgcolor="#FFFFCC" fontname="helvetica">2003</TD> 
+ <TD>10</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#CCFFCC" fontname="helvetica">2020</TD> 
+ <TD>15</TD> 
+ </TR> 
+<TR> <TD COLSPAN="2"><font face = "Arial Black"> Edges </font></TD> </TR> 
+<TR> 
+ <TD><font color ="#000000">is_a (2003)</font></TD><TD>9</TD>
+</TR>
+<TR> 
+ <TD><font color ="#000000">is_a (2020)</font></TD><TD>14</TD>
+</TR>
+<TR> 
+ <TD><font color ="#AA00FF">articulations</font></TD><TD>9</TD>
+</TR>
+</TABLE> 
+ >] } 
+}

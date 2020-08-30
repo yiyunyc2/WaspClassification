@@ -1,0 +1,28 @@
+taxonomy 2020 Current
+(Microgastrine Alphomelon_Mason Deuterixys_Mason Distatrix_Mason Rhygolitis_Mason Venanides_Mason Wilkinsonellus_Mason Beyerslania_Kocak_and_Kemal Pholetesor_Mason Teremys_Mason Cotesia_Cameron Protapanteles_Ashmead Sathon_Mason Nyereria_Mason Glyptapanteles_Ashmead Rasivalva_Mason Pseudapanteles_Ashmead Parapanteles_Ashmead Microplitis_Foerster Snellenius_Westwood Protomicroplitis_Ashead Diologaster_Ashmead Xanthomicrogaster_Cameron)
+taxonomy 2003 VanAchterberg
+(Microgastrine Alphomelon_Mason Deuterixys_Mason Distatrix_Mason Rhygolitis_Mason Venanides_Mason Wilkinsonellus_Mason Xenogaster_Mason Pholetesor_Mason Teremys_Mason Cotesia_Cameron Protapanteles_Ashmead Pseudapanteles_Ashmead Parapanteles_Ashmead Microplitis_Forster Snellenius_Westwood Protomicroplitis_Ashead Diologaster_Ashmead Xanthomicrogaster_Cameron)
+
+articulations 2020 2003
+[2020.Alphomelon_Mason equals 2003.Alphomelon_Mason]
+[2020.Deuterixys_Mason equals 2003.Deuterixys_Mason]
+[2020.Distatrix_Mason equals 2003.Distatrix_Mason]
+[2020.Rhygolitis_Mason equals 2003.Rhygolitis_Mason]
+[2020.Venanides_Mason equals 2003.Venanides_Mason]
+[2020.Wilkinsonellus_Mason equals 2003.Wilkinsonellus_Mason]
+[2020.Beyerslania_Kocak_and_Kemal equals 2003.Xenogaster_Mason]
+[2020.Pholetesor_Mason equals 2003.Pholetesor_Mason]
+[2020.Teremys_Mason equals 2003.Teremys_Mason]
+[2020.Cotesia_Cameron equals 2003.Cotesia_Cameron]
+[2020.Protapanteles_Ashmead equals 2003.Protapanteles_Ashmead]
+#[2020.Sathon_Mason equals 2003.Sathon_Mason]
+#[2020.Nyereria_Mason equals 2003.Nyereria_Mason]
+#[2020.Glyptapanteles_Ashmead equals 2003.Glyptapanteles_Ashmead]
+#[2020.Rasivalva_Mason equals 2003.Rasivalva_Mason]
+[2020.Pseudapanteles_Ashmead equals 2003.Pseudapanteles_Ashmead]
+[2020.Parapanteles_Ashmead equals 2003.Parapanteles_Ashmead]
+[2020.Microplitis_Foerster equals 2003.Microplitis_Forster]
+[2020.Snellenius_Westwood equals 2003.Snellenius_Westwood]
+[2020.Protomicroplitis_Ashead equals 2003.Protomicroplitis_Ashead]
+[2020.Diologaster_Ashmead equals 2003.Diologaster_Ashmead]
+[2020.Xanthomicrogaster_Cameron equals 2003.Xanthomicrogaster_Cameron]

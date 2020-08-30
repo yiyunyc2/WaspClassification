@@ -1,0 +1,203 @@
+2003.Apanteles_Forster:
+  concept: Apanteles_Forster
+  group: '2003'
+2003.Exix_Mason:
+  concept: Exix_Mason
+  group: '2003'
+2003.Fornicia_Brulle:
+  concept: Fornicia_Brulle
+  group: '2003'
+2003.Hygroplitis_Thomson:
+  concept: Hygroplitis_Thomson
+  group: '2003'
+2003.Hypomicrogaster_Ashmead:
+  concept: Hypomicrogaster_Ashmead
+  group: '2003'
+2003.Microgaster_Latreille:
+  concept: Microgaster_Latreille
+  group: '2003'
+2003.Microgastrine:
+  concept: Microgastrine
+  group: '2003'
+2003.Miropotes_Nixon:
+  concept: Miropotes_Nixon
+  group: '2003'
+2003.Parenion_Nixon:
+  concept: Parenion_Nixon
+  group: '2003'
+2003.ParoplitisMason:
+  concept: ParoplitisMason
+  group: '2003'
+2020.Apanteles_Forster:
+  concept: Apanteles_Forster
+  group: '2020'
+2020.Choeras_Mason:
+  concept: Choeras_Mason
+  group: '2020'
+2020.Dolichogenidea_Viereck:
+  concept: Dolichogenidea_Viereck
+  group: '2020'
+2020.Exix_Mason:
+  concept: Exix_Mason
+  group: '2020'
+2020.Exoryza_Mason:
+  concept: Exoryza_Mason
+  group: '2020'
+2020.Fornicia_Brulle:
+  concept: Fornicia_Brulle
+  group: '2020'
+2020.Hygroplitis_Thomson:
+  concept: Hygroplitis_Thomson
+  group: '2020'
+2020.Hypomicrogaster_Ashmead:
+  concept: Hypomicrogaster_Ashmead
+  group: '2020'
+2020.Iconella_Mason:
+  concept: Iconella_Mason
+  group: '2020'
+2020.Illidops_Mason:
+  concept: Illidops_Mason
+  group: '2020'
+2020.Microgaster_Latreille:
+  concept: Microgaster_Latreille
+  group: '2020'
+2020.Microgastrine:
+  concept: Microgastrine
+  group: '2020'
+2020.Miropotes_Nixon:
+  concept: Miropotes_Nixon
+  group: '2020'
+2020.Parenion_Nixon:
+  concept: Parenion_Nixon
+  group: '2020'
+2020.ParoplitisMason:
+  concept: ParoplitisMason
+  group: '2020'
+2003.Apanteles_Forster_2003.Microgastrine:
+  label: isa
+  s: 2003.Apanteles_Forster
+  t: 2003.Microgastrine
+2003.Exix_Mason_2003.Microgastrine:
+  label: isa
+  s: 2003.Exix_Mason
+  t: 2003.Microgastrine
+2003.Fornicia_Brulle_2003.Microgastrine:
+  label: isa
+  s: 2003.Fornicia_Brulle
+  t: 2003.Microgastrine
+2003.Hygroplitis_Thomson_2003.Microgastrine:
+  label: isa
+  s: 2003.Hygroplitis_Thomson
+  t: 2003.Microgastrine
+2003.Hypomicrogaster_Ashmead_2003.Microgastrine:
+  label: isa
+  s: 2003.Hypomicrogaster_Ashmead
+  t: 2003.Microgastrine
+2003.Microgaster_Latreille_2003.Microgastrine:
+  label: isa
+  s: 2003.Microgaster_Latreille
+  t: 2003.Microgastrine
+2003.Miropotes_Nixon_2003.Microgastrine:
+  label: isa
+  s: 2003.Miropotes_Nixon
+  t: 2003.Microgastrine
+2003.Parenion_Nixon_2003.Microgastrine:
+  label: isa
+  s: 2003.Parenion_Nixon
+  t: 2003.Microgastrine
+2003.ParoplitisMason_2003.Microgastrine:
+  label: isa
+  s: 2003.ParoplitisMason
+  t: 2003.Microgastrine
+2020.Apanteles_Forster_2003.Apanteles_Forster:
+  label: '='
+  s: 2020.Apanteles_Forster
+  t: 2003.Apanteles_Forster
+2020.Apanteles_Forster_2020.Microgastrine:
+  label: isa
+  s: 2020.Apanteles_Forster
+  t: 2020.Microgastrine
+2020.Choeras_Mason_2020.Microgastrine:
+  label: isa
+  s: 2020.Choeras_Mason
+  t: 2020.Microgastrine
+2020.Dolichogenidea_Viereck_2020.Microgastrine:
+  label: isa
+  s: 2020.Dolichogenidea_Viereck
+  t: 2020.Microgastrine
+2020.Exix_Mason_2003.Exix_Mason:
+  label: '='
+  s: 2020.Exix_Mason
+  t: 2003.Exix_Mason
+2020.Exix_Mason_2020.Microgastrine:
+  label: isa
+  s: 2020.Exix_Mason
+  t: 2020.Microgastrine
+2020.Exoryza_Mason_2020.Microgastrine:
+  label: isa
+  s: 2020.Exoryza_Mason
+  t: 2020.Microgastrine
+2020.Fornicia_Brulle_2003.Fornicia_Brulle:
+  label: '='
+  s: 2020.Fornicia_Brulle
+  t: 2003.Fornicia_Brulle
+2020.Fornicia_Brulle_2020.Microgastrine:
+  label: isa
+  s: 2020.Fornicia_Brulle
+  t: 2020.Microgastrine
+2020.Hygroplitis_Thomson_2003.Hygroplitis_Thomson:
+  label: '='
+  s: 2020.Hygroplitis_Thomson
+  t: 2003.Hygroplitis_Thomson
+2020.Hygroplitis_Thomson_2020.Microgastrine:
+  label: isa
+  s: 2020.Hygroplitis_Thomson
+  t: 2020.Microgastrine
+2020.Hypomicrogaster_Ashmead_2003.Hypomicrogaster_Ashmead:
+  label: '='
+  s: 2020.Hypomicrogaster_Ashmead
+  t: 2003.Hypomicrogaster_Ashmead
+2020.Hypomicrogaster_Ashmead_2020.Microgastrine:
+  label: isa
+  s: 2020.Hypomicrogaster_Ashmead
+  t: 2020.Microgastrine
+2020.Iconella_Mason_2020.Microgastrine:
+  label: isa
+  s: 2020.Iconella_Mason
+  t: 2020.Microgastrine
+2020.Illidops_Mason_2020.Microgastrine:
+  label: isa
+  s: 2020.Illidops_Mason
+  t: 2020.Microgastrine
+2020.Microgaster_Latreille_2003.Microgaster_Latreille:
+  label: '='
+  s: 2020.Microgaster_Latreille
+  t: 2003.Microgaster_Latreille
+2020.Microgaster_Latreille_2020.Microgastrine:
+  label: isa
+  s: 2020.Microgaster_Latreille
+  t: 2020.Microgastrine
+2020.Miropotes_Nixon_2003.Miropotes_Nixon:
+  label: '='
+  s: 2020.Miropotes_Nixon
+  t: 2003.Miropotes_Nixon
+2020.Miropotes_Nixon_2020.Microgastrine:
+  label: isa
+  s: 2020.Miropotes_Nixon
+  t: 2020.Microgastrine
+2020.Parenion_Nixon_2003.Parenion_Nixon:
+  label: '='
+  s: 2020.Parenion_Nixon
+  t: 2003.Parenion_Nixon
+2020.Parenion_Nixon_2020.Microgastrine:
+  label: isa
+  s: 2020.Parenion_Nixon
+  t: 2020.Microgastrine
+2020.ParoplitisMason_2003.ParoplitisMason:
+  label: '='
+  s: 2020.ParoplitisMason
+  t: 2003.ParoplitisMason
+2020.ParoplitisMason_2020.Microgastrine:
+  label: isa
+  s: 2020.ParoplitisMason
+  t: 2020.Microgastrine
