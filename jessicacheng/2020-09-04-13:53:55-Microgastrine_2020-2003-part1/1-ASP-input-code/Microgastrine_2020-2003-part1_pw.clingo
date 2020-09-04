@@ -1,0 +1,1554 @@
+%%% Euler regions
+r(1..149).
+
+%%% Concepts
+tax(t2003,0).
+concept2(A, B) :- concept(A,B,_).
+concept2(c2003_Microgastrine,0).
+concept(c2003_Microgaster_Latreille,0,0).
+concept(c2003_Fornicia_Brulle,0,1).
+concept(c2003_Miropotes_Nixon,0,2).
+concept(c2003_Hypomicrogaster_Ashmead,0,3).
+concept(c2003_Parenion_Nixon,0,4).
+concept(c2003_Apanteles_Forster,0,5).
+concept(c2003_Exix_Mason,0,6).
+concept(c2003_Hygroplitis_Thomson,0,7).
+concept(c2003_ParoplitisMason,0,8).
+tax(t2020,1).
+concept2(A, B) :- concept(A,B,_).
+concept(c2020_Iconella_Mason,1,0).
+concept2(c2020_Microgastrine,1).
+concept(c2020_Microgaster_Latreille,1,1).
+concept(c2020_Fornicia_Brulle,1,2).
+concept(c2020_Miropotes_Nixon,1,3).
+concept(c2020_Hypomicrogaster_Ashmead,1,4).
+concept(c2020_Parenion_Nixon,1,5).
+concept(c2020_Exoryza_Mason,1,6).
+concept(c2020_Apanteles_Forster,1,7).
+concept(c2020_Illidops_Mason,1,8).
+concept(c2020_Exix_Mason,1,9).
+concept(c2020_Choeras_Mason,1,10).
+concept(c2020_Hygroplitis_Thomson,1,11).
+concept(c2020_Dolichogenidea_Viereck,1,12).
+concept(c2020_ParoplitisMason,1,13).
+%%% Euler Bit
+bit(M, 0, V):-r(M),M1=M/1, V = M1 \ 10.
+bit(M, 1, V):-r(M),M1=M/10, V = M1 \ 15.
+
+
+%%% Meaning of regions
+in(X, M) :- r(M),concept(X,T,N),N1=N+1,bit(M,T,N1).
+out(X, M) :- r(M),concept(X,T,N),N1=N+1,not bit(M,T,N1).
+in(X, M) :- r(M),concept2(X,_),not out(X, M).
+out(X, M) :- out3(X, M, _), ix.
+irs(M) :- in(X, M), out(X, M), r(M), concept2(X,_).
+
+%%% Constraints of regions.
+irs(X) :- ir(X, _).
+vrs(X) :- vr(X, _).
+vr(X, X) :- not irs(X), r(X).
+ir(X, X) :- not vrs(X), r(X), pw.
+ie(prod(A,B)) :- vr(X, A), ir(X, B), ix.
+:- vrs(X), irs(X), pw.
+
+%%% Inconsistency Explanation.
+ie(s(R, A, Y)) :- pie(R, A, Y), not cc(R, Y), ix.
+cc(R, Y) :- c(R, _, Y), ix.
+
+%%% Parent-Child relations
+%% ISA
+% c2003_Microgaster_Latreille isa c2003_Microgastrine
+ir(X, r0) :- in(c2003_Microgaster_Latreille, X), out(c2003_Microgastrine, X), pw.
+ir(X, prod(r0,R)) :- in(c2003_Microgaster_Latreille,X), out3(c2003_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2003_Microgaster_Latreille,X), in(c2003_Microgastrine,X)} <= 0, pw.
+pie(r0, A, 1) :- ir(X, A), in(c2003_Microgaster_Latreille, X), in(c2003_Microgastrine, X), ix.
+c(r0, A, 1) :- vr(X, A), in(c2003_Microgaster_Latreille, X), in(c2003_Microgastrine, X), ix.
+
+% c2003_Exix_Mason isa c2003_Microgastrine
+ir(X, r1) :- in(c2003_Exix_Mason, X), out(c2003_Microgastrine, X), pw.
+ir(X, prod(r1,R)) :- in(c2003_Exix_Mason,X), out3(c2003_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2003_Exix_Mason,X), in(c2003_Microgastrine,X)} <= 0, pw.
+pie(r1, A, 1) :- ir(X, A), in(c2003_Exix_Mason, X), in(c2003_Microgastrine, X), ix.
+c(r1, A, 1) :- vr(X, A), in(c2003_Exix_Mason, X), in(c2003_Microgastrine, X), ix.
+
+% c2003_ParoplitisMason isa c2003_Microgastrine
+ir(X, r2) :- in(c2003_ParoplitisMason, X), out(c2003_Microgastrine, X), pw.
+ir(X, prod(r2,R)) :- in(c2003_ParoplitisMason,X), out3(c2003_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2003_ParoplitisMason,X), in(c2003_Microgastrine,X)} <= 0, pw.
+pie(r2, A, 1) :- ir(X, A), in(c2003_ParoplitisMason, X), in(c2003_Microgastrine, X), ix.
+c(r2, A, 1) :- vr(X, A), in(c2003_ParoplitisMason, X), in(c2003_Microgastrine, X), ix.
+
+% c2003_Hygroplitis_Thomson isa c2003_Microgastrine
+ir(X, r3) :- in(c2003_Hygroplitis_Thomson, X), out(c2003_Microgastrine, X), pw.
+ir(X, prod(r3,R)) :- in(c2003_Hygroplitis_Thomson,X), out3(c2003_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2003_Hygroplitis_Thomson,X), in(c2003_Microgastrine,X)} <= 0, pw.
+pie(r3, A, 1) :- ir(X, A), in(c2003_Hygroplitis_Thomson, X), in(c2003_Microgastrine, X), ix.
+c(r3, A, 1) :- vr(X, A), in(c2003_Hygroplitis_Thomson, X), in(c2003_Microgastrine, X), ix.
+
+% c2003_Miropotes_Nixon isa c2003_Microgastrine
+ir(X, r4) :- in(c2003_Miropotes_Nixon, X), out(c2003_Microgastrine, X), pw.
+ir(X, prod(r4,R)) :- in(c2003_Miropotes_Nixon,X), out3(c2003_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2003_Miropotes_Nixon,X), in(c2003_Microgastrine,X)} <= 0, pw.
+pie(r4, A, 1) :- ir(X, A), in(c2003_Miropotes_Nixon, X), in(c2003_Microgastrine, X), ix.
+c(r4, A, 1) :- vr(X, A), in(c2003_Miropotes_Nixon, X), in(c2003_Microgastrine, X), ix.
+
+% c2003_Parenion_Nixon isa c2003_Microgastrine
+ir(X, r5) :- in(c2003_Parenion_Nixon, X), out(c2003_Microgastrine, X), pw.
+ir(X, prod(r5,R)) :- in(c2003_Parenion_Nixon,X), out3(c2003_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2003_Parenion_Nixon,X), in(c2003_Microgastrine,X)} <= 0, pw.
+pie(r5, A, 1) :- ir(X, A), in(c2003_Parenion_Nixon, X), in(c2003_Microgastrine, X), ix.
+c(r5, A, 1) :- vr(X, A), in(c2003_Parenion_Nixon, X), in(c2003_Microgastrine, X), ix.
+
+% c2003_Fornicia_Brulle isa c2003_Microgastrine
+ir(X, r6) :- in(c2003_Fornicia_Brulle, X), out(c2003_Microgastrine, X), pw.
+ir(X, prod(r6,R)) :- in(c2003_Fornicia_Brulle,X), out3(c2003_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2003_Fornicia_Brulle,X), in(c2003_Microgastrine,X)} <= 0, pw.
+pie(r6, A, 1) :- ir(X, A), in(c2003_Fornicia_Brulle, X), in(c2003_Microgastrine, X), ix.
+c(r6, A, 1) :- vr(X, A), in(c2003_Fornicia_Brulle, X), in(c2003_Microgastrine, X), ix.
+
+% c2003_Hypomicrogaster_Ashmead isa c2003_Microgastrine
+ir(X, r7) :- in(c2003_Hypomicrogaster_Ashmead, X), out(c2003_Microgastrine, X), pw.
+ir(X, prod(r7,R)) :- in(c2003_Hypomicrogaster_Ashmead,X), out3(c2003_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2003_Hypomicrogaster_Ashmead,X), in(c2003_Microgastrine,X)} <= 0, pw.
+pie(r7, A, 1) :- ir(X, A), in(c2003_Hypomicrogaster_Ashmead, X), in(c2003_Microgastrine, X), ix.
+c(r7, A, 1) :- vr(X, A), in(c2003_Hypomicrogaster_Ashmead, X), in(c2003_Microgastrine, X), ix.
+
+% c2003_Apanteles_Forster isa c2003_Microgastrine
+ir(X, r8) :- in(c2003_Apanteles_Forster, X), out(c2003_Microgastrine, X), pw.
+ir(X, prod(r8,R)) :- in(c2003_Apanteles_Forster,X), out3(c2003_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2003_Apanteles_Forster,X), in(c2003_Microgastrine,X)} <= 0, pw.
+pie(r8, A, 1) :- ir(X, A), in(c2003_Apanteles_Forster, X), in(c2003_Microgastrine, X), ix.
+c(r8, A, 1) :- vr(X, A), in(c2003_Apanteles_Forster, X), in(c2003_Microgastrine, X), ix.
+
+%% coverage
+out3(c2003_Microgastrine, X, r9) :- out(c2003_Microgaster_Latreille, X), out(c2003_Exix_Mason, X), out(c2003_ParoplitisMason, X), out(c2003_Hygroplitis_Thomson, X), out(c2003_Miropotes_Nixon, X), out(c2003_Parenion_Nixon, X), out(c2003_Fornicia_Brulle, X), out(c2003_Hypomicrogaster_Ashmead, X), out(c2003_Apanteles_Forster, X), ix.
+out(c2003_Microgastrine, X) :- out(c2003_Microgaster_Latreille, X), out(c2003_Exix_Mason, X), out(c2003_ParoplitisMason, X), out(c2003_Hygroplitis_Thomson, X), out(c2003_Miropotes_Nixon, X), out(c2003_Parenion_Nixon, X), out(c2003_Fornicia_Brulle, X), out(c2003_Hypomicrogaster_Ashmead, X), out(c2003_Apanteles_Forster, X), pw.
+%% sibling disjointness
+% c2003_Microgaster_Latreille ! c2003_Exix_Mason
+ir(X, r10) :- in(c2003_Microgaster_Latreille, X), in(c2003_Exix_Mason, X).
+:- #count {X : vrs(X), in(c2003_Microgaster_Latreille,X), out(c2003_Exix_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Microgaster_Latreille,X), in(c2003_Exix_Mason,X)} <= 0, pw.
+pie(r10, A, 1) :- ir(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_Exix_Mason, X), ix.
+c(r10, A, 1) :- vr(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_Exix_Mason, X), ix.
+pie(r10, A, 2) :- ir(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_Exix_Mason, X), ix.
+c(r10, A, 2) :- vr(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_Exix_Mason, X), ix.
+
+% c2003_Microgaster_Latreille ! c2003_ParoplitisMason
+ir(X, r11) :- in(c2003_Microgaster_Latreille, X), in(c2003_ParoplitisMason, X).
+:- #count {X : vrs(X), in(c2003_Microgaster_Latreille,X), out(c2003_ParoplitisMason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Microgaster_Latreille,X), in(c2003_ParoplitisMason,X)} <= 0, pw.
+pie(r11, A, 1) :- ir(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_ParoplitisMason, X), ix.
+c(r11, A, 1) :- vr(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_ParoplitisMason, X), ix.
+pie(r11, A, 2) :- ir(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_ParoplitisMason, X), ix.
+c(r11, A, 2) :- vr(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_ParoplitisMason, X), ix.
+
+% c2003_Microgaster_Latreille ! c2003_Hygroplitis_Thomson
+ir(X, r12) :- in(c2003_Microgaster_Latreille, X), in(c2003_Hygroplitis_Thomson, X).
+:- #count {X : vrs(X), in(c2003_Microgaster_Latreille,X), out(c2003_Hygroplitis_Thomson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Microgaster_Latreille,X), in(c2003_Hygroplitis_Thomson,X)} <= 0, pw.
+pie(r12, A, 1) :- ir(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_Hygroplitis_Thomson, X), ix.
+c(r12, A, 1) :- vr(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_Hygroplitis_Thomson, X), ix.
+pie(r12, A, 2) :- ir(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_Hygroplitis_Thomson, X), ix.
+c(r12, A, 2) :- vr(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_Hygroplitis_Thomson, X), ix.
+
+% c2003_Microgaster_Latreille ! c2003_Miropotes_Nixon
+ir(X, r13) :- in(c2003_Microgaster_Latreille, X), in(c2003_Miropotes_Nixon, X).
+:- #count {X : vrs(X), in(c2003_Microgaster_Latreille,X), out(c2003_Miropotes_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Microgaster_Latreille,X), in(c2003_Miropotes_Nixon,X)} <= 0, pw.
+pie(r13, A, 1) :- ir(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_Miropotes_Nixon, X), ix.
+c(r13, A, 1) :- vr(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_Miropotes_Nixon, X), ix.
+pie(r13, A, 2) :- ir(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_Miropotes_Nixon, X), ix.
+c(r13, A, 2) :- vr(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_Miropotes_Nixon, X), ix.
+
+% c2003_Microgaster_Latreille ! c2003_Parenion_Nixon
+ir(X, r14) :- in(c2003_Microgaster_Latreille, X), in(c2003_Parenion_Nixon, X).
+:- #count {X : vrs(X), in(c2003_Microgaster_Latreille,X), out(c2003_Parenion_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Microgaster_Latreille,X), in(c2003_Parenion_Nixon,X)} <= 0, pw.
+pie(r14, A, 1) :- ir(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_Parenion_Nixon, X), ix.
+c(r14, A, 1) :- vr(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_Parenion_Nixon, X), ix.
+pie(r14, A, 2) :- ir(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_Parenion_Nixon, X), ix.
+c(r14, A, 2) :- vr(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_Parenion_Nixon, X), ix.
+
+% c2003_Microgaster_Latreille ! c2003_Fornicia_Brulle
+ir(X, r15) :- in(c2003_Microgaster_Latreille, X), in(c2003_Fornicia_Brulle, X).
+:- #count {X : vrs(X), in(c2003_Microgaster_Latreille,X), out(c2003_Fornicia_Brulle,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Microgaster_Latreille,X), in(c2003_Fornicia_Brulle,X)} <= 0, pw.
+pie(r15, A, 1) :- ir(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_Fornicia_Brulle, X), ix.
+c(r15, A, 1) :- vr(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_Fornicia_Brulle, X), ix.
+pie(r15, A, 2) :- ir(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_Fornicia_Brulle, X), ix.
+c(r15, A, 2) :- vr(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_Fornicia_Brulle, X), ix.
+
+% c2003_Microgaster_Latreille ! c2003_Hypomicrogaster_Ashmead
+ir(X, r16) :- in(c2003_Microgaster_Latreille, X), in(c2003_Hypomicrogaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2003_Microgaster_Latreille,X), out(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Microgaster_Latreille,X), in(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r16, A, 1) :- ir(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r16, A, 1) :- vr(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_Hypomicrogaster_Ashmead, X), ix.
+pie(r16, A, 2) :- ir(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r16, A, 2) :- vr(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+
+% c2003_Microgaster_Latreille ! c2003_Apanteles_Forster
+ir(X, r17) :- in(c2003_Microgaster_Latreille, X), in(c2003_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2003_Microgaster_Latreille,X), out(c2003_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Microgaster_Latreille,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+pie(r17, A, 1) :- ir(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_Apanteles_Forster, X), ix.
+c(r17, A, 1) :- vr(X, A), in(c2003_Microgaster_Latreille, X), out(c2003_Apanteles_Forster, X), ix.
+pie(r17, A, 2) :- ir(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_Apanteles_Forster, X), ix.
+c(r17, A, 2) :- vr(X, A), out(c2003_Microgaster_Latreille, X), in(c2003_Apanteles_Forster, X), ix.
+
+% c2003_Exix_Mason ! c2003_ParoplitisMason
+ir(X, r18) :- in(c2003_Exix_Mason, X), in(c2003_ParoplitisMason, X).
+:- #count {X : vrs(X), in(c2003_Exix_Mason,X), out(c2003_ParoplitisMason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Exix_Mason,X), in(c2003_ParoplitisMason,X)} <= 0, pw.
+pie(r18, A, 1) :- ir(X, A), in(c2003_Exix_Mason, X), out(c2003_ParoplitisMason, X), ix.
+c(r18, A, 1) :- vr(X, A), in(c2003_Exix_Mason, X), out(c2003_ParoplitisMason, X), ix.
+pie(r18, A, 2) :- ir(X, A), out(c2003_Exix_Mason, X), in(c2003_ParoplitisMason, X), ix.
+c(r18, A, 2) :- vr(X, A), out(c2003_Exix_Mason, X), in(c2003_ParoplitisMason, X), ix.
+
+% c2003_Exix_Mason ! c2003_Hygroplitis_Thomson
+ir(X, r19) :- in(c2003_Exix_Mason, X), in(c2003_Hygroplitis_Thomson, X).
+:- #count {X : vrs(X), in(c2003_Exix_Mason,X), out(c2003_Hygroplitis_Thomson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Exix_Mason,X), in(c2003_Hygroplitis_Thomson,X)} <= 0, pw.
+pie(r19, A, 1) :- ir(X, A), in(c2003_Exix_Mason, X), out(c2003_Hygroplitis_Thomson, X), ix.
+c(r19, A, 1) :- vr(X, A), in(c2003_Exix_Mason, X), out(c2003_Hygroplitis_Thomson, X), ix.
+pie(r19, A, 2) :- ir(X, A), out(c2003_Exix_Mason, X), in(c2003_Hygroplitis_Thomson, X), ix.
+c(r19, A, 2) :- vr(X, A), out(c2003_Exix_Mason, X), in(c2003_Hygroplitis_Thomson, X), ix.
+
+% c2003_Exix_Mason ! c2003_Miropotes_Nixon
+ir(X, r20) :- in(c2003_Exix_Mason, X), in(c2003_Miropotes_Nixon, X).
+:- #count {X : vrs(X), in(c2003_Exix_Mason,X), out(c2003_Miropotes_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Exix_Mason,X), in(c2003_Miropotes_Nixon,X)} <= 0, pw.
+pie(r20, A, 1) :- ir(X, A), in(c2003_Exix_Mason, X), out(c2003_Miropotes_Nixon, X), ix.
+c(r20, A, 1) :- vr(X, A), in(c2003_Exix_Mason, X), out(c2003_Miropotes_Nixon, X), ix.
+pie(r20, A, 2) :- ir(X, A), out(c2003_Exix_Mason, X), in(c2003_Miropotes_Nixon, X), ix.
+c(r20, A, 2) :- vr(X, A), out(c2003_Exix_Mason, X), in(c2003_Miropotes_Nixon, X), ix.
+
+% c2003_Exix_Mason ! c2003_Parenion_Nixon
+ir(X, r21) :- in(c2003_Exix_Mason, X), in(c2003_Parenion_Nixon, X).
+:- #count {X : vrs(X), in(c2003_Exix_Mason,X), out(c2003_Parenion_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Exix_Mason,X), in(c2003_Parenion_Nixon,X)} <= 0, pw.
+pie(r21, A, 1) :- ir(X, A), in(c2003_Exix_Mason, X), out(c2003_Parenion_Nixon, X), ix.
+c(r21, A, 1) :- vr(X, A), in(c2003_Exix_Mason, X), out(c2003_Parenion_Nixon, X), ix.
+pie(r21, A, 2) :- ir(X, A), out(c2003_Exix_Mason, X), in(c2003_Parenion_Nixon, X), ix.
+c(r21, A, 2) :- vr(X, A), out(c2003_Exix_Mason, X), in(c2003_Parenion_Nixon, X), ix.
+
+% c2003_Exix_Mason ! c2003_Fornicia_Brulle
+ir(X, r22) :- in(c2003_Exix_Mason, X), in(c2003_Fornicia_Brulle, X).
+:- #count {X : vrs(X), in(c2003_Exix_Mason,X), out(c2003_Fornicia_Brulle,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Exix_Mason,X), in(c2003_Fornicia_Brulle,X)} <= 0, pw.
+pie(r22, A, 1) :- ir(X, A), in(c2003_Exix_Mason, X), out(c2003_Fornicia_Brulle, X), ix.
+c(r22, A, 1) :- vr(X, A), in(c2003_Exix_Mason, X), out(c2003_Fornicia_Brulle, X), ix.
+pie(r22, A, 2) :- ir(X, A), out(c2003_Exix_Mason, X), in(c2003_Fornicia_Brulle, X), ix.
+c(r22, A, 2) :- vr(X, A), out(c2003_Exix_Mason, X), in(c2003_Fornicia_Brulle, X), ix.
+
+% c2003_Exix_Mason ! c2003_Hypomicrogaster_Ashmead
+ir(X, r23) :- in(c2003_Exix_Mason, X), in(c2003_Hypomicrogaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2003_Exix_Mason,X), out(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Exix_Mason,X), in(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r23, A, 1) :- ir(X, A), in(c2003_Exix_Mason, X), out(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r23, A, 1) :- vr(X, A), in(c2003_Exix_Mason, X), out(c2003_Hypomicrogaster_Ashmead, X), ix.
+pie(r23, A, 2) :- ir(X, A), out(c2003_Exix_Mason, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r23, A, 2) :- vr(X, A), out(c2003_Exix_Mason, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+
+% c2003_Exix_Mason ! c2003_Apanteles_Forster
+ir(X, r24) :- in(c2003_Exix_Mason, X), in(c2003_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2003_Exix_Mason,X), out(c2003_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Exix_Mason,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+pie(r24, A, 1) :- ir(X, A), in(c2003_Exix_Mason, X), out(c2003_Apanteles_Forster, X), ix.
+c(r24, A, 1) :- vr(X, A), in(c2003_Exix_Mason, X), out(c2003_Apanteles_Forster, X), ix.
+pie(r24, A, 2) :- ir(X, A), out(c2003_Exix_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+c(r24, A, 2) :- vr(X, A), out(c2003_Exix_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+
+% c2003_ParoplitisMason ! c2003_Hygroplitis_Thomson
+ir(X, r25) :- in(c2003_ParoplitisMason, X), in(c2003_Hygroplitis_Thomson, X).
+:- #count {X : vrs(X), in(c2003_ParoplitisMason,X), out(c2003_Hygroplitis_Thomson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_ParoplitisMason,X), in(c2003_Hygroplitis_Thomson,X)} <= 0, pw.
+pie(r25, A, 1) :- ir(X, A), in(c2003_ParoplitisMason, X), out(c2003_Hygroplitis_Thomson, X), ix.
+c(r25, A, 1) :- vr(X, A), in(c2003_ParoplitisMason, X), out(c2003_Hygroplitis_Thomson, X), ix.
+pie(r25, A, 2) :- ir(X, A), out(c2003_ParoplitisMason, X), in(c2003_Hygroplitis_Thomson, X), ix.
+c(r25, A, 2) :- vr(X, A), out(c2003_ParoplitisMason, X), in(c2003_Hygroplitis_Thomson, X), ix.
+
+% c2003_ParoplitisMason ! c2003_Miropotes_Nixon
+ir(X, r26) :- in(c2003_ParoplitisMason, X), in(c2003_Miropotes_Nixon, X).
+:- #count {X : vrs(X), in(c2003_ParoplitisMason,X), out(c2003_Miropotes_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_ParoplitisMason,X), in(c2003_Miropotes_Nixon,X)} <= 0, pw.
+pie(r26, A, 1) :- ir(X, A), in(c2003_ParoplitisMason, X), out(c2003_Miropotes_Nixon, X), ix.
+c(r26, A, 1) :- vr(X, A), in(c2003_ParoplitisMason, X), out(c2003_Miropotes_Nixon, X), ix.
+pie(r26, A, 2) :- ir(X, A), out(c2003_ParoplitisMason, X), in(c2003_Miropotes_Nixon, X), ix.
+c(r26, A, 2) :- vr(X, A), out(c2003_ParoplitisMason, X), in(c2003_Miropotes_Nixon, X), ix.
+
+% c2003_ParoplitisMason ! c2003_Parenion_Nixon
+ir(X, r27) :- in(c2003_ParoplitisMason, X), in(c2003_Parenion_Nixon, X).
+:- #count {X : vrs(X), in(c2003_ParoplitisMason,X), out(c2003_Parenion_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_ParoplitisMason,X), in(c2003_Parenion_Nixon,X)} <= 0, pw.
+pie(r27, A, 1) :- ir(X, A), in(c2003_ParoplitisMason, X), out(c2003_Parenion_Nixon, X), ix.
+c(r27, A, 1) :- vr(X, A), in(c2003_ParoplitisMason, X), out(c2003_Parenion_Nixon, X), ix.
+pie(r27, A, 2) :- ir(X, A), out(c2003_ParoplitisMason, X), in(c2003_Parenion_Nixon, X), ix.
+c(r27, A, 2) :- vr(X, A), out(c2003_ParoplitisMason, X), in(c2003_Parenion_Nixon, X), ix.
+
+% c2003_ParoplitisMason ! c2003_Fornicia_Brulle
+ir(X, r28) :- in(c2003_ParoplitisMason, X), in(c2003_Fornicia_Brulle, X).
+:- #count {X : vrs(X), in(c2003_ParoplitisMason,X), out(c2003_Fornicia_Brulle,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_ParoplitisMason,X), in(c2003_Fornicia_Brulle,X)} <= 0, pw.
+pie(r28, A, 1) :- ir(X, A), in(c2003_ParoplitisMason, X), out(c2003_Fornicia_Brulle, X), ix.
+c(r28, A, 1) :- vr(X, A), in(c2003_ParoplitisMason, X), out(c2003_Fornicia_Brulle, X), ix.
+pie(r28, A, 2) :- ir(X, A), out(c2003_ParoplitisMason, X), in(c2003_Fornicia_Brulle, X), ix.
+c(r28, A, 2) :- vr(X, A), out(c2003_ParoplitisMason, X), in(c2003_Fornicia_Brulle, X), ix.
+
+% c2003_ParoplitisMason ! c2003_Hypomicrogaster_Ashmead
+ir(X, r29) :- in(c2003_ParoplitisMason, X), in(c2003_Hypomicrogaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2003_ParoplitisMason,X), out(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_ParoplitisMason,X), in(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r29, A, 1) :- ir(X, A), in(c2003_ParoplitisMason, X), out(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r29, A, 1) :- vr(X, A), in(c2003_ParoplitisMason, X), out(c2003_Hypomicrogaster_Ashmead, X), ix.
+pie(r29, A, 2) :- ir(X, A), out(c2003_ParoplitisMason, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r29, A, 2) :- vr(X, A), out(c2003_ParoplitisMason, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+
+% c2003_ParoplitisMason ! c2003_Apanteles_Forster
+ir(X, r30) :- in(c2003_ParoplitisMason, X), in(c2003_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2003_ParoplitisMason,X), out(c2003_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_ParoplitisMason,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+pie(r30, A, 1) :- ir(X, A), in(c2003_ParoplitisMason, X), out(c2003_Apanteles_Forster, X), ix.
+c(r30, A, 1) :- vr(X, A), in(c2003_ParoplitisMason, X), out(c2003_Apanteles_Forster, X), ix.
+pie(r30, A, 2) :- ir(X, A), out(c2003_ParoplitisMason, X), in(c2003_Apanteles_Forster, X), ix.
+c(r30, A, 2) :- vr(X, A), out(c2003_ParoplitisMason, X), in(c2003_Apanteles_Forster, X), ix.
+
+% c2003_Hygroplitis_Thomson ! c2003_Miropotes_Nixon
+ir(X, r31) :- in(c2003_Hygroplitis_Thomson, X), in(c2003_Miropotes_Nixon, X).
+:- #count {X : vrs(X), in(c2003_Hygroplitis_Thomson,X), out(c2003_Miropotes_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Hygroplitis_Thomson,X), in(c2003_Miropotes_Nixon,X)} <= 0, pw.
+pie(r31, A, 1) :- ir(X, A), in(c2003_Hygroplitis_Thomson, X), out(c2003_Miropotes_Nixon, X), ix.
+c(r31, A, 1) :- vr(X, A), in(c2003_Hygroplitis_Thomson, X), out(c2003_Miropotes_Nixon, X), ix.
+pie(r31, A, 2) :- ir(X, A), out(c2003_Hygroplitis_Thomson, X), in(c2003_Miropotes_Nixon, X), ix.
+c(r31, A, 2) :- vr(X, A), out(c2003_Hygroplitis_Thomson, X), in(c2003_Miropotes_Nixon, X), ix.
+
+% c2003_Hygroplitis_Thomson ! c2003_Parenion_Nixon
+ir(X, r32) :- in(c2003_Hygroplitis_Thomson, X), in(c2003_Parenion_Nixon, X).
+:- #count {X : vrs(X), in(c2003_Hygroplitis_Thomson,X), out(c2003_Parenion_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Hygroplitis_Thomson,X), in(c2003_Parenion_Nixon,X)} <= 0, pw.
+pie(r32, A, 1) :- ir(X, A), in(c2003_Hygroplitis_Thomson, X), out(c2003_Parenion_Nixon, X), ix.
+c(r32, A, 1) :- vr(X, A), in(c2003_Hygroplitis_Thomson, X), out(c2003_Parenion_Nixon, X), ix.
+pie(r32, A, 2) :- ir(X, A), out(c2003_Hygroplitis_Thomson, X), in(c2003_Parenion_Nixon, X), ix.
+c(r32, A, 2) :- vr(X, A), out(c2003_Hygroplitis_Thomson, X), in(c2003_Parenion_Nixon, X), ix.
+
+% c2003_Hygroplitis_Thomson ! c2003_Fornicia_Brulle
+ir(X, r33) :- in(c2003_Hygroplitis_Thomson, X), in(c2003_Fornicia_Brulle, X).
+:- #count {X : vrs(X), in(c2003_Hygroplitis_Thomson,X), out(c2003_Fornicia_Brulle,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Hygroplitis_Thomson,X), in(c2003_Fornicia_Brulle,X)} <= 0, pw.
+pie(r33, A, 1) :- ir(X, A), in(c2003_Hygroplitis_Thomson, X), out(c2003_Fornicia_Brulle, X), ix.
+c(r33, A, 1) :- vr(X, A), in(c2003_Hygroplitis_Thomson, X), out(c2003_Fornicia_Brulle, X), ix.
+pie(r33, A, 2) :- ir(X, A), out(c2003_Hygroplitis_Thomson, X), in(c2003_Fornicia_Brulle, X), ix.
+c(r33, A, 2) :- vr(X, A), out(c2003_Hygroplitis_Thomson, X), in(c2003_Fornicia_Brulle, X), ix.
+
+% c2003_Hygroplitis_Thomson ! c2003_Hypomicrogaster_Ashmead
+ir(X, r34) :- in(c2003_Hygroplitis_Thomson, X), in(c2003_Hypomicrogaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2003_Hygroplitis_Thomson,X), out(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Hygroplitis_Thomson,X), in(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r34, A, 1) :- ir(X, A), in(c2003_Hygroplitis_Thomson, X), out(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r34, A, 1) :- vr(X, A), in(c2003_Hygroplitis_Thomson, X), out(c2003_Hypomicrogaster_Ashmead, X), ix.
+pie(r34, A, 2) :- ir(X, A), out(c2003_Hygroplitis_Thomson, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r34, A, 2) :- vr(X, A), out(c2003_Hygroplitis_Thomson, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+
+% c2003_Hygroplitis_Thomson ! c2003_Apanteles_Forster
+ir(X, r35) :- in(c2003_Hygroplitis_Thomson, X), in(c2003_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2003_Hygroplitis_Thomson,X), out(c2003_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Hygroplitis_Thomson,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+pie(r35, A, 1) :- ir(X, A), in(c2003_Hygroplitis_Thomson, X), out(c2003_Apanteles_Forster, X), ix.
+c(r35, A, 1) :- vr(X, A), in(c2003_Hygroplitis_Thomson, X), out(c2003_Apanteles_Forster, X), ix.
+pie(r35, A, 2) :- ir(X, A), out(c2003_Hygroplitis_Thomson, X), in(c2003_Apanteles_Forster, X), ix.
+c(r35, A, 2) :- vr(X, A), out(c2003_Hygroplitis_Thomson, X), in(c2003_Apanteles_Forster, X), ix.
+
+% c2003_Miropotes_Nixon ! c2003_Parenion_Nixon
+ir(X, r36) :- in(c2003_Miropotes_Nixon, X), in(c2003_Parenion_Nixon, X).
+:- #count {X : vrs(X), in(c2003_Miropotes_Nixon,X), out(c2003_Parenion_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Miropotes_Nixon,X), in(c2003_Parenion_Nixon,X)} <= 0, pw.
+pie(r36, A, 1) :- ir(X, A), in(c2003_Miropotes_Nixon, X), out(c2003_Parenion_Nixon, X), ix.
+c(r36, A, 1) :- vr(X, A), in(c2003_Miropotes_Nixon, X), out(c2003_Parenion_Nixon, X), ix.
+pie(r36, A, 2) :- ir(X, A), out(c2003_Miropotes_Nixon, X), in(c2003_Parenion_Nixon, X), ix.
+c(r36, A, 2) :- vr(X, A), out(c2003_Miropotes_Nixon, X), in(c2003_Parenion_Nixon, X), ix.
+
+% c2003_Miropotes_Nixon ! c2003_Fornicia_Brulle
+ir(X, r37) :- in(c2003_Miropotes_Nixon, X), in(c2003_Fornicia_Brulle, X).
+:- #count {X : vrs(X), in(c2003_Miropotes_Nixon,X), out(c2003_Fornicia_Brulle,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Miropotes_Nixon,X), in(c2003_Fornicia_Brulle,X)} <= 0, pw.
+pie(r37, A, 1) :- ir(X, A), in(c2003_Miropotes_Nixon, X), out(c2003_Fornicia_Brulle, X), ix.
+c(r37, A, 1) :- vr(X, A), in(c2003_Miropotes_Nixon, X), out(c2003_Fornicia_Brulle, X), ix.
+pie(r37, A, 2) :- ir(X, A), out(c2003_Miropotes_Nixon, X), in(c2003_Fornicia_Brulle, X), ix.
+c(r37, A, 2) :- vr(X, A), out(c2003_Miropotes_Nixon, X), in(c2003_Fornicia_Brulle, X), ix.
+
+% c2003_Miropotes_Nixon ! c2003_Hypomicrogaster_Ashmead
+ir(X, r38) :- in(c2003_Miropotes_Nixon, X), in(c2003_Hypomicrogaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2003_Miropotes_Nixon,X), out(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Miropotes_Nixon,X), in(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r38, A, 1) :- ir(X, A), in(c2003_Miropotes_Nixon, X), out(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r38, A, 1) :- vr(X, A), in(c2003_Miropotes_Nixon, X), out(c2003_Hypomicrogaster_Ashmead, X), ix.
+pie(r38, A, 2) :- ir(X, A), out(c2003_Miropotes_Nixon, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r38, A, 2) :- vr(X, A), out(c2003_Miropotes_Nixon, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+
+% c2003_Miropotes_Nixon ! c2003_Apanteles_Forster
+ir(X, r39) :- in(c2003_Miropotes_Nixon, X), in(c2003_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2003_Miropotes_Nixon,X), out(c2003_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Miropotes_Nixon,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+pie(r39, A, 1) :- ir(X, A), in(c2003_Miropotes_Nixon, X), out(c2003_Apanteles_Forster, X), ix.
+c(r39, A, 1) :- vr(X, A), in(c2003_Miropotes_Nixon, X), out(c2003_Apanteles_Forster, X), ix.
+pie(r39, A, 2) :- ir(X, A), out(c2003_Miropotes_Nixon, X), in(c2003_Apanteles_Forster, X), ix.
+c(r39, A, 2) :- vr(X, A), out(c2003_Miropotes_Nixon, X), in(c2003_Apanteles_Forster, X), ix.
+
+% c2003_Parenion_Nixon ! c2003_Fornicia_Brulle
+ir(X, r40) :- in(c2003_Parenion_Nixon, X), in(c2003_Fornicia_Brulle, X).
+:- #count {X : vrs(X), in(c2003_Parenion_Nixon,X), out(c2003_Fornicia_Brulle,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Parenion_Nixon,X), in(c2003_Fornicia_Brulle,X)} <= 0, pw.
+pie(r40, A, 1) :- ir(X, A), in(c2003_Parenion_Nixon, X), out(c2003_Fornicia_Brulle, X), ix.
+c(r40, A, 1) :- vr(X, A), in(c2003_Parenion_Nixon, X), out(c2003_Fornicia_Brulle, X), ix.
+pie(r40, A, 2) :- ir(X, A), out(c2003_Parenion_Nixon, X), in(c2003_Fornicia_Brulle, X), ix.
+c(r40, A, 2) :- vr(X, A), out(c2003_Parenion_Nixon, X), in(c2003_Fornicia_Brulle, X), ix.
+
+% c2003_Parenion_Nixon ! c2003_Hypomicrogaster_Ashmead
+ir(X, r41) :- in(c2003_Parenion_Nixon, X), in(c2003_Hypomicrogaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2003_Parenion_Nixon,X), out(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Parenion_Nixon,X), in(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r41, A, 1) :- ir(X, A), in(c2003_Parenion_Nixon, X), out(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r41, A, 1) :- vr(X, A), in(c2003_Parenion_Nixon, X), out(c2003_Hypomicrogaster_Ashmead, X), ix.
+pie(r41, A, 2) :- ir(X, A), out(c2003_Parenion_Nixon, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r41, A, 2) :- vr(X, A), out(c2003_Parenion_Nixon, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+
+% c2003_Parenion_Nixon ! c2003_Apanteles_Forster
+ir(X, r42) :- in(c2003_Parenion_Nixon, X), in(c2003_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2003_Parenion_Nixon,X), out(c2003_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Parenion_Nixon,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+pie(r42, A, 1) :- ir(X, A), in(c2003_Parenion_Nixon, X), out(c2003_Apanteles_Forster, X), ix.
+c(r42, A, 1) :- vr(X, A), in(c2003_Parenion_Nixon, X), out(c2003_Apanteles_Forster, X), ix.
+pie(r42, A, 2) :- ir(X, A), out(c2003_Parenion_Nixon, X), in(c2003_Apanteles_Forster, X), ix.
+c(r42, A, 2) :- vr(X, A), out(c2003_Parenion_Nixon, X), in(c2003_Apanteles_Forster, X), ix.
+
+% c2003_Fornicia_Brulle ! c2003_Hypomicrogaster_Ashmead
+ir(X, r43) :- in(c2003_Fornicia_Brulle, X), in(c2003_Hypomicrogaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2003_Fornicia_Brulle,X), out(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Fornicia_Brulle,X), in(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r43, A, 1) :- ir(X, A), in(c2003_Fornicia_Brulle, X), out(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r43, A, 1) :- vr(X, A), in(c2003_Fornicia_Brulle, X), out(c2003_Hypomicrogaster_Ashmead, X), ix.
+pie(r43, A, 2) :- ir(X, A), out(c2003_Fornicia_Brulle, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r43, A, 2) :- vr(X, A), out(c2003_Fornicia_Brulle, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+
+% c2003_Fornicia_Brulle ! c2003_Apanteles_Forster
+ir(X, r44) :- in(c2003_Fornicia_Brulle, X), in(c2003_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2003_Fornicia_Brulle,X), out(c2003_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Fornicia_Brulle,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+pie(r44, A, 1) :- ir(X, A), in(c2003_Fornicia_Brulle, X), out(c2003_Apanteles_Forster, X), ix.
+c(r44, A, 1) :- vr(X, A), in(c2003_Fornicia_Brulle, X), out(c2003_Apanteles_Forster, X), ix.
+pie(r44, A, 2) :- ir(X, A), out(c2003_Fornicia_Brulle, X), in(c2003_Apanteles_Forster, X), ix.
+c(r44, A, 2) :- vr(X, A), out(c2003_Fornicia_Brulle, X), in(c2003_Apanteles_Forster, X), ix.
+
+% c2003_Hypomicrogaster_Ashmead ! c2003_Apanteles_Forster
+ir(X, r45) :- in(c2003_Hypomicrogaster_Ashmead, X), in(c2003_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2003_Hypomicrogaster_Ashmead,X), out(c2003_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Hypomicrogaster_Ashmead,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+pie(r45, A, 1) :- ir(X, A), in(c2003_Hypomicrogaster_Ashmead, X), out(c2003_Apanteles_Forster, X), ix.
+c(r45, A, 1) :- vr(X, A), in(c2003_Hypomicrogaster_Ashmead, X), out(c2003_Apanteles_Forster, X), ix.
+pie(r45, A, 2) :- ir(X, A), out(c2003_Hypomicrogaster_Ashmead, X), in(c2003_Apanteles_Forster, X), ix.
+c(r45, A, 2) :- vr(X, A), out(c2003_Hypomicrogaster_Ashmead, X), in(c2003_Apanteles_Forster, X), ix.
+
+%% ISA
+% c2020_Microgaster_Latreille isa c2020_Microgastrine
+ir(X, r46) :- in(c2020_Microgaster_Latreille, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r46,R)) :- in(c2020_Microgaster_Latreille,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r46, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), in(c2020_Microgastrine, X), ix.
+c(r46, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Exix_Mason isa c2020_Microgastrine
+ir(X, r47) :- in(c2020_Exix_Mason, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r47,R)) :- in(c2020_Exix_Mason,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Exix_Mason,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r47, A, 1) :- ir(X, A), in(c2020_Exix_Mason, X), in(c2020_Microgastrine, X), ix.
+c(r47, A, 1) :- vr(X, A), in(c2020_Exix_Mason, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_ParoplitisMason isa c2020_Microgastrine
+ir(X, r48) :- in(c2020_ParoplitisMason, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r48,R)) :- in(c2020_ParoplitisMason,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_ParoplitisMason,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r48, A, 1) :- ir(X, A), in(c2020_ParoplitisMason, X), in(c2020_Microgastrine, X), ix.
+c(r48, A, 1) :- vr(X, A), in(c2020_ParoplitisMason, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Hygroplitis_Thomson isa c2020_Microgastrine
+ir(X, r49) :- in(c2020_Hygroplitis_Thomson, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r49,R)) :- in(c2020_Hygroplitis_Thomson,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Hygroplitis_Thomson,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r49, A, 1) :- ir(X, A), in(c2020_Hygroplitis_Thomson, X), in(c2020_Microgastrine, X), ix.
+c(r49, A, 1) :- vr(X, A), in(c2020_Hygroplitis_Thomson, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Miropotes_Nixon isa c2020_Microgastrine
+ir(X, r50) :- in(c2020_Miropotes_Nixon, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r50,R)) :- in(c2020_Miropotes_Nixon,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Miropotes_Nixon,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r50, A, 1) :- ir(X, A), in(c2020_Miropotes_Nixon, X), in(c2020_Microgastrine, X), ix.
+c(r50, A, 1) :- vr(X, A), in(c2020_Miropotes_Nixon, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Parenion_Nixon isa c2020_Microgastrine
+ir(X, r51) :- in(c2020_Parenion_Nixon, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r51,R)) :- in(c2020_Parenion_Nixon,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Parenion_Nixon,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r51, A, 1) :- ir(X, A), in(c2020_Parenion_Nixon, X), in(c2020_Microgastrine, X), ix.
+c(r51, A, 1) :- vr(X, A), in(c2020_Parenion_Nixon, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Fornicia_Brulle isa c2020_Microgastrine
+ir(X, r52) :- in(c2020_Fornicia_Brulle, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r52,R)) :- in(c2020_Fornicia_Brulle,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Fornicia_Brulle,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r52, A, 1) :- ir(X, A), in(c2020_Fornicia_Brulle, X), in(c2020_Microgastrine, X), ix.
+c(r52, A, 1) :- vr(X, A), in(c2020_Fornicia_Brulle, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Hypomicrogaster_Ashmead isa c2020_Microgastrine
+ir(X, r53) :- in(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r53,R)) :- in(c2020_Hypomicrogaster_Ashmead,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Hypomicrogaster_Ashmead,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r53, A, 1) :- ir(X, A), in(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Microgastrine, X), ix.
+c(r53, A, 1) :- vr(X, A), in(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Choeras_Mason isa c2020_Microgastrine
+ir(X, r54) :- in(c2020_Choeras_Mason, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r54,R)) :- in(c2020_Choeras_Mason,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Choeras_Mason,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r54, A, 1) :- ir(X, A), in(c2020_Choeras_Mason, X), in(c2020_Microgastrine, X), ix.
+c(r54, A, 1) :- vr(X, A), in(c2020_Choeras_Mason, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Dolichogenidea_Viereck isa c2020_Microgastrine
+ir(X, r55) :- in(c2020_Dolichogenidea_Viereck, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r55,R)) :- in(c2020_Dolichogenidea_Viereck,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Dolichogenidea_Viereck,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r55, A, 1) :- ir(X, A), in(c2020_Dolichogenidea_Viereck, X), in(c2020_Microgastrine, X), ix.
+c(r55, A, 1) :- vr(X, A), in(c2020_Dolichogenidea_Viereck, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Apanteles_Forster isa c2020_Microgastrine
+ir(X, r56) :- in(c2020_Apanteles_Forster, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r56,R)) :- in(c2020_Apanteles_Forster,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Apanteles_Forster,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r56, A, 1) :- ir(X, A), in(c2020_Apanteles_Forster, X), in(c2020_Microgastrine, X), ix.
+c(r56, A, 1) :- vr(X, A), in(c2020_Apanteles_Forster, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Exoryza_Mason isa c2020_Microgastrine
+ir(X, r57) :- in(c2020_Exoryza_Mason, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r57,R)) :- in(c2020_Exoryza_Mason,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Exoryza_Mason,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r57, A, 1) :- ir(X, A), in(c2020_Exoryza_Mason, X), in(c2020_Microgastrine, X), ix.
+c(r57, A, 1) :- vr(X, A), in(c2020_Exoryza_Mason, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Iconella_Mason isa c2020_Microgastrine
+ir(X, r58) :- in(c2020_Iconella_Mason, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r58,R)) :- in(c2020_Iconella_Mason,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Iconella_Mason,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r58, A, 1) :- ir(X, A), in(c2020_Iconella_Mason, X), in(c2020_Microgastrine, X), ix.
+c(r58, A, 1) :- vr(X, A), in(c2020_Iconella_Mason, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Illidops_Mason isa c2020_Microgastrine
+ir(X, r59) :- in(c2020_Illidops_Mason, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r59,R)) :- in(c2020_Illidops_Mason,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Illidops_Mason,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r59, A, 1) :- ir(X, A), in(c2020_Illidops_Mason, X), in(c2020_Microgastrine, X), ix.
+c(r59, A, 1) :- vr(X, A), in(c2020_Illidops_Mason, X), in(c2020_Microgastrine, X), ix.
+
+%% coverage
+out3(c2020_Microgastrine, X, r60) :- out(c2020_Microgaster_Latreille, X), out(c2020_Exix_Mason, X), out(c2020_ParoplitisMason, X), out(c2020_Hygroplitis_Thomson, X), out(c2020_Miropotes_Nixon, X), out(c2020_Parenion_Nixon, X), out(c2020_Fornicia_Brulle, X), out(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Choeras_Mason, X), out(c2020_Dolichogenidea_Viereck, X), out(c2020_Apanteles_Forster, X), out(c2020_Exoryza_Mason, X), out(c2020_Iconella_Mason, X), out(c2020_Illidops_Mason, X), ix.
+out(c2020_Microgastrine, X) :- out(c2020_Microgaster_Latreille, X), out(c2020_Exix_Mason, X), out(c2020_ParoplitisMason, X), out(c2020_Hygroplitis_Thomson, X), out(c2020_Miropotes_Nixon, X), out(c2020_Parenion_Nixon, X), out(c2020_Fornicia_Brulle, X), out(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Choeras_Mason, X), out(c2020_Dolichogenidea_Viereck, X), out(c2020_Apanteles_Forster, X), out(c2020_Exoryza_Mason, X), out(c2020_Iconella_Mason, X), out(c2020_Illidops_Mason, X), pw.
+%% sibling disjointness
+% c2020_Microgaster_Latreille ! c2020_Exix_Mason
+ir(X, r61) :- in(c2020_Microgaster_Latreille, X), in(c2020_Exix_Mason, X).
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), out(c2020_Exix_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microgaster_Latreille,X), in(c2020_Exix_Mason,X)} <= 0, pw.
+pie(r61, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Exix_Mason, X), ix.
+c(r61, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Exix_Mason, X), ix.
+pie(r61, A, 2) :- ir(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Exix_Mason, X), ix.
+c(r61, A, 2) :- vr(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Exix_Mason, X), ix.
+
+% c2020_Microgaster_Latreille ! c2020_ParoplitisMason
+ir(X, r62) :- in(c2020_Microgaster_Latreille, X), in(c2020_ParoplitisMason, X).
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), out(c2020_ParoplitisMason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microgaster_Latreille,X), in(c2020_ParoplitisMason,X)} <= 0, pw.
+pie(r62, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_ParoplitisMason, X), ix.
+c(r62, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_ParoplitisMason, X), ix.
+pie(r62, A, 2) :- ir(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_ParoplitisMason, X), ix.
+c(r62, A, 2) :- vr(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_ParoplitisMason, X), ix.
+
+% c2020_Microgaster_Latreille ! c2020_Hygroplitis_Thomson
+ir(X, r63) :- in(c2020_Microgaster_Latreille, X), in(c2020_Hygroplitis_Thomson, X).
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), out(c2020_Hygroplitis_Thomson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microgaster_Latreille,X), in(c2020_Hygroplitis_Thomson,X)} <= 0, pw.
+pie(r63, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Hygroplitis_Thomson, X), ix.
+c(r63, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Hygroplitis_Thomson, X), ix.
+pie(r63, A, 2) :- ir(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Hygroplitis_Thomson, X), ix.
+c(r63, A, 2) :- vr(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Hygroplitis_Thomson, X), ix.
+
+% c2020_Microgaster_Latreille ! c2020_Miropotes_Nixon
+ir(X, r64) :- in(c2020_Microgaster_Latreille, X), in(c2020_Miropotes_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), out(c2020_Miropotes_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microgaster_Latreille,X), in(c2020_Miropotes_Nixon,X)} <= 0, pw.
+pie(r64, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Miropotes_Nixon, X), ix.
+c(r64, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Miropotes_Nixon, X), ix.
+pie(r64, A, 2) :- ir(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Miropotes_Nixon, X), ix.
+c(r64, A, 2) :- vr(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Miropotes_Nixon, X), ix.
+
+% c2020_Microgaster_Latreille ! c2020_Parenion_Nixon
+ir(X, r65) :- in(c2020_Microgaster_Latreille, X), in(c2020_Parenion_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), out(c2020_Parenion_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microgaster_Latreille,X), in(c2020_Parenion_Nixon,X)} <= 0, pw.
+pie(r65, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Parenion_Nixon, X), ix.
+c(r65, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Parenion_Nixon, X), ix.
+pie(r65, A, 2) :- ir(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Parenion_Nixon, X), ix.
+c(r65, A, 2) :- vr(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Parenion_Nixon, X), ix.
+
+% c2020_Microgaster_Latreille ! c2020_Fornicia_Brulle
+ir(X, r66) :- in(c2020_Microgaster_Latreille, X), in(c2020_Fornicia_Brulle, X).
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), out(c2020_Fornicia_Brulle,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microgaster_Latreille,X), in(c2020_Fornicia_Brulle,X)} <= 0, pw.
+pie(r66, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Fornicia_Brulle, X), ix.
+c(r66, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Fornicia_Brulle, X), ix.
+pie(r66, A, 2) :- ir(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Fornicia_Brulle, X), ix.
+c(r66, A, 2) :- vr(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Fornicia_Brulle, X), ix.
+
+% c2020_Microgaster_Latreille ! c2020_Hypomicrogaster_Ashmead
+ir(X, r67) :- in(c2020_Microgaster_Latreille, X), in(c2020_Hypomicrogaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), out(c2020_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microgaster_Latreille,X), in(c2020_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r67, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Hypomicrogaster_Ashmead, X), ix.
+c(r67, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Hypomicrogaster_Ashmead, X), ix.
+pie(r67, A, 2) :- ir(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Hypomicrogaster_Ashmead, X), ix.
+c(r67, A, 2) :- vr(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Hypomicrogaster_Ashmead, X), ix.
+
+% c2020_Microgaster_Latreille ! c2020_Choeras_Mason
+ir(X, r68) :- in(c2020_Microgaster_Latreille, X), in(c2020_Choeras_Mason, X).
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), out(c2020_Choeras_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microgaster_Latreille,X), in(c2020_Choeras_Mason,X)} <= 0, pw.
+pie(r68, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Choeras_Mason, X), ix.
+c(r68, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Choeras_Mason, X), ix.
+pie(r68, A, 2) :- ir(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Choeras_Mason, X), ix.
+c(r68, A, 2) :- vr(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Choeras_Mason, X), ix.
+
+% c2020_Microgaster_Latreille ! c2020_Dolichogenidea_Viereck
+ir(X, r69) :- in(c2020_Microgaster_Latreille, X), in(c2020_Dolichogenidea_Viereck, X).
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), out(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microgaster_Latreille,X), in(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+pie(r69, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+c(r69, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+pie(r69, A, 2) :- ir(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+c(r69, A, 2) :- vr(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+
+% c2020_Microgaster_Latreille ! c2020_Apanteles_Forster
+ir(X, r70) :- in(c2020_Microgaster_Latreille, X), in(c2020_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), out(c2020_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microgaster_Latreille,X), in(c2020_Apanteles_Forster,X)} <= 0, pw.
+pie(r70, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Apanteles_Forster, X), ix.
+c(r70, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Apanteles_Forster, X), ix.
+pie(r70, A, 2) :- ir(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Apanteles_Forster, X), ix.
+c(r70, A, 2) :- vr(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Apanteles_Forster, X), ix.
+
+% c2020_Microgaster_Latreille ! c2020_Exoryza_Mason
+ir(X, r71) :- in(c2020_Microgaster_Latreille, X), in(c2020_Exoryza_Mason, X).
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), out(c2020_Exoryza_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microgaster_Latreille,X), in(c2020_Exoryza_Mason,X)} <= 0, pw.
+pie(r71, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Exoryza_Mason, X), ix.
+c(r71, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Exoryza_Mason, X), ix.
+pie(r71, A, 2) :- ir(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Exoryza_Mason, X), ix.
+c(r71, A, 2) :- vr(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Exoryza_Mason, X), ix.
+
+% c2020_Microgaster_Latreille ! c2020_Iconella_Mason
+ir(X, r72) :- in(c2020_Microgaster_Latreille, X), in(c2020_Iconella_Mason, X).
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), out(c2020_Iconella_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microgaster_Latreille,X), in(c2020_Iconella_Mason,X)} <= 0, pw.
+pie(r72, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Iconella_Mason, X), ix.
+c(r72, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Iconella_Mason, X), ix.
+pie(r72, A, 2) :- ir(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Iconella_Mason, X), ix.
+c(r72, A, 2) :- vr(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Iconella_Mason, X), ix.
+
+% c2020_Microgaster_Latreille ! c2020_Illidops_Mason
+ir(X, r73) :- in(c2020_Microgaster_Latreille, X), in(c2020_Illidops_Mason, X).
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), out(c2020_Illidops_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microgaster_Latreille,X), in(c2020_Illidops_Mason,X)} <= 0, pw.
+pie(r73, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Illidops_Mason, X), ix.
+c(r73, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), out(c2020_Illidops_Mason, X), ix.
+pie(r73, A, 2) :- ir(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Illidops_Mason, X), ix.
+c(r73, A, 2) :- vr(X, A), out(c2020_Microgaster_Latreille, X), in(c2020_Illidops_Mason, X), ix.
+
+% c2020_Exix_Mason ! c2020_ParoplitisMason
+ir(X, r74) :- in(c2020_Exix_Mason, X), in(c2020_ParoplitisMason, X).
+:- #count {X : vrs(X), in(c2020_Exix_Mason,X), out(c2020_ParoplitisMason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exix_Mason,X), in(c2020_ParoplitisMason,X)} <= 0, pw.
+pie(r74, A, 1) :- ir(X, A), in(c2020_Exix_Mason, X), out(c2020_ParoplitisMason, X), ix.
+c(r74, A, 1) :- vr(X, A), in(c2020_Exix_Mason, X), out(c2020_ParoplitisMason, X), ix.
+pie(r74, A, 2) :- ir(X, A), out(c2020_Exix_Mason, X), in(c2020_ParoplitisMason, X), ix.
+c(r74, A, 2) :- vr(X, A), out(c2020_Exix_Mason, X), in(c2020_ParoplitisMason, X), ix.
+
+% c2020_Exix_Mason ! c2020_Hygroplitis_Thomson
+ir(X, r75) :- in(c2020_Exix_Mason, X), in(c2020_Hygroplitis_Thomson, X).
+:- #count {X : vrs(X), in(c2020_Exix_Mason,X), out(c2020_Hygroplitis_Thomson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exix_Mason,X), in(c2020_Hygroplitis_Thomson,X)} <= 0, pw.
+pie(r75, A, 1) :- ir(X, A), in(c2020_Exix_Mason, X), out(c2020_Hygroplitis_Thomson, X), ix.
+c(r75, A, 1) :- vr(X, A), in(c2020_Exix_Mason, X), out(c2020_Hygroplitis_Thomson, X), ix.
+pie(r75, A, 2) :- ir(X, A), out(c2020_Exix_Mason, X), in(c2020_Hygroplitis_Thomson, X), ix.
+c(r75, A, 2) :- vr(X, A), out(c2020_Exix_Mason, X), in(c2020_Hygroplitis_Thomson, X), ix.
+
+% c2020_Exix_Mason ! c2020_Miropotes_Nixon
+ir(X, r76) :- in(c2020_Exix_Mason, X), in(c2020_Miropotes_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Exix_Mason,X), out(c2020_Miropotes_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exix_Mason,X), in(c2020_Miropotes_Nixon,X)} <= 0, pw.
+pie(r76, A, 1) :- ir(X, A), in(c2020_Exix_Mason, X), out(c2020_Miropotes_Nixon, X), ix.
+c(r76, A, 1) :- vr(X, A), in(c2020_Exix_Mason, X), out(c2020_Miropotes_Nixon, X), ix.
+pie(r76, A, 2) :- ir(X, A), out(c2020_Exix_Mason, X), in(c2020_Miropotes_Nixon, X), ix.
+c(r76, A, 2) :- vr(X, A), out(c2020_Exix_Mason, X), in(c2020_Miropotes_Nixon, X), ix.
+
+% c2020_Exix_Mason ! c2020_Parenion_Nixon
+ir(X, r77) :- in(c2020_Exix_Mason, X), in(c2020_Parenion_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Exix_Mason,X), out(c2020_Parenion_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exix_Mason,X), in(c2020_Parenion_Nixon,X)} <= 0, pw.
+pie(r77, A, 1) :- ir(X, A), in(c2020_Exix_Mason, X), out(c2020_Parenion_Nixon, X), ix.
+c(r77, A, 1) :- vr(X, A), in(c2020_Exix_Mason, X), out(c2020_Parenion_Nixon, X), ix.
+pie(r77, A, 2) :- ir(X, A), out(c2020_Exix_Mason, X), in(c2020_Parenion_Nixon, X), ix.
+c(r77, A, 2) :- vr(X, A), out(c2020_Exix_Mason, X), in(c2020_Parenion_Nixon, X), ix.
+
+% c2020_Exix_Mason ! c2020_Fornicia_Brulle
+ir(X, r78) :- in(c2020_Exix_Mason, X), in(c2020_Fornicia_Brulle, X).
+:- #count {X : vrs(X), in(c2020_Exix_Mason,X), out(c2020_Fornicia_Brulle,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exix_Mason,X), in(c2020_Fornicia_Brulle,X)} <= 0, pw.
+pie(r78, A, 1) :- ir(X, A), in(c2020_Exix_Mason, X), out(c2020_Fornicia_Brulle, X), ix.
+c(r78, A, 1) :- vr(X, A), in(c2020_Exix_Mason, X), out(c2020_Fornicia_Brulle, X), ix.
+pie(r78, A, 2) :- ir(X, A), out(c2020_Exix_Mason, X), in(c2020_Fornicia_Brulle, X), ix.
+c(r78, A, 2) :- vr(X, A), out(c2020_Exix_Mason, X), in(c2020_Fornicia_Brulle, X), ix.
+
+% c2020_Exix_Mason ! c2020_Hypomicrogaster_Ashmead
+ir(X, r79) :- in(c2020_Exix_Mason, X), in(c2020_Hypomicrogaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2020_Exix_Mason,X), out(c2020_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exix_Mason,X), in(c2020_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r79, A, 1) :- ir(X, A), in(c2020_Exix_Mason, X), out(c2020_Hypomicrogaster_Ashmead, X), ix.
+c(r79, A, 1) :- vr(X, A), in(c2020_Exix_Mason, X), out(c2020_Hypomicrogaster_Ashmead, X), ix.
+pie(r79, A, 2) :- ir(X, A), out(c2020_Exix_Mason, X), in(c2020_Hypomicrogaster_Ashmead, X), ix.
+c(r79, A, 2) :- vr(X, A), out(c2020_Exix_Mason, X), in(c2020_Hypomicrogaster_Ashmead, X), ix.
+
+% c2020_Exix_Mason ! c2020_Choeras_Mason
+ir(X, r80) :- in(c2020_Exix_Mason, X), in(c2020_Choeras_Mason, X).
+:- #count {X : vrs(X), in(c2020_Exix_Mason,X), out(c2020_Choeras_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exix_Mason,X), in(c2020_Choeras_Mason,X)} <= 0, pw.
+pie(r80, A, 1) :- ir(X, A), in(c2020_Exix_Mason, X), out(c2020_Choeras_Mason, X), ix.
+c(r80, A, 1) :- vr(X, A), in(c2020_Exix_Mason, X), out(c2020_Choeras_Mason, X), ix.
+pie(r80, A, 2) :- ir(X, A), out(c2020_Exix_Mason, X), in(c2020_Choeras_Mason, X), ix.
+c(r80, A, 2) :- vr(X, A), out(c2020_Exix_Mason, X), in(c2020_Choeras_Mason, X), ix.
+
+% c2020_Exix_Mason ! c2020_Dolichogenidea_Viereck
+ir(X, r81) :- in(c2020_Exix_Mason, X), in(c2020_Dolichogenidea_Viereck, X).
+:- #count {X : vrs(X), in(c2020_Exix_Mason,X), out(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exix_Mason,X), in(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+pie(r81, A, 1) :- ir(X, A), in(c2020_Exix_Mason, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+c(r81, A, 1) :- vr(X, A), in(c2020_Exix_Mason, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+pie(r81, A, 2) :- ir(X, A), out(c2020_Exix_Mason, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+c(r81, A, 2) :- vr(X, A), out(c2020_Exix_Mason, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+
+% c2020_Exix_Mason ! c2020_Apanteles_Forster
+ir(X, r82) :- in(c2020_Exix_Mason, X), in(c2020_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2020_Exix_Mason,X), out(c2020_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exix_Mason,X), in(c2020_Apanteles_Forster,X)} <= 0, pw.
+pie(r82, A, 1) :- ir(X, A), in(c2020_Exix_Mason, X), out(c2020_Apanteles_Forster, X), ix.
+c(r82, A, 1) :- vr(X, A), in(c2020_Exix_Mason, X), out(c2020_Apanteles_Forster, X), ix.
+pie(r82, A, 2) :- ir(X, A), out(c2020_Exix_Mason, X), in(c2020_Apanteles_Forster, X), ix.
+c(r82, A, 2) :- vr(X, A), out(c2020_Exix_Mason, X), in(c2020_Apanteles_Forster, X), ix.
+
+% c2020_Exix_Mason ! c2020_Exoryza_Mason
+ir(X, r83) :- in(c2020_Exix_Mason, X), in(c2020_Exoryza_Mason, X).
+:- #count {X : vrs(X), in(c2020_Exix_Mason,X), out(c2020_Exoryza_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exix_Mason,X), in(c2020_Exoryza_Mason,X)} <= 0, pw.
+pie(r83, A, 1) :- ir(X, A), in(c2020_Exix_Mason, X), out(c2020_Exoryza_Mason, X), ix.
+c(r83, A, 1) :- vr(X, A), in(c2020_Exix_Mason, X), out(c2020_Exoryza_Mason, X), ix.
+pie(r83, A, 2) :- ir(X, A), out(c2020_Exix_Mason, X), in(c2020_Exoryza_Mason, X), ix.
+c(r83, A, 2) :- vr(X, A), out(c2020_Exix_Mason, X), in(c2020_Exoryza_Mason, X), ix.
+
+% c2020_Exix_Mason ! c2020_Iconella_Mason
+ir(X, r84) :- in(c2020_Exix_Mason, X), in(c2020_Iconella_Mason, X).
+:- #count {X : vrs(X), in(c2020_Exix_Mason,X), out(c2020_Iconella_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exix_Mason,X), in(c2020_Iconella_Mason,X)} <= 0, pw.
+pie(r84, A, 1) :- ir(X, A), in(c2020_Exix_Mason, X), out(c2020_Iconella_Mason, X), ix.
+c(r84, A, 1) :- vr(X, A), in(c2020_Exix_Mason, X), out(c2020_Iconella_Mason, X), ix.
+pie(r84, A, 2) :- ir(X, A), out(c2020_Exix_Mason, X), in(c2020_Iconella_Mason, X), ix.
+c(r84, A, 2) :- vr(X, A), out(c2020_Exix_Mason, X), in(c2020_Iconella_Mason, X), ix.
+
+% c2020_Exix_Mason ! c2020_Illidops_Mason
+ir(X, r85) :- in(c2020_Exix_Mason, X), in(c2020_Illidops_Mason, X).
+:- #count {X : vrs(X), in(c2020_Exix_Mason,X), out(c2020_Illidops_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exix_Mason,X), in(c2020_Illidops_Mason,X)} <= 0, pw.
+pie(r85, A, 1) :- ir(X, A), in(c2020_Exix_Mason, X), out(c2020_Illidops_Mason, X), ix.
+c(r85, A, 1) :- vr(X, A), in(c2020_Exix_Mason, X), out(c2020_Illidops_Mason, X), ix.
+pie(r85, A, 2) :- ir(X, A), out(c2020_Exix_Mason, X), in(c2020_Illidops_Mason, X), ix.
+c(r85, A, 2) :- vr(X, A), out(c2020_Exix_Mason, X), in(c2020_Illidops_Mason, X), ix.
+
+% c2020_ParoplitisMason ! c2020_Hygroplitis_Thomson
+ir(X, r86) :- in(c2020_ParoplitisMason, X), in(c2020_Hygroplitis_Thomson, X).
+:- #count {X : vrs(X), in(c2020_ParoplitisMason,X), out(c2020_Hygroplitis_Thomson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_ParoplitisMason,X), in(c2020_Hygroplitis_Thomson,X)} <= 0, pw.
+pie(r86, A, 1) :- ir(X, A), in(c2020_ParoplitisMason, X), out(c2020_Hygroplitis_Thomson, X), ix.
+c(r86, A, 1) :- vr(X, A), in(c2020_ParoplitisMason, X), out(c2020_Hygroplitis_Thomson, X), ix.
+pie(r86, A, 2) :- ir(X, A), out(c2020_ParoplitisMason, X), in(c2020_Hygroplitis_Thomson, X), ix.
+c(r86, A, 2) :- vr(X, A), out(c2020_ParoplitisMason, X), in(c2020_Hygroplitis_Thomson, X), ix.
+
+% c2020_ParoplitisMason ! c2020_Miropotes_Nixon
+ir(X, r87) :- in(c2020_ParoplitisMason, X), in(c2020_Miropotes_Nixon, X).
+:- #count {X : vrs(X), in(c2020_ParoplitisMason,X), out(c2020_Miropotes_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_ParoplitisMason,X), in(c2020_Miropotes_Nixon,X)} <= 0, pw.
+pie(r87, A, 1) :- ir(X, A), in(c2020_ParoplitisMason, X), out(c2020_Miropotes_Nixon, X), ix.
+c(r87, A, 1) :- vr(X, A), in(c2020_ParoplitisMason, X), out(c2020_Miropotes_Nixon, X), ix.
+pie(r87, A, 2) :- ir(X, A), out(c2020_ParoplitisMason, X), in(c2020_Miropotes_Nixon, X), ix.
+c(r87, A, 2) :- vr(X, A), out(c2020_ParoplitisMason, X), in(c2020_Miropotes_Nixon, X), ix.
+
+% c2020_ParoplitisMason ! c2020_Parenion_Nixon
+ir(X, r88) :- in(c2020_ParoplitisMason, X), in(c2020_Parenion_Nixon, X).
+:- #count {X : vrs(X), in(c2020_ParoplitisMason,X), out(c2020_Parenion_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_ParoplitisMason,X), in(c2020_Parenion_Nixon,X)} <= 0, pw.
+pie(r88, A, 1) :- ir(X, A), in(c2020_ParoplitisMason, X), out(c2020_Parenion_Nixon, X), ix.
+c(r88, A, 1) :- vr(X, A), in(c2020_ParoplitisMason, X), out(c2020_Parenion_Nixon, X), ix.
+pie(r88, A, 2) :- ir(X, A), out(c2020_ParoplitisMason, X), in(c2020_Parenion_Nixon, X), ix.
+c(r88, A, 2) :- vr(X, A), out(c2020_ParoplitisMason, X), in(c2020_Parenion_Nixon, X), ix.
+
+% c2020_ParoplitisMason ! c2020_Fornicia_Brulle
+ir(X, r89) :- in(c2020_ParoplitisMason, X), in(c2020_Fornicia_Brulle, X).
+:- #count {X : vrs(X), in(c2020_ParoplitisMason,X), out(c2020_Fornicia_Brulle,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_ParoplitisMason,X), in(c2020_Fornicia_Brulle,X)} <= 0, pw.
+pie(r89, A, 1) :- ir(X, A), in(c2020_ParoplitisMason, X), out(c2020_Fornicia_Brulle, X), ix.
+c(r89, A, 1) :- vr(X, A), in(c2020_ParoplitisMason, X), out(c2020_Fornicia_Brulle, X), ix.
+pie(r89, A, 2) :- ir(X, A), out(c2020_ParoplitisMason, X), in(c2020_Fornicia_Brulle, X), ix.
+c(r89, A, 2) :- vr(X, A), out(c2020_ParoplitisMason, X), in(c2020_Fornicia_Brulle, X), ix.
+
+% c2020_ParoplitisMason ! c2020_Hypomicrogaster_Ashmead
+ir(X, r90) :- in(c2020_ParoplitisMason, X), in(c2020_Hypomicrogaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2020_ParoplitisMason,X), out(c2020_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_ParoplitisMason,X), in(c2020_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r90, A, 1) :- ir(X, A), in(c2020_ParoplitisMason, X), out(c2020_Hypomicrogaster_Ashmead, X), ix.
+c(r90, A, 1) :- vr(X, A), in(c2020_ParoplitisMason, X), out(c2020_Hypomicrogaster_Ashmead, X), ix.
+pie(r90, A, 2) :- ir(X, A), out(c2020_ParoplitisMason, X), in(c2020_Hypomicrogaster_Ashmead, X), ix.
+c(r90, A, 2) :- vr(X, A), out(c2020_ParoplitisMason, X), in(c2020_Hypomicrogaster_Ashmead, X), ix.
+
+% c2020_ParoplitisMason ! c2020_Choeras_Mason
+ir(X, r91) :- in(c2020_ParoplitisMason, X), in(c2020_Choeras_Mason, X).
+:- #count {X : vrs(X), in(c2020_ParoplitisMason,X), out(c2020_Choeras_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_ParoplitisMason,X), in(c2020_Choeras_Mason,X)} <= 0, pw.
+pie(r91, A, 1) :- ir(X, A), in(c2020_ParoplitisMason, X), out(c2020_Choeras_Mason, X), ix.
+c(r91, A, 1) :- vr(X, A), in(c2020_ParoplitisMason, X), out(c2020_Choeras_Mason, X), ix.
+pie(r91, A, 2) :- ir(X, A), out(c2020_ParoplitisMason, X), in(c2020_Choeras_Mason, X), ix.
+c(r91, A, 2) :- vr(X, A), out(c2020_ParoplitisMason, X), in(c2020_Choeras_Mason, X), ix.
+
+% c2020_ParoplitisMason ! c2020_Dolichogenidea_Viereck
+ir(X, r92) :- in(c2020_ParoplitisMason, X), in(c2020_Dolichogenidea_Viereck, X).
+:- #count {X : vrs(X), in(c2020_ParoplitisMason,X), out(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_ParoplitisMason,X), in(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+pie(r92, A, 1) :- ir(X, A), in(c2020_ParoplitisMason, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+c(r92, A, 1) :- vr(X, A), in(c2020_ParoplitisMason, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+pie(r92, A, 2) :- ir(X, A), out(c2020_ParoplitisMason, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+c(r92, A, 2) :- vr(X, A), out(c2020_ParoplitisMason, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+
+% c2020_ParoplitisMason ! c2020_Apanteles_Forster
+ir(X, r93) :- in(c2020_ParoplitisMason, X), in(c2020_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2020_ParoplitisMason,X), out(c2020_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_ParoplitisMason,X), in(c2020_Apanteles_Forster,X)} <= 0, pw.
+pie(r93, A, 1) :- ir(X, A), in(c2020_ParoplitisMason, X), out(c2020_Apanteles_Forster, X), ix.
+c(r93, A, 1) :- vr(X, A), in(c2020_ParoplitisMason, X), out(c2020_Apanteles_Forster, X), ix.
+pie(r93, A, 2) :- ir(X, A), out(c2020_ParoplitisMason, X), in(c2020_Apanteles_Forster, X), ix.
+c(r93, A, 2) :- vr(X, A), out(c2020_ParoplitisMason, X), in(c2020_Apanteles_Forster, X), ix.
+
+% c2020_ParoplitisMason ! c2020_Exoryza_Mason
+ir(X, r94) :- in(c2020_ParoplitisMason, X), in(c2020_Exoryza_Mason, X).
+:- #count {X : vrs(X), in(c2020_ParoplitisMason,X), out(c2020_Exoryza_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_ParoplitisMason,X), in(c2020_Exoryza_Mason,X)} <= 0, pw.
+pie(r94, A, 1) :- ir(X, A), in(c2020_ParoplitisMason, X), out(c2020_Exoryza_Mason, X), ix.
+c(r94, A, 1) :- vr(X, A), in(c2020_ParoplitisMason, X), out(c2020_Exoryza_Mason, X), ix.
+pie(r94, A, 2) :- ir(X, A), out(c2020_ParoplitisMason, X), in(c2020_Exoryza_Mason, X), ix.
+c(r94, A, 2) :- vr(X, A), out(c2020_ParoplitisMason, X), in(c2020_Exoryza_Mason, X), ix.
+
+% c2020_ParoplitisMason ! c2020_Iconella_Mason
+ir(X, r95) :- in(c2020_ParoplitisMason, X), in(c2020_Iconella_Mason, X).
+:- #count {X : vrs(X), in(c2020_ParoplitisMason,X), out(c2020_Iconella_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_ParoplitisMason,X), in(c2020_Iconella_Mason,X)} <= 0, pw.
+pie(r95, A, 1) :- ir(X, A), in(c2020_ParoplitisMason, X), out(c2020_Iconella_Mason, X), ix.
+c(r95, A, 1) :- vr(X, A), in(c2020_ParoplitisMason, X), out(c2020_Iconella_Mason, X), ix.
+pie(r95, A, 2) :- ir(X, A), out(c2020_ParoplitisMason, X), in(c2020_Iconella_Mason, X), ix.
+c(r95, A, 2) :- vr(X, A), out(c2020_ParoplitisMason, X), in(c2020_Iconella_Mason, X), ix.
+
+% c2020_ParoplitisMason ! c2020_Illidops_Mason
+ir(X, r96) :- in(c2020_ParoplitisMason, X), in(c2020_Illidops_Mason, X).
+:- #count {X : vrs(X), in(c2020_ParoplitisMason,X), out(c2020_Illidops_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_ParoplitisMason,X), in(c2020_Illidops_Mason,X)} <= 0, pw.
+pie(r96, A, 1) :- ir(X, A), in(c2020_ParoplitisMason, X), out(c2020_Illidops_Mason, X), ix.
+c(r96, A, 1) :- vr(X, A), in(c2020_ParoplitisMason, X), out(c2020_Illidops_Mason, X), ix.
+pie(r96, A, 2) :- ir(X, A), out(c2020_ParoplitisMason, X), in(c2020_Illidops_Mason, X), ix.
+c(r96, A, 2) :- vr(X, A), out(c2020_ParoplitisMason, X), in(c2020_Illidops_Mason, X), ix.
+
+% c2020_Hygroplitis_Thomson ! c2020_Miropotes_Nixon
+ir(X, r97) :- in(c2020_Hygroplitis_Thomson, X), in(c2020_Miropotes_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Hygroplitis_Thomson,X), out(c2020_Miropotes_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hygroplitis_Thomson,X), in(c2020_Miropotes_Nixon,X)} <= 0, pw.
+pie(r97, A, 1) :- ir(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Miropotes_Nixon, X), ix.
+c(r97, A, 1) :- vr(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Miropotes_Nixon, X), ix.
+pie(r97, A, 2) :- ir(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Miropotes_Nixon, X), ix.
+c(r97, A, 2) :- vr(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Miropotes_Nixon, X), ix.
+
+% c2020_Hygroplitis_Thomson ! c2020_Parenion_Nixon
+ir(X, r98) :- in(c2020_Hygroplitis_Thomson, X), in(c2020_Parenion_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Hygroplitis_Thomson,X), out(c2020_Parenion_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hygroplitis_Thomson,X), in(c2020_Parenion_Nixon,X)} <= 0, pw.
+pie(r98, A, 1) :- ir(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Parenion_Nixon, X), ix.
+c(r98, A, 1) :- vr(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Parenion_Nixon, X), ix.
+pie(r98, A, 2) :- ir(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Parenion_Nixon, X), ix.
+c(r98, A, 2) :- vr(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Parenion_Nixon, X), ix.
+
+% c2020_Hygroplitis_Thomson ! c2020_Fornicia_Brulle
+ir(X, r99) :- in(c2020_Hygroplitis_Thomson, X), in(c2020_Fornicia_Brulle, X).
+:- #count {X : vrs(X), in(c2020_Hygroplitis_Thomson,X), out(c2020_Fornicia_Brulle,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hygroplitis_Thomson,X), in(c2020_Fornicia_Brulle,X)} <= 0, pw.
+pie(r99, A, 1) :- ir(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Fornicia_Brulle, X), ix.
+c(r99, A, 1) :- vr(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Fornicia_Brulle, X), ix.
+pie(r99, A, 2) :- ir(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Fornicia_Brulle, X), ix.
+c(r99, A, 2) :- vr(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Fornicia_Brulle, X), ix.
+
+% c2020_Hygroplitis_Thomson ! c2020_Hypomicrogaster_Ashmead
+ir(X, r100) :- in(c2020_Hygroplitis_Thomson, X), in(c2020_Hypomicrogaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2020_Hygroplitis_Thomson,X), out(c2020_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hygroplitis_Thomson,X), in(c2020_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r100, A, 1) :- ir(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Hypomicrogaster_Ashmead, X), ix.
+c(r100, A, 1) :- vr(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Hypomicrogaster_Ashmead, X), ix.
+pie(r100, A, 2) :- ir(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Hypomicrogaster_Ashmead, X), ix.
+c(r100, A, 2) :- vr(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Hypomicrogaster_Ashmead, X), ix.
+
+% c2020_Hygroplitis_Thomson ! c2020_Choeras_Mason
+ir(X, r101) :- in(c2020_Hygroplitis_Thomson, X), in(c2020_Choeras_Mason, X).
+:- #count {X : vrs(X), in(c2020_Hygroplitis_Thomson,X), out(c2020_Choeras_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hygroplitis_Thomson,X), in(c2020_Choeras_Mason,X)} <= 0, pw.
+pie(r101, A, 1) :- ir(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Choeras_Mason, X), ix.
+c(r101, A, 1) :- vr(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Choeras_Mason, X), ix.
+pie(r101, A, 2) :- ir(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Choeras_Mason, X), ix.
+c(r101, A, 2) :- vr(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Choeras_Mason, X), ix.
+
+% c2020_Hygroplitis_Thomson ! c2020_Dolichogenidea_Viereck
+ir(X, r102) :- in(c2020_Hygroplitis_Thomson, X), in(c2020_Dolichogenidea_Viereck, X).
+:- #count {X : vrs(X), in(c2020_Hygroplitis_Thomson,X), out(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hygroplitis_Thomson,X), in(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+pie(r102, A, 1) :- ir(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+c(r102, A, 1) :- vr(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+pie(r102, A, 2) :- ir(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+c(r102, A, 2) :- vr(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+
+% c2020_Hygroplitis_Thomson ! c2020_Apanteles_Forster
+ir(X, r103) :- in(c2020_Hygroplitis_Thomson, X), in(c2020_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2020_Hygroplitis_Thomson,X), out(c2020_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hygroplitis_Thomson,X), in(c2020_Apanteles_Forster,X)} <= 0, pw.
+pie(r103, A, 1) :- ir(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Apanteles_Forster, X), ix.
+c(r103, A, 1) :- vr(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Apanteles_Forster, X), ix.
+pie(r103, A, 2) :- ir(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Apanteles_Forster, X), ix.
+c(r103, A, 2) :- vr(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Apanteles_Forster, X), ix.
+
+% c2020_Hygroplitis_Thomson ! c2020_Exoryza_Mason
+ir(X, r104) :- in(c2020_Hygroplitis_Thomson, X), in(c2020_Exoryza_Mason, X).
+:- #count {X : vrs(X), in(c2020_Hygroplitis_Thomson,X), out(c2020_Exoryza_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hygroplitis_Thomson,X), in(c2020_Exoryza_Mason,X)} <= 0, pw.
+pie(r104, A, 1) :- ir(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Exoryza_Mason, X), ix.
+c(r104, A, 1) :- vr(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Exoryza_Mason, X), ix.
+pie(r104, A, 2) :- ir(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Exoryza_Mason, X), ix.
+c(r104, A, 2) :- vr(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Exoryza_Mason, X), ix.
+
+% c2020_Hygroplitis_Thomson ! c2020_Iconella_Mason
+ir(X, r105) :- in(c2020_Hygroplitis_Thomson, X), in(c2020_Iconella_Mason, X).
+:- #count {X : vrs(X), in(c2020_Hygroplitis_Thomson,X), out(c2020_Iconella_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hygroplitis_Thomson,X), in(c2020_Iconella_Mason,X)} <= 0, pw.
+pie(r105, A, 1) :- ir(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Iconella_Mason, X), ix.
+c(r105, A, 1) :- vr(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Iconella_Mason, X), ix.
+pie(r105, A, 2) :- ir(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Iconella_Mason, X), ix.
+c(r105, A, 2) :- vr(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Iconella_Mason, X), ix.
+
+% c2020_Hygroplitis_Thomson ! c2020_Illidops_Mason
+ir(X, r106) :- in(c2020_Hygroplitis_Thomson, X), in(c2020_Illidops_Mason, X).
+:- #count {X : vrs(X), in(c2020_Hygroplitis_Thomson,X), out(c2020_Illidops_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hygroplitis_Thomson,X), in(c2020_Illidops_Mason,X)} <= 0, pw.
+pie(r106, A, 1) :- ir(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Illidops_Mason, X), ix.
+c(r106, A, 1) :- vr(X, A), in(c2020_Hygroplitis_Thomson, X), out(c2020_Illidops_Mason, X), ix.
+pie(r106, A, 2) :- ir(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Illidops_Mason, X), ix.
+c(r106, A, 2) :- vr(X, A), out(c2020_Hygroplitis_Thomson, X), in(c2020_Illidops_Mason, X), ix.
+
+% c2020_Miropotes_Nixon ! c2020_Parenion_Nixon
+ir(X, r107) :- in(c2020_Miropotes_Nixon, X), in(c2020_Parenion_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Miropotes_Nixon,X), out(c2020_Parenion_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Miropotes_Nixon,X), in(c2020_Parenion_Nixon,X)} <= 0, pw.
+pie(r107, A, 1) :- ir(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Parenion_Nixon, X), ix.
+c(r107, A, 1) :- vr(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Parenion_Nixon, X), ix.
+pie(r107, A, 2) :- ir(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Parenion_Nixon, X), ix.
+c(r107, A, 2) :- vr(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Parenion_Nixon, X), ix.
+
+% c2020_Miropotes_Nixon ! c2020_Fornicia_Brulle
+ir(X, r108) :- in(c2020_Miropotes_Nixon, X), in(c2020_Fornicia_Brulle, X).
+:- #count {X : vrs(X), in(c2020_Miropotes_Nixon,X), out(c2020_Fornicia_Brulle,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Miropotes_Nixon,X), in(c2020_Fornicia_Brulle,X)} <= 0, pw.
+pie(r108, A, 1) :- ir(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Fornicia_Brulle, X), ix.
+c(r108, A, 1) :- vr(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Fornicia_Brulle, X), ix.
+pie(r108, A, 2) :- ir(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Fornicia_Brulle, X), ix.
+c(r108, A, 2) :- vr(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Fornicia_Brulle, X), ix.
+
+% c2020_Miropotes_Nixon ! c2020_Hypomicrogaster_Ashmead
+ir(X, r109) :- in(c2020_Miropotes_Nixon, X), in(c2020_Hypomicrogaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2020_Miropotes_Nixon,X), out(c2020_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Miropotes_Nixon,X), in(c2020_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r109, A, 1) :- ir(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Hypomicrogaster_Ashmead, X), ix.
+c(r109, A, 1) :- vr(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Hypomicrogaster_Ashmead, X), ix.
+pie(r109, A, 2) :- ir(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Hypomicrogaster_Ashmead, X), ix.
+c(r109, A, 2) :- vr(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Hypomicrogaster_Ashmead, X), ix.
+
+% c2020_Miropotes_Nixon ! c2020_Choeras_Mason
+ir(X, r110) :- in(c2020_Miropotes_Nixon, X), in(c2020_Choeras_Mason, X).
+:- #count {X : vrs(X), in(c2020_Miropotes_Nixon,X), out(c2020_Choeras_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Miropotes_Nixon,X), in(c2020_Choeras_Mason,X)} <= 0, pw.
+pie(r110, A, 1) :- ir(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Choeras_Mason, X), ix.
+c(r110, A, 1) :- vr(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Choeras_Mason, X), ix.
+pie(r110, A, 2) :- ir(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Choeras_Mason, X), ix.
+c(r110, A, 2) :- vr(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Choeras_Mason, X), ix.
+
+% c2020_Miropotes_Nixon ! c2020_Dolichogenidea_Viereck
+ir(X, r111) :- in(c2020_Miropotes_Nixon, X), in(c2020_Dolichogenidea_Viereck, X).
+:- #count {X : vrs(X), in(c2020_Miropotes_Nixon,X), out(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Miropotes_Nixon,X), in(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+pie(r111, A, 1) :- ir(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+c(r111, A, 1) :- vr(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+pie(r111, A, 2) :- ir(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+c(r111, A, 2) :- vr(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+
+% c2020_Miropotes_Nixon ! c2020_Apanteles_Forster
+ir(X, r112) :- in(c2020_Miropotes_Nixon, X), in(c2020_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2020_Miropotes_Nixon,X), out(c2020_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Miropotes_Nixon,X), in(c2020_Apanteles_Forster,X)} <= 0, pw.
+pie(r112, A, 1) :- ir(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Apanteles_Forster, X), ix.
+c(r112, A, 1) :- vr(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Apanteles_Forster, X), ix.
+pie(r112, A, 2) :- ir(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Apanteles_Forster, X), ix.
+c(r112, A, 2) :- vr(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Apanteles_Forster, X), ix.
+
+% c2020_Miropotes_Nixon ! c2020_Exoryza_Mason
+ir(X, r113) :- in(c2020_Miropotes_Nixon, X), in(c2020_Exoryza_Mason, X).
+:- #count {X : vrs(X), in(c2020_Miropotes_Nixon,X), out(c2020_Exoryza_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Miropotes_Nixon,X), in(c2020_Exoryza_Mason,X)} <= 0, pw.
+pie(r113, A, 1) :- ir(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Exoryza_Mason, X), ix.
+c(r113, A, 1) :- vr(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Exoryza_Mason, X), ix.
+pie(r113, A, 2) :- ir(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Exoryza_Mason, X), ix.
+c(r113, A, 2) :- vr(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Exoryza_Mason, X), ix.
+
+% c2020_Miropotes_Nixon ! c2020_Iconella_Mason
+ir(X, r114) :- in(c2020_Miropotes_Nixon, X), in(c2020_Iconella_Mason, X).
+:- #count {X : vrs(X), in(c2020_Miropotes_Nixon,X), out(c2020_Iconella_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Miropotes_Nixon,X), in(c2020_Iconella_Mason,X)} <= 0, pw.
+pie(r114, A, 1) :- ir(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Iconella_Mason, X), ix.
+c(r114, A, 1) :- vr(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Iconella_Mason, X), ix.
+pie(r114, A, 2) :- ir(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Iconella_Mason, X), ix.
+c(r114, A, 2) :- vr(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Iconella_Mason, X), ix.
+
+% c2020_Miropotes_Nixon ! c2020_Illidops_Mason
+ir(X, r115) :- in(c2020_Miropotes_Nixon, X), in(c2020_Illidops_Mason, X).
+:- #count {X : vrs(X), in(c2020_Miropotes_Nixon,X), out(c2020_Illidops_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Miropotes_Nixon,X), in(c2020_Illidops_Mason,X)} <= 0, pw.
+pie(r115, A, 1) :- ir(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Illidops_Mason, X), ix.
+c(r115, A, 1) :- vr(X, A), in(c2020_Miropotes_Nixon, X), out(c2020_Illidops_Mason, X), ix.
+pie(r115, A, 2) :- ir(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Illidops_Mason, X), ix.
+c(r115, A, 2) :- vr(X, A), out(c2020_Miropotes_Nixon, X), in(c2020_Illidops_Mason, X), ix.
+
+% c2020_Parenion_Nixon ! c2020_Fornicia_Brulle
+ir(X, r116) :- in(c2020_Parenion_Nixon, X), in(c2020_Fornicia_Brulle, X).
+:- #count {X : vrs(X), in(c2020_Parenion_Nixon,X), out(c2020_Fornicia_Brulle,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Parenion_Nixon,X), in(c2020_Fornicia_Brulle,X)} <= 0, pw.
+pie(r116, A, 1) :- ir(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Fornicia_Brulle, X), ix.
+c(r116, A, 1) :- vr(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Fornicia_Brulle, X), ix.
+pie(r116, A, 2) :- ir(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Fornicia_Brulle, X), ix.
+c(r116, A, 2) :- vr(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Fornicia_Brulle, X), ix.
+
+% c2020_Parenion_Nixon ! c2020_Hypomicrogaster_Ashmead
+ir(X, r117) :- in(c2020_Parenion_Nixon, X), in(c2020_Hypomicrogaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2020_Parenion_Nixon,X), out(c2020_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Parenion_Nixon,X), in(c2020_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r117, A, 1) :- ir(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Hypomicrogaster_Ashmead, X), ix.
+c(r117, A, 1) :- vr(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Hypomicrogaster_Ashmead, X), ix.
+pie(r117, A, 2) :- ir(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Hypomicrogaster_Ashmead, X), ix.
+c(r117, A, 2) :- vr(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Hypomicrogaster_Ashmead, X), ix.
+
+% c2020_Parenion_Nixon ! c2020_Choeras_Mason
+ir(X, r118) :- in(c2020_Parenion_Nixon, X), in(c2020_Choeras_Mason, X).
+:- #count {X : vrs(X), in(c2020_Parenion_Nixon,X), out(c2020_Choeras_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Parenion_Nixon,X), in(c2020_Choeras_Mason,X)} <= 0, pw.
+pie(r118, A, 1) :- ir(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Choeras_Mason, X), ix.
+c(r118, A, 1) :- vr(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Choeras_Mason, X), ix.
+pie(r118, A, 2) :- ir(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Choeras_Mason, X), ix.
+c(r118, A, 2) :- vr(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Choeras_Mason, X), ix.
+
+% c2020_Parenion_Nixon ! c2020_Dolichogenidea_Viereck
+ir(X, r119) :- in(c2020_Parenion_Nixon, X), in(c2020_Dolichogenidea_Viereck, X).
+:- #count {X : vrs(X), in(c2020_Parenion_Nixon,X), out(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Parenion_Nixon,X), in(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+pie(r119, A, 1) :- ir(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+c(r119, A, 1) :- vr(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+pie(r119, A, 2) :- ir(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+c(r119, A, 2) :- vr(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+
+% c2020_Parenion_Nixon ! c2020_Apanteles_Forster
+ir(X, r120) :- in(c2020_Parenion_Nixon, X), in(c2020_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2020_Parenion_Nixon,X), out(c2020_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Parenion_Nixon,X), in(c2020_Apanteles_Forster,X)} <= 0, pw.
+pie(r120, A, 1) :- ir(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Apanteles_Forster, X), ix.
+c(r120, A, 1) :- vr(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Apanteles_Forster, X), ix.
+pie(r120, A, 2) :- ir(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Apanteles_Forster, X), ix.
+c(r120, A, 2) :- vr(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Apanteles_Forster, X), ix.
+
+% c2020_Parenion_Nixon ! c2020_Exoryza_Mason
+ir(X, r121) :- in(c2020_Parenion_Nixon, X), in(c2020_Exoryza_Mason, X).
+:- #count {X : vrs(X), in(c2020_Parenion_Nixon,X), out(c2020_Exoryza_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Parenion_Nixon,X), in(c2020_Exoryza_Mason,X)} <= 0, pw.
+pie(r121, A, 1) :- ir(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Exoryza_Mason, X), ix.
+c(r121, A, 1) :- vr(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Exoryza_Mason, X), ix.
+pie(r121, A, 2) :- ir(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Exoryza_Mason, X), ix.
+c(r121, A, 2) :- vr(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Exoryza_Mason, X), ix.
+
+% c2020_Parenion_Nixon ! c2020_Iconella_Mason
+ir(X, r122) :- in(c2020_Parenion_Nixon, X), in(c2020_Iconella_Mason, X).
+:- #count {X : vrs(X), in(c2020_Parenion_Nixon,X), out(c2020_Iconella_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Parenion_Nixon,X), in(c2020_Iconella_Mason,X)} <= 0, pw.
+pie(r122, A, 1) :- ir(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Iconella_Mason, X), ix.
+c(r122, A, 1) :- vr(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Iconella_Mason, X), ix.
+pie(r122, A, 2) :- ir(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Iconella_Mason, X), ix.
+c(r122, A, 2) :- vr(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Iconella_Mason, X), ix.
+
+% c2020_Parenion_Nixon ! c2020_Illidops_Mason
+ir(X, r123) :- in(c2020_Parenion_Nixon, X), in(c2020_Illidops_Mason, X).
+:- #count {X : vrs(X), in(c2020_Parenion_Nixon,X), out(c2020_Illidops_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Parenion_Nixon,X), in(c2020_Illidops_Mason,X)} <= 0, pw.
+pie(r123, A, 1) :- ir(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Illidops_Mason, X), ix.
+c(r123, A, 1) :- vr(X, A), in(c2020_Parenion_Nixon, X), out(c2020_Illidops_Mason, X), ix.
+pie(r123, A, 2) :- ir(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Illidops_Mason, X), ix.
+c(r123, A, 2) :- vr(X, A), out(c2020_Parenion_Nixon, X), in(c2020_Illidops_Mason, X), ix.
+
+% c2020_Fornicia_Brulle ! c2020_Hypomicrogaster_Ashmead
+ir(X, r124) :- in(c2020_Fornicia_Brulle, X), in(c2020_Hypomicrogaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2020_Fornicia_Brulle,X), out(c2020_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Fornicia_Brulle,X), in(c2020_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r124, A, 1) :- ir(X, A), in(c2020_Fornicia_Brulle, X), out(c2020_Hypomicrogaster_Ashmead, X), ix.
+c(r124, A, 1) :- vr(X, A), in(c2020_Fornicia_Brulle, X), out(c2020_Hypomicrogaster_Ashmead, X), ix.
+pie(r124, A, 2) :- ir(X, A), out(c2020_Fornicia_Brulle, X), in(c2020_Hypomicrogaster_Ashmead, X), ix.
+c(r124, A, 2) :- vr(X, A), out(c2020_Fornicia_Brulle, X), in(c2020_Hypomicrogaster_Ashmead, X), ix.
+
+% c2020_Fornicia_Brulle ! c2020_Choeras_Mason
+ir(X, r125) :- in(c2020_Fornicia_Brulle, X), in(c2020_Choeras_Mason, X).
+:- #count {X : vrs(X), in(c2020_Fornicia_Brulle,X), out(c2020_Choeras_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Fornicia_Brulle,X), in(c2020_Choeras_Mason,X)} <= 0, pw.
+pie(r125, A, 1) :- ir(X, A), in(c2020_Fornicia_Brulle, X), out(c2020_Choeras_Mason, X), ix.
+c(r125, A, 1) :- vr(X, A), in(c2020_Fornicia_Brulle, X), out(c2020_Choeras_Mason, X), ix.
+pie(r125, A, 2) :- ir(X, A), out(c2020_Fornicia_Brulle, X), in(c2020_Choeras_Mason, X), ix.
+c(r125, A, 2) :- vr(X, A), out(c2020_Fornicia_Brulle, X), in(c2020_Choeras_Mason, X), ix.
+
+% c2020_Fornicia_Brulle ! c2020_Dolichogenidea_Viereck
+ir(X, r126) :- in(c2020_Fornicia_Brulle, X), in(c2020_Dolichogenidea_Viereck, X).
+:- #count {X : vrs(X), in(c2020_Fornicia_Brulle,X), out(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Fornicia_Brulle,X), in(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+pie(r126, A, 1) :- ir(X, A), in(c2020_Fornicia_Brulle, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+c(r126, A, 1) :- vr(X, A), in(c2020_Fornicia_Brulle, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+pie(r126, A, 2) :- ir(X, A), out(c2020_Fornicia_Brulle, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+c(r126, A, 2) :- vr(X, A), out(c2020_Fornicia_Brulle, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+
+% c2020_Fornicia_Brulle ! c2020_Apanteles_Forster
+ir(X, r127) :- in(c2020_Fornicia_Brulle, X), in(c2020_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2020_Fornicia_Brulle,X), out(c2020_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Fornicia_Brulle,X), in(c2020_Apanteles_Forster,X)} <= 0, pw.
+pie(r127, A, 1) :- ir(X, A), in(c2020_Fornicia_Brulle, X), out(c2020_Apanteles_Forster, X), ix.
+c(r127, A, 1) :- vr(X, A), in(c2020_Fornicia_Brulle, X), out(c2020_Apanteles_Forster, X), ix.
+pie(r127, A, 2) :- ir(X, A), out(c2020_Fornicia_Brulle, X), in(c2020_Apanteles_Forster, X), ix.
+c(r127, A, 2) :- vr(X, A), out(c2020_Fornicia_Brulle, X), in(c2020_Apanteles_Forster, X), ix.
+
+% c2020_Fornicia_Brulle ! c2020_Exoryza_Mason
+ir(X, r128) :- in(c2020_Fornicia_Brulle, X), in(c2020_Exoryza_Mason, X).
+:- #count {X : vrs(X), in(c2020_Fornicia_Brulle,X), out(c2020_Exoryza_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Fornicia_Brulle,X), in(c2020_Exoryza_Mason,X)} <= 0, pw.
+pie(r128, A, 1) :- ir(X, A), in(c2020_Fornicia_Brulle, X), out(c2020_Exoryza_Mason, X), ix.
+c(r128, A, 1) :- vr(X, A), in(c2020_Fornicia_Brulle, X), out(c2020_Exoryza_Mason, X), ix.
+pie(r128, A, 2) :- ir(X, A), out(c2020_Fornicia_Brulle, X), in(c2020_Exoryza_Mason, X), ix.
+c(r128, A, 2) :- vr(X, A), out(c2020_Fornicia_Brulle, X), in(c2020_Exoryza_Mason, X), ix.
+
+% c2020_Fornicia_Brulle ! c2020_Iconella_Mason
+ir(X, r129) :- in(c2020_Fornicia_Brulle, X), in(c2020_Iconella_Mason, X).
+:- #count {X : vrs(X), in(c2020_Fornicia_Brulle,X), out(c2020_Iconella_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Fornicia_Brulle,X), in(c2020_Iconella_Mason,X)} <= 0, pw.
+pie(r129, A, 1) :- ir(X, A), in(c2020_Fornicia_Brulle, X), out(c2020_Iconella_Mason, X), ix.
+c(r129, A, 1) :- vr(X, A), in(c2020_Fornicia_Brulle, X), out(c2020_Iconella_Mason, X), ix.
+pie(r129, A, 2) :- ir(X, A), out(c2020_Fornicia_Brulle, X), in(c2020_Iconella_Mason, X), ix.
+c(r129, A, 2) :- vr(X, A), out(c2020_Fornicia_Brulle, X), in(c2020_Iconella_Mason, X), ix.
+
+% c2020_Fornicia_Brulle ! c2020_Illidops_Mason
+ir(X, r130) :- in(c2020_Fornicia_Brulle, X), in(c2020_Illidops_Mason, X).
+:- #count {X : vrs(X), in(c2020_Fornicia_Brulle,X), out(c2020_Illidops_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Fornicia_Brulle,X), in(c2020_Illidops_Mason,X)} <= 0, pw.
+pie(r130, A, 1) :- ir(X, A), in(c2020_Fornicia_Brulle, X), out(c2020_Illidops_Mason, X), ix.
+c(r130, A, 1) :- vr(X, A), in(c2020_Fornicia_Brulle, X), out(c2020_Illidops_Mason, X), ix.
+pie(r130, A, 2) :- ir(X, A), out(c2020_Fornicia_Brulle, X), in(c2020_Illidops_Mason, X), ix.
+c(r130, A, 2) :- vr(X, A), out(c2020_Fornicia_Brulle, X), in(c2020_Illidops_Mason, X), ix.
+
+% c2020_Hypomicrogaster_Ashmead ! c2020_Choeras_Mason
+ir(X, r131) :- in(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Choeras_Mason, X).
+:- #count {X : vrs(X), in(c2020_Hypomicrogaster_Ashmead,X), out(c2020_Choeras_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hypomicrogaster_Ashmead,X), in(c2020_Choeras_Mason,X)} <= 0, pw.
+pie(r131, A, 1) :- ir(X, A), in(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Choeras_Mason, X), ix.
+c(r131, A, 1) :- vr(X, A), in(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Choeras_Mason, X), ix.
+pie(r131, A, 2) :- ir(X, A), out(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Choeras_Mason, X), ix.
+c(r131, A, 2) :- vr(X, A), out(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Choeras_Mason, X), ix.
+
+% c2020_Hypomicrogaster_Ashmead ! c2020_Dolichogenidea_Viereck
+ir(X, r132) :- in(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Dolichogenidea_Viereck, X).
+:- #count {X : vrs(X), in(c2020_Hypomicrogaster_Ashmead,X), out(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hypomicrogaster_Ashmead,X), in(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+pie(r132, A, 1) :- ir(X, A), in(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+c(r132, A, 1) :- vr(X, A), in(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+pie(r132, A, 2) :- ir(X, A), out(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+c(r132, A, 2) :- vr(X, A), out(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+
+% c2020_Hypomicrogaster_Ashmead ! c2020_Apanteles_Forster
+ir(X, r133) :- in(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2020_Hypomicrogaster_Ashmead,X), out(c2020_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hypomicrogaster_Ashmead,X), in(c2020_Apanteles_Forster,X)} <= 0, pw.
+pie(r133, A, 1) :- ir(X, A), in(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Apanteles_Forster, X), ix.
+c(r133, A, 1) :- vr(X, A), in(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Apanteles_Forster, X), ix.
+pie(r133, A, 2) :- ir(X, A), out(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Apanteles_Forster, X), ix.
+c(r133, A, 2) :- vr(X, A), out(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Apanteles_Forster, X), ix.
+
+% c2020_Hypomicrogaster_Ashmead ! c2020_Exoryza_Mason
+ir(X, r134) :- in(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Exoryza_Mason, X).
+:- #count {X : vrs(X), in(c2020_Hypomicrogaster_Ashmead,X), out(c2020_Exoryza_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hypomicrogaster_Ashmead,X), in(c2020_Exoryza_Mason,X)} <= 0, pw.
+pie(r134, A, 1) :- ir(X, A), in(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Exoryza_Mason, X), ix.
+c(r134, A, 1) :- vr(X, A), in(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Exoryza_Mason, X), ix.
+pie(r134, A, 2) :- ir(X, A), out(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Exoryza_Mason, X), ix.
+c(r134, A, 2) :- vr(X, A), out(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Exoryza_Mason, X), ix.
+
+% c2020_Hypomicrogaster_Ashmead ! c2020_Iconella_Mason
+ir(X, r135) :- in(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Iconella_Mason, X).
+:- #count {X : vrs(X), in(c2020_Hypomicrogaster_Ashmead,X), out(c2020_Iconella_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hypomicrogaster_Ashmead,X), in(c2020_Iconella_Mason,X)} <= 0, pw.
+pie(r135, A, 1) :- ir(X, A), in(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Iconella_Mason, X), ix.
+c(r135, A, 1) :- vr(X, A), in(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Iconella_Mason, X), ix.
+pie(r135, A, 2) :- ir(X, A), out(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Iconella_Mason, X), ix.
+c(r135, A, 2) :- vr(X, A), out(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Iconella_Mason, X), ix.
+
+% c2020_Hypomicrogaster_Ashmead ! c2020_Illidops_Mason
+ir(X, r136) :- in(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Illidops_Mason, X).
+:- #count {X : vrs(X), in(c2020_Hypomicrogaster_Ashmead,X), out(c2020_Illidops_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Hypomicrogaster_Ashmead,X), in(c2020_Illidops_Mason,X)} <= 0, pw.
+pie(r136, A, 1) :- ir(X, A), in(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Illidops_Mason, X), ix.
+c(r136, A, 1) :- vr(X, A), in(c2020_Hypomicrogaster_Ashmead, X), out(c2020_Illidops_Mason, X), ix.
+pie(r136, A, 2) :- ir(X, A), out(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Illidops_Mason, X), ix.
+c(r136, A, 2) :- vr(X, A), out(c2020_Hypomicrogaster_Ashmead, X), in(c2020_Illidops_Mason, X), ix.
+
+% c2020_Choeras_Mason ! c2020_Dolichogenidea_Viereck
+ir(X, r137) :- in(c2020_Choeras_Mason, X), in(c2020_Dolichogenidea_Viereck, X).
+:- #count {X : vrs(X), in(c2020_Choeras_Mason,X), out(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Choeras_Mason,X), in(c2020_Dolichogenidea_Viereck,X)} <= 0, pw.
+pie(r137, A, 1) :- ir(X, A), in(c2020_Choeras_Mason, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+c(r137, A, 1) :- vr(X, A), in(c2020_Choeras_Mason, X), out(c2020_Dolichogenidea_Viereck, X), ix.
+pie(r137, A, 2) :- ir(X, A), out(c2020_Choeras_Mason, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+c(r137, A, 2) :- vr(X, A), out(c2020_Choeras_Mason, X), in(c2020_Dolichogenidea_Viereck, X), ix.
+
+% c2020_Choeras_Mason ! c2020_Apanteles_Forster
+ir(X, r138) :- in(c2020_Choeras_Mason, X), in(c2020_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2020_Choeras_Mason,X), out(c2020_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Choeras_Mason,X), in(c2020_Apanteles_Forster,X)} <= 0, pw.
+pie(r138, A, 1) :- ir(X, A), in(c2020_Choeras_Mason, X), out(c2020_Apanteles_Forster, X), ix.
+c(r138, A, 1) :- vr(X, A), in(c2020_Choeras_Mason, X), out(c2020_Apanteles_Forster, X), ix.
+pie(r138, A, 2) :- ir(X, A), out(c2020_Choeras_Mason, X), in(c2020_Apanteles_Forster, X), ix.
+c(r138, A, 2) :- vr(X, A), out(c2020_Choeras_Mason, X), in(c2020_Apanteles_Forster, X), ix.
+
+% c2020_Choeras_Mason ! c2020_Exoryza_Mason
+ir(X, r139) :- in(c2020_Choeras_Mason, X), in(c2020_Exoryza_Mason, X).
+:- #count {X : vrs(X), in(c2020_Choeras_Mason,X), out(c2020_Exoryza_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Choeras_Mason,X), in(c2020_Exoryza_Mason,X)} <= 0, pw.
+pie(r139, A, 1) :- ir(X, A), in(c2020_Choeras_Mason, X), out(c2020_Exoryza_Mason, X), ix.
+c(r139, A, 1) :- vr(X, A), in(c2020_Choeras_Mason, X), out(c2020_Exoryza_Mason, X), ix.
+pie(r139, A, 2) :- ir(X, A), out(c2020_Choeras_Mason, X), in(c2020_Exoryza_Mason, X), ix.
+c(r139, A, 2) :- vr(X, A), out(c2020_Choeras_Mason, X), in(c2020_Exoryza_Mason, X), ix.
+
+% c2020_Choeras_Mason ! c2020_Iconella_Mason
+ir(X, r140) :- in(c2020_Choeras_Mason, X), in(c2020_Iconella_Mason, X).
+:- #count {X : vrs(X), in(c2020_Choeras_Mason,X), out(c2020_Iconella_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Choeras_Mason,X), in(c2020_Iconella_Mason,X)} <= 0, pw.
+pie(r140, A, 1) :- ir(X, A), in(c2020_Choeras_Mason, X), out(c2020_Iconella_Mason, X), ix.
+c(r140, A, 1) :- vr(X, A), in(c2020_Choeras_Mason, X), out(c2020_Iconella_Mason, X), ix.
+pie(r140, A, 2) :- ir(X, A), out(c2020_Choeras_Mason, X), in(c2020_Iconella_Mason, X), ix.
+c(r140, A, 2) :- vr(X, A), out(c2020_Choeras_Mason, X), in(c2020_Iconella_Mason, X), ix.
+
+% c2020_Choeras_Mason ! c2020_Illidops_Mason
+ir(X, r141) :- in(c2020_Choeras_Mason, X), in(c2020_Illidops_Mason, X).
+:- #count {X : vrs(X), in(c2020_Choeras_Mason,X), out(c2020_Illidops_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Choeras_Mason,X), in(c2020_Illidops_Mason,X)} <= 0, pw.
+pie(r141, A, 1) :- ir(X, A), in(c2020_Choeras_Mason, X), out(c2020_Illidops_Mason, X), ix.
+c(r141, A, 1) :- vr(X, A), in(c2020_Choeras_Mason, X), out(c2020_Illidops_Mason, X), ix.
+pie(r141, A, 2) :- ir(X, A), out(c2020_Choeras_Mason, X), in(c2020_Illidops_Mason, X), ix.
+c(r141, A, 2) :- vr(X, A), out(c2020_Choeras_Mason, X), in(c2020_Illidops_Mason, X), ix.
+
+% c2020_Dolichogenidea_Viereck ! c2020_Apanteles_Forster
+ir(X, r142) :- in(c2020_Dolichogenidea_Viereck, X), in(c2020_Apanteles_Forster, X).
+:- #count {X : vrs(X), in(c2020_Dolichogenidea_Viereck,X), out(c2020_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Dolichogenidea_Viereck,X), in(c2020_Apanteles_Forster,X)} <= 0, pw.
+pie(r142, A, 1) :- ir(X, A), in(c2020_Dolichogenidea_Viereck, X), out(c2020_Apanteles_Forster, X), ix.
+c(r142, A, 1) :- vr(X, A), in(c2020_Dolichogenidea_Viereck, X), out(c2020_Apanteles_Forster, X), ix.
+pie(r142, A, 2) :- ir(X, A), out(c2020_Dolichogenidea_Viereck, X), in(c2020_Apanteles_Forster, X), ix.
+c(r142, A, 2) :- vr(X, A), out(c2020_Dolichogenidea_Viereck, X), in(c2020_Apanteles_Forster, X), ix.
+
+% c2020_Dolichogenidea_Viereck ! c2020_Exoryza_Mason
+ir(X, r143) :- in(c2020_Dolichogenidea_Viereck, X), in(c2020_Exoryza_Mason, X).
+:- #count {X : vrs(X), in(c2020_Dolichogenidea_Viereck,X), out(c2020_Exoryza_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Dolichogenidea_Viereck,X), in(c2020_Exoryza_Mason,X)} <= 0, pw.
+pie(r143, A, 1) :- ir(X, A), in(c2020_Dolichogenidea_Viereck, X), out(c2020_Exoryza_Mason, X), ix.
+c(r143, A, 1) :- vr(X, A), in(c2020_Dolichogenidea_Viereck, X), out(c2020_Exoryza_Mason, X), ix.
+pie(r143, A, 2) :- ir(X, A), out(c2020_Dolichogenidea_Viereck, X), in(c2020_Exoryza_Mason, X), ix.
+c(r143, A, 2) :- vr(X, A), out(c2020_Dolichogenidea_Viereck, X), in(c2020_Exoryza_Mason, X), ix.
+
+% c2020_Dolichogenidea_Viereck ! c2020_Iconella_Mason
+ir(X, r144) :- in(c2020_Dolichogenidea_Viereck, X), in(c2020_Iconella_Mason, X).
+:- #count {X : vrs(X), in(c2020_Dolichogenidea_Viereck,X), out(c2020_Iconella_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Dolichogenidea_Viereck,X), in(c2020_Iconella_Mason,X)} <= 0, pw.
+pie(r144, A, 1) :- ir(X, A), in(c2020_Dolichogenidea_Viereck, X), out(c2020_Iconella_Mason, X), ix.
+c(r144, A, 1) :- vr(X, A), in(c2020_Dolichogenidea_Viereck, X), out(c2020_Iconella_Mason, X), ix.
+pie(r144, A, 2) :- ir(X, A), out(c2020_Dolichogenidea_Viereck, X), in(c2020_Iconella_Mason, X), ix.
+c(r144, A, 2) :- vr(X, A), out(c2020_Dolichogenidea_Viereck, X), in(c2020_Iconella_Mason, X), ix.
+
+% c2020_Dolichogenidea_Viereck ! c2020_Illidops_Mason
+ir(X, r145) :- in(c2020_Dolichogenidea_Viereck, X), in(c2020_Illidops_Mason, X).
+:- #count {X : vrs(X), in(c2020_Dolichogenidea_Viereck,X), out(c2020_Illidops_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Dolichogenidea_Viereck,X), in(c2020_Illidops_Mason,X)} <= 0, pw.
+pie(r145, A, 1) :- ir(X, A), in(c2020_Dolichogenidea_Viereck, X), out(c2020_Illidops_Mason, X), ix.
+c(r145, A, 1) :- vr(X, A), in(c2020_Dolichogenidea_Viereck, X), out(c2020_Illidops_Mason, X), ix.
+pie(r145, A, 2) :- ir(X, A), out(c2020_Dolichogenidea_Viereck, X), in(c2020_Illidops_Mason, X), ix.
+c(r145, A, 2) :- vr(X, A), out(c2020_Dolichogenidea_Viereck, X), in(c2020_Illidops_Mason, X), ix.
+
+% c2020_Apanteles_Forster ! c2020_Exoryza_Mason
+ir(X, r146) :- in(c2020_Apanteles_Forster, X), in(c2020_Exoryza_Mason, X).
+:- #count {X : vrs(X), in(c2020_Apanteles_Forster,X), out(c2020_Exoryza_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles_Forster,X), in(c2020_Exoryza_Mason,X)} <= 0, pw.
+pie(r146, A, 1) :- ir(X, A), in(c2020_Apanteles_Forster, X), out(c2020_Exoryza_Mason, X), ix.
+c(r146, A, 1) :- vr(X, A), in(c2020_Apanteles_Forster, X), out(c2020_Exoryza_Mason, X), ix.
+pie(r146, A, 2) :- ir(X, A), out(c2020_Apanteles_Forster, X), in(c2020_Exoryza_Mason, X), ix.
+c(r146, A, 2) :- vr(X, A), out(c2020_Apanteles_Forster, X), in(c2020_Exoryza_Mason, X), ix.
+
+% c2020_Apanteles_Forster ! c2020_Iconella_Mason
+ir(X, r147) :- in(c2020_Apanteles_Forster, X), in(c2020_Iconella_Mason, X).
+:- #count {X : vrs(X), in(c2020_Apanteles_Forster,X), out(c2020_Iconella_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles_Forster,X), in(c2020_Iconella_Mason,X)} <= 0, pw.
+pie(r147, A, 1) :- ir(X, A), in(c2020_Apanteles_Forster, X), out(c2020_Iconella_Mason, X), ix.
+c(r147, A, 1) :- vr(X, A), in(c2020_Apanteles_Forster, X), out(c2020_Iconella_Mason, X), ix.
+pie(r147, A, 2) :- ir(X, A), out(c2020_Apanteles_Forster, X), in(c2020_Iconella_Mason, X), ix.
+c(r147, A, 2) :- vr(X, A), out(c2020_Apanteles_Forster, X), in(c2020_Iconella_Mason, X), ix.
+
+% c2020_Apanteles_Forster ! c2020_Illidops_Mason
+ir(X, r148) :- in(c2020_Apanteles_Forster, X), in(c2020_Illidops_Mason, X).
+:- #count {X : vrs(X), in(c2020_Apanteles_Forster,X), out(c2020_Illidops_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles_Forster,X), in(c2020_Illidops_Mason,X)} <= 0, pw.
+pie(r148, A, 1) :- ir(X, A), in(c2020_Apanteles_Forster, X), out(c2020_Illidops_Mason, X), ix.
+c(r148, A, 1) :- vr(X, A), in(c2020_Apanteles_Forster, X), out(c2020_Illidops_Mason, X), ix.
+pie(r148, A, 2) :- ir(X, A), out(c2020_Apanteles_Forster, X), in(c2020_Illidops_Mason, X), ix.
+c(r148, A, 2) :- vr(X, A), out(c2020_Apanteles_Forster, X), in(c2020_Illidops_Mason, X), ix.
+
+% c2020_Exoryza_Mason ! c2020_Iconella_Mason
+ir(X, r149) :- in(c2020_Exoryza_Mason, X), in(c2020_Iconella_Mason, X).
+:- #count {X : vrs(X), in(c2020_Exoryza_Mason,X), out(c2020_Iconella_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exoryza_Mason,X), in(c2020_Iconella_Mason,X)} <= 0, pw.
+pie(r149, A, 1) :- ir(X, A), in(c2020_Exoryza_Mason, X), out(c2020_Iconella_Mason, X), ix.
+c(r149, A, 1) :- vr(X, A), in(c2020_Exoryza_Mason, X), out(c2020_Iconella_Mason, X), ix.
+pie(r149, A, 2) :- ir(X, A), out(c2020_Exoryza_Mason, X), in(c2020_Iconella_Mason, X), ix.
+c(r149, A, 2) :- vr(X, A), out(c2020_Exoryza_Mason, X), in(c2020_Iconella_Mason, X), ix.
+
+% c2020_Exoryza_Mason ! c2020_Illidops_Mason
+ir(X, r150) :- in(c2020_Exoryza_Mason, X), in(c2020_Illidops_Mason, X).
+:- #count {X : vrs(X), in(c2020_Exoryza_Mason,X), out(c2020_Illidops_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exoryza_Mason,X), in(c2020_Illidops_Mason,X)} <= 0, pw.
+pie(r150, A, 1) :- ir(X, A), in(c2020_Exoryza_Mason, X), out(c2020_Illidops_Mason, X), ix.
+c(r150, A, 1) :- vr(X, A), in(c2020_Exoryza_Mason, X), out(c2020_Illidops_Mason, X), ix.
+pie(r150, A, 2) :- ir(X, A), out(c2020_Exoryza_Mason, X), in(c2020_Illidops_Mason, X), ix.
+c(r150, A, 2) :- vr(X, A), out(c2020_Exoryza_Mason, X), in(c2020_Illidops_Mason, X), ix.
+
+% c2020_Iconella_Mason ! c2020_Illidops_Mason
+ir(X, r151) :- in(c2020_Iconella_Mason, X), in(c2020_Illidops_Mason, X).
+:- #count {X : vrs(X), in(c2020_Iconella_Mason,X), out(c2020_Illidops_Mason,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Iconella_Mason,X), in(c2020_Illidops_Mason,X)} <= 0, pw.
+pie(r151, A, 1) :- ir(X, A), in(c2020_Iconella_Mason, X), out(c2020_Illidops_Mason, X), ix.
+c(r151, A, 1) :- vr(X, A), in(c2020_Iconella_Mason, X), out(c2020_Illidops_Mason, X), ix.
+pie(r151, A, 2) :- ir(X, A), out(c2020_Iconella_Mason, X), in(c2020_Illidops_Mason, X), ix.
+c(r151, A, 2) :- vr(X, A), out(c2020_Iconella_Mason, X), in(c2020_Illidops_Mason, X), ix.
+
+
+%%% Articulations
+% 2020.Microgaster_Latreille equals 2003.Microgaster_Latreille
+ir(X, r152) :- out(c2020_Microgaster_Latreille,X), in(c2003_Microgaster_Latreille,X).
+ir(X, r152) :- in(c2020_Microgaster_Latreille,X), out(c2003_Microgaster_Latreille,X).
+ir(X, prod(r152,R)) :- out3(c2020_Microgaster_Latreille, X, R), in(c2003_Microgaster_Latreille,X), ix.
+ir(X, prod(r152,R)) :- in(c2020_Microgaster_Latreille,X), out3(c2003_Microgaster_Latreille, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Microgaster_Latreille,X), in(c2003_Microgaster_Latreille,X)} <= 0, pw.
+pie(r152, A, 1) :- ir(X, A), in(c2020_Microgaster_Latreille, X), in(c2003_Microgaster_Latreille, X), ix.
+c(r152, A, 1) :- vr(X, A), in(c2020_Microgaster_Latreille, X), in(c2003_Microgaster_Latreille, X), ix.
+
+
+% 2020.Exix_Mason equals 2003.Exix_Mason
+ir(X, r153) :- out(c2020_Exix_Mason,X), in(c2003_Exix_Mason,X).
+ir(X, r153) :- in(c2020_Exix_Mason,X), out(c2003_Exix_Mason,X).
+ir(X, prod(r153,R)) :- out3(c2020_Exix_Mason, X, R), in(c2003_Exix_Mason,X), ix.
+ir(X, prod(r153,R)) :- in(c2020_Exix_Mason,X), out3(c2003_Exix_Mason, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Exix_Mason,X), in(c2003_Exix_Mason,X)} <= 0, pw.
+pie(r153, A, 1) :- ir(X, A), in(c2020_Exix_Mason, X), in(c2003_Exix_Mason, X), ix.
+c(r153, A, 1) :- vr(X, A), in(c2020_Exix_Mason, X), in(c2003_Exix_Mason, X), ix.
+
+
+% 2020.ParoplitisMason equals 2003.ParoplitisMason
+ir(X, r154) :- out(c2020_ParoplitisMason,X), in(c2003_ParoplitisMason,X).
+ir(X, r154) :- in(c2020_ParoplitisMason,X), out(c2003_ParoplitisMason,X).
+ir(X, prod(r154,R)) :- out3(c2020_ParoplitisMason, X, R), in(c2003_ParoplitisMason,X), ix.
+ir(X, prod(r154,R)) :- in(c2020_ParoplitisMason,X), out3(c2003_ParoplitisMason, X, R), ix.
+:- #count {X : vrs(X), in(c2020_ParoplitisMason,X), in(c2003_ParoplitisMason,X)} <= 0, pw.
+pie(r154, A, 1) :- ir(X, A), in(c2020_ParoplitisMason, X), in(c2003_ParoplitisMason, X), ix.
+c(r154, A, 1) :- vr(X, A), in(c2020_ParoplitisMason, X), in(c2003_ParoplitisMason, X), ix.
+
+
+% 2020.Hygroplitis_Thomson equals 2003.Hygroplitis_Thomson
+ir(X, r155) :- out(c2020_Hygroplitis_Thomson,X), in(c2003_Hygroplitis_Thomson,X).
+ir(X, r155) :- in(c2020_Hygroplitis_Thomson,X), out(c2003_Hygroplitis_Thomson,X).
+ir(X, prod(r155,R)) :- out3(c2020_Hygroplitis_Thomson, X, R), in(c2003_Hygroplitis_Thomson,X), ix.
+ir(X, prod(r155,R)) :- in(c2020_Hygroplitis_Thomson,X), out3(c2003_Hygroplitis_Thomson, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Hygroplitis_Thomson,X), in(c2003_Hygroplitis_Thomson,X)} <= 0, pw.
+pie(r155, A, 1) :- ir(X, A), in(c2020_Hygroplitis_Thomson, X), in(c2003_Hygroplitis_Thomson, X), ix.
+c(r155, A, 1) :- vr(X, A), in(c2020_Hygroplitis_Thomson, X), in(c2003_Hygroplitis_Thomson, X), ix.
+
+
+% 2020.Miropotes_Nixon equals 2003.Miropotes_Nixon
+ir(X, r156) :- out(c2020_Miropotes_Nixon,X), in(c2003_Miropotes_Nixon,X).
+ir(X, r156) :- in(c2020_Miropotes_Nixon,X), out(c2003_Miropotes_Nixon,X).
+ir(X, prod(r156,R)) :- out3(c2020_Miropotes_Nixon, X, R), in(c2003_Miropotes_Nixon,X), ix.
+ir(X, prod(r156,R)) :- in(c2020_Miropotes_Nixon,X), out3(c2003_Miropotes_Nixon, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Miropotes_Nixon,X), in(c2003_Miropotes_Nixon,X)} <= 0, pw.
+pie(r156, A, 1) :- ir(X, A), in(c2020_Miropotes_Nixon, X), in(c2003_Miropotes_Nixon, X), ix.
+c(r156, A, 1) :- vr(X, A), in(c2020_Miropotes_Nixon, X), in(c2003_Miropotes_Nixon, X), ix.
+
+
+% 2020.Parenion_Nixon equals 2003.Parenion_Nixon
+ir(X, r157) :- out(c2020_Parenion_Nixon,X), in(c2003_Parenion_Nixon,X).
+ir(X, r157) :- in(c2020_Parenion_Nixon,X), out(c2003_Parenion_Nixon,X).
+ir(X, prod(r157,R)) :- out3(c2020_Parenion_Nixon, X, R), in(c2003_Parenion_Nixon,X), ix.
+ir(X, prod(r157,R)) :- in(c2020_Parenion_Nixon,X), out3(c2003_Parenion_Nixon, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Parenion_Nixon,X), in(c2003_Parenion_Nixon,X)} <= 0, pw.
+pie(r157, A, 1) :- ir(X, A), in(c2020_Parenion_Nixon, X), in(c2003_Parenion_Nixon, X), ix.
+c(r157, A, 1) :- vr(X, A), in(c2020_Parenion_Nixon, X), in(c2003_Parenion_Nixon, X), ix.
+
+
+% 2020.Fornicia_Brulle equals 2003.Fornicia_Brulle
+ir(X, r158) :- out(c2020_Fornicia_Brulle,X), in(c2003_Fornicia_Brulle,X).
+ir(X, r158) :- in(c2020_Fornicia_Brulle,X), out(c2003_Fornicia_Brulle,X).
+ir(X, prod(r158,R)) :- out3(c2020_Fornicia_Brulle, X, R), in(c2003_Fornicia_Brulle,X), ix.
+ir(X, prod(r158,R)) :- in(c2020_Fornicia_Brulle,X), out3(c2003_Fornicia_Brulle, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Fornicia_Brulle,X), in(c2003_Fornicia_Brulle,X)} <= 0, pw.
+pie(r158, A, 1) :- ir(X, A), in(c2020_Fornicia_Brulle, X), in(c2003_Fornicia_Brulle, X), ix.
+c(r158, A, 1) :- vr(X, A), in(c2020_Fornicia_Brulle, X), in(c2003_Fornicia_Brulle, X), ix.
+
+
+% 2020.Hypomicrogaster_Ashmead equals 2003.Hypomicrogaster_Ashmead
+ir(X, r159) :- out(c2020_Hypomicrogaster_Ashmead,X), in(c2003_Hypomicrogaster_Ashmead,X).
+ir(X, r159) :- in(c2020_Hypomicrogaster_Ashmead,X), out(c2003_Hypomicrogaster_Ashmead,X).
+ir(X, prod(r159,R)) :- out3(c2020_Hypomicrogaster_Ashmead, X, R), in(c2003_Hypomicrogaster_Ashmead,X), ix.
+ir(X, prod(r159,R)) :- in(c2020_Hypomicrogaster_Ashmead,X), out3(c2003_Hypomicrogaster_Ashmead, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Hypomicrogaster_Ashmead,X), in(c2003_Hypomicrogaster_Ashmead,X)} <= 0, pw.
+pie(r159, A, 1) :- ir(X, A), in(c2020_Hypomicrogaster_Ashmead, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+c(r159, A, 1) :- vr(X, A), in(c2020_Hypomicrogaster_Ashmead, X), in(c2003_Hypomicrogaster_Ashmead, X), ix.
+
+
+% 2020.Choeras_Mason is_included_in 2003.Apanteles_Forster
+:- #count {X : vrs(X), in(c2020_Choeras_Mason,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Choeras_Mason,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+ir(X, r160) :- in(c2020_Choeras_Mason,X), out(c2003_Apanteles_Forster,X), pw.
+pie(r160, A, 1) :- ir(X, A), out(c2020_Choeras_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+c(r160, A, 1) :- vr(X, A), out(c2020_Choeras_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+
+pie(r160, A, 2) :- ir(X, A), in(c2020_Choeras_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+c(r160, A, 2) :- vr(X, A), in(c2020_Choeras_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+
+
+% 2020.Dolichogenidea_Viereck is_included_in 2003.Apanteles_Forster
+:- #count {X : vrs(X), in(c2020_Dolichogenidea_Viereck,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Dolichogenidea_Viereck,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+ir(X, r161) :- in(c2020_Dolichogenidea_Viereck,X), out(c2003_Apanteles_Forster,X), pw.
+pie(r161, A, 1) :- ir(X, A), out(c2020_Dolichogenidea_Viereck, X), in(c2003_Apanteles_Forster, X), ix.
+c(r161, A, 1) :- vr(X, A), out(c2020_Dolichogenidea_Viereck, X), in(c2003_Apanteles_Forster, X), ix.
+
+pie(r161, A, 2) :- ir(X, A), in(c2020_Dolichogenidea_Viereck, X), in(c2003_Apanteles_Forster, X), ix.
+c(r161, A, 2) :- vr(X, A), in(c2020_Dolichogenidea_Viereck, X), in(c2003_Apanteles_Forster, X), ix.
+
+
+% 2020.Apanteles_Forster is_included_in 2003.Apanteles_Forster
+:- #count {X : vrs(X), in(c2020_Apanteles_Forster,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles_Forster,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+ir(X, r162) :- in(c2020_Apanteles_Forster,X), out(c2003_Apanteles_Forster,X), pw.
+pie(r162, A, 1) :- ir(X, A), out(c2020_Apanteles_Forster, X), in(c2003_Apanteles_Forster, X), ix.
+c(r162, A, 1) :- vr(X, A), out(c2020_Apanteles_Forster, X), in(c2003_Apanteles_Forster, X), ix.
+
+pie(r162, A, 2) :- ir(X, A), in(c2020_Apanteles_Forster, X), in(c2003_Apanteles_Forster, X), ix.
+c(r162, A, 2) :- vr(X, A), in(c2020_Apanteles_Forster, X), in(c2003_Apanteles_Forster, X), ix.
+
+
+% 2020.Exoryza_Mason is_included_in 2003.Apanteles_Forster
+:- #count {X : vrs(X), in(c2020_Exoryza_Mason,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exoryza_Mason,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+ir(X, r163) :- in(c2020_Exoryza_Mason,X), out(c2003_Apanteles_Forster,X), pw.
+pie(r163, A, 1) :- ir(X, A), out(c2020_Exoryza_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+c(r163, A, 1) :- vr(X, A), out(c2020_Exoryza_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+
+pie(r163, A, 2) :- ir(X, A), in(c2020_Exoryza_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+c(r163, A, 2) :- vr(X, A), in(c2020_Exoryza_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+
+
+% 2020.Iconella_Mason is_included_in 2003.Apanteles_Forster
+:- #count {X : vrs(X), in(c2020_Iconella_Mason,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Iconella_Mason,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+ir(X, r164) :- in(c2020_Iconella_Mason,X), out(c2003_Apanteles_Forster,X), pw.
+pie(r164, A, 1) :- ir(X, A), out(c2020_Iconella_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+c(r164, A, 1) :- vr(X, A), out(c2020_Iconella_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+
+pie(r164, A, 2) :- ir(X, A), in(c2020_Iconella_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+c(r164, A, 2) :- vr(X, A), in(c2020_Iconella_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+
+
+% 2020.Illidops_Mason is_included_in 2003.Apanteles_Forster
+:- #count {X : vrs(X), in(c2020_Illidops_Mason,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Illidops_Mason,X), in(c2003_Apanteles_Forster,X)} <= 0, pw.
+ir(X, r165) :- in(c2020_Illidops_Mason,X), out(c2003_Apanteles_Forster,X), pw.
+pie(r165, A, 1) :- ir(X, A), out(c2020_Illidops_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+c(r165, A, 1) :- vr(X, A), out(c2020_Illidops_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+
+pie(r165, A, 2) :- ir(X, A), in(c2020_Illidops_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+c(r165, A, 2) :- vr(X, A), in(c2020_Illidops_Mason, X), in(c2003_Apanteles_Forster, X), ix.
+
+
+% 2020.Microgastrine equals 2003.Microgastrine
+ir(X, r166) :- out(c2020_Microgastrine,X), in(c2003_Microgastrine,X).
+ir(X, r166) :- in(c2020_Microgastrine,X), out(c2003_Microgastrine,X).
+ir(X, prod(r166,R)) :- out3(c2020_Microgastrine, X, R), in(c2003_Microgastrine,X), ix.
+ir(X, prod(r166,R)) :- in(c2020_Microgastrine,X), out3(c2003_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Microgastrine,X), in(c2003_Microgastrine,X)} <= 0, pw.
+pie(r166, A, 1) :- ir(X, A), in(c2020_Microgastrine, X), in(c2003_Microgastrine, X), ix.
+c(r166, A, 1) :- vr(X, A), in(c2020_Microgastrine, X), in(c2003_Microgastrine, X), ix.
+
+
+%%% Decoding now
+:- rel(X, Y, "="), rel(X, Y, "<"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "="), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "="), rel(X, Y, "><"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "="), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "<"), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "<"), rel(X, Y, "><"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "<"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, ">"), rel(X, Y, "><"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, ">"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "><"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- not rel(X, Y, "="), not rel(X, Y, "<"), not rel(X, Y, ">"), not rel(X, Y, "><"), not rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), N1 < N2, not ncf(X), not ncf(Y), pw.
+
+rel(X, Y, "=") :- not hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2), pw.
+rel(X, Y, "<") :- not hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2), pw.
+rel(X, Y, ">") :- hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2), pw.
+rel(X, Y, "><") :- hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2), pw.
+rel(X, Y, "!") :- hint(X, Y, 0), not hint(X, Y, 1), hint(X, Y, 2), pw.
+
+
+hint(X, Y, 0) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), out(Y, R), not ncf(X), not ncf(Y), pw.
+hint(X, Y, 1) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), in(Y, R), not ncf(X), not ncf(Y), pw.
+hint(X, Y, 2) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), out(X, R), in(Y, R), not ncf(X), not ncf(Y), pw.
+

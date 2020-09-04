@@ -1,0 +1,20 @@
+taxonomy 2020 Current
+(Microgastrine Microgaster_Latreille Exix_Mason ParoplitisMason Hygroplitis_Thomson Miropotes_Nixon Parenion_Nixon Fornicia_Brulle Hypomicrogaster_Ashmead Choeras_Mason Dolichogenidea_Viereck Apanteles_Forster Exoryza_Mason Iconella_Mason Illidops_Mason)
+
+taxonomy 2003 VanAchterberg
+(Microgastrine Microgaster_Latreille Exix_Mason	ParoplitisMason	Hygroplitis_Thomson	Miropotes_Nixon	Parenion_Nixon Fornicia_Brulle Hypomicrogaster_Ashmead Apanteles_Forster)
+articulations 2020 2003
+[2020.Microgaster_Latreille equals 2003.Microgaster_Latreille]
+[2020.Exix_Mason equals 2003.Exix_Mason]
+[2020.ParoplitisMason equals 2003.ParoplitisMason]
+[2020.Hygroplitis_Thomson equals 2003.Hygroplitis_Thomson]
+[2020.Miropotes_Nixon equals 2003.Miropotes_Nixon]
+[2020.Parenion_Nixon equals 2003.Parenion_Nixon]
+[2020.Fornicia_Brulle equals 2003.Fornicia_Brulle]
+[2020.Hypomicrogaster_Ashmead equals 2003.Hypomicrogaster_Ashmead]
+[2020.Choeras_Mason is_included_in 2003.Apanteles_Forster]
+[2020.Dolichogenidea_Viereck is_included_in 2003.Apanteles_Forster]
+[2020.Apanteles_Forster is_included_in 2003.Apanteles_Forster]
+[2020.Exoryza_Mason is_included_in 2003.Apanteles_Forster]
+[2020.Iconella_Mason is_included_in 2003.Apanteles_Forster]
+[2020.Illidops_Mason is_included_in 2003.Apanteles_Forster]

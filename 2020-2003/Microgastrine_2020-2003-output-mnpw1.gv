@@ -2,34 +2,116 @@ digraph{
 rankdir=RL
 node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"] 
 "2003.Microgastrine"
+"2003.Apanteles_Forster"
 node[shape=box style="filled,rounded" fillcolor="#EEEEEE" fontname="helvetica"] 
-"2020.Hygroplitis_Thomson\n2003.Hygroplitis_Thomson"
-"2020.Miropotes_Nixon\n2003.Miropotes_Nixon"
 "2020.Hypomicrogaster_Ashmead\n2003.Hypomicrogaster_Ashmead"
 "2020.Fornicia_Brulle\n2003.Fornicia_Brulle"
-"2020.Apanteles_Forster\n2003.Apanteles_Forster"
-"2020.Exix_Mason\n2003.Exix_Mason"
-"2020.Microgaster_Latreille\n2003.Microgaster_Latreille"
-"2020.Parenion_Nixon\n2003.Parenion_Nixon"
 "2020.ParoplitisMason\n2003.ParoplitisMason"
+"2020.Microgaster_Latreille\n2003.Microgaster_Latreille"
+"2020.Hygroplitis_Thomson\n2003.Hygroplitis_Thomson"
+"2020.Miropotes_Nixon\n2003.Miropotes_Nixon"
+"2020.Exix_Mason\n2003.Exix_Mason"
+"2020.Parenion_Nixon\n2003.Parenion_Nixon"
+node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"] 
+"2020.Illidops_Mason"
+"2020.Exoryza_Mason"
+"2020.Choeras_Mason"
+"2020.Microgastrine"
+"2020.Dolichogenidea_Viereck"
+"2020.Apanteles_Forster"
+"2020.Iconella_Mason"
+edge[arrowhead=normal style=solid color="#FF0000" constraint=true penwidth=1]
+"2020.Microgastrine" -> "2003.Microgastrine"
+edge[arrowhead=normal style=solid color="#000000" constraint=true penwidth=1]
+"2020.Exoryza_Mason" -> "2003.Apanteles_Forster"
+"2020.Dolichogenidea_Viereck" -> "2020.Microgastrine"
+"2020.Hygroplitis_Thomson\n2003.Hygroplitis_Thomson" -> "2020.Microgastrine"
+"2020.Illidops_Mason" -> "2003.Apanteles_Forster"
+"2020.Illidops_Mason" -> "2020.Microgastrine"
+"2020.Hypomicrogaster_Ashmead\n2003.Hypomicrogaster_Ashmead" -> "2020.Microgastrine"
+"2020.Iconella_Mason" -> "2003.Apanteles_Forster"
+"2003.Apanteles_Forster" -> "2003.Microgastrine"
+"2020.Microgaster_Latreille\n2003.Microgaster_Latreille" -> "2020.Microgastrine"
+"2020.Apanteles_Forster" -> "2020.Microgastrine"
+"2020.Exix_Mason\n2003.Exix_Mason" -> "2020.Microgastrine"
+"2020.Fornicia_Brulle\n2003.Fornicia_Brulle" -> "2020.Microgastrine"
+"2020.Apanteles_Forster" -> "2003.Apanteles_Forster"
+"2020.Exoryza_Mason" -> "2020.Microgastrine"
+"2020.Parenion_Nixon\n2003.Parenion_Nixon" -> "2020.Microgastrine"
+"2020.Miropotes_Nixon\n2003.Miropotes_Nixon" -> "2020.Microgastrine"
+"2020.Dolichogenidea_Viereck" -> "2003.Apanteles_Forster"
+"2020.Choeras_Mason" -> "2003.Apanteles_Forster"
+"2020.ParoplitisMason\n2003.ParoplitisMason" -> "2020.Microgastrine"
+"2020.Iconella_Mason" -> "2020.Microgastrine"
+"2020.Choeras_Mason" -> "2020.Microgastrine"
+edge[arrowhead=normal style=dotted color="#000000" constraint=true penwidth=1]
+edge[arrowhead=none style=dashed color="#FF0000" constraint=false penwidth=1]
+"2003.Apanteles_Forster" -> "2020.Microgastrine"
+
+node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"] 
+"2003.Microgastrine"
+"2003.Protapanteles_Ashmead"
+node[shape=box style="filled,rounded" fillcolor="#EEEEEE" fontname="helvetica"] 
 "2020.Rhygolitis_Mason\n2003.Rhygolitis_Mason"
 "2020.Snellenius_Westwood\n2003.Snellenius_Westwood"
 "2020.Pseudapanteles_Ashmead\n2003.Pseudapanteles_Ashmead"
 "2020.Cotesia_Cameron\n2003.Cotesia_Cameron"
 "2020.Diologaster_Ashmead\n2003.Diologaster_Ashmead"
-"2020.Protapanteles_Ashmead\n2003.Protapanteles_Ashmead"
+"2020.Parapanteles_Ashmead\n2003.Parapanteles_Ashmead"
 "2020.Beyerslania_Kocak_and_Kemal\n2003.Xenogaster_Mason"
 "2020.Distatrix_Mason\n2003.Distatrix_Mason"
 "2020.Alphomelon_Mason\n2003.Alphomelon_Mason"
 "2020.Xanthomicrogaster_Cameron\n2003.Xanthomicrogaster_Cameron"
+"2020.Teremys_Mason\n2003.Teremys_Mason"
 "2020.Venanides_Mason\n2003.Venanides_Mason"
 "2020.Wilkinsonellus_Mason\n2003.Wilkinsonellus_Mason"
 "2020.Protomicroplitis_Ashead\n2003.Protomicroplitis_Ashead"
-"2020.Teremys_Mason\n2003.Teremys_Mason"
-"2020.Parapanteles_Ashmead\n2003.Parapanteles_Ashmead"
 "2020.Pholetesor_Mason\n2003.Pholetesor_Mason"
 "2020.Deuterixys_Mason\n2003.Deuterixys_Mason"
 "2020.Microplitis_Foerster\n2003.Microplitis_Forster"
+node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"] 
+"2020.Microgastrine"
+"2020.Glyptapanteles_Ashmead"
+"2020.Rasivalva_Mason"
+"2020.Sathon_Mason"
+"2020.Nyereria_Mason"
+"2020.Protapanteles_Ashmead"
+edge[arrowhead=none style=dashed color="#FF0000" constraint=false penwidth=1]
+"2003.Protapanteles_Ashmead" -> "2020.Microgastrine"
+edge[arrowhead=normal style=dotted color="#000000" constraint=true penwidth=1]
+edge[arrowhead=normal style=solid color="#000000" constraint=true penwidth=1]
+"2020.Rhygolitis_Mason\n2003.Rhygolitis_Mason" -> "2020.Microgastrine"
+"2020.Distatrix_Mason\n2003.Distatrix_Mason" -> "2020.Microgastrine"
+"2020.Deuterixys_Mason\n2003.Deuterixys_Mason" -> "2020.Microgastrine"
+"2020.Glyptapanteles_Ashmead" -> "2020.Microgastrine"
+"2020.Parapanteles_Ashmead\n2003.Parapanteles_Ashmead" -> "2020.Microgastrine"
+"2020.Nyereria_Mason" -> "2003.Protapanteles_Ashmead"
+"2020.Cotesia_Cameron\n2003.Cotesia_Cameron" -> "2020.Microgastrine"
+"2020.Glyptapanteles_Ashmead" -> "2003.Protapanteles_Ashmead"
+"2020.Sathon_Mason" -> "2003.Protapanteles_Ashmead"
+"2020.Teremys_Mason\n2003.Teremys_Mason" -> "2020.Microgastrine"
+"2020.Rasivalva_Mason" -> "2020.Microgastrine"
+"2003.Protapanteles_Ashmead" -> "2003.Microgastrine"
+"2020.Protomicroplitis_Ashead\n2003.Protomicroplitis_Ashead" -> "2020.Microgastrine"
+"2020.Snellenius_Westwood\n2003.Snellenius_Westwood" -> "2020.Microgastrine"
+"2020.Pholetesor_Mason\n2003.Pholetesor_Mason" -> "2020.Microgastrine"
+"2020.Nyereria_Mason" -> "2020.Microgastrine"
+"2020.Microplitis_Foerster\n2003.Microplitis_Forster" -> "2020.Microgastrine"
+"2020.Xanthomicrogaster_Cameron\n2003.Xanthomicrogaster_Cameron" -> "2020.Microgastrine"
+"2020.Protapanteles_Ashmead" -> "2020.Microgastrine"
+"2020.Wilkinsonellus_Mason\n2003.Wilkinsonellus_Mason" -> "2020.Microgastrine"
+"2020.Rasivalva_Mason" -> "2003.Protapanteles_Ashmead"
+"2020.Alphomelon_Mason\n2003.Alphomelon_Mason" -> "2020.Microgastrine"
+"2020.Protapanteles_Ashmead" -> "2003.Protapanteles_Ashmead"
+"2020.Diologaster_Ashmead\n2003.Diologaster_Ashmead" -> "2020.Microgastrine"
+"2020.Pseudapanteles_Ashmead\n2003.Pseudapanteles_Ashmead" -> "2020.Microgastrine"
+"2020.Beyerslania_Kocak_and_Kemal\n2003.Xenogaster_Mason" -> "2020.Microgastrine"
+"2020.Venanides_Mason\n2003.Venanides_Mason" -> "2020.Microgastrine"
+"2020.Sathon_Mason" -> "2020.Microgastrine"
+
+node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"] 
+"2003.Microgastrine"
+node[shape=box style="filled,rounded" fillcolor="#EEEEEE" fontname="helvetica"] 
 "2020.Pseudovenanides_Xiao_and_You\n2003.Pseudovenanides_Xiao_and_You"
 "2020.Napamus_Papp\n2003.Napamus_Papp"
 "2020.Alloplitis_Nixon\n2003.Alloplitis_Nixon"
@@ -51,16 +133,6 @@ node[shape=box style="filled,rounded" fillcolor="#EEEEEE" fontname="helvetica"]
 "2020.Pelicope_Mason\n2003.Pelicope_Mason"
 "2020.Buluka_De_Saeger\n2003.Buluka_De_Saeger"
 node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"] 
-"2020.Dolichogenidea_Viereck"
-"2020.Microgastrine"
-"2020.Illidops_Mason"
-"2020.Exoryza_Mason"
-"2020.Iconella_Mason"
-"2020.Choeras_Mason"
-"2020.Glyptapanteles_Ashmead"
-"2020.Rasivalva_Mason"
-"2020.Sathon_Mason"
-"2020.Nyereria_Mason"
 "2020.Billmasonius_FernandezTriana"
 "2020.Agupta_FernandezTriana"
 "2020.Kiwigaster_FernandezTriana_Whitifled_and_Ward"
@@ -86,47 +158,12 @@ node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"]
 "2020.Shireplitis_FernandezTriana_and_Ward"
 "2020.Jenopappius_FernandezTriana"
 "2020.Mariapanteles_Whitfield_and_FernandezTriana"
+"2020.Microgastrine"
 "2020.Teremys_Mason"
 "2020.Ohenri_FernandezTriana"
 "2020.Gilbertnixonius_FernandezTriana"
 edge[arrowhead=normal style=dotted color="#000000" constraint=true penwidth=1]
 edge[arrowhead=normal style=solid color="#000000" constraint=true penwidth=1]
-"2020.Dolichogenidea_Viereck" -> "2020.Microgastrine"
-"2020.Parenion_Nixon\n2003.Parenion_Nixon" -> "2003.Microgastrine"
-"2020.Miropotes_Nixon\n2003.Miropotes_Nixon" -> "2003.Microgastrine"
-"2020.Exoryza_Mason" -> "2020.Microgastrine"
-"2020.Exix_Mason\n2003.Exix_Mason" -> "2003.Microgastrine"
-"2020.Microgaster_Latreille\n2003.Microgaster_Latreille" -> "2003.Microgastrine"
-"2020.Illidops_Mason" -> "2020.Microgastrine"
-"2020.Apanteles_Forster\n2003.Apanteles_Forster" -> "2003.Microgastrine"
-"2020.ParoplitisMason\n2003.ParoplitisMason" -> "2003.Microgastrine"
-"2020.Choeras_Mason" -> "2020.Microgastrine"
-"2020.Fornicia_Brulle\n2003.Fornicia_Brulle" -> "2003.Microgastrine"
-"2020.Iconella_Mason" -> "2020.Microgastrine"
-"2020.Hygroplitis_Thomson\n2003.Hygroplitis_Thomson" -> "2003.Microgastrine"
-"2020.Hypomicrogaster_Ashmead\n2003.Hypomicrogaster_Ashmead" -> "2003.Microgastrine"
-"2020.Protomicroplitis_Ashead\n2003.Protomicroplitis_Ashead" -> "2003.Microgastrine"
-"2020.Protapanteles_Ashmead\n2003.Protapanteles_Ashmead" -> "2003.Microgastrine"
-"2020.Teremys_Mason\n2003.Teremys_Mason" -> "2003.Microgastrine"
-"2020.Glyptapanteles_Ashmead" -> "2020.Microgastrine"
-"2020.Snellenius_Westwood\n2003.Snellenius_Westwood" -> "2003.Microgastrine"
-"2020.Sathon_Mason" -> "2020.Microgastrine"
-"2020.Venanides_Mason\n2003.Venanides_Mason" -> "2003.Microgastrine"
-"2020.Distatrix_Mason\n2003.Distatrix_Mason" -> "2003.Microgastrine"
-"2020.Diologaster_Ashmead\n2003.Diologaster_Ashmead" -> "2003.Microgastrine"
-"2020.Rasivalva_Mason" -> "2020.Microgastrine"
-"2020.Rhygolitis_Mason\n2003.Rhygolitis_Mason" -> "2003.Microgastrine"
-"2020.Pholetesor_Mason\n2003.Pholetesor_Mason" -> "2003.Microgastrine"
-"2020.Nyereria_Mason" -> "2020.Microgastrine"
-"2020.Microplitis_Foerster\n2003.Microplitis_Forster" -> "2003.Microgastrine"
-"2020.Deuterixys_Mason\n2003.Deuterixys_Mason" -> "2003.Microgastrine"
-"2020.Cotesia_Cameron\n2003.Cotesia_Cameron" -> "2003.Microgastrine"
-"2020.Beyerslania_Kocak_and_Kemal\n2003.Xenogaster_Mason" -> "2003.Microgastrine"
-"2020.Pseudapanteles_Ashmead\n2003.Pseudapanteles_Ashmead" -> "2003.Microgastrine"
-"2020.Alphomelon_Mason\n2003.Alphomelon_Mason" -> "2003.Microgastrine"
-"2020.Wilkinsonellus_Mason\n2003.Wilkinsonellus_Mason" -> "2003.Microgastrine"
-"2020.Parapanteles_Ashmead\n2003.Parapanteles_Ashmead" -> "2003.Microgastrine"
-"2020.Xanthomicrogaster_Cameron\n2003.Xanthomicrogaster_Cameron" -> "2003.Microgastrine"
 "2020.Shireplitis_FernandezTriana_and_Ward" -> "2020.Microgastrine"
 "2020.Austinocotesia_FernandezTriana" -> "2020.Microgastrine"
 "2020.Kiwigaster_FernandezTriana_Whitifled_and_Ward" -> "2020.Microgastrine"
@@ -175,30 +212,33 @@ edge[arrowhead=normal style=solid color="#000000" constraint=true penwidth=1]
 "2020.Promicrogaster_Brues_and_Richardson\n2003.Promicrogaster_Brues_and_Richardson" -> "2003.Microgastrine"
 "2020.Qrocodiledundee_FernandezTriana" -> "2020.Microgastrine"
 "2020.Philoplitis_Nixon\n2003.Philoplitis_Nixon" -> "2003.Microgastrine"
-edge[arrowhead=normal style=solid color="#FF0000" constraint=true penwidth=1]
-"2003.Microgastrine" -> "2020.Microgastrine"
+
+
 node[shape=box] 
 {rank=source Legend [fillcolor= white margin=0 label=< 
  <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> 
 <TR> <TD COLSPAN="2"><font face="Arial Black"> Nodes</font></TD> </TR> 
 <TR> 
  <TD bgcolor="#FFFFCC" fontname="helvetica">2003</TD> 
- <TD>1</TD> 
+ <TD>3</TD> 
  </TR> 
 <TR> 
  <TD bgcolor="#EEEEEE" fontname="helvetica">congruent</TD> 
- <TD>47</TD> 
+ <TD>45</TD> 
  </TR> 
 <TR> 
  <TD bgcolor="#CCFFCC" fontname="helvetica">2020</TD> 
- <TD>38</TD> 
+ <TD>34</TD> 
  </TR> 
 <TR> <TD COLSPAN="2"><font face = "Arial Black"> Edges </font></TD> </TR> 
 <TR> 
- <TD><font color ="#000000">is_a (input)</font></TD><TD>84</TD>
+ <TD><font color ="#FF0000">is_a (inferred)</font></TD><TD>1</TD>
 </TR>
 <TR> 
- <TD><font color ="#FF0000">is_a (inferred)</font></TD><TD>1</TD>
+ <TD><font color ="#000000">is_a (input)</font></TD><TD>87</TD>
+</TR>
+<TR> 
+ <TD><font color ="#FF0000">overlaps (inferred)</font></TD><TD>2</TD>
 </TR>
 </TABLE> 
  >] } 
