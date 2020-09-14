@@ -25,7 +25,7 @@ node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"]
 "2020.Protomicroplitis_Ashead"
 "2020.Prasmodon_Nixon"
 "2020.Iconella_Mason"
-"2020.ParoplitisMason"
+"2020.Paroplitis_Mason"
 "2020.Fornicia_Brulle"
 "2020.Sendaphne_Nixon"
 "2020.Parenion_Nixon"
@@ -71,7 +71,7 @@ node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"]
 "2018.Promicrogaster_Brues_and_Richardson"
 "2018.Sathon_Mason"
 "2018.Venanides_Mason"
-"2018.ParoplitisMason"
+"2018.Paroplitis_Mason"
 "2018.Hygroplitis_Thomson"
 "2018.Protapanteles_Ashmead"
 "2018.Microplitis_Forster"
@@ -108,7 +108,7 @@ edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
 "2020.Microgastrine" -> "2020.Cotesia_Cameron" [dir=back]
 "2020.Microgastrine" -> "2020.Exoryza_Mason" [dir=back]
 "2020.Microgastrine" -> "2020.Xanthomicrogaster_Cameron" [dir=back]
-"2020.Microgastrine" -> "2020.ParoplitisMason" [dir=back]
+"2020.Microgastrine" -> "2020.Paroplitis_Mason" [dir=back]
 "2020.Microgastrine" -> "2020.Sendaphne_Nixon" [dir=back]
 "2020.Microgastrine" -> "2020.Prasmodon_Nixon" [dir=back]
 "2020.Microgastrine" -> "2020.Larissimus_Nixon" [dir=back]
@@ -181,7 +181,7 @@ edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
 "2018.Sendaphne_Nixon" -> "2018.Microgastrine"
 "2018.Rhygolitis_Mason" -> "2018.Microgastrine"
 "2018.Pholetesor_Mason" -> "2018.Microgastrine"
-"2018.ParoplitisMason" -> "2018.Microgastrine"
+"2018.Paroplitis_Mason" -> "2018.Microgastrine"
 "2018.Beyerslania_Kocak_and_Kemal" -> "2018.Microgastrine"
 "2018.Hygroplitis_Thomson" -> "2018.Microgastrine"
 "2018.Hypomicrogaster_Ashmead" -> "2018.Microgastrine"
@@ -199,7 +199,7 @@ edge[style=dashed color="#AA00FF" constraint=true penwidth=2 dir=both]
 "2020.Parapanteles_Ashmead" -> "2018.Parapanteles_Ashmead" [label="="]
 "2020.Protomicroplitis_Ashead" -> "2018.Protomicroplitis_Ashead" [label="="]
 "2020.Apanteles_Forster" -> "2018.Apanteles_Forster" [label="="]
-"2020.ParoplitisMason" -> "2018.ParoplitisMason" [label="="]
+"2020.Paroplitis_Mason" -> "2018.Paroplitis_Mason" [label="="]
 "2020.Dasylagon_Muesebeck" -> "2018.Dasylagon_Muesebeck" [label="="]
 "2020.Microplitis_Foerster" -> "2018.Microplitis_Forster" [label="="]
 "2020.Teremys_Mason" -> "2018.Pholetesor_Mason" [label="<"]
@@ -262,7 +262,7 @@ node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"]
 "2020.Chaoa_Luo_and_You"
 "2020.Austinocotesia_FernandezTriana"
 "2020.Pseudofornicia_van_Achterberg"
-"2020.Dodiogaster_Rousse"
+"2020.Dodogaster_Rousse"
 "2020.Papanteles_Mason"
 "2020.Pelicope_Mason"
 "2020.Tobleronius_FernandezTriana"
@@ -277,12 +277,12 @@ node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"]
 "2020.Neoclarkinella_Rema_and_Narendran"
 "2020.Ohenri_FernandezTriana"
 "2020.Lathrapanteles_Williams"
-"2020.Xantahapanteles_Whitfield"
+"2020.Xanthapanteles_Whitfield"
 node[shape=circle style=filled fillcolor="#FFFFFF"] 
 node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"] 
 "2018.Pseudofornicia_van_Achterberg"
 "2018.Pelicope_Mason"
-"2018.Xantahapanteles_Whitfield"
+"2018.Xanthapanteles_Whitfield"
 "2018.Lathrapanteles_Williams"
 "2018.Microgastrine"
 "2018.Keylimepie_FernandezTriana"
@@ -298,7 +298,7 @@ node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"]
 "2018.Kiwigaster_FernandezTriana_Whitifled_and_Ward"
 "2018.Cuneogaster_Choi_and_Whitfield"
 "2018.Chaoa_Luo_and_You"
-"2018.Dodiogaster_Rousse"
+"2018.Dodogaster_Rousse"
 "2018.Shireplitis_FernandezTriana_and_Ward"
 edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
 edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
@@ -313,7 +313,7 @@ edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
 "2020.Microgastrine" -> "2020.Agupta_FernandezTriana" [dir=back]
 "2020.Microgastrine" -> "2020.Ungunicus_FernandezTriana" [dir=back]
 "2020.Microgastrine" -> "2020.Cuneogaster_Choi_and_Whitfield" [dir=back]
-"2020.Microgastrine" -> "2020.Xantahapanteles_Whitfield" [dir=back]
+"2020.Microgastrine" -> "2020.Xanthapanteles_Whitfield" [dir=back]
 "2020.Microgastrine" -> "2020.Silvaspinosus_FernandezTriana" [dir=back]
 "2020.Microgastrine" -> "2020.Papanteles_Mason" [dir=back]
 "2020.Microgastrine" -> "2020.Austinocotesia_FernandezTriana" [dir=back]
@@ -333,7 +333,7 @@ edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
 "2020.Microgastrine" -> "2020.Keylimepie_FernandezTriana" [dir=back]
 "2020.Microgastrine" -> "2020.Clarkinella_Mason" [dir=back]
 "2020.Microgastrine" -> "2020.Pelicope_Mason" [dir=back]
-"2020.Microgastrine" -> "2020.Dodiogaster_Rousse" [dir=back]
+"2020.Microgastrine" -> "2020.Dodogaster_Rousse" [dir=back]
 "2020.Microgastrine" -> "2020.Janhalacaste_FernandezTriana" [dir=back]
 "2020.Microgastrine" -> "2020.Tobleronius_FernandezTriana" [dir=back]
 "2020.Microgastrine" -> "2020.Notogaster_FernandezTriana_and_Ward" [dir=back]
@@ -349,7 +349,7 @@ edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
 "2018.Neoclarkinella_Rema_and_Narendran" -> "2018.Microgastrine"
 "2018.Pseudovenanides_Xiao_and_You" -> "2018.Microgastrine"
 "2018.Venanus_Mason" -> "2018.Microgastrine"
-"2018.Dodiogaster_Rousse" -> "2018.Microgastrine"
+"2018.Dodogaster_Rousse" -> "2018.Microgastrine"
 "2018.Shireplitis_FernandezTriana_and_Ward" -> "2018.Microgastrine"
 "2018.Cuneogaster_Choi_and_Whitfield" -> "2018.Microgastrine"
 "2018.Chaoa_Luo_and_You" -> "2018.Microgastrine"
@@ -360,7 +360,7 @@ edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
 "2018.Mariapanteles_Whitfield_and_FernandezTriana" -> "2018.Microgastrine"
 "2018.Napamus_Papp" -> "2018.Microgastrine"
 "2018.Pseudofornicia_van_Achterberg" -> "2018.Microgastrine"
-"2018.Xantahapanteles_Whitfield" -> "2018.Microgastrine"
+"2018.Xanthapanteles_Whitfield" -> "2018.Microgastrine"
 "2018.Pelicope_Mason" -> "2018.Microgastrine"
 edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
 edge[style=dashed color="#AA00FF" constraint=true penwidth=2 dir=both]
@@ -380,9 +380,9 @@ edge[style=dashed color="#AA00FF" constraint=true penwidth=2 dir=both]
 "2020.Pelicope_Mason" -> "2018.Pelicope_Mason" [label="="]
 "2020.Pseudovenanides_Xiao_and_You" -> "2018.Pseudovenanides_Xiao_and_You" [label="="]
 "2020.Kiwigaster_FernandezTriana_Whitifled_and_Ward" -> "2018.Kiwigaster_FernandezTriana_Whitifled_and_Ward" [label="="]
-"2020.Xantahapanteles_Whitfield" -> "2018.Xantahapanteles_Whitfield" [label="="]
+"2020.Xanthapanteles_Whitfield" -> "2018.Xanthapanteles_Whitfield" [label="="]
 "2020.Austrocotesia_Austin_and_Dangerfield" -> "2018.Austrocotesia_Austin_and_Dangerfield" [label="="]
-"2020.Dodiogaster_Rousse" -> "2018.Dodiogaster_Rousse" [label="="]
+"2020.Dodogaster_Rousse" -> "2018.Dodogaster_Rousse" [label="="]
 
 node[shape=box] 
 {rank=source Legend [fillcolor= white margin=0 label=< 
