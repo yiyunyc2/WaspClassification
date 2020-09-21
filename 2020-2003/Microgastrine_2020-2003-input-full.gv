@@ -87,7 +87,7 @@ node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"]
 "2003.Venanides_Mason"
 "2003.Pseudapanteles_Ashmead"
 "2003.Teremys_Mason"
-"2003.Protomicroplitis_Ashead"
+"2003.Protomicroplitis_Ashmead"
 "2003.Rhygolitis_Mason"
 "2003.Wilkinsonellus_Mason"
 "2003.Cotesia_Cameron"
@@ -116,14 +116,14 @@ node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"]
 "2020.Nyereria_Mason"
 "2020.Wilkinsonellus_Mason"
 "2020.Rhygolitis_Mason"
-"2020.Protomicroplitis_Ashead"
+"2020.Protomicroplitis_Ashmead"
 "2020.Protapanteles_Ashmead"
 edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
 edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
 "2003.Wilkinsonellus_Mason" -> "2003.Microgastrine"
 "2003.Xenogaster_Mason" -> "2003.Microgastrine"
 "2003.Venanides_Mason" -> "2003.Microgastrine"
-"2003.Protomicroplitis_Ashead" -> "2003.Microgastrine"
+"2003.Protomicroplitis_Ashmead" -> "2003.Microgastrine"
 "2003.Protapanteles_Ashmead" -> "2003.Microgastrine"
 "2003.Pholetesor_Mason" -> "2003.Microgastrine"
 "2003.Alphomelon_Mason" -> "2003.Microgastrine"
@@ -146,7 +146,7 @@ edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
 "2020.Microgastrine" -> "2020.Nyereria_Mason" [dir=back]
 "2020.Microgastrine" -> "2020.Deuterixys_Mason" [dir=back]
 "2020.Microgastrine" -> "2020.Cotesia_Cameron" [dir=back]
-"2020.Microgastrine" -> "2020.Protomicroplitis_Ashead" [dir=back]
+"2020.Microgastrine" -> "2020.Protomicroplitis_Ashmead" [dir=back]
 "2020.Microgastrine" -> "2020.Rasivalva_Mason" [dir=back]
 "2020.Microgastrine" -> "2020.Protapanteles_Ashmead" [dir=back]
 "2020.Microgastrine" -> "2020.Teremys_Mason" [dir=back]
@@ -164,7 +164,7 @@ edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
 "2020.Microgastrine" -> "2020.Alphomelon_Mason" [dir=back]
 edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
 edge[style=dashed color="#AA00FF" constraint=true penwidth=2 dir=both]
-"2020.Protomicroplitis_Ashead" -> "2003.Protomicroplitis_Ashead" [label="="]
+"2020.Protomicroplitis_Ashmead" -> "2003.Protomicroplitis_Ashmead" [label="="]
 "2020.Wilkinsonellus_Mason" -> "2003.Wilkinsonellus_Mason" [label="="]
 "2020.Alphomelon_Mason" -> "2003.Alphomelon_Mason" [label="="]
 "2020.Glyptapanteles_Ashmead" -> "2003.Protapanteles_Ashmead" [label="<"]

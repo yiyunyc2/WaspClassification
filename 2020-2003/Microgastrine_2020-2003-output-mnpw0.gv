@@ -50,7 +50,7 @@ node[shape=box style="filled,rounded" fillcolor="#EEEEEE" fontname="helvetica"]
 "2020.Xanthomicrogaster_Cameron\n2003.Xanthomicrogaster_Cameron"
 "2020.Venanides_Mason\n2003.Venanides_Mason"
 "2020.Deuterixys_Mason\n2003.Deuterixys_Mason"
-"2020.Protomicroplitis_Ashead\n2003.Protomicroplitis_Ashead"
+"2020.Protomicroplitis_Ashmead\n2003.Protomicroplitis_Ashmead"
 "2020.Teremys_Mason\n2003.Teremys_Mason"
 "2020.Parapanteles_Ashmead\n2003.Parapanteles_Ashmead"
 "2020.Microgastrine\n2003.Microgastrine"
@@ -64,7 +64,7 @@ node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"]
 "2020.Protapanteles_Ashmead"
 edge[arrowhead=normal style=solid color="#000000" constraint=true penwidth=1]
 "2020.Snellenius_Westwood\n2003.Snellenius_Westwood" -> "2020.Microgastrine\n2003.Microgastrine"
-"2020.Protomicroplitis_Ashead\n2003.Protomicroplitis_Ashead" -> "2020.Microgastrine\n2003.Microgastrine"
+"2020.Protomicroplitis_Ashmead\n2003.Protomicroplitis_Ashmead" -> "2020.Microgastrine\n2003.Microgastrine"
 "2020.Beyerslania_Kocak_and_Kemal\n2003.Xenogaster_Mason" -> "2020.Microgastrine\n2003.Microgastrine"
 "2020.Pseudapanteles_Ashmead\n2003.Pseudapanteles_Ashmead" -> "2020.Microgastrine\n2003.Microgastrine"
 "2003.Protapanteles_Ashmead" -> "2020.Microgastrine\n2003.Microgastrine"
