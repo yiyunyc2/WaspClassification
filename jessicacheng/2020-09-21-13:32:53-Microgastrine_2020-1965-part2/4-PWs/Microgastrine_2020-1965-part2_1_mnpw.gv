@@ -1,0 +1,71 @@
+digraph{
+rankdir=RL
+node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"] 
+"1965.Microgastrine"
+"1965.Protomicroplitis_Ashmead"
+node[shape=box style="filled,rounded" fillcolor="#EEEEEE" fontname="helvetica"] 
+"2020.Microplitis_Foerster\n1965.Microplitis_Forster"
+"2020.Semionis_Nixon\n1965.Semionis_Nixon"
+"2020.Dasylagon_Muesebeck\n1965.Dasylagon_Muesebeck"
+"2020.Larissimus_Nixon\n1965.Larissimus_Nixon"
+"2020.Prasmodon_Nixon\n1965.Prasmodon_Nixon"
+"2020.Xanthomicrogaster_Cameron\n1965.Xanthomicrogaster_Cameron"
+"2020.Buluka_De_Saeger\n1965.Buluka_De_Saeger"
+"2020.Alloplitis_Nixon\n1965.Alloplitis_Nixon"
+"2020.Snellenius_Westwood\n1965.Snellenius_Westwood"
+"2020.Promicrogaster_Brues_and_Richardson\n1965.Promicrogaster_Brues_and_Richardson"
+"2020.Sendaphne_Nixon\n1965.Sendaphne_Nixon"
+"2020.Philoplitis_Nixon\n1965.Philoplitis_Nixon"
+node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"] 
+"2020.Diologaster_Ashmead"
+"2020.Microgastrine"
+"2020.Protomicroplitis_Ashmead"
+"2020.Other"
+edge[arrowhead=normal style=dotted color="#000000" constraint=true penwidth=1]
+edge[arrowhead=normal style=solid color="#000000" constraint=true penwidth=1]
+"2020.Larissimus_Nixon\n1965.Larissimus_Nixon" -> "1965.Microgastrine"
+"2020.Other" -> "2020.Microgastrine"
+"2020.Microplitis_Foerster\n1965.Microplitis_Forster" -> "1965.Microgastrine"
+"2020.Promicrogaster_Brues_and_Richardson\n1965.Promicrogaster_Brues_and_Richardson" -> "1965.Microgastrine"
+"2020.Protomicroplitis_Ashmead" -> "1965.Protomicroplitis_Ashmead"
+"2020.Xanthomicrogaster_Cameron\n1965.Xanthomicrogaster_Cameron" -> "1965.Microgastrine"
+"2020.Buluka_De_Saeger\n1965.Buluka_De_Saeger" -> "1965.Microgastrine"
+"2020.Philoplitis_Nixon\n1965.Philoplitis_Nixon" -> "1965.Microgastrine"
+"2020.Dasylagon_Muesebeck\n1965.Dasylagon_Muesebeck" -> "1965.Microgastrine"
+"2020.Snellenius_Westwood\n1965.Snellenius_Westwood" -> "1965.Microgastrine"
+"2020.Diologaster_Ashmead" -> "1965.Protomicroplitis_Ashmead"
+"1965.Microgastrine" -> "2020.Microgastrine"
+"2020.Prasmodon_Nixon\n1965.Prasmodon_Nixon" -> "1965.Microgastrine"
+"2020.Sendaphne_Nixon\n1965.Sendaphne_Nixon" -> "1965.Microgastrine"
+"1965.Protomicroplitis_Ashmead" -> "1965.Microgastrine"
+"2020.Alloplitis_Nixon\n1965.Alloplitis_Nixon" -> "1965.Microgastrine"
+"2020.Semionis_Nixon\n1965.Semionis_Nixon" -> "1965.Microgastrine"
+edge[arrowhead=none style=dashed color="#FF0000" constraint=false penwidth=1]
+"1965.Microgastrine" -> "2020.Other"
+"1965.Protomicroplitis_Ashmead" -> "2020.Other"
+node[shape=box] 
+{rank=source Legend [fillcolor= white margin=0 label=< 
+ <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> 
+<TR> <TD COLSPAN="2"><font face="Arial Black"> Nodes</font></TD> </TR> 
+<TR> 
+ <TD bgcolor="#FFFFCC" fontname="helvetica">1965</TD> 
+ <TD>2</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#EEEEEE" fontname="helvetica">congruent</TD> 
+ <TD>12</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#CCFFCC" fontname="helvetica">2020</TD> 
+ <TD>4</TD> 
+ </TR> 
+<TR> <TD COLSPAN="2"><font face = "Arial Black"> Edges </font></TD> </TR> 
+<TR> 
+ <TD><font color ="#000000">is_a (input)</font></TD><TD>17</TD>
+</TR>
+<TR> 
+ <TD><font color ="#FF0000">overlaps (inferred)</font></TD><TD>2</TD>
+</TR>
+</TABLE> 
+ >] } 
+}

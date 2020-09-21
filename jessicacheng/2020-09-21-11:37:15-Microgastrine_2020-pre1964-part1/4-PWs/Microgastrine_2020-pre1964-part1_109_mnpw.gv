@@ -1,0 +1,103 @@
+digraph{
+rankdir=RL
+node[shape=box style="filled,rounded" fillcolor="#EEEEEE" fontname="helvetica"] 
+"2020.Fornicia_Brulle\n1804.Fornicia_Brulle"
+"2020.Cotesia_Cameron\n1804.Cotesia_Cameron"
+"2020.Microgastrine\n1804.Microgastrine"
+"2020.Dolichogenidea_Viereck\n1804.Dolichogenidea_Viereck"
+"2020.Hygroplitis_Thomson\n1804.Hygroplitis_Thomson"
+node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"] 
+"1804.Protapanteles_Ashmead"
+"1804.Apanteles_Forster"
+"1804.Hypomicrogaster_Ashmead"
+"1804.Microgaster_Latreille"
+node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"] 
+"2020.Parenion_Nixon"
+"2020.Microgaster_Latreille"
+"2020.Illidops_Mason"
+"2020.Choeras_Mason"
+"2020.Sathon_Mason"
+"2020.Deuterixys_Mason"
+"2020.Venanides_Mason"
+"2020.Apanteles_Forster"
+"2020.Beyerslania_Kocak_and_Kemal"
+"2020.Distatrix_Mason"
+"2020.Hypomicrogaster_Ashmead"
+"2020.Exix_Mason"
+"2020.Pholetesor_Mason"
+"2020.Alphomelon_Mason"
+"2020.Teremys_Mason"
+"2020.Exoryza_Mason"
+"2020.Miropotes_Nixon"
+"2020.Protapanteles_Ashmead"
+"2020.Paroplitis_Mason"
+"2020.Nyereria_Mason"
+"2020.Wilkinsonellus_Mason"
+"2020.Rhygolitis_Mason"
+"2020.Iconella_Mason"
+edge[arrowhead=normal style=solid color="#FF0000" constraint=true penwidth=1]
+"2020.Miropotes_Nixon" -> "1804.Hypomicrogaster_Ashmead"
+edge[arrowhead=normal style=solid color="#000000" constraint=true penwidth=1]
+"2020.Paroplitis_Mason" -> "1804.Microgaster_Latreille"
+"2020.Dolichogenidea_Viereck\n1804.Dolichogenidea_Viereck" -> "2020.Microgastrine\n1804.Microgastrine"
+"1804.Apanteles_Forster" -> "2020.Microgastrine\n1804.Microgastrine"
+"2020.Rhygolitis_Mason" -> "1804.Apanteles_Forster"
+"2020.Cotesia_Cameron\n1804.Cotesia_Cameron" -> "2020.Microgastrine\n1804.Microgastrine"
+"2020.Illidops_Mason" -> "1804.Apanteles_Forster"
+"1804.Protapanteles_Ashmead" -> "2020.Microgastrine\n1804.Microgastrine"
+"2020.Wilkinsonellus_Mason" -> "1804.Apanteles_Forster"
+"2020.Apanteles_Forster" -> "1804.Apanteles_Forster"
+"2020.Protapanteles_Ashmead" -> "1804.Protapanteles_Ashmead"
+"2020.Beyerslania_Kocak_and_Kemal" -> "1804.Apanteles_Forster"
+"2020.Teremys_Mason" -> "1804.Apanteles_Forster"
+"2020.Alphomelon_Mason" -> "1804.Apanteles_Forster"
+"2020.Choeras_Mason" -> "1804.Hypomicrogaster_Ashmead"
+"1804.Microgaster_Latreille" -> "2020.Microgastrine\n1804.Microgastrine"
+"2020.Exoryza_Mason" -> "1804.Apanteles_Forster"
+"2020.Distatrix_Mason" -> "1804.Apanteles_Forster"
+"2020.Fornicia_Brulle\n1804.Fornicia_Brulle" -> "2020.Microgastrine\n1804.Microgastrine"
+"1804.Hypomicrogaster_Ashmead" -> "2020.Microgastrine\n1804.Microgastrine"
+"2020.Microgaster_Latreille" -> "1804.Microgaster_Latreille"
+"2020.Iconella_Mason" -> "1804.Apanteles_Forster"
+"2020.Exix_Mason" -> "1804.Microgaster_Latreille"
+"2020.Parenion_Nixon" -> "2020.Microgastrine\n1804.Microgastrine"
+"2020.Deuterixys_Mason" -> "1804.Apanteles_Forster"
+"2020.Hypomicrogaster_Ashmead" -> "1804.Hypomicrogaster_Ashmead"
+"2020.Venanides_Mason" -> "1804.Apanteles_Forster"
+"2020.Sathon_Mason" -> "1804.Protapanteles_Ashmead"
+"2020.Pholetesor_Mason" -> "1804.Apanteles_Forster"
+"2020.Hygroplitis_Thomson\n1804.Hygroplitis_Thomson" -> "2020.Microgastrine\n1804.Microgastrine"
+"2020.Nyereria_Mason" -> "1804.Protapanteles_Ashmead"
+edge[arrowhead=normal style=dotted color="#000000" constraint=true penwidth=1]
+edge[arrowhead=none style=dashed color="#FF0000" constraint=false penwidth=1]
+"1804.Protapanteles_Ashmead" -> "2020.Parenion_Nixon"
+"1804.Apanteles_Forster" -> "2020.Parenion_Nixon"
+node[shape=box] 
+{rank=source Legend [fillcolor= white margin=0 label=< 
+ <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> 
+<TR> <TD COLSPAN="2"><font face="Arial Black"> Nodes</font></TD> </TR> 
+<TR> 
+ <TD bgcolor="#EEEEEE" fontname="helvetica">congruent</TD> 
+ <TD>5</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#FFFFCC" fontname="helvetica">1804</TD> 
+ <TD>4</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#CCFFCC" fontname="helvetica">2020</TD> 
+ <TD>23</TD> 
+ </TR> 
+<TR> <TD COLSPAN="2"><font face = "Arial Black"> Edges </font></TD> </TR> 
+<TR> 
+ <TD><font color ="#FF0000">is_a (inferred)</font></TD><TD>1</TD>
+</TR>
+<TR> 
+ <TD><font color ="#000000">is_a (input)</font></TD><TD>30</TD>
+</TR>
+<TR> 
+ <TD><font color ="#FF0000">overlaps (inferred)</font></TD><TD>2</TD>
+</TR>
+</TABLE> 
+ >] } 
+}

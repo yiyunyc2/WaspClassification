@@ -1,0 +1,22 @@
+taxonomy 2020 Current
+(Microgastrine Microplitis_Foerster Snellenius_Westwood Protomicroplitis_Ashmead Diologaster_Ashmead Xanthomicrogaster_Cameron Promicrogaster_Brues_and_Richardson Buluka_De_Saeger Dasylagon_Muesebeck Larissimus_Nixon Alloplitis_Nixon Philoplitis_Nixon Prasmodon_Nixon Semionis_Nixon Sendaphne_Nixon Other)
+
+taxonomy 1965 Nixon
+(Microgastrine Microplitis_Forster Snellenius_Westwood Protomicroplitis_Ashmead Xanthomicrogaster_Cameron Promicrogaster_Brues_and_Richardson Buluka_De_Saeger Dasylagon_Muesebeck Larissimus_Nixon Alloplitis_Nixon Philoplitis_Nixon Prasmodon_Nixon Semionis_Nixon Sendaphne_Nixon)
+
+articulations 2020 1965
+[2020.Microplitis_Foerster equals 1965.Microplitis_Forster]
+[2020.Snellenius_Westwood equals 1965.Snellenius_Westwood]
+[2020.Protomicroplitis_Ashmead is_included_in 1965.Protomicroplitis_Ashmead]
+[2020.Diologaster_Ashmead is_included_in 1965.Protomicroplitis_Ashmead]
+[2020.Xanthomicrogaster_Cameron equals 1965.Xanthomicrogaster_Cameron]
+[2020.Promicrogaster_Brues_and_Richardson equals 1965.Promicrogaster_Brues_and_Richardson]
+[2020.Buluka_De_Saeger equals 1965.Buluka_De_Saeger]
+[2020.Dasylagon_Muesebeck equals 1965.Dasylagon_Muesebeck]
+[2020.Larissimus_Nixon equals 1965.Larissimus_Nixon]
+[2020.Alloplitis_Nixon equals 1965.Alloplitis_Nixon]
+[2020.Philoplitis_Nixon equals 1965.Philoplitis_Nixon]
+[2020.Prasmodon_Nixon equals 1965.Prasmodon_Nixon]
+[2020.Semionis_Nixon equals 1965.Semionis_Nixon]
+[2020.Sendaphne_Nixon equals 1965.Sendaphne_Nixon]
+[2020.Microgastrine	includes 1965.Microgastrine]

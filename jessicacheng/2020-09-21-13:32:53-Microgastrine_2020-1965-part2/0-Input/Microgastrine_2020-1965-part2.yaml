@@ -1,0 +1,262 @@
+1965.Alloplitis_Nixon:
+  concept: Alloplitis_Nixon
+  group: '1965'
+1965.Buluka_De_Saeger:
+  concept: Buluka_De_Saeger
+  group: '1965'
+1965.Dasylagon_Muesebeck:
+  concept: Dasylagon_Muesebeck
+  group: '1965'
+1965.Larissimus_Nixon:
+  concept: Larissimus_Nixon
+  group: '1965'
+1965.Microgastrine:
+  concept: Microgastrine
+  group: '1965'
+1965.Microplitis_Forster:
+  concept: Microplitis_Forster
+  group: '1965'
+1965.Philoplitis_Nixon:
+  concept: Philoplitis_Nixon
+  group: '1965'
+1965.Prasmodon_Nixon:
+  concept: Prasmodon_Nixon
+  group: '1965'
+1965.Promicrogaster_Brues_and_Richardson:
+  concept: Promicrogaster_Brues_and_Richardson
+  group: '1965'
+1965.Protomicroplitis_Ashmead:
+  concept: Protomicroplitis_Ashmead
+  group: '1965'
+1965.Semionis_Nixon:
+  concept: Semionis_Nixon
+  group: '1965'
+1965.Sendaphne_Nixon:
+  concept: Sendaphne_Nixon
+  group: '1965'
+1965.Snellenius_Westwood:
+  concept: Snellenius_Westwood
+  group: '1965'
+1965.Xanthomicrogaster_Cameron:
+  concept: Xanthomicrogaster_Cameron
+  group: '1965'
+2020.Alloplitis_Nixon:
+  concept: Alloplitis_Nixon
+  group: '2020'
+2020.Buluka_De_Saeger:
+  concept: Buluka_De_Saeger
+  group: '2020'
+2020.Dasylagon_Muesebeck:
+  concept: Dasylagon_Muesebeck
+  group: '2020'
+2020.Diologaster_Ashmead:
+  concept: Diologaster_Ashmead
+  group: '2020'
+2020.Larissimus_Nixon:
+  concept: Larissimus_Nixon
+  group: '2020'
+2020.Microgastrine:
+  concept: Microgastrine
+  group: '2020'
+2020.Microplitis_Foerster:
+  concept: Microplitis_Foerster
+  group: '2020'
+2020.Other:
+  concept: Other
+  group: '2020'
+2020.Philoplitis_Nixon:
+  concept: Philoplitis_Nixon
+  group: '2020'
+2020.Prasmodon_Nixon:
+  concept: Prasmodon_Nixon
+  group: '2020'
+2020.Promicrogaster_Brues_and_Richardson:
+  concept: Promicrogaster_Brues_and_Richardson
+  group: '2020'
+2020.Protomicroplitis_Ashmead:
+  concept: Protomicroplitis_Ashmead
+  group: '2020'
+2020.Semionis_Nixon:
+  concept: Semionis_Nixon
+  group: '2020'
+2020.Sendaphne_Nixon:
+  concept: Sendaphne_Nixon
+  group: '2020'
+2020.Snellenius_Westwood:
+  concept: Snellenius_Westwood
+  group: '2020'
+2020.Xanthomicrogaster_Cameron:
+  concept: Xanthomicrogaster_Cameron
+  group: '2020'
+1965.Alloplitis_Nixon_1965.Microgastrine:
+  label: isa
+  s: 1965.Alloplitis_Nixon
+  t: 1965.Microgastrine
+1965.Buluka_De_Saeger_1965.Microgastrine:
+  label: isa
+  s: 1965.Buluka_De_Saeger
+  t: 1965.Microgastrine
+1965.Dasylagon_Muesebeck_1965.Microgastrine:
+  label: isa
+  s: 1965.Dasylagon_Muesebeck
+  t: 1965.Microgastrine
+1965.Larissimus_Nixon_1965.Microgastrine:
+  label: isa
+  s: 1965.Larissimus_Nixon
+  t: 1965.Microgastrine
+1965.Microplitis_Forster_1965.Microgastrine:
+  label: isa
+  s: 1965.Microplitis_Forster
+  t: 1965.Microgastrine
+1965.Philoplitis_Nixon_1965.Microgastrine:
+  label: isa
+  s: 1965.Philoplitis_Nixon
+  t: 1965.Microgastrine
+1965.Prasmodon_Nixon_1965.Microgastrine:
+  label: isa
+  s: 1965.Prasmodon_Nixon
+  t: 1965.Microgastrine
+1965.Promicrogaster_Brues_and_Richardson_1965.Microgastrine:
+  label: isa
+  s: 1965.Promicrogaster_Brues_and_Richardson
+  t: 1965.Microgastrine
+1965.Protomicroplitis_Ashmead_1965.Microgastrine:
+  label: isa
+  s: 1965.Protomicroplitis_Ashmead
+  t: 1965.Microgastrine
+1965.Semionis_Nixon_1965.Microgastrine:
+  label: isa
+  s: 1965.Semionis_Nixon
+  t: 1965.Microgastrine
+1965.Sendaphne_Nixon_1965.Microgastrine:
+  label: isa
+  s: 1965.Sendaphne_Nixon
+  t: 1965.Microgastrine
+1965.Snellenius_Westwood_1965.Microgastrine:
+  label: isa
+  s: 1965.Snellenius_Westwood
+  t: 1965.Microgastrine
+1965.Xanthomicrogaster_Cameron_1965.Microgastrine:
+  label: isa
+  s: 1965.Xanthomicrogaster_Cameron
+  t: 1965.Microgastrine
+2020.Alloplitis_Nixon_1965.Alloplitis_Nixon:
+  label: '='
+  s: 2020.Alloplitis_Nixon
+  t: 1965.Alloplitis_Nixon
+2020.Alloplitis_Nixon_2020.Microgastrine:
+  label: isa
+  s: 2020.Alloplitis_Nixon
+  t: 2020.Microgastrine
+2020.Buluka_De_Saeger_1965.Buluka_De_Saeger:
+  label: '='
+  s: 2020.Buluka_De_Saeger
+  t: 1965.Buluka_De_Saeger
+2020.Buluka_De_Saeger_2020.Microgastrine:
+  label: isa
+  s: 2020.Buluka_De_Saeger
+  t: 2020.Microgastrine
+2020.Dasylagon_Muesebeck_1965.Dasylagon_Muesebeck:
+  label: '='
+  s: 2020.Dasylagon_Muesebeck
+  t: 1965.Dasylagon_Muesebeck
+2020.Dasylagon_Muesebeck_2020.Microgastrine:
+  label: isa
+  s: 2020.Dasylagon_Muesebeck
+  t: 2020.Microgastrine
+2020.Diologaster_Ashmead_1965.Protomicroplitis_Ashmead:
+  label: <
+  s: 2020.Diologaster_Ashmead
+  t: 1965.Protomicroplitis_Ashmead
+2020.Diologaster_Ashmead_2020.Microgastrine:
+  label: isa
+  s: 2020.Diologaster_Ashmead
+  t: 2020.Microgastrine
+2020.Larissimus_Nixon_1965.Larissimus_Nixon:
+  label: '='
+  s: 2020.Larissimus_Nixon
+  t: 1965.Larissimus_Nixon
+2020.Larissimus_Nixon_2020.Microgastrine:
+  label: isa
+  s: 2020.Larissimus_Nixon
+  t: 2020.Microgastrine
+2020.Microgastrine_1965.Microgastrine:
+  label: '>'
+  s: 2020.Microgastrine
+  t: 1965.Microgastrine
+2020.Microplitis_Foerster_1965.Microplitis_Forster:
+  label: '='
+  s: 2020.Microplitis_Foerster
+  t: 1965.Microplitis_Forster
+2020.Microplitis_Foerster_2020.Microgastrine:
+  label: isa
+  s: 2020.Microplitis_Foerster
+  t: 2020.Microgastrine
+2020.Other_2020.Microgastrine:
+  label: isa
+  s: 2020.Other
+  t: 2020.Microgastrine
+2020.Philoplitis_Nixon_1965.Philoplitis_Nixon:
+  label: '='
+  s: 2020.Philoplitis_Nixon
+  t: 1965.Philoplitis_Nixon
+2020.Philoplitis_Nixon_2020.Microgastrine:
+  label: isa
+  s: 2020.Philoplitis_Nixon
+  t: 2020.Microgastrine
+2020.Prasmodon_Nixon_1965.Prasmodon_Nixon:
+  label: '='
+  s: 2020.Prasmodon_Nixon
+  t: 1965.Prasmodon_Nixon
+2020.Prasmodon_Nixon_2020.Microgastrine:
+  label: isa
+  s: 2020.Prasmodon_Nixon
+  t: 2020.Microgastrine
+2020.Promicrogaster_Brues_and_Richardson_1965.Promicrogaster_Brues_and_Richardson:
+  label: '='
+  s: 2020.Promicrogaster_Brues_and_Richardson
+  t: 1965.Promicrogaster_Brues_and_Richardson
+2020.Promicrogaster_Brues_and_Richardson_2020.Microgastrine:
+  label: isa
+  s: 2020.Promicrogaster_Brues_and_Richardson
+  t: 2020.Microgastrine
+2020.Protomicroplitis_Ashmead_1965.Protomicroplitis_Ashmead:
+  label: <
+  s: 2020.Protomicroplitis_Ashmead
+  t: 1965.Protomicroplitis_Ashmead
+2020.Protomicroplitis_Ashmead_2020.Microgastrine:
+  label: isa
+  s: 2020.Protomicroplitis_Ashmead
+  t: 2020.Microgastrine
+2020.Semionis_Nixon_1965.Semionis_Nixon:
+  label: '='
+  s: 2020.Semionis_Nixon
+  t: 1965.Semionis_Nixon
+2020.Semionis_Nixon_2020.Microgastrine:
+  label: isa
+  s: 2020.Semionis_Nixon
+  t: 2020.Microgastrine
+2020.Sendaphne_Nixon_1965.Sendaphne_Nixon:
+  label: '='
+  s: 2020.Sendaphne_Nixon
+  t: 1965.Sendaphne_Nixon
+2020.Sendaphne_Nixon_2020.Microgastrine:
+  label: isa
+  s: 2020.Sendaphne_Nixon
+  t: 2020.Microgastrine
+2020.Snellenius_Westwood_1965.Snellenius_Westwood:
+  label: '='
+  s: 2020.Snellenius_Westwood
+  t: 1965.Snellenius_Westwood
+2020.Snellenius_Westwood_2020.Microgastrine:
+  label: isa
+  s: 2020.Snellenius_Westwood
+  t: 2020.Microgastrine
+2020.Xanthomicrogaster_Cameron_1965.Xanthomicrogaster_Cameron:
+  label: '='
+  s: 2020.Xanthomicrogaster_Cameron
+  t: 1965.Xanthomicrogaster_Cameron
+2020.Xanthomicrogaster_Cameron_2020.Microgastrine:
+  label: isa
+  s: 2020.Xanthomicrogaster_Cameron
+  t: 2020.Microgastrine

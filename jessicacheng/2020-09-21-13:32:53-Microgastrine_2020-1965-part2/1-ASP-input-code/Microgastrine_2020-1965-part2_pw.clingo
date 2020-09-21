@@ -1,0 +1,2096 @@
+%%% Euler regions
+r(1..223).
+
+%%% Concepts
+tax(t1965,0).
+concept2(A, B) :- concept(A,B,_).
+concept(c1965_Snellenius_Westwood,0,0).
+concept(c1965_Promicrogaster_Brues_and_Richardson,0,1).
+concept(c1965_Microplitis_Forster,0,2).
+concept(c1965_Prasmodon_Nixon,0,3).
+concept(c1965_Semionis_Nixon,0,4).
+concept(c1965_Protomicroplitis_Ashmead,0,5).
+concept(c1965_Xanthomicrogaster_Cameron,0,6).
+concept(c1965_Philoplitis_Nixon,0,7).
+concept(c1965_Sendaphne_Nixon,0,8).
+concept(c1965_Larissimus_Nixon,0,9).
+concept(c1965_Dasylagon_Muesebeck,0,10).
+concept(c1965_Alloplitis_Nixon,0,11).
+concept(c1965_Buluka_De_Saeger,0,12).
+concept2(c1965_Microgastrine,0).
+tax(t2020,1).
+concept2(A, B) :- concept(A,B,_).
+concept(c2020_Snellenius_Westwood,1,0).
+concept(c2020_Promicrogaster_Brues_and_Richardson,1,1).
+concept(c2020_Alloplitis_Nixon,1,2).
+concept(c2020_Prasmodon_Nixon,1,3).
+concept(c2020_Semionis_Nixon,1,4).
+concept(c2020_Protomicroplitis_Ashmead,1,5).
+concept(c2020_Microplitis_Foerster,1,6).
+concept(c2020_Xanthomicrogaster_Cameron,1,7).
+concept(c2020_Diologaster_Ashmead,1,8).
+concept(c2020_Philoplitis_Nixon,1,9).
+concept(c2020_Sendaphne_Nixon,1,10).
+concept(c2020_Other,1,11).
+concept(c2020_Larissimus_Nixon,1,12).
+concept(c2020_Dasylagon_Muesebeck,1,13).
+concept(c2020_Buluka_De_Saeger,1,14).
+concept2(c2020_Microgastrine,1).
+%%% Euler Bit
+bit(M, 0, V):-r(M),M1=M/1, V = M1 \ 14.
+bit(M, 1, V):-r(M),M1=M/14, V = M1 \ 16.
+
+
+%%% Meaning of regions
+in(X, M) :- r(M),concept(X,T,N),N1=N+1,bit(M,T,N1).
+out(X, M) :- r(M),concept(X,T,N),N1=N+1,not bit(M,T,N1).
+in(X, M) :- r(M),concept2(X,_),not out(X, M).
+out(X, M) :- out3(X, M, _), ix.
+irs(M) :- in(X, M), out(X, M), r(M), concept2(X,_).
+
+%%% Constraints of regions.
+irs(X) :- ir(X, _).
+vrs(X) :- vr(X, _).
+vr(X, X) :- not irs(X), r(X).
+ir(X, X) :- not vrs(X), r(X), pw.
+ie(prod(A,B)) :- vr(X, A), ir(X, B), ix.
+:- vrs(X), irs(X), pw.
+
+%%% Inconsistency Explanation.
+ie(s(R, A, Y)) :- pie(R, A, Y), not cc(R, Y), ix.
+cc(R, Y) :- c(R, _, Y), ix.
+
+%%% Parent-Child relations
+%% ISA
+% c1965_Microplitis_Forster isa c1965_Microgastrine
+ir(X, r0) :- in(c1965_Microplitis_Forster, X), out(c1965_Microgastrine, X), pw.
+ir(X, prod(r0,R)) :- in(c1965_Microplitis_Forster,X), out3(c1965_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c1965_Microplitis_Forster,X), in(c1965_Microgastrine,X)} <= 0, pw.
+pie(r0, A, 1) :- ir(X, A), in(c1965_Microplitis_Forster, X), in(c1965_Microgastrine, X), ix.
+c(r0, A, 1) :- vr(X, A), in(c1965_Microplitis_Forster, X), in(c1965_Microgastrine, X), ix.
+
+% c1965_Snellenius_Westwood isa c1965_Microgastrine
+ir(X, r1) :- in(c1965_Snellenius_Westwood, X), out(c1965_Microgastrine, X), pw.
+ir(X, prod(r1,R)) :- in(c1965_Snellenius_Westwood,X), out3(c1965_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c1965_Snellenius_Westwood,X), in(c1965_Microgastrine,X)} <= 0, pw.
+pie(r1, A, 1) :- ir(X, A), in(c1965_Snellenius_Westwood, X), in(c1965_Microgastrine, X), ix.
+c(r1, A, 1) :- vr(X, A), in(c1965_Snellenius_Westwood, X), in(c1965_Microgastrine, X), ix.
+
+% c1965_Protomicroplitis_Ashmead isa c1965_Microgastrine
+ir(X, r2) :- in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Microgastrine, X), pw.
+ir(X, prod(r2,R)) :- in(c1965_Protomicroplitis_Ashmead,X), out3(c1965_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c1965_Protomicroplitis_Ashmead,X), in(c1965_Microgastrine,X)} <= 0, pw.
+pie(r2, A, 1) :- ir(X, A), in(c1965_Protomicroplitis_Ashmead, X), in(c1965_Microgastrine, X), ix.
+c(r2, A, 1) :- vr(X, A), in(c1965_Protomicroplitis_Ashmead, X), in(c1965_Microgastrine, X), ix.
+
+% c1965_Xanthomicrogaster_Cameron isa c1965_Microgastrine
+ir(X, r3) :- in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Microgastrine, X), pw.
+ir(X, prod(r3,R)) :- in(c1965_Xanthomicrogaster_Cameron,X), out3(c1965_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c1965_Xanthomicrogaster_Cameron,X), in(c1965_Microgastrine,X)} <= 0, pw.
+pie(r3, A, 1) :- ir(X, A), in(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Microgastrine, X), ix.
+c(r3, A, 1) :- vr(X, A), in(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Microgastrine, X), ix.
+
+% c1965_Promicrogaster_Brues_and_Richardson isa c1965_Microgastrine
+ir(X, r4) :- in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Microgastrine, X), pw.
+ir(X, prod(r4,R)) :- in(c1965_Promicrogaster_Brues_and_Richardson,X), out3(c1965_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c1965_Promicrogaster_Brues_and_Richardson,X), in(c1965_Microgastrine,X)} <= 0, pw.
+pie(r4, A, 1) :- ir(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Microgastrine, X), ix.
+c(r4, A, 1) :- vr(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Microgastrine, X), ix.
+
+% c1965_Buluka_De_Saeger isa c1965_Microgastrine
+ir(X, r5) :- in(c1965_Buluka_De_Saeger, X), out(c1965_Microgastrine, X), pw.
+ir(X, prod(r5,R)) :- in(c1965_Buluka_De_Saeger,X), out3(c1965_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c1965_Buluka_De_Saeger,X), in(c1965_Microgastrine,X)} <= 0, pw.
+pie(r5, A, 1) :- ir(X, A), in(c1965_Buluka_De_Saeger, X), in(c1965_Microgastrine, X), ix.
+c(r5, A, 1) :- vr(X, A), in(c1965_Buluka_De_Saeger, X), in(c1965_Microgastrine, X), ix.
+
+% c1965_Dasylagon_Muesebeck isa c1965_Microgastrine
+ir(X, r6) :- in(c1965_Dasylagon_Muesebeck, X), out(c1965_Microgastrine, X), pw.
+ir(X, prod(r6,R)) :- in(c1965_Dasylagon_Muesebeck,X), out3(c1965_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c1965_Dasylagon_Muesebeck,X), in(c1965_Microgastrine,X)} <= 0, pw.
+pie(r6, A, 1) :- ir(X, A), in(c1965_Dasylagon_Muesebeck, X), in(c1965_Microgastrine, X), ix.
+c(r6, A, 1) :- vr(X, A), in(c1965_Dasylagon_Muesebeck, X), in(c1965_Microgastrine, X), ix.
+
+% c1965_Larissimus_Nixon isa c1965_Microgastrine
+ir(X, r7) :- in(c1965_Larissimus_Nixon, X), out(c1965_Microgastrine, X), pw.
+ir(X, prod(r7,R)) :- in(c1965_Larissimus_Nixon,X), out3(c1965_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c1965_Larissimus_Nixon,X), in(c1965_Microgastrine,X)} <= 0, pw.
+pie(r7, A, 1) :- ir(X, A), in(c1965_Larissimus_Nixon, X), in(c1965_Microgastrine, X), ix.
+c(r7, A, 1) :- vr(X, A), in(c1965_Larissimus_Nixon, X), in(c1965_Microgastrine, X), ix.
+
+% c1965_Alloplitis_Nixon isa c1965_Microgastrine
+ir(X, r8) :- in(c1965_Alloplitis_Nixon, X), out(c1965_Microgastrine, X), pw.
+ir(X, prod(r8,R)) :- in(c1965_Alloplitis_Nixon,X), out3(c1965_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c1965_Alloplitis_Nixon,X), in(c1965_Microgastrine,X)} <= 0, pw.
+pie(r8, A, 1) :- ir(X, A), in(c1965_Alloplitis_Nixon, X), in(c1965_Microgastrine, X), ix.
+c(r8, A, 1) :- vr(X, A), in(c1965_Alloplitis_Nixon, X), in(c1965_Microgastrine, X), ix.
+
+% c1965_Philoplitis_Nixon isa c1965_Microgastrine
+ir(X, r9) :- in(c1965_Philoplitis_Nixon, X), out(c1965_Microgastrine, X), pw.
+ir(X, prod(r9,R)) :- in(c1965_Philoplitis_Nixon,X), out3(c1965_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c1965_Philoplitis_Nixon,X), in(c1965_Microgastrine,X)} <= 0, pw.
+pie(r9, A, 1) :- ir(X, A), in(c1965_Philoplitis_Nixon, X), in(c1965_Microgastrine, X), ix.
+c(r9, A, 1) :- vr(X, A), in(c1965_Philoplitis_Nixon, X), in(c1965_Microgastrine, X), ix.
+
+% c1965_Prasmodon_Nixon isa c1965_Microgastrine
+ir(X, r10) :- in(c1965_Prasmodon_Nixon, X), out(c1965_Microgastrine, X), pw.
+ir(X, prod(r10,R)) :- in(c1965_Prasmodon_Nixon,X), out3(c1965_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c1965_Prasmodon_Nixon,X), in(c1965_Microgastrine,X)} <= 0, pw.
+pie(r10, A, 1) :- ir(X, A), in(c1965_Prasmodon_Nixon, X), in(c1965_Microgastrine, X), ix.
+c(r10, A, 1) :- vr(X, A), in(c1965_Prasmodon_Nixon, X), in(c1965_Microgastrine, X), ix.
+
+% c1965_Semionis_Nixon isa c1965_Microgastrine
+ir(X, r11) :- in(c1965_Semionis_Nixon, X), out(c1965_Microgastrine, X), pw.
+ir(X, prod(r11,R)) :- in(c1965_Semionis_Nixon,X), out3(c1965_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c1965_Semionis_Nixon,X), in(c1965_Microgastrine,X)} <= 0, pw.
+pie(r11, A, 1) :- ir(X, A), in(c1965_Semionis_Nixon, X), in(c1965_Microgastrine, X), ix.
+c(r11, A, 1) :- vr(X, A), in(c1965_Semionis_Nixon, X), in(c1965_Microgastrine, X), ix.
+
+% c1965_Sendaphne_Nixon isa c1965_Microgastrine
+ir(X, r12) :- in(c1965_Sendaphne_Nixon, X), out(c1965_Microgastrine, X), pw.
+ir(X, prod(r12,R)) :- in(c1965_Sendaphne_Nixon,X), out3(c1965_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c1965_Sendaphne_Nixon,X), in(c1965_Microgastrine,X)} <= 0, pw.
+pie(r12, A, 1) :- ir(X, A), in(c1965_Sendaphne_Nixon, X), in(c1965_Microgastrine, X), ix.
+c(r12, A, 1) :- vr(X, A), in(c1965_Sendaphne_Nixon, X), in(c1965_Microgastrine, X), ix.
+
+%% coverage
+out3(c1965_Microgastrine, X, r13) :- out(c1965_Microplitis_Forster, X), out(c1965_Snellenius_Westwood, X), out(c1965_Protomicroplitis_Ashmead, X), out(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Buluka_De_Saeger, X), out(c1965_Dasylagon_Muesebeck, X), out(c1965_Larissimus_Nixon, X), out(c1965_Alloplitis_Nixon, X), out(c1965_Philoplitis_Nixon, X), out(c1965_Prasmodon_Nixon, X), out(c1965_Semionis_Nixon, X), out(c1965_Sendaphne_Nixon, X), ix.
+out(c1965_Microgastrine, X) :- out(c1965_Microplitis_Forster, X), out(c1965_Snellenius_Westwood, X), out(c1965_Protomicroplitis_Ashmead, X), out(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Buluka_De_Saeger, X), out(c1965_Dasylagon_Muesebeck, X), out(c1965_Larissimus_Nixon, X), out(c1965_Alloplitis_Nixon, X), out(c1965_Philoplitis_Nixon, X), out(c1965_Prasmodon_Nixon, X), out(c1965_Semionis_Nixon, X), out(c1965_Sendaphne_Nixon, X), pw.
+%% sibling disjointness
+% c1965_Microplitis_Forster ! c1965_Snellenius_Westwood
+ir(X, r14) :- in(c1965_Microplitis_Forster, X), in(c1965_Snellenius_Westwood, X).
+:- #count {X : vrs(X), in(c1965_Microplitis_Forster,X), out(c1965_Snellenius_Westwood,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Microplitis_Forster,X), in(c1965_Snellenius_Westwood,X)} <= 0, pw.
+pie(r14, A, 1) :- ir(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Snellenius_Westwood, X), ix.
+c(r14, A, 1) :- vr(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Snellenius_Westwood, X), ix.
+pie(r14, A, 2) :- ir(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Snellenius_Westwood, X), ix.
+c(r14, A, 2) :- vr(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Snellenius_Westwood, X), ix.
+
+% c1965_Microplitis_Forster ! c1965_Protomicroplitis_Ashmead
+ir(X, r15) :- in(c1965_Microplitis_Forster, X), in(c1965_Protomicroplitis_Ashmead, X).
+:- #count {X : vrs(X), in(c1965_Microplitis_Forster,X), out(c1965_Protomicroplitis_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Microplitis_Forster,X), in(c1965_Protomicroplitis_Ashmead,X)} <= 0, pw.
+pie(r15, A, 1) :- ir(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Protomicroplitis_Ashmead, X), ix.
+c(r15, A, 1) :- vr(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Protomicroplitis_Ashmead, X), ix.
+pie(r15, A, 2) :- ir(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Protomicroplitis_Ashmead, X), ix.
+c(r15, A, 2) :- vr(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Protomicroplitis_Ashmead, X), ix.
+
+% c1965_Microplitis_Forster ! c1965_Xanthomicrogaster_Cameron
+ir(X, r16) :- in(c1965_Microplitis_Forster, X), in(c1965_Xanthomicrogaster_Cameron, X).
+:- #count {X : vrs(X), in(c1965_Microplitis_Forster,X), out(c1965_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Microplitis_Forster,X), in(c1965_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+pie(r16, A, 1) :- ir(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Xanthomicrogaster_Cameron, X), ix.
+c(r16, A, 1) :- vr(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Xanthomicrogaster_Cameron, X), ix.
+pie(r16, A, 2) :- ir(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Xanthomicrogaster_Cameron, X), ix.
+c(r16, A, 2) :- vr(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Xanthomicrogaster_Cameron, X), ix.
+
+% c1965_Microplitis_Forster ! c1965_Promicrogaster_Brues_and_Richardson
+ir(X, r17) :- in(c1965_Microplitis_Forster, X), in(c1965_Promicrogaster_Brues_and_Richardson, X).
+:- #count {X : vrs(X), in(c1965_Microplitis_Forster,X), out(c1965_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Microplitis_Forster,X), in(c1965_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+pie(r17, A, 1) :- ir(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r17, A, 1) :- vr(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+pie(r17, A, 2) :- ir(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r17, A, 2) :- vr(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+
+% c1965_Microplitis_Forster ! c1965_Buluka_De_Saeger
+ir(X, r18) :- in(c1965_Microplitis_Forster, X), in(c1965_Buluka_De_Saeger, X).
+:- #count {X : vrs(X), in(c1965_Microplitis_Forster,X), out(c1965_Buluka_De_Saeger,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Microplitis_Forster,X), in(c1965_Buluka_De_Saeger,X)} <= 0, pw.
+pie(r18, A, 1) :- ir(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Buluka_De_Saeger, X), ix.
+c(r18, A, 1) :- vr(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Buluka_De_Saeger, X), ix.
+pie(r18, A, 2) :- ir(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Buluka_De_Saeger, X), ix.
+c(r18, A, 2) :- vr(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Buluka_De_Saeger, X), ix.
+
+% c1965_Microplitis_Forster ! c1965_Dasylagon_Muesebeck
+ir(X, r19) :- in(c1965_Microplitis_Forster, X), in(c1965_Dasylagon_Muesebeck, X).
+:- #count {X : vrs(X), in(c1965_Microplitis_Forster,X), out(c1965_Dasylagon_Muesebeck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Microplitis_Forster,X), in(c1965_Dasylagon_Muesebeck,X)} <= 0, pw.
+pie(r19, A, 1) :- ir(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Dasylagon_Muesebeck, X), ix.
+c(r19, A, 1) :- vr(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Dasylagon_Muesebeck, X), ix.
+pie(r19, A, 2) :- ir(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Dasylagon_Muesebeck, X), ix.
+c(r19, A, 2) :- vr(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Dasylagon_Muesebeck, X), ix.
+
+% c1965_Microplitis_Forster ! c1965_Larissimus_Nixon
+ir(X, r20) :- in(c1965_Microplitis_Forster, X), in(c1965_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Microplitis_Forster,X), out(c1965_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Microplitis_Forster,X), in(c1965_Larissimus_Nixon,X)} <= 0, pw.
+pie(r20, A, 1) :- ir(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Larissimus_Nixon, X), ix.
+c(r20, A, 1) :- vr(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Larissimus_Nixon, X), ix.
+pie(r20, A, 2) :- ir(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Larissimus_Nixon, X), ix.
+c(r20, A, 2) :- vr(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Larissimus_Nixon, X), ix.
+
+% c1965_Microplitis_Forster ! c1965_Alloplitis_Nixon
+ir(X, r21) :- in(c1965_Microplitis_Forster, X), in(c1965_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Microplitis_Forster,X), out(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Microplitis_Forster,X), in(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r21, A, 1) :- ir(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Alloplitis_Nixon, X), ix.
+c(r21, A, 1) :- vr(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Alloplitis_Nixon, X), ix.
+pie(r21, A, 2) :- ir(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Alloplitis_Nixon, X), ix.
+c(r21, A, 2) :- vr(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Alloplitis_Nixon, X), ix.
+
+% c1965_Microplitis_Forster ! c1965_Philoplitis_Nixon
+ir(X, r22) :- in(c1965_Microplitis_Forster, X), in(c1965_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Microplitis_Forster,X), out(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Microplitis_Forster,X), in(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r22, A, 1) :- ir(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Philoplitis_Nixon, X), ix.
+c(r22, A, 1) :- vr(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Philoplitis_Nixon, X), ix.
+pie(r22, A, 2) :- ir(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Philoplitis_Nixon, X), ix.
+c(r22, A, 2) :- vr(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Philoplitis_Nixon, X), ix.
+
+% c1965_Microplitis_Forster ! c1965_Prasmodon_Nixon
+ir(X, r23) :- in(c1965_Microplitis_Forster, X), in(c1965_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Microplitis_Forster,X), out(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Microplitis_Forster,X), in(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r23, A, 1) :- ir(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Prasmodon_Nixon, X), ix.
+c(r23, A, 1) :- vr(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Prasmodon_Nixon, X), ix.
+pie(r23, A, 2) :- ir(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Prasmodon_Nixon, X), ix.
+c(r23, A, 2) :- vr(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Prasmodon_Nixon, X), ix.
+
+% c1965_Microplitis_Forster ! c1965_Semionis_Nixon
+ir(X, r24) :- in(c1965_Microplitis_Forster, X), in(c1965_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Microplitis_Forster,X), out(c1965_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Microplitis_Forster,X), in(c1965_Semionis_Nixon,X)} <= 0, pw.
+pie(r24, A, 1) :- ir(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Semionis_Nixon, X), ix.
+c(r24, A, 1) :- vr(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Semionis_Nixon, X), ix.
+pie(r24, A, 2) :- ir(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Semionis_Nixon, X), ix.
+c(r24, A, 2) :- vr(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Semionis_Nixon, X), ix.
+
+% c1965_Microplitis_Forster ! c1965_Sendaphne_Nixon
+ir(X, r25) :- in(c1965_Microplitis_Forster, X), in(c1965_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Microplitis_Forster,X), out(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Microplitis_Forster,X), in(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r25, A, 1) :- ir(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Sendaphne_Nixon, X), ix.
+c(r25, A, 1) :- vr(X, A), in(c1965_Microplitis_Forster, X), out(c1965_Sendaphne_Nixon, X), ix.
+pie(r25, A, 2) :- ir(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Sendaphne_Nixon, X), ix.
+c(r25, A, 2) :- vr(X, A), out(c1965_Microplitis_Forster, X), in(c1965_Sendaphne_Nixon, X), ix.
+
+% c1965_Snellenius_Westwood ! c1965_Protomicroplitis_Ashmead
+ir(X, r26) :- in(c1965_Snellenius_Westwood, X), in(c1965_Protomicroplitis_Ashmead, X).
+:- #count {X : vrs(X), in(c1965_Snellenius_Westwood,X), out(c1965_Protomicroplitis_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Snellenius_Westwood,X), in(c1965_Protomicroplitis_Ashmead,X)} <= 0, pw.
+pie(r26, A, 1) :- ir(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Protomicroplitis_Ashmead, X), ix.
+c(r26, A, 1) :- vr(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Protomicroplitis_Ashmead, X), ix.
+pie(r26, A, 2) :- ir(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Protomicroplitis_Ashmead, X), ix.
+c(r26, A, 2) :- vr(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Protomicroplitis_Ashmead, X), ix.
+
+% c1965_Snellenius_Westwood ! c1965_Xanthomicrogaster_Cameron
+ir(X, r27) :- in(c1965_Snellenius_Westwood, X), in(c1965_Xanthomicrogaster_Cameron, X).
+:- #count {X : vrs(X), in(c1965_Snellenius_Westwood,X), out(c1965_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Snellenius_Westwood,X), in(c1965_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+pie(r27, A, 1) :- ir(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Xanthomicrogaster_Cameron, X), ix.
+c(r27, A, 1) :- vr(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Xanthomicrogaster_Cameron, X), ix.
+pie(r27, A, 2) :- ir(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Xanthomicrogaster_Cameron, X), ix.
+c(r27, A, 2) :- vr(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Xanthomicrogaster_Cameron, X), ix.
+
+% c1965_Snellenius_Westwood ! c1965_Promicrogaster_Brues_and_Richardson
+ir(X, r28) :- in(c1965_Snellenius_Westwood, X), in(c1965_Promicrogaster_Brues_and_Richardson, X).
+:- #count {X : vrs(X), in(c1965_Snellenius_Westwood,X), out(c1965_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Snellenius_Westwood,X), in(c1965_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+pie(r28, A, 1) :- ir(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r28, A, 1) :- vr(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+pie(r28, A, 2) :- ir(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r28, A, 2) :- vr(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+
+% c1965_Snellenius_Westwood ! c1965_Buluka_De_Saeger
+ir(X, r29) :- in(c1965_Snellenius_Westwood, X), in(c1965_Buluka_De_Saeger, X).
+:- #count {X : vrs(X), in(c1965_Snellenius_Westwood,X), out(c1965_Buluka_De_Saeger,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Snellenius_Westwood,X), in(c1965_Buluka_De_Saeger,X)} <= 0, pw.
+pie(r29, A, 1) :- ir(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Buluka_De_Saeger, X), ix.
+c(r29, A, 1) :- vr(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Buluka_De_Saeger, X), ix.
+pie(r29, A, 2) :- ir(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Buluka_De_Saeger, X), ix.
+c(r29, A, 2) :- vr(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Buluka_De_Saeger, X), ix.
+
+% c1965_Snellenius_Westwood ! c1965_Dasylagon_Muesebeck
+ir(X, r30) :- in(c1965_Snellenius_Westwood, X), in(c1965_Dasylagon_Muesebeck, X).
+:- #count {X : vrs(X), in(c1965_Snellenius_Westwood,X), out(c1965_Dasylagon_Muesebeck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Snellenius_Westwood,X), in(c1965_Dasylagon_Muesebeck,X)} <= 0, pw.
+pie(r30, A, 1) :- ir(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Dasylagon_Muesebeck, X), ix.
+c(r30, A, 1) :- vr(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Dasylagon_Muesebeck, X), ix.
+pie(r30, A, 2) :- ir(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Dasylagon_Muesebeck, X), ix.
+c(r30, A, 2) :- vr(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Dasylagon_Muesebeck, X), ix.
+
+% c1965_Snellenius_Westwood ! c1965_Larissimus_Nixon
+ir(X, r31) :- in(c1965_Snellenius_Westwood, X), in(c1965_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Snellenius_Westwood,X), out(c1965_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Snellenius_Westwood,X), in(c1965_Larissimus_Nixon,X)} <= 0, pw.
+pie(r31, A, 1) :- ir(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Larissimus_Nixon, X), ix.
+c(r31, A, 1) :- vr(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Larissimus_Nixon, X), ix.
+pie(r31, A, 2) :- ir(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Larissimus_Nixon, X), ix.
+c(r31, A, 2) :- vr(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Larissimus_Nixon, X), ix.
+
+% c1965_Snellenius_Westwood ! c1965_Alloplitis_Nixon
+ir(X, r32) :- in(c1965_Snellenius_Westwood, X), in(c1965_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Snellenius_Westwood,X), out(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Snellenius_Westwood,X), in(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r32, A, 1) :- ir(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Alloplitis_Nixon, X), ix.
+c(r32, A, 1) :- vr(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Alloplitis_Nixon, X), ix.
+pie(r32, A, 2) :- ir(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Alloplitis_Nixon, X), ix.
+c(r32, A, 2) :- vr(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Alloplitis_Nixon, X), ix.
+
+% c1965_Snellenius_Westwood ! c1965_Philoplitis_Nixon
+ir(X, r33) :- in(c1965_Snellenius_Westwood, X), in(c1965_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Snellenius_Westwood,X), out(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Snellenius_Westwood,X), in(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r33, A, 1) :- ir(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Philoplitis_Nixon, X), ix.
+c(r33, A, 1) :- vr(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Philoplitis_Nixon, X), ix.
+pie(r33, A, 2) :- ir(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Philoplitis_Nixon, X), ix.
+c(r33, A, 2) :- vr(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Philoplitis_Nixon, X), ix.
+
+% c1965_Snellenius_Westwood ! c1965_Prasmodon_Nixon
+ir(X, r34) :- in(c1965_Snellenius_Westwood, X), in(c1965_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Snellenius_Westwood,X), out(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Snellenius_Westwood,X), in(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r34, A, 1) :- ir(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Prasmodon_Nixon, X), ix.
+c(r34, A, 1) :- vr(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Prasmodon_Nixon, X), ix.
+pie(r34, A, 2) :- ir(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Prasmodon_Nixon, X), ix.
+c(r34, A, 2) :- vr(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Prasmodon_Nixon, X), ix.
+
+% c1965_Snellenius_Westwood ! c1965_Semionis_Nixon
+ir(X, r35) :- in(c1965_Snellenius_Westwood, X), in(c1965_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Snellenius_Westwood,X), out(c1965_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Snellenius_Westwood,X), in(c1965_Semionis_Nixon,X)} <= 0, pw.
+pie(r35, A, 1) :- ir(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Semionis_Nixon, X), ix.
+c(r35, A, 1) :- vr(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Semionis_Nixon, X), ix.
+pie(r35, A, 2) :- ir(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Semionis_Nixon, X), ix.
+c(r35, A, 2) :- vr(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Semionis_Nixon, X), ix.
+
+% c1965_Snellenius_Westwood ! c1965_Sendaphne_Nixon
+ir(X, r36) :- in(c1965_Snellenius_Westwood, X), in(c1965_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Snellenius_Westwood,X), out(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Snellenius_Westwood,X), in(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r36, A, 1) :- ir(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Sendaphne_Nixon, X), ix.
+c(r36, A, 1) :- vr(X, A), in(c1965_Snellenius_Westwood, X), out(c1965_Sendaphne_Nixon, X), ix.
+pie(r36, A, 2) :- ir(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Sendaphne_Nixon, X), ix.
+c(r36, A, 2) :- vr(X, A), out(c1965_Snellenius_Westwood, X), in(c1965_Sendaphne_Nixon, X), ix.
+
+% c1965_Protomicroplitis_Ashmead ! c1965_Xanthomicrogaster_Cameron
+ir(X, r37) :- in(c1965_Protomicroplitis_Ashmead, X), in(c1965_Xanthomicrogaster_Cameron, X).
+:- #count {X : vrs(X), in(c1965_Protomicroplitis_Ashmead,X), out(c1965_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Protomicroplitis_Ashmead,X), in(c1965_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+pie(r37, A, 1) :- ir(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Xanthomicrogaster_Cameron, X), ix.
+c(r37, A, 1) :- vr(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Xanthomicrogaster_Cameron, X), ix.
+pie(r37, A, 2) :- ir(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Xanthomicrogaster_Cameron, X), ix.
+c(r37, A, 2) :- vr(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Xanthomicrogaster_Cameron, X), ix.
+
+% c1965_Protomicroplitis_Ashmead ! c1965_Promicrogaster_Brues_and_Richardson
+ir(X, r38) :- in(c1965_Protomicroplitis_Ashmead, X), in(c1965_Promicrogaster_Brues_and_Richardson, X).
+:- #count {X : vrs(X), in(c1965_Protomicroplitis_Ashmead,X), out(c1965_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Protomicroplitis_Ashmead,X), in(c1965_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+pie(r38, A, 1) :- ir(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r38, A, 1) :- vr(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+pie(r38, A, 2) :- ir(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r38, A, 2) :- vr(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+
+% c1965_Protomicroplitis_Ashmead ! c1965_Buluka_De_Saeger
+ir(X, r39) :- in(c1965_Protomicroplitis_Ashmead, X), in(c1965_Buluka_De_Saeger, X).
+:- #count {X : vrs(X), in(c1965_Protomicroplitis_Ashmead,X), out(c1965_Buluka_De_Saeger,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Protomicroplitis_Ashmead,X), in(c1965_Buluka_De_Saeger,X)} <= 0, pw.
+pie(r39, A, 1) :- ir(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Buluka_De_Saeger, X), ix.
+c(r39, A, 1) :- vr(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Buluka_De_Saeger, X), ix.
+pie(r39, A, 2) :- ir(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Buluka_De_Saeger, X), ix.
+c(r39, A, 2) :- vr(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Buluka_De_Saeger, X), ix.
+
+% c1965_Protomicroplitis_Ashmead ! c1965_Dasylagon_Muesebeck
+ir(X, r40) :- in(c1965_Protomicroplitis_Ashmead, X), in(c1965_Dasylagon_Muesebeck, X).
+:- #count {X : vrs(X), in(c1965_Protomicroplitis_Ashmead,X), out(c1965_Dasylagon_Muesebeck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Protomicroplitis_Ashmead,X), in(c1965_Dasylagon_Muesebeck,X)} <= 0, pw.
+pie(r40, A, 1) :- ir(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Dasylagon_Muesebeck, X), ix.
+c(r40, A, 1) :- vr(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Dasylagon_Muesebeck, X), ix.
+pie(r40, A, 2) :- ir(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Dasylagon_Muesebeck, X), ix.
+c(r40, A, 2) :- vr(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Dasylagon_Muesebeck, X), ix.
+
+% c1965_Protomicroplitis_Ashmead ! c1965_Larissimus_Nixon
+ir(X, r41) :- in(c1965_Protomicroplitis_Ashmead, X), in(c1965_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Protomicroplitis_Ashmead,X), out(c1965_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Protomicroplitis_Ashmead,X), in(c1965_Larissimus_Nixon,X)} <= 0, pw.
+pie(r41, A, 1) :- ir(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Larissimus_Nixon, X), ix.
+c(r41, A, 1) :- vr(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Larissimus_Nixon, X), ix.
+pie(r41, A, 2) :- ir(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Larissimus_Nixon, X), ix.
+c(r41, A, 2) :- vr(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Larissimus_Nixon, X), ix.
+
+% c1965_Protomicroplitis_Ashmead ! c1965_Alloplitis_Nixon
+ir(X, r42) :- in(c1965_Protomicroplitis_Ashmead, X), in(c1965_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Protomicroplitis_Ashmead,X), out(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Protomicroplitis_Ashmead,X), in(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r42, A, 1) :- ir(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Alloplitis_Nixon, X), ix.
+c(r42, A, 1) :- vr(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Alloplitis_Nixon, X), ix.
+pie(r42, A, 2) :- ir(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Alloplitis_Nixon, X), ix.
+c(r42, A, 2) :- vr(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Alloplitis_Nixon, X), ix.
+
+% c1965_Protomicroplitis_Ashmead ! c1965_Philoplitis_Nixon
+ir(X, r43) :- in(c1965_Protomicroplitis_Ashmead, X), in(c1965_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Protomicroplitis_Ashmead,X), out(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Protomicroplitis_Ashmead,X), in(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r43, A, 1) :- ir(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Philoplitis_Nixon, X), ix.
+c(r43, A, 1) :- vr(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Philoplitis_Nixon, X), ix.
+pie(r43, A, 2) :- ir(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Philoplitis_Nixon, X), ix.
+c(r43, A, 2) :- vr(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Philoplitis_Nixon, X), ix.
+
+% c1965_Protomicroplitis_Ashmead ! c1965_Prasmodon_Nixon
+ir(X, r44) :- in(c1965_Protomicroplitis_Ashmead, X), in(c1965_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Protomicroplitis_Ashmead,X), out(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Protomicroplitis_Ashmead,X), in(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r44, A, 1) :- ir(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Prasmodon_Nixon, X), ix.
+c(r44, A, 1) :- vr(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Prasmodon_Nixon, X), ix.
+pie(r44, A, 2) :- ir(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Prasmodon_Nixon, X), ix.
+c(r44, A, 2) :- vr(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Prasmodon_Nixon, X), ix.
+
+% c1965_Protomicroplitis_Ashmead ! c1965_Semionis_Nixon
+ir(X, r45) :- in(c1965_Protomicroplitis_Ashmead, X), in(c1965_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Protomicroplitis_Ashmead,X), out(c1965_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Protomicroplitis_Ashmead,X), in(c1965_Semionis_Nixon,X)} <= 0, pw.
+pie(r45, A, 1) :- ir(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Semionis_Nixon, X), ix.
+c(r45, A, 1) :- vr(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Semionis_Nixon, X), ix.
+pie(r45, A, 2) :- ir(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Semionis_Nixon, X), ix.
+c(r45, A, 2) :- vr(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Semionis_Nixon, X), ix.
+
+% c1965_Protomicroplitis_Ashmead ! c1965_Sendaphne_Nixon
+ir(X, r46) :- in(c1965_Protomicroplitis_Ashmead, X), in(c1965_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Protomicroplitis_Ashmead,X), out(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Protomicroplitis_Ashmead,X), in(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r46, A, 1) :- ir(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Sendaphne_Nixon, X), ix.
+c(r46, A, 1) :- vr(X, A), in(c1965_Protomicroplitis_Ashmead, X), out(c1965_Sendaphne_Nixon, X), ix.
+pie(r46, A, 2) :- ir(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Sendaphne_Nixon, X), ix.
+c(r46, A, 2) :- vr(X, A), out(c1965_Protomicroplitis_Ashmead, X), in(c1965_Sendaphne_Nixon, X), ix.
+
+% c1965_Xanthomicrogaster_Cameron ! c1965_Promicrogaster_Brues_and_Richardson
+ir(X, r47) :- in(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Promicrogaster_Brues_and_Richardson, X).
+:- #count {X : vrs(X), in(c1965_Xanthomicrogaster_Cameron,X), out(c1965_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Xanthomicrogaster_Cameron,X), in(c1965_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+pie(r47, A, 1) :- ir(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r47, A, 1) :- vr(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+pie(r47, A, 2) :- ir(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r47, A, 2) :- vr(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+
+% c1965_Xanthomicrogaster_Cameron ! c1965_Buluka_De_Saeger
+ir(X, r48) :- in(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Buluka_De_Saeger, X).
+:- #count {X : vrs(X), in(c1965_Xanthomicrogaster_Cameron,X), out(c1965_Buluka_De_Saeger,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Xanthomicrogaster_Cameron,X), in(c1965_Buluka_De_Saeger,X)} <= 0, pw.
+pie(r48, A, 1) :- ir(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Buluka_De_Saeger, X), ix.
+c(r48, A, 1) :- vr(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Buluka_De_Saeger, X), ix.
+pie(r48, A, 2) :- ir(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Buluka_De_Saeger, X), ix.
+c(r48, A, 2) :- vr(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Buluka_De_Saeger, X), ix.
+
+% c1965_Xanthomicrogaster_Cameron ! c1965_Dasylagon_Muesebeck
+ir(X, r49) :- in(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Dasylagon_Muesebeck, X).
+:- #count {X : vrs(X), in(c1965_Xanthomicrogaster_Cameron,X), out(c1965_Dasylagon_Muesebeck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Xanthomicrogaster_Cameron,X), in(c1965_Dasylagon_Muesebeck,X)} <= 0, pw.
+pie(r49, A, 1) :- ir(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Dasylagon_Muesebeck, X), ix.
+c(r49, A, 1) :- vr(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Dasylagon_Muesebeck, X), ix.
+pie(r49, A, 2) :- ir(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Dasylagon_Muesebeck, X), ix.
+c(r49, A, 2) :- vr(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Dasylagon_Muesebeck, X), ix.
+
+% c1965_Xanthomicrogaster_Cameron ! c1965_Larissimus_Nixon
+ir(X, r50) :- in(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Xanthomicrogaster_Cameron,X), out(c1965_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Xanthomicrogaster_Cameron,X), in(c1965_Larissimus_Nixon,X)} <= 0, pw.
+pie(r50, A, 1) :- ir(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Larissimus_Nixon, X), ix.
+c(r50, A, 1) :- vr(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Larissimus_Nixon, X), ix.
+pie(r50, A, 2) :- ir(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Larissimus_Nixon, X), ix.
+c(r50, A, 2) :- vr(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Larissimus_Nixon, X), ix.
+
+% c1965_Xanthomicrogaster_Cameron ! c1965_Alloplitis_Nixon
+ir(X, r51) :- in(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Xanthomicrogaster_Cameron,X), out(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Xanthomicrogaster_Cameron,X), in(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r51, A, 1) :- ir(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Alloplitis_Nixon, X), ix.
+c(r51, A, 1) :- vr(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Alloplitis_Nixon, X), ix.
+pie(r51, A, 2) :- ir(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Alloplitis_Nixon, X), ix.
+c(r51, A, 2) :- vr(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Alloplitis_Nixon, X), ix.
+
+% c1965_Xanthomicrogaster_Cameron ! c1965_Philoplitis_Nixon
+ir(X, r52) :- in(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Xanthomicrogaster_Cameron,X), out(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Xanthomicrogaster_Cameron,X), in(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r52, A, 1) :- ir(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Philoplitis_Nixon, X), ix.
+c(r52, A, 1) :- vr(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Philoplitis_Nixon, X), ix.
+pie(r52, A, 2) :- ir(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Philoplitis_Nixon, X), ix.
+c(r52, A, 2) :- vr(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Philoplitis_Nixon, X), ix.
+
+% c1965_Xanthomicrogaster_Cameron ! c1965_Prasmodon_Nixon
+ir(X, r53) :- in(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Xanthomicrogaster_Cameron,X), out(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Xanthomicrogaster_Cameron,X), in(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r53, A, 1) :- ir(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Prasmodon_Nixon, X), ix.
+c(r53, A, 1) :- vr(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Prasmodon_Nixon, X), ix.
+pie(r53, A, 2) :- ir(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Prasmodon_Nixon, X), ix.
+c(r53, A, 2) :- vr(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Prasmodon_Nixon, X), ix.
+
+% c1965_Xanthomicrogaster_Cameron ! c1965_Semionis_Nixon
+ir(X, r54) :- in(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Xanthomicrogaster_Cameron,X), out(c1965_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Xanthomicrogaster_Cameron,X), in(c1965_Semionis_Nixon,X)} <= 0, pw.
+pie(r54, A, 1) :- ir(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Semionis_Nixon, X), ix.
+c(r54, A, 1) :- vr(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Semionis_Nixon, X), ix.
+pie(r54, A, 2) :- ir(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Semionis_Nixon, X), ix.
+c(r54, A, 2) :- vr(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Semionis_Nixon, X), ix.
+
+% c1965_Xanthomicrogaster_Cameron ! c1965_Sendaphne_Nixon
+ir(X, r55) :- in(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Xanthomicrogaster_Cameron,X), out(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Xanthomicrogaster_Cameron,X), in(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r55, A, 1) :- ir(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Sendaphne_Nixon, X), ix.
+c(r55, A, 1) :- vr(X, A), in(c1965_Xanthomicrogaster_Cameron, X), out(c1965_Sendaphne_Nixon, X), ix.
+pie(r55, A, 2) :- ir(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Sendaphne_Nixon, X), ix.
+c(r55, A, 2) :- vr(X, A), out(c1965_Xanthomicrogaster_Cameron, X), in(c1965_Sendaphne_Nixon, X), ix.
+
+% c1965_Promicrogaster_Brues_and_Richardson ! c1965_Buluka_De_Saeger
+ir(X, r56) :- in(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Buluka_De_Saeger, X).
+:- #count {X : vrs(X), in(c1965_Promicrogaster_Brues_and_Richardson,X), out(c1965_Buluka_De_Saeger,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Promicrogaster_Brues_and_Richardson,X), in(c1965_Buluka_De_Saeger,X)} <= 0, pw.
+pie(r56, A, 1) :- ir(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Buluka_De_Saeger, X), ix.
+c(r56, A, 1) :- vr(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Buluka_De_Saeger, X), ix.
+pie(r56, A, 2) :- ir(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Buluka_De_Saeger, X), ix.
+c(r56, A, 2) :- vr(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Buluka_De_Saeger, X), ix.
+
+% c1965_Promicrogaster_Brues_and_Richardson ! c1965_Dasylagon_Muesebeck
+ir(X, r57) :- in(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Dasylagon_Muesebeck, X).
+:- #count {X : vrs(X), in(c1965_Promicrogaster_Brues_and_Richardson,X), out(c1965_Dasylagon_Muesebeck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Promicrogaster_Brues_and_Richardson,X), in(c1965_Dasylagon_Muesebeck,X)} <= 0, pw.
+pie(r57, A, 1) :- ir(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Dasylagon_Muesebeck, X), ix.
+c(r57, A, 1) :- vr(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Dasylagon_Muesebeck, X), ix.
+pie(r57, A, 2) :- ir(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Dasylagon_Muesebeck, X), ix.
+c(r57, A, 2) :- vr(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Dasylagon_Muesebeck, X), ix.
+
+% c1965_Promicrogaster_Brues_and_Richardson ! c1965_Larissimus_Nixon
+ir(X, r58) :- in(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Promicrogaster_Brues_and_Richardson,X), out(c1965_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Promicrogaster_Brues_and_Richardson,X), in(c1965_Larissimus_Nixon,X)} <= 0, pw.
+pie(r58, A, 1) :- ir(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Larissimus_Nixon, X), ix.
+c(r58, A, 1) :- vr(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Larissimus_Nixon, X), ix.
+pie(r58, A, 2) :- ir(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Larissimus_Nixon, X), ix.
+c(r58, A, 2) :- vr(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Larissimus_Nixon, X), ix.
+
+% c1965_Promicrogaster_Brues_and_Richardson ! c1965_Alloplitis_Nixon
+ir(X, r59) :- in(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Promicrogaster_Brues_and_Richardson,X), out(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Promicrogaster_Brues_and_Richardson,X), in(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r59, A, 1) :- ir(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Alloplitis_Nixon, X), ix.
+c(r59, A, 1) :- vr(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Alloplitis_Nixon, X), ix.
+pie(r59, A, 2) :- ir(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Alloplitis_Nixon, X), ix.
+c(r59, A, 2) :- vr(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Alloplitis_Nixon, X), ix.
+
+% c1965_Promicrogaster_Brues_and_Richardson ! c1965_Philoplitis_Nixon
+ir(X, r60) :- in(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Promicrogaster_Brues_and_Richardson,X), out(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Promicrogaster_Brues_and_Richardson,X), in(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r60, A, 1) :- ir(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Philoplitis_Nixon, X), ix.
+c(r60, A, 1) :- vr(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Philoplitis_Nixon, X), ix.
+pie(r60, A, 2) :- ir(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Philoplitis_Nixon, X), ix.
+c(r60, A, 2) :- vr(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Philoplitis_Nixon, X), ix.
+
+% c1965_Promicrogaster_Brues_and_Richardson ! c1965_Prasmodon_Nixon
+ir(X, r61) :- in(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Promicrogaster_Brues_and_Richardson,X), out(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Promicrogaster_Brues_and_Richardson,X), in(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r61, A, 1) :- ir(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Prasmodon_Nixon, X), ix.
+c(r61, A, 1) :- vr(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Prasmodon_Nixon, X), ix.
+pie(r61, A, 2) :- ir(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Prasmodon_Nixon, X), ix.
+c(r61, A, 2) :- vr(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Prasmodon_Nixon, X), ix.
+
+% c1965_Promicrogaster_Brues_and_Richardson ! c1965_Semionis_Nixon
+ir(X, r62) :- in(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Promicrogaster_Brues_and_Richardson,X), out(c1965_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Promicrogaster_Brues_and_Richardson,X), in(c1965_Semionis_Nixon,X)} <= 0, pw.
+pie(r62, A, 1) :- ir(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Semionis_Nixon, X), ix.
+c(r62, A, 1) :- vr(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Semionis_Nixon, X), ix.
+pie(r62, A, 2) :- ir(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Semionis_Nixon, X), ix.
+c(r62, A, 2) :- vr(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Semionis_Nixon, X), ix.
+
+% c1965_Promicrogaster_Brues_and_Richardson ! c1965_Sendaphne_Nixon
+ir(X, r63) :- in(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Promicrogaster_Brues_and_Richardson,X), out(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Promicrogaster_Brues_and_Richardson,X), in(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r63, A, 1) :- ir(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Sendaphne_Nixon, X), ix.
+c(r63, A, 1) :- vr(X, A), in(c1965_Promicrogaster_Brues_and_Richardson, X), out(c1965_Sendaphne_Nixon, X), ix.
+pie(r63, A, 2) :- ir(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Sendaphne_Nixon, X), ix.
+c(r63, A, 2) :- vr(X, A), out(c1965_Promicrogaster_Brues_and_Richardson, X), in(c1965_Sendaphne_Nixon, X), ix.
+
+% c1965_Buluka_De_Saeger ! c1965_Dasylagon_Muesebeck
+ir(X, r64) :- in(c1965_Buluka_De_Saeger, X), in(c1965_Dasylagon_Muesebeck, X).
+:- #count {X : vrs(X), in(c1965_Buluka_De_Saeger,X), out(c1965_Dasylagon_Muesebeck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Buluka_De_Saeger,X), in(c1965_Dasylagon_Muesebeck,X)} <= 0, pw.
+pie(r64, A, 1) :- ir(X, A), in(c1965_Buluka_De_Saeger, X), out(c1965_Dasylagon_Muesebeck, X), ix.
+c(r64, A, 1) :- vr(X, A), in(c1965_Buluka_De_Saeger, X), out(c1965_Dasylagon_Muesebeck, X), ix.
+pie(r64, A, 2) :- ir(X, A), out(c1965_Buluka_De_Saeger, X), in(c1965_Dasylagon_Muesebeck, X), ix.
+c(r64, A, 2) :- vr(X, A), out(c1965_Buluka_De_Saeger, X), in(c1965_Dasylagon_Muesebeck, X), ix.
+
+% c1965_Buluka_De_Saeger ! c1965_Larissimus_Nixon
+ir(X, r65) :- in(c1965_Buluka_De_Saeger, X), in(c1965_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Buluka_De_Saeger,X), out(c1965_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Buluka_De_Saeger,X), in(c1965_Larissimus_Nixon,X)} <= 0, pw.
+pie(r65, A, 1) :- ir(X, A), in(c1965_Buluka_De_Saeger, X), out(c1965_Larissimus_Nixon, X), ix.
+c(r65, A, 1) :- vr(X, A), in(c1965_Buluka_De_Saeger, X), out(c1965_Larissimus_Nixon, X), ix.
+pie(r65, A, 2) :- ir(X, A), out(c1965_Buluka_De_Saeger, X), in(c1965_Larissimus_Nixon, X), ix.
+c(r65, A, 2) :- vr(X, A), out(c1965_Buluka_De_Saeger, X), in(c1965_Larissimus_Nixon, X), ix.
+
+% c1965_Buluka_De_Saeger ! c1965_Alloplitis_Nixon
+ir(X, r66) :- in(c1965_Buluka_De_Saeger, X), in(c1965_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Buluka_De_Saeger,X), out(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Buluka_De_Saeger,X), in(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r66, A, 1) :- ir(X, A), in(c1965_Buluka_De_Saeger, X), out(c1965_Alloplitis_Nixon, X), ix.
+c(r66, A, 1) :- vr(X, A), in(c1965_Buluka_De_Saeger, X), out(c1965_Alloplitis_Nixon, X), ix.
+pie(r66, A, 2) :- ir(X, A), out(c1965_Buluka_De_Saeger, X), in(c1965_Alloplitis_Nixon, X), ix.
+c(r66, A, 2) :- vr(X, A), out(c1965_Buluka_De_Saeger, X), in(c1965_Alloplitis_Nixon, X), ix.
+
+% c1965_Buluka_De_Saeger ! c1965_Philoplitis_Nixon
+ir(X, r67) :- in(c1965_Buluka_De_Saeger, X), in(c1965_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Buluka_De_Saeger,X), out(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Buluka_De_Saeger,X), in(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r67, A, 1) :- ir(X, A), in(c1965_Buluka_De_Saeger, X), out(c1965_Philoplitis_Nixon, X), ix.
+c(r67, A, 1) :- vr(X, A), in(c1965_Buluka_De_Saeger, X), out(c1965_Philoplitis_Nixon, X), ix.
+pie(r67, A, 2) :- ir(X, A), out(c1965_Buluka_De_Saeger, X), in(c1965_Philoplitis_Nixon, X), ix.
+c(r67, A, 2) :- vr(X, A), out(c1965_Buluka_De_Saeger, X), in(c1965_Philoplitis_Nixon, X), ix.
+
+% c1965_Buluka_De_Saeger ! c1965_Prasmodon_Nixon
+ir(X, r68) :- in(c1965_Buluka_De_Saeger, X), in(c1965_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Buluka_De_Saeger,X), out(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Buluka_De_Saeger,X), in(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r68, A, 1) :- ir(X, A), in(c1965_Buluka_De_Saeger, X), out(c1965_Prasmodon_Nixon, X), ix.
+c(r68, A, 1) :- vr(X, A), in(c1965_Buluka_De_Saeger, X), out(c1965_Prasmodon_Nixon, X), ix.
+pie(r68, A, 2) :- ir(X, A), out(c1965_Buluka_De_Saeger, X), in(c1965_Prasmodon_Nixon, X), ix.
+c(r68, A, 2) :- vr(X, A), out(c1965_Buluka_De_Saeger, X), in(c1965_Prasmodon_Nixon, X), ix.
+
+% c1965_Buluka_De_Saeger ! c1965_Semionis_Nixon
+ir(X, r69) :- in(c1965_Buluka_De_Saeger, X), in(c1965_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Buluka_De_Saeger,X), out(c1965_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Buluka_De_Saeger,X), in(c1965_Semionis_Nixon,X)} <= 0, pw.
+pie(r69, A, 1) :- ir(X, A), in(c1965_Buluka_De_Saeger, X), out(c1965_Semionis_Nixon, X), ix.
+c(r69, A, 1) :- vr(X, A), in(c1965_Buluka_De_Saeger, X), out(c1965_Semionis_Nixon, X), ix.
+pie(r69, A, 2) :- ir(X, A), out(c1965_Buluka_De_Saeger, X), in(c1965_Semionis_Nixon, X), ix.
+c(r69, A, 2) :- vr(X, A), out(c1965_Buluka_De_Saeger, X), in(c1965_Semionis_Nixon, X), ix.
+
+% c1965_Buluka_De_Saeger ! c1965_Sendaphne_Nixon
+ir(X, r70) :- in(c1965_Buluka_De_Saeger, X), in(c1965_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Buluka_De_Saeger,X), out(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Buluka_De_Saeger,X), in(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r70, A, 1) :- ir(X, A), in(c1965_Buluka_De_Saeger, X), out(c1965_Sendaphne_Nixon, X), ix.
+c(r70, A, 1) :- vr(X, A), in(c1965_Buluka_De_Saeger, X), out(c1965_Sendaphne_Nixon, X), ix.
+pie(r70, A, 2) :- ir(X, A), out(c1965_Buluka_De_Saeger, X), in(c1965_Sendaphne_Nixon, X), ix.
+c(r70, A, 2) :- vr(X, A), out(c1965_Buluka_De_Saeger, X), in(c1965_Sendaphne_Nixon, X), ix.
+
+% c1965_Dasylagon_Muesebeck ! c1965_Larissimus_Nixon
+ir(X, r71) :- in(c1965_Dasylagon_Muesebeck, X), in(c1965_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Dasylagon_Muesebeck,X), out(c1965_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Dasylagon_Muesebeck,X), in(c1965_Larissimus_Nixon,X)} <= 0, pw.
+pie(r71, A, 1) :- ir(X, A), in(c1965_Dasylagon_Muesebeck, X), out(c1965_Larissimus_Nixon, X), ix.
+c(r71, A, 1) :- vr(X, A), in(c1965_Dasylagon_Muesebeck, X), out(c1965_Larissimus_Nixon, X), ix.
+pie(r71, A, 2) :- ir(X, A), out(c1965_Dasylagon_Muesebeck, X), in(c1965_Larissimus_Nixon, X), ix.
+c(r71, A, 2) :- vr(X, A), out(c1965_Dasylagon_Muesebeck, X), in(c1965_Larissimus_Nixon, X), ix.
+
+% c1965_Dasylagon_Muesebeck ! c1965_Alloplitis_Nixon
+ir(X, r72) :- in(c1965_Dasylagon_Muesebeck, X), in(c1965_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Dasylagon_Muesebeck,X), out(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Dasylagon_Muesebeck,X), in(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r72, A, 1) :- ir(X, A), in(c1965_Dasylagon_Muesebeck, X), out(c1965_Alloplitis_Nixon, X), ix.
+c(r72, A, 1) :- vr(X, A), in(c1965_Dasylagon_Muesebeck, X), out(c1965_Alloplitis_Nixon, X), ix.
+pie(r72, A, 2) :- ir(X, A), out(c1965_Dasylagon_Muesebeck, X), in(c1965_Alloplitis_Nixon, X), ix.
+c(r72, A, 2) :- vr(X, A), out(c1965_Dasylagon_Muesebeck, X), in(c1965_Alloplitis_Nixon, X), ix.
+
+% c1965_Dasylagon_Muesebeck ! c1965_Philoplitis_Nixon
+ir(X, r73) :- in(c1965_Dasylagon_Muesebeck, X), in(c1965_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Dasylagon_Muesebeck,X), out(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Dasylagon_Muesebeck,X), in(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r73, A, 1) :- ir(X, A), in(c1965_Dasylagon_Muesebeck, X), out(c1965_Philoplitis_Nixon, X), ix.
+c(r73, A, 1) :- vr(X, A), in(c1965_Dasylagon_Muesebeck, X), out(c1965_Philoplitis_Nixon, X), ix.
+pie(r73, A, 2) :- ir(X, A), out(c1965_Dasylagon_Muesebeck, X), in(c1965_Philoplitis_Nixon, X), ix.
+c(r73, A, 2) :- vr(X, A), out(c1965_Dasylagon_Muesebeck, X), in(c1965_Philoplitis_Nixon, X), ix.
+
+% c1965_Dasylagon_Muesebeck ! c1965_Prasmodon_Nixon
+ir(X, r74) :- in(c1965_Dasylagon_Muesebeck, X), in(c1965_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Dasylagon_Muesebeck,X), out(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Dasylagon_Muesebeck,X), in(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r74, A, 1) :- ir(X, A), in(c1965_Dasylagon_Muesebeck, X), out(c1965_Prasmodon_Nixon, X), ix.
+c(r74, A, 1) :- vr(X, A), in(c1965_Dasylagon_Muesebeck, X), out(c1965_Prasmodon_Nixon, X), ix.
+pie(r74, A, 2) :- ir(X, A), out(c1965_Dasylagon_Muesebeck, X), in(c1965_Prasmodon_Nixon, X), ix.
+c(r74, A, 2) :- vr(X, A), out(c1965_Dasylagon_Muesebeck, X), in(c1965_Prasmodon_Nixon, X), ix.
+
+% c1965_Dasylagon_Muesebeck ! c1965_Semionis_Nixon
+ir(X, r75) :- in(c1965_Dasylagon_Muesebeck, X), in(c1965_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Dasylagon_Muesebeck,X), out(c1965_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Dasylagon_Muesebeck,X), in(c1965_Semionis_Nixon,X)} <= 0, pw.
+pie(r75, A, 1) :- ir(X, A), in(c1965_Dasylagon_Muesebeck, X), out(c1965_Semionis_Nixon, X), ix.
+c(r75, A, 1) :- vr(X, A), in(c1965_Dasylagon_Muesebeck, X), out(c1965_Semionis_Nixon, X), ix.
+pie(r75, A, 2) :- ir(X, A), out(c1965_Dasylagon_Muesebeck, X), in(c1965_Semionis_Nixon, X), ix.
+c(r75, A, 2) :- vr(X, A), out(c1965_Dasylagon_Muesebeck, X), in(c1965_Semionis_Nixon, X), ix.
+
+% c1965_Dasylagon_Muesebeck ! c1965_Sendaphne_Nixon
+ir(X, r76) :- in(c1965_Dasylagon_Muesebeck, X), in(c1965_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Dasylagon_Muesebeck,X), out(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Dasylagon_Muesebeck,X), in(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r76, A, 1) :- ir(X, A), in(c1965_Dasylagon_Muesebeck, X), out(c1965_Sendaphne_Nixon, X), ix.
+c(r76, A, 1) :- vr(X, A), in(c1965_Dasylagon_Muesebeck, X), out(c1965_Sendaphne_Nixon, X), ix.
+pie(r76, A, 2) :- ir(X, A), out(c1965_Dasylagon_Muesebeck, X), in(c1965_Sendaphne_Nixon, X), ix.
+c(r76, A, 2) :- vr(X, A), out(c1965_Dasylagon_Muesebeck, X), in(c1965_Sendaphne_Nixon, X), ix.
+
+% c1965_Larissimus_Nixon ! c1965_Alloplitis_Nixon
+ir(X, r77) :- in(c1965_Larissimus_Nixon, X), in(c1965_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Larissimus_Nixon,X), out(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Larissimus_Nixon,X), in(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r77, A, 1) :- ir(X, A), in(c1965_Larissimus_Nixon, X), out(c1965_Alloplitis_Nixon, X), ix.
+c(r77, A, 1) :- vr(X, A), in(c1965_Larissimus_Nixon, X), out(c1965_Alloplitis_Nixon, X), ix.
+pie(r77, A, 2) :- ir(X, A), out(c1965_Larissimus_Nixon, X), in(c1965_Alloplitis_Nixon, X), ix.
+c(r77, A, 2) :- vr(X, A), out(c1965_Larissimus_Nixon, X), in(c1965_Alloplitis_Nixon, X), ix.
+
+% c1965_Larissimus_Nixon ! c1965_Philoplitis_Nixon
+ir(X, r78) :- in(c1965_Larissimus_Nixon, X), in(c1965_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Larissimus_Nixon,X), out(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Larissimus_Nixon,X), in(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r78, A, 1) :- ir(X, A), in(c1965_Larissimus_Nixon, X), out(c1965_Philoplitis_Nixon, X), ix.
+c(r78, A, 1) :- vr(X, A), in(c1965_Larissimus_Nixon, X), out(c1965_Philoplitis_Nixon, X), ix.
+pie(r78, A, 2) :- ir(X, A), out(c1965_Larissimus_Nixon, X), in(c1965_Philoplitis_Nixon, X), ix.
+c(r78, A, 2) :- vr(X, A), out(c1965_Larissimus_Nixon, X), in(c1965_Philoplitis_Nixon, X), ix.
+
+% c1965_Larissimus_Nixon ! c1965_Prasmodon_Nixon
+ir(X, r79) :- in(c1965_Larissimus_Nixon, X), in(c1965_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Larissimus_Nixon,X), out(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Larissimus_Nixon,X), in(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r79, A, 1) :- ir(X, A), in(c1965_Larissimus_Nixon, X), out(c1965_Prasmodon_Nixon, X), ix.
+c(r79, A, 1) :- vr(X, A), in(c1965_Larissimus_Nixon, X), out(c1965_Prasmodon_Nixon, X), ix.
+pie(r79, A, 2) :- ir(X, A), out(c1965_Larissimus_Nixon, X), in(c1965_Prasmodon_Nixon, X), ix.
+c(r79, A, 2) :- vr(X, A), out(c1965_Larissimus_Nixon, X), in(c1965_Prasmodon_Nixon, X), ix.
+
+% c1965_Larissimus_Nixon ! c1965_Semionis_Nixon
+ir(X, r80) :- in(c1965_Larissimus_Nixon, X), in(c1965_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Larissimus_Nixon,X), out(c1965_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Larissimus_Nixon,X), in(c1965_Semionis_Nixon,X)} <= 0, pw.
+pie(r80, A, 1) :- ir(X, A), in(c1965_Larissimus_Nixon, X), out(c1965_Semionis_Nixon, X), ix.
+c(r80, A, 1) :- vr(X, A), in(c1965_Larissimus_Nixon, X), out(c1965_Semionis_Nixon, X), ix.
+pie(r80, A, 2) :- ir(X, A), out(c1965_Larissimus_Nixon, X), in(c1965_Semionis_Nixon, X), ix.
+c(r80, A, 2) :- vr(X, A), out(c1965_Larissimus_Nixon, X), in(c1965_Semionis_Nixon, X), ix.
+
+% c1965_Larissimus_Nixon ! c1965_Sendaphne_Nixon
+ir(X, r81) :- in(c1965_Larissimus_Nixon, X), in(c1965_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Larissimus_Nixon,X), out(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Larissimus_Nixon,X), in(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r81, A, 1) :- ir(X, A), in(c1965_Larissimus_Nixon, X), out(c1965_Sendaphne_Nixon, X), ix.
+c(r81, A, 1) :- vr(X, A), in(c1965_Larissimus_Nixon, X), out(c1965_Sendaphne_Nixon, X), ix.
+pie(r81, A, 2) :- ir(X, A), out(c1965_Larissimus_Nixon, X), in(c1965_Sendaphne_Nixon, X), ix.
+c(r81, A, 2) :- vr(X, A), out(c1965_Larissimus_Nixon, X), in(c1965_Sendaphne_Nixon, X), ix.
+
+% c1965_Alloplitis_Nixon ! c1965_Philoplitis_Nixon
+ir(X, r82) :- in(c1965_Alloplitis_Nixon, X), in(c1965_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Alloplitis_Nixon,X), out(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Alloplitis_Nixon,X), in(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r82, A, 1) :- ir(X, A), in(c1965_Alloplitis_Nixon, X), out(c1965_Philoplitis_Nixon, X), ix.
+c(r82, A, 1) :- vr(X, A), in(c1965_Alloplitis_Nixon, X), out(c1965_Philoplitis_Nixon, X), ix.
+pie(r82, A, 2) :- ir(X, A), out(c1965_Alloplitis_Nixon, X), in(c1965_Philoplitis_Nixon, X), ix.
+c(r82, A, 2) :- vr(X, A), out(c1965_Alloplitis_Nixon, X), in(c1965_Philoplitis_Nixon, X), ix.
+
+% c1965_Alloplitis_Nixon ! c1965_Prasmodon_Nixon
+ir(X, r83) :- in(c1965_Alloplitis_Nixon, X), in(c1965_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Alloplitis_Nixon,X), out(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Alloplitis_Nixon,X), in(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r83, A, 1) :- ir(X, A), in(c1965_Alloplitis_Nixon, X), out(c1965_Prasmodon_Nixon, X), ix.
+c(r83, A, 1) :- vr(X, A), in(c1965_Alloplitis_Nixon, X), out(c1965_Prasmodon_Nixon, X), ix.
+pie(r83, A, 2) :- ir(X, A), out(c1965_Alloplitis_Nixon, X), in(c1965_Prasmodon_Nixon, X), ix.
+c(r83, A, 2) :- vr(X, A), out(c1965_Alloplitis_Nixon, X), in(c1965_Prasmodon_Nixon, X), ix.
+
+% c1965_Alloplitis_Nixon ! c1965_Semionis_Nixon
+ir(X, r84) :- in(c1965_Alloplitis_Nixon, X), in(c1965_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Alloplitis_Nixon,X), out(c1965_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Alloplitis_Nixon,X), in(c1965_Semionis_Nixon,X)} <= 0, pw.
+pie(r84, A, 1) :- ir(X, A), in(c1965_Alloplitis_Nixon, X), out(c1965_Semionis_Nixon, X), ix.
+c(r84, A, 1) :- vr(X, A), in(c1965_Alloplitis_Nixon, X), out(c1965_Semionis_Nixon, X), ix.
+pie(r84, A, 2) :- ir(X, A), out(c1965_Alloplitis_Nixon, X), in(c1965_Semionis_Nixon, X), ix.
+c(r84, A, 2) :- vr(X, A), out(c1965_Alloplitis_Nixon, X), in(c1965_Semionis_Nixon, X), ix.
+
+% c1965_Alloplitis_Nixon ! c1965_Sendaphne_Nixon
+ir(X, r85) :- in(c1965_Alloplitis_Nixon, X), in(c1965_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Alloplitis_Nixon,X), out(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Alloplitis_Nixon,X), in(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r85, A, 1) :- ir(X, A), in(c1965_Alloplitis_Nixon, X), out(c1965_Sendaphne_Nixon, X), ix.
+c(r85, A, 1) :- vr(X, A), in(c1965_Alloplitis_Nixon, X), out(c1965_Sendaphne_Nixon, X), ix.
+pie(r85, A, 2) :- ir(X, A), out(c1965_Alloplitis_Nixon, X), in(c1965_Sendaphne_Nixon, X), ix.
+c(r85, A, 2) :- vr(X, A), out(c1965_Alloplitis_Nixon, X), in(c1965_Sendaphne_Nixon, X), ix.
+
+% c1965_Philoplitis_Nixon ! c1965_Prasmodon_Nixon
+ir(X, r86) :- in(c1965_Philoplitis_Nixon, X), in(c1965_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Philoplitis_Nixon,X), out(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Philoplitis_Nixon,X), in(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r86, A, 1) :- ir(X, A), in(c1965_Philoplitis_Nixon, X), out(c1965_Prasmodon_Nixon, X), ix.
+c(r86, A, 1) :- vr(X, A), in(c1965_Philoplitis_Nixon, X), out(c1965_Prasmodon_Nixon, X), ix.
+pie(r86, A, 2) :- ir(X, A), out(c1965_Philoplitis_Nixon, X), in(c1965_Prasmodon_Nixon, X), ix.
+c(r86, A, 2) :- vr(X, A), out(c1965_Philoplitis_Nixon, X), in(c1965_Prasmodon_Nixon, X), ix.
+
+% c1965_Philoplitis_Nixon ! c1965_Semionis_Nixon
+ir(X, r87) :- in(c1965_Philoplitis_Nixon, X), in(c1965_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Philoplitis_Nixon,X), out(c1965_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Philoplitis_Nixon,X), in(c1965_Semionis_Nixon,X)} <= 0, pw.
+pie(r87, A, 1) :- ir(X, A), in(c1965_Philoplitis_Nixon, X), out(c1965_Semionis_Nixon, X), ix.
+c(r87, A, 1) :- vr(X, A), in(c1965_Philoplitis_Nixon, X), out(c1965_Semionis_Nixon, X), ix.
+pie(r87, A, 2) :- ir(X, A), out(c1965_Philoplitis_Nixon, X), in(c1965_Semionis_Nixon, X), ix.
+c(r87, A, 2) :- vr(X, A), out(c1965_Philoplitis_Nixon, X), in(c1965_Semionis_Nixon, X), ix.
+
+% c1965_Philoplitis_Nixon ! c1965_Sendaphne_Nixon
+ir(X, r88) :- in(c1965_Philoplitis_Nixon, X), in(c1965_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Philoplitis_Nixon,X), out(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Philoplitis_Nixon,X), in(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r88, A, 1) :- ir(X, A), in(c1965_Philoplitis_Nixon, X), out(c1965_Sendaphne_Nixon, X), ix.
+c(r88, A, 1) :- vr(X, A), in(c1965_Philoplitis_Nixon, X), out(c1965_Sendaphne_Nixon, X), ix.
+pie(r88, A, 2) :- ir(X, A), out(c1965_Philoplitis_Nixon, X), in(c1965_Sendaphne_Nixon, X), ix.
+c(r88, A, 2) :- vr(X, A), out(c1965_Philoplitis_Nixon, X), in(c1965_Sendaphne_Nixon, X), ix.
+
+% c1965_Prasmodon_Nixon ! c1965_Semionis_Nixon
+ir(X, r89) :- in(c1965_Prasmodon_Nixon, X), in(c1965_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Prasmodon_Nixon,X), out(c1965_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Prasmodon_Nixon,X), in(c1965_Semionis_Nixon,X)} <= 0, pw.
+pie(r89, A, 1) :- ir(X, A), in(c1965_Prasmodon_Nixon, X), out(c1965_Semionis_Nixon, X), ix.
+c(r89, A, 1) :- vr(X, A), in(c1965_Prasmodon_Nixon, X), out(c1965_Semionis_Nixon, X), ix.
+pie(r89, A, 2) :- ir(X, A), out(c1965_Prasmodon_Nixon, X), in(c1965_Semionis_Nixon, X), ix.
+c(r89, A, 2) :- vr(X, A), out(c1965_Prasmodon_Nixon, X), in(c1965_Semionis_Nixon, X), ix.
+
+% c1965_Prasmodon_Nixon ! c1965_Sendaphne_Nixon
+ir(X, r90) :- in(c1965_Prasmodon_Nixon, X), in(c1965_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Prasmodon_Nixon,X), out(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Prasmodon_Nixon,X), in(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r90, A, 1) :- ir(X, A), in(c1965_Prasmodon_Nixon, X), out(c1965_Sendaphne_Nixon, X), ix.
+c(r90, A, 1) :- vr(X, A), in(c1965_Prasmodon_Nixon, X), out(c1965_Sendaphne_Nixon, X), ix.
+pie(r90, A, 2) :- ir(X, A), out(c1965_Prasmodon_Nixon, X), in(c1965_Sendaphne_Nixon, X), ix.
+c(r90, A, 2) :- vr(X, A), out(c1965_Prasmodon_Nixon, X), in(c1965_Sendaphne_Nixon, X), ix.
+
+% c1965_Semionis_Nixon ! c1965_Sendaphne_Nixon
+ir(X, r91) :- in(c1965_Semionis_Nixon, X), in(c1965_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c1965_Semionis_Nixon,X), out(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1965_Semionis_Nixon,X), in(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r91, A, 1) :- ir(X, A), in(c1965_Semionis_Nixon, X), out(c1965_Sendaphne_Nixon, X), ix.
+c(r91, A, 1) :- vr(X, A), in(c1965_Semionis_Nixon, X), out(c1965_Sendaphne_Nixon, X), ix.
+pie(r91, A, 2) :- ir(X, A), out(c1965_Semionis_Nixon, X), in(c1965_Sendaphne_Nixon, X), ix.
+c(r91, A, 2) :- vr(X, A), out(c1965_Semionis_Nixon, X), in(c1965_Sendaphne_Nixon, X), ix.
+
+%% ISA
+% c2020_Microplitis_Foerster isa c2020_Microgastrine
+ir(X, r92) :- in(c2020_Microplitis_Foerster, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r92,R)) :- in(c2020_Microplitis_Foerster,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r92, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), in(c2020_Microgastrine, X), ix.
+c(r92, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Snellenius_Westwood isa c2020_Microgastrine
+ir(X, r93) :- in(c2020_Snellenius_Westwood, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r93,R)) :- in(c2020_Snellenius_Westwood,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r93, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), in(c2020_Microgastrine, X), ix.
+c(r93, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Protomicroplitis_Ashmead isa c2020_Microgastrine
+ir(X, r94) :- in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r94,R)) :- in(c2020_Protomicroplitis_Ashmead,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Protomicroplitis_Ashmead,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r94, A, 1) :- ir(X, A), in(c2020_Protomicroplitis_Ashmead, X), in(c2020_Microgastrine, X), ix.
+c(r94, A, 1) :- vr(X, A), in(c2020_Protomicroplitis_Ashmead, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Diologaster_Ashmead isa c2020_Microgastrine
+ir(X, r95) :- in(c2020_Diologaster_Ashmead, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r95,R)) :- in(c2020_Diologaster_Ashmead,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Diologaster_Ashmead,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r95, A, 1) :- ir(X, A), in(c2020_Diologaster_Ashmead, X), in(c2020_Microgastrine, X), ix.
+c(r95, A, 1) :- vr(X, A), in(c2020_Diologaster_Ashmead, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Xanthomicrogaster_Cameron isa c2020_Microgastrine
+ir(X, r96) :- in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r96,R)) :- in(c2020_Xanthomicrogaster_Cameron,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Xanthomicrogaster_Cameron,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r96, A, 1) :- ir(X, A), in(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Microgastrine, X), ix.
+c(r96, A, 1) :- vr(X, A), in(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Promicrogaster_Brues_and_Richardson isa c2020_Microgastrine
+ir(X, r97) :- in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r97,R)) :- in(c2020_Promicrogaster_Brues_and_Richardson,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Promicrogaster_Brues_and_Richardson,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r97, A, 1) :- ir(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Microgastrine, X), ix.
+c(r97, A, 1) :- vr(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Buluka_De_Saeger isa c2020_Microgastrine
+ir(X, r98) :- in(c2020_Buluka_De_Saeger, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r98,R)) :- in(c2020_Buluka_De_Saeger,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Buluka_De_Saeger,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r98, A, 1) :- ir(X, A), in(c2020_Buluka_De_Saeger, X), in(c2020_Microgastrine, X), ix.
+c(r98, A, 1) :- vr(X, A), in(c2020_Buluka_De_Saeger, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Dasylagon_Muesebeck isa c2020_Microgastrine
+ir(X, r99) :- in(c2020_Dasylagon_Muesebeck, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r99,R)) :- in(c2020_Dasylagon_Muesebeck,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Dasylagon_Muesebeck,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r99, A, 1) :- ir(X, A), in(c2020_Dasylagon_Muesebeck, X), in(c2020_Microgastrine, X), ix.
+c(r99, A, 1) :- vr(X, A), in(c2020_Dasylagon_Muesebeck, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Larissimus_Nixon isa c2020_Microgastrine
+ir(X, r100) :- in(c2020_Larissimus_Nixon, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r100,R)) :- in(c2020_Larissimus_Nixon,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Larissimus_Nixon,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r100, A, 1) :- ir(X, A), in(c2020_Larissimus_Nixon, X), in(c2020_Microgastrine, X), ix.
+c(r100, A, 1) :- vr(X, A), in(c2020_Larissimus_Nixon, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Alloplitis_Nixon isa c2020_Microgastrine
+ir(X, r101) :- in(c2020_Alloplitis_Nixon, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r101,R)) :- in(c2020_Alloplitis_Nixon,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Alloplitis_Nixon,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r101, A, 1) :- ir(X, A), in(c2020_Alloplitis_Nixon, X), in(c2020_Microgastrine, X), ix.
+c(r101, A, 1) :- vr(X, A), in(c2020_Alloplitis_Nixon, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Philoplitis_Nixon isa c2020_Microgastrine
+ir(X, r102) :- in(c2020_Philoplitis_Nixon, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r102,R)) :- in(c2020_Philoplitis_Nixon,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Philoplitis_Nixon,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r102, A, 1) :- ir(X, A), in(c2020_Philoplitis_Nixon, X), in(c2020_Microgastrine, X), ix.
+c(r102, A, 1) :- vr(X, A), in(c2020_Philoplitis_Nixon, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Prasmodon_Nixon isa c2020_Microgastrine
+ir(X, r103) :- in(c2020_Prasmodon_Nixon, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r103,R)) :- in(c2020_Prasmodon_Nixon,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Prasmodon_Nixon,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r103, A, 1) :- ir(X, A), in(c2020_Prasmodon_Nixon, X), in(c2020_Microgastrine, X), ix.
+c(r103, A, 1) :- vr(X, A), in(c2020_Prasmodon_Nixon, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Semionis_Nixon isa c2020_Microgastrine
+ir(X, r104) :- in(c2020_Semionis_Nixon, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r104,R)) :- in(c2020_Semionis_Nixon,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Semionis_Nixon,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r104, A, 1) :- ir(X, A), in(c2020_Semionis_Nixon, X), in(c2020_Microgastrine, X), ix.
+c(r104, A, 1) :- vr(X, A), in(c2020_Semionis_Nixon, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Sendaphne_Nixon isa c2020_Microgastrine
+ir(X, r105) :- in(c2020_Sendaphne_Nixon, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r105,R)) :- in(c2020_Sendaphne_Nixon,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Sendaphne_Nixon,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r105, A, 1) :- ir(X, A), in(c2020_Sendaphne_Nixon, X), in(c2020_Microgastrine, X), ix.
+c(r105, A, 1) :- vr(X, A), in(c2020_Sendaphne_Nixon, X), in(c2020_Microgastrine, X), ix.
+
+% c2020_Other isa c2020_Microgastrine
+ir(X, r106) :- in(c2020_Other, X), out(c2020_Microgastrine, X), pw.
+ir(X, prod(r106,R)) :- in(c2020_Other,X), out3(c2020_Microgastrine, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Other,X), in(c2020_Microgastrine,X)} <= 0, pw.
+pie(r106, A, 1) :- ir(X, A), in(c2020_Other, X), in(c2020_Microgastrine, X), ix.
+c(r106, A, 1) :- vr(X, A), in(c2020_Other, X), in(c2020_Microgastrine, X), ix.
+
+%% coverage
+out3(c2020_Microgastrine, X, r107) :- out(c2020_Microplitis_Foerster, X), out(c2020_Snellenius_Westwood, X), out(c2020_Protomicroplitis_Ashmead, X), out(c2020_Diologaster_Ashmead, X), out(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Buluka_De_Saeger, X), out(c2020_Dasylagon_Muesebeck, X), out(c2020_Larissimus_Nixon, X), out(c2020_Alloplitis_Nixon, X), out(c2020_Philoplitis_Nixon, X), out(c2020_Prasmodon_Nixon, X), out(c2020_Semionis_Nixon, X), out(c2020_Sendaphne_Nixon, X), out(c2020_Other, X), ix.
+out(c2020_Microgastrine, X) :- out(c2020_Microplitis_Foerster, X), out(c2020_Snellenius_Westwood, X), out(c2020_Protomicroplitis_Ashmead, X), out(c2020_Diologaster_Ashmead, X), out(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Buluka_De_Saeger, X), out(c2020_Dasylagon_Muesebeck, X), out(c2020_Larissimus_Nixon, X), out(c2020_Alloplitis_Nixon, X), out(c2020_Philoplitis_Nixon, X), out(c2020_Prasmodon_Nixon, X), out(c2020_Semionis_Nixon, X), out(c2020_Sendaphne_Nixon, X), out(c2020_Other, X), pw.
+%% sibling disjointness
+% c2020_Microplitis_Foerster ! c2020_Snellenius_Westwood
+ir(X, r108) :- in(c2020_Microplitis_Foerster, X), in(c2020_Snellenius_Westwood, X).
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), out(c2020_Snellenius_Westwood,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microplitis_Foerster,X), in(c2020_Snellenius_Westwood,X)} <= 0, pw.
+pie(r108, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Snellenius_Westwood, X), ix.
+c(r108, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Snellenius_Westwood, X), ix.
+pie(r108, A, 2) :- ir(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Snellenius_Westwood, X), ix.
+c(r108, A, 2) :- vr(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Snellenius_Westwood, X), ix.
+
+% c2020_Microplitis_Foerster ! c2020_Protomicroplitis_Ashmead
+ir(X, r109) :- in(c2020_Microplitis_Foerster, X), in(c2020_Protomicroplitis_Ashmead, X).
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), out(c2020_Protomicroplitis_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microplitis_Foerster,X), in(c2020_Protomicroplitis_Ashmead,X)} <= 0, pw.
+pie(r109, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Protomicroplitis_Ashmead, X), ix.
+c(r109, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Protomicroplitis_Ashmead, X), ix.
+pie(r109, A, 2) :- ir(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Protomicroplitis_Ashmead, X), ix.
+c(r109, A, 2) :- vr(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Protomicroplitis_Ashmead, X), ix.
+
+% c2020_Microplitis_Foerster ! c2020_Diologaster_Ashmead
+ir(X, r110) :- in(c2020_Microplitis_Foerster, X), in(c2020_Diologaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), out(c2020_Diologaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microplitis_Foerster,X), in(c2020_Diologaster_Ashmead,X)} <= 0, pw.
+pie(r110, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Diologaster_Ashmead, X), ix.
+c(r110, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Diologaster_Ashmead, X), ix.
+pie(r110, A, 2) :- ir(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Diologaster_Ashmead, X), ix.
+c(r110, A, 2) :- vr(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Diologaster_Ashmead, X), ix.
+
+% c2020_Microplitis_Foerster ! c2020_Xanthomicrogaster_Cameron
+ir(X, r111) :- in(c2020_Microplitis_Foerster, X), in(c2020_Xanthomicrogaster_Cameron, X).
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), out(c2020_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microplitis_Foerster,X), in(c2020_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+pie(r111, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Xanthomicrogaster_Cameron, X), ix.
+c(r111, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Xanthomicrogaster_Cameron, X), ix.
+pie(r111, A, 2) :- ir(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Xanthomicrogaster_Cameron, X), ix.
+c(r111, A, 2) :- vr(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Xanthomicrogaster_Cameron, X), ix.
+
+% c2020_Microplitis_Foerster ! c2020_Promicrogaster_Brues_and_Richardson
+ir(X, r112) :- in(c2020_Microplitis_Foerster, X), in(c2020_Promicrogaster_Brues_and_Richardson, X).
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), out(c2020_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microplitis_Foerster,X), in(c2020_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+pie(r112, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r112, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+pie(r112, A, 2) :- ir(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r112, A, 2) :- vr(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+
+% c2020_Microplitis_Foerster ! c2020_Buluka_De_Saeger
+ir(X, r113) :- in(c2020_Microplitis_Foerster, X), in(c2020_Buluka_De_Saeger, X).
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), out(c2020_Buluka_De_Saeger,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microplitis_Foerster,X), in(c2020_Buluka_De_Saeger,X)} <= 0, pw.
+pie(r113, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Buluka_De_Saeger, X), ix.
+c(r113, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Buluka_De_Saeger, X), ix.
+pie(r113, A, 2) :- ir(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Buluka_De_Saeger, X), ix.
+c(r113, A, 2) :- vr(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Buluka_De_Saeger, X), ix.
+
+% c2020_Microplitis_Foerster ! c2020_Dasylagon_Muesebeck
+ir(X, r114) :- in(c2020_Microplitis_Foerster, X), in(c2020_Dasylagon_Muesebeck, X).
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), out(c2020_Dasylagon_Muesebeck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microplitis_Foerster,X), in(c2020_Dasylagon_Muesebeck,X)} <= 0, pw.
+pie(r114, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Dasylagon_Muesebeck, X), ix.
+c(r114, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Dasylagon_Muesebeck, X), ix.
+pie(r114, A, 2) :- ir(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Dasylagon_Muesebeck, X), ix.
+c(r114, A, 2) :- vr(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Dasylagon_Muesebeck, X), ix.
+
+% c2020_Microplitis_Foerster ! c2020_Larissimus_Nixon
+ir(X, r115) :- in(c2020_Microplitis_Foerster, X), in(c2020_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), out(c2020_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microplitis_Foerster,X), in(c2020_Larissimus_Nixon,X)} <= 0, pw.
+pie(r115, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Larissimus_Nixon, X), ix.
+c(r115, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Larissimus_Nixon, X), ix.
+pie(r115, A, 2) :- ir(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Larissimus_Nixon, X), ix.
+c(r115, A, 2) :- vr(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Larissimus_Nixon, X), ix.
+
+% c2020_Microplitis_Foerster ! c2020_Alloplitis_Nixon
+ir(X, r116) :- in(c2020_Microplitis_Foerster, X), in(c2020_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), out(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microplitis_Foerster,X), in(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r116, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Alloplitis_Nixon, X), ix.
+c(r116, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Alloplitis_Nixon, X), ix.
+pie(r116, A, 2) :- ir(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Alloplitis_Nixon, X), ix.
+c(r116, A, 2) :- vr(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Alloplitis_Nixon, X), ix.
+
+% c2020_Microplitis_Foerster ! c2020_Philoplitis_Nixon
+ir(X, r117) :- in(c2020_Microplitis_Foerster, X), in(c2020_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), out(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microplitis_Foerster,X), in(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r117, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Philoplitis_Nixon, X), ix.
+c(r117, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Philoplitis_Nixon, X), ix.
+pie(r117, A, 2) :- ir(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Philoplitis_Nixon, X), ix.
+c(r117, A, 2) :- vr(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Philoplitis_Nixon, X), ix.
+
+% c2020_Microplitis_Foerster ! c2020_Prasmodon_Nixon
+ir(X, r118) :- in(c2020_Microplitis_Foerster, X), in(c2020_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), out(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microplitis_Foerster,X), in(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r118, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Prasmodon_Nixon, X), ix.
+c(r118, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Prasmodon_Nixon, X), ix.
+pie(r118, A, 2) :- ir(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Prasmodon_Nixon, X), ix.
+c(r118, A, 2) :- vr(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Prasmodon_Nixon, X), ix.
+
+% c2020_Microplitis_Foerster ! c2020_Semionis_Nixon
+ir(X, r119) :- in(c2020_Microplitis_Foerster, X), in(c2020_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), out(c2020_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microplitis_Foerster,X), in(c2020_Semionis_Nixon,X)} <= 0, pw.
+pie(r119, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Semionis_Nixon, X), ix.
+c(r119, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Semionis_Nixon, X), ix.
+pie(r119, A, 2) :- ir(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Semionis_Nixon, X), ix.
+c(r119, A, 2) :- vr(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Semionis_Nixon, X), ix.
+
+% c2020_Microplitis_Foerster ! c2020_Sendaphne_Nixon
+ir(X, r120) :- in(c2020_Microplitis_Foerster, X), in(c2020_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), out(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microplitis_Foerster,X), in(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r120, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Sendaphne_Nixon, X), ix.
+c(r120, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Sendaphne_Nixon, X), ix.
+pie(r120, A, 2) :- ir(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Sendaphne_Nixon, X), ix.
+c(r120, A, 2) :- vr(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Sendaphne_Nixon, X), ix.
+
+% c2020_Microplitis_Foerster ! c2020_Other
+ir(X, r121) :- in(c2020_Microplitis_Foerster, X), in(c2020_Other, X).
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), out(c2020_Other,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Microplitis_Foerster,X), in(c2020_Other,X)} <= 0, pw.
+pie(r121, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Other, X), ix.
+c(r121, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), out(c2020_Other, X), ix.
+pie(r121, A, 2) :- ir(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Other, X), ix.
+c(r121, A, 2) :- vr(X, A), out(c2020_Microplitis_Foerster, X), in(c2020_Other, X), ix.
+
+% c2020_Snellenius_Westwood ! c2020_Protomicroplitis_Ashmead
+ir(X, r122) :- in(c2020_Snellenius_Westwood, X), in(c2020_Protomicroplitis_Ashmead, X).
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), out(c2020_Protomicroplitis_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Snellenius_Westwood,X), in(c2020_Protomicroplitis_Ashmead,X)} <= 0, pw.
+pie(r122, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Protomicroplitis_Ashmead, X), ix.
+c(r122, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Protomicroplitis_Ashmead, X), ix.
+pie(r122, A, 2) :- ir(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Protomicroplitis_Ashmead, X), ix.
+c(r122, A, 2) :- vr(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Protomicroplitis_Ashmead, X), ix.
+
+% c2020_Snellenius_Westwood ! c2020_Diologaster_Ashmead
+ir(X, r123) :- in(c2020_Snellenius_Westwood, X), in(c2020_Diologaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), out(c2020_Diologaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Snellenius_Westwood,X), in(c2020_Diologaster_Ashmead,X)} <= 0, pw.
+pie(r123, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Diologaster_Ashmead, X), ix.
+c(r123, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Diologaster_Ashmead, X), ix.
+pie(r123, A, 2) :- ir(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Diologaster_Ashmead, X), ix.
+c(r123, A, 2) :- vr(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Diologaster_Ashmead, X), ix.
+
+% c2020_Snellenius_Westwood ! c2020_Xanthomicrogaster_Cameron
+ir(X, r124) :- in(c2020_Snellenius_Westwood, X), in(c2020_Xanthomicrogaster_Cameron, X).
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), out(c2020_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Snellenius_Westwood,X), in(c2020_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+pie(r124, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Xanthomicrogaster_Cameron, X), ix.
+c(r124, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Xanthomicrogaster_Cameron, X), ix.
+pie(r124, A, 2) :- ir(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Xanthomicrogaster_Cameron, X), ix.
+c(r124, A, 2) :- vr(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Xanthomicrogaster_Cameron, X), ix.
+
+% c2020_Snellenius_Westwood ! c2020_Promicrogaster_Brues_and_Richardson
+ir(X, r125) :- in(c2020_Snellenius_Westwood, X), in(c2020_Promicrogaster_Brues_and_Richardson, X).
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), out(c2020_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Snellenius_Westwood,X), in(c2020_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+pie(r125, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r125, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+pie(r125, A, 2) :- ir(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r125, A, 2) :- vr(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+
+% c2020_Snellenius_Westwood ! c2020_Buluka_De_Saeger
+ir(X, r126) :- in(c2020_Snellenius_Westwood, X), in(c2020_Buluka_De_Saeger, X).
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), out(c2020_Buluka_De_Saeger,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Snellenius_Westwood,X), in(c2020_Buluka_De_Saeger,X)} <= 0, pw.
+pie(r126, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Buluka_De_Saeger, X), ix.
+c(r126, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Buluka_De_Saeger, X), ix.
+pie(r126, A, 2) :- ir(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Buluka_De_Saeger, X), ix.
+c(r126, A, 2) :- vr(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Buluka_De_Saeger, X), ix.
+
+% c2020_Snellenius_Westwood ! c2020_Dasylagon_Muesebeck
+ir(X, r127) :- in(c2020_Snellenius_Westwood, X), in(c2020_Dasylagon_Muesebeck, X).
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), out(c2020_Dasylagon_Muesebeck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Snellenius_Westwood,X), in(c2020_Dasylagon_Muesebeck,X)} <= 0, pw.
+pie(r127, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Dasylagon_Muesebeck, X), ix.
+c(r127, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Dasylagon_Muesebeck, X), ix.
+pie(r127, A, 2) :- ir(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Dasylagon_Muesebeck, X), ix.
+c(r127, A, 2) :- vr(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Dasylagon_Muesebeck, X), ix.
+
+% c2020_Snellenius_Westwood ! c2020_Larissimus_Nixon
+ir(X, r128) :- in(c2020_Snellenius_Westwood, X), in(c2020_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), out(c2020_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Snellenius_Westwood,X), in(c2020_Larissimus_Nixon,X)} <= 0, pw.
+pie(r128, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Larissimus_Nixon, X), ix.
+c(r128, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Larissimus_Nixon, X), ix.
+pie(r128, A, 2) :- ir(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Larissimus_Nixon, X), ix.
+c(r128, A, 2) :- vr(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Larissimus_Nixon, X), ix.
+
+% c2020_Snellenius_Westwood ! c2020_Alloplitis_Nixon
+ir(X, r129) :- in(c2020_Snellenius_Westwood, X), in(c2020_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), out(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Snellenius_Westwood,X), in(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r129, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Alloplitis_Nixon, X), ix.
+c(r129, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Alloplitis_Nixon, X), ix.
+pie(r129, A, 2) :- ir(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Alloplitis_Nixon, X), ix.
+c(r129, A, 2) :- vr(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Alloplitis_Nixon, X), ix.
+
+% c2020_Snellenius_Westwood ! c2020_Philoplitis_Nixon
+ir(X, r130) :- in(c2020_Snellenius_Westwood, X), in(c2020_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), out(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Snellenius_Westwood,X), in(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r130, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Philoplitis_Nixon, X), ix.
+c(r130, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Philoplitis_Nixon, X), ix.
+pie(r130, A, 2) :- ir(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Philoplitis_Nixon, X), ix.
+c(r130, A, 2) :- vr(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Philoplitis_Nixon, X), ix.
+
+% c2020_Snellenius_Westwood ! c2020_Prasmodon_Nixon
+ir(X, r131) :- in(c2020_Snellenius_Westwood, X), in(c2020_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), out(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Snellenius_Westwood,X), in(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r131, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Prasmodon_Nixon, X), ix.
+c(r131, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Prasmodon_Nixon, X), ix.
+pie(r131, A, 2) :- ir(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Prasmodon_Nixon, X), ix.
+c(r131, A, 2) :- vr(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Prasmodon_Nixon, X), ix.
+
+% c2020_Snellenius_Westwood ! c2020_Semionis_Nixon
+ir(X, r132) :- in(c2020_Snellenius_Westwood, X), in(c2020_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), out(c2020_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Snellenius_Westwood,X), in(c2020_Semionis_Nixon,X)} <= 0, pw.
+pie(r132, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Semionis_Nixon, X), ix.
+c(r132, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Semionis_Nixon, X), ix.
+pie(r132, A, 2) :- ir(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Semionis_Nixon, X), ix.
+c(r132, A, 2) :- vr(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Semionis_Nixon, X), ix.
+
+% c2020_Snellenius_Westwood ! c2020_Sendaphne_Nixon
+ir(X, r133) :- in(c2020_Snellenius_Westwood, X), in(c2020_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), out(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Snellenius_Westwood,X), in(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r133, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Sendaphne_Nixon, X), ix.
+c(r133, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Sendaphne_Nixon, X), ix.
+pie(r133, A, 2) :- ir(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Sendaphne_Nixon, X), ix.
+c(r133, A, 2) :- vr(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Sendaphne_Nixon, X), ix.
+
+% c2020_Snellenius_Westwood ! c2020_Other
+ir(X, r134) :- in(c2020_Snellenius_Westwood, X), in(c2020_Other, X).
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), out(c2020_Other,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Snellenius_Westwood,X), in(c2020_Other,X)} <= 0, pw.
+pie(r134, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Other, X), ix.
+c(r134, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), out(c2020_Other, X), ix.
+pie(r134, A, 2) :- ir(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Other, X), ix.
+c(r134, A, 2) :- vr(X, A), out(c2020_Snellenius_Westwood, X), in(c2020_Other, X), ix.
+
+% c2020_Protomicroplitis_Ashmead ! c2020_Diologaster_Ashmead
+ir(X, r135) :- in(c2020_Protomicroplitis_Ashmead, X), in(c2020_Diologaster_Ashmead, X).
+:- #count {X : vrs(X), in(c2020_Protomicroplitis_Ashmead,X), out(c2020_Diologaster_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protomicroplitis_Ashmead,X), in(c2020_Diologaster_Ashmead,X)} <= 0, pw.
+pie(r135, A, 1) :- ir(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Diologaster_Ashmead, X), ix.
+c(r135, A, 1) :- vr(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Diologaster_Ashmead, X), ix.
+pie(r135, A, 2) :- ir(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Diologaster_Ashmead, X), ix.
+c(r135, A, 2) :- vr(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Diologaster_Ashmead, X), ix.
+
+% c2020_Protomicroplitis_Ashmead ! c2020_Xanthomicrogaster_Cameron
+ir(X, r136) :- in(c2020_Protomicroplitis_Ashmead, X), in(c2020_Xanthomicrogaster_Cameron, X).
+:- #count {X : vrs(X), in(c2020_Protomicroplitis_Ashmead,X), out(c2020_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protomicroplitis_Ashmead,X), in(c2020_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+pie(r136, A, 1) :- ir(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Xanthomicrogaster_Cameron, X), ix.
+c(r136, A, 1) :- vr(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Xanthomicrogaster_Cameron, X), ix.
+pie(r136, A, 2) :- ir(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Xanthomicrogaster_Cameron, X), ix.
+c(r136, A, 2) :- vr(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Xanthomicrogaster_Cameron, X), ix.
+
+% c2020_Protomicroplitis_Ashmead ! c2020_Promicrogaster_Brues_and_Richardson
+ir(X, r137) :- in(c2020_Protomicroplitis_Ashmead, X), in(c2020_Promicrogaster_Brues_and_Richardson, X).
+:- #count {X : vrs(X), in(c2020_Protomicroplitis_Ashmead,X), out(c2020_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protomicroplitis_Ashmead,X), in(c2020_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+pie(r137, A, 1) :- ir(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r137, A, 1) :- vr(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+pie(r137, A, 2) :- ir(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r137, A, 2) :- vr(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+
+% c2020_Protomicroplitis_Ashmead ! c2020_Buluka_De_Saeger
+ir(X, r138) :- in(c2020_Protomicroplitis_Ashmead, X), in(c2020_Buluka_De_Saeger, X).
+:- #count {X : vrs(X), in(c2020_Protomicroplitis_Ashmead,X), out(c2020_Buluka_De_Saeger,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protomicroplitis_Ashmead,X), in(c2020_Buluka_De_Saeger,X)} <= 0, pw.
+pie(r138, A, 1) :- ir(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Buluka_De_Saeger, X), ix.
+c(r138, A, 1) :- vr(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Buluka_De_Saeger, X), ix.
+pie(r138, A, 2) :- ir(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Buluka_De_Saeger, X), ix.
+c(r138, A, 2) :- vr(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Buluka_De_Saeger, X), ix.
+
+% c2020_Protomicroplitis_Ashmead ! c2020_Dasylagon_Muesebeck
+ir(X, r139) :- in(c2020_Protomicroplitis_Ashmead, X), in(c2020_Dasylagon_Muesebeck, X).
+:- #count {X : vrs(X), in(c2020_Protomicroplitis_Ashmead,X), out(c2020_Dasylagon_Muesebeck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protomicroplitis_Ashmead,X), in(c2020_Dasylagon_Muesebeck,X)} <= 0, pw.
+pie(r139, A, 1) :- ir(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Dasylagon_Muesebeck, X), ix.
+c(r139, A, 1) :- vr(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Dasylagon_Muesebeck, X), ix.
+pie(r139, A, 2) :- ir(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Dasylagon_Muesebeck, X), ix.
+c(r139, A, 2) :- vr(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Dasylagon_Muesebeck, X), ix.
+
+% c2020_Protomicroplitis_Ashmead ! c2020_Larissimus_Nixon
+ir(X, r140) :- in(c2020_Protomicroplitis_Ashmead, X), in(c2020_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Protomicroplitis_Ashmead,X), out(c2020_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protomicroplitis_Ashmead,X), in(c2020_Larissimus_Nixon,X)} <= 0, pw.
+pie(r140, A, 1) :- ir(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Larissimus_Nixon, X), ix.
+c(r140, A, 1) :- vr(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Larissimus_Nixon, X), ix.
+pie(r140, A, 2) :- ir(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Larissimus_Nixon, X), ix.
+c(r140, A, 2) :- vr(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Larissimus_Nixon, X), ix.
+
+% c2020_Protomicroplitis_Ashmead ! c2020_Alloplitis_Nixon
+ir(X, r141) :- in(c2020_Protomicroplitis_Ashmead, X), in(c2020_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Protomicroplitis_Ashmead,X), out(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protomicroplitis_Ashmead,X), in(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r141, A, 1) :- ir(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Alloplitis_Nixon, X), ix.
+c(r141, A, 1) :- vr(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Alloplitis_Nixon, X), ix.
+pie(r141, A, 2) :- ir(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Alloplitis_Nixon, X), ix.
+c(r141, A, 2) :- vr(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Alloplitis_Nixon, X), ix.
+
+% c2020_Protomicroplitis_Ashmead ! c2020_Philoplitis_Nixon
+ir(X, r142) :- in(c2020_Protomicroplitis_Ashmead, X), in(c2020_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Protomicroplitis_Ashmead,X), out(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protomicroplitis_Ashmead,X), in(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r142, A, 1) :- ir(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Philoplitis_Nixon, X), ix.
+c(r142, A, 1) :- vr(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Philoplitis_Nixon, X), ix.
+pie(r142, A, 2) :- ir(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Philoplitis_Nixon, X), ix.
+c(r142, A, 2) :- vr(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Philoplitis_Nixon, X), ix.
+
+% c2020_Protomicroplitis_Ashmead ! c2020_Prasmodon_Nixon
+ir(X, r143) :- in(c2020_Protomicroplitis_Ashmead, X), in(c2020_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Protomicroplitis_Ashmead,X), out(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protomicroplitis_Ashmead,X), in(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r143, A, 1) :- ir(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Prasmodon_Nixon, X), ix.
+c(r143, A, 1) :- vr(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Prasmodon_Nixon, X), ix.
+pie(r143, A, 2) :- ir(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Prasmodon_Nixon, X), ix.
+c(r143, A, 2) :- vr(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Prasmodon_Nixon, X), ix.
+
+% c2020_Protomicroplitis_Ashmead ! c2020_Semionis_Nixon
+ir(X, r144) :- in(c2020_Protomicroplitis_Ashmead, X), in(c2020_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Protomicroplitis_Ashmead,X), out(c2020_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protomicroplitis_Ashmead,X), in(c2020_Semionis_Nixon,X)} <= 0, pw.
+pie(r144, A, 1) :- ir(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Semionis_Nixon, X), ix.
+c(r144, A, 1) :- vr(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Semionis_Nixon, X), ix.
+pie(r144, A, 2) :- ir(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Semionis_Nixon, X), ix.
+c(r144, A, 2) :- vr(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Semionis_Nixon, X), ix.
+
+% c2020_Protomicroplitis_Ashmead ! c2020_Sendaphne_Nixon
+ir(X, r145) :- in(c2020_Protomicroplitis_Ashmead, X), in(c2020_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Protomicroplitis_Ashmead,X), out(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protomicroplitis_Ashmead,X), in(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r145, A, 1) :- ir(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Sendaphne_Nixon, X), ix.
+c(r145, A, 1) :- vr(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Sendaphne_Nixon, X), ix.
+pie(r145, A, 2) :- ir(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Sendaphne_Nixon, X), ix.
+c(r145, A, 2) :- vr(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Sendaphne_Nixon, X), ix.
+
+% c2020_Protomicroplitis_Ashmead ! c2020_Other
+ir(X, r146) :- in(c2020_Protomicroplitis_Ashmead, X), in(c2020_Other, X).
+:- #count {X : vrs(X), in(c2020_Protomicroplitis_Ashmead,X), out(c2020_Other,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protomicroplitis_Ashmead,X), in(c2020_Other,X)} <= 0, pw.
+pie(r146, A, 1) :- ir(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Other, X), ix.
+c(r146, A, 1) :- vr(X, A), in(c2020_Protomicroplitis_Ashmead, X), out(c2020_Other, X), ix.
+pie(r146, A, 2) :- ir(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Other, X), ix.
+c(r146, A, 2) :- vr(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c2020_Other, X), ix.
+
+% c2020_Diologaster_Ashmead ! c2020_Xanthomicrogaster_Cameron
+ir(X, r147) :- in(c2020_Diologaster_Ashmead, X), in(c2020_Xanthomicrogaster_Cameron, X).
+:- #count {X : vrs(X), in(c2020_Diologaster_Ashmead,X), out(c2020_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Diologaster_Ashmead,X), in(c2020_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+pie(r147, A, 1) :- ir(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Xanthomicrogaster_Cameron, X), ix.
+c(r147, A, 1) :- vr(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Xanthomicrogaster_Cameron, X), ix.
+pie(r147, A, 2) :- ir(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Xanthomicrogaster_Cameron, X), ix.
+c(r147, A, 2) :- vr(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Xanthomicrogaster_Cameron, X), ix.
+
+% c2020_Diologaster_Ashmead ! c2020_Promicrogaster_Brues_and_Richardson
+ir(X, r148) :- in(c2020_Diologaster_Ashmead, X), in(c2020_Promicrogaster_Brues_and_Richardson, X).
+:- #count {X : vrs(X), in(c2020_Diologaster_Ashmead,X), out(c2020_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Diologaster_Ashmead,X), in(c2020_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+pie(r148, A, 1) :- ir(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r148, A, 1) :- vr(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+pie(r148, A, 2) :- ir(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r148, A, 2) :- vr(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+
+% c2020_Diologaster_Ashmead ! c2020_Buluka_De_Saeger
+ir(X, r149) :- in(c2020_Diologaster_Ashmead, X), in(c2020_Buluka_De_Saeger, X).
+:- #count {X : vrs(X), in(c2020_Diologaster_Ashmead,X), out(c2020_Buluka_De_Saeger,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Diologaster_Ashmead,X), in(c2020_Buluka_De_Saeger,X)} <= 0, pw.
+pie(r149, A, 1) :- ir(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Buluka_De_Saeger, X), ix.
+c(r149, A, 1) :- vr(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Buluka_De_Saeger, X), ix.
+pie(r149, A, 2) :- ir(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Buluka_De_Saeger, X), ix.
+c(r149, A, 2) :- vr(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Buluka_De_Saeger, X), ix.
+
+% c2020_Diologaster_Ashmead ! c2020_Dasylagon_Muesebeck
+ir(X, r150) :- in(c2020_Diologaster_Ashmead, X), in(c2020_Dasylagon_Muesebeck, X).
+:- #count {X : vrs(X), in(c2020_Diologaster_Ashmead,X), out(c2020_Dasylagon_Muesebeck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Diologaster_Ashmead,X), in(c2020_Dasylagon_Muesebeck,X)} <= 0, pw.
+pie(r150, A, 1) :- ir(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Dasylagon_Muesebeck, X), ix.
+c(r150, A, 1) :- vr(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Dasylagon_Muesebeck, X), ix.
+pie(r150, A, 2) :- ir(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Dasylagon_Muesebeck, X), ix.
+c(r150, A, 2) :- vr(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Dasylagon_Muesebeck, X), ix.
+
+% c2020_Diologaster_Ashmead ! c2020_Larissimus_Nixon
+ir(X, r151) :- in(c2020_Diologaster_Ashmead, X), in(c2020_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Diologaster_Ashmead,X), out(c2020_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Diologaster_Ashmead,X), in(c2020_Larissimus_Nixon,X)} <= 0, pw.
+pie(r151, A, 1) :- ir(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Larissimus_Nixon, X), ix.
+c(r151, A, 1) :- vr(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Larissimus_Nixon, X), ix.
+pie(r151, A, 2) :- ir(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Larissimus_Nixon, X), ix.
+c(r151, A, 2) :- vr(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Larissimus_Nixon, X), ix.
+
+% c2020_Diologaster_Ashmead ! c2020_Alloplitis_Nixon
+ir(X, r152) :- in(c2020_Diologaster_Ashmead, X), in(c2020_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Diologaster_Ashmead,X), out(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Diologaster_Ashmead,X), in(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r152, A, 1) :- ir(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Alloplitis_Nixon, X), ix.
+c(r152, A, 1) :- vr(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Alloplitis_Nixon, X), ix.
+pie(r152, A, 2) :- ir(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Alloplitis_Nixon, X), ix.
+c(r152, A, 2) :- vr(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Alloplitis_Nixon, X), ix.
+
+% c2020_Diologaster_Ashmead ! c2020_Philoplitis_Nixon
+ir(X, r153) :- in(c2020_Diologaster_Ashmead, X), in(c2020_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Diologaster_Ashmead,X), out(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Diologaster_Ashmead,X), in(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r153, A, 1) :- ir(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Philoplitis_Nixon, X), ix.
+c(r153, A, 1) :- vr(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Philoplitis_Nixon, X), ix.
+pie(r153, A, 2) :- ir(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Philoplitis_Nixon, X), ix.
+c(r153, A, 2) :- vr(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Philoplitis_Nixon, X), ix.
+
+% c2020_Diologaster_Ashmead ! c2020_Prasmodon_Nixon
+ir(X, r154) :- in(c2020_Diologaster_Ashmead, X), in(c2020_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Diologaster_Ashmead,X), out(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Diologaster_Ashmead,X), in(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r154, A, 1) :- ir(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Prasmodon_Nixon, X), ix.
+c(r154, A, 1) :- vr(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Prasmodon_Nixon, X), ix.
+pie(r154, A, 2) :- ir(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Prasmodon_Nixon, X), ix.
+c(r154, A, 2) :- vr(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Prasmodon_Nixon, X), ix.
+
+% c2020_Diologaster_Ashmead ! c2020_Semionis_Nixon
+ir(X, r155) :- in(c2020_Diologaster_Ashmead, X), in(c2020_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Diologaster_Ashmead,X), out(c2020_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Diologaster_Ashmead,X), in(c2020_Semionis_Nixon,X)} <= 0, pw.
+pie(r155, A, 1) :- ir(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Semionis_Nixon, X), ix.
+c(r155, A, 1) :- vr(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Semionis_Nixon, X), ix.
+pie(r155, A, 2) :- ir(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Semionis_Nixon, X), ix.
+c(r155, A, 2) :- vr(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Semionis_Nixon, X), ix.
+
+% c2020_Diologaster_Ashmead ! c2020_Sendaphne_Nixon
+ir(X, r156) :- in(c2020_Diologaster_Ashmead, X), in(c2020_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Diologaster_Ashmead,X), out(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Diologaster_Ashmead,X), in(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r156, A, 1) :- ir(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Sendaphne_Nixon, X), ix.
+c(r156, A, 1) :- vr(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Sendaphne_Nixon, X), ix.
+pie(r156, A, 2) :- ir(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Sendaphne_Nixon, X), ix.
+c(r156, A, 2) :- vr(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Sendaphne_Nixon, X), ix.
+
+% c2020_Diologaster_Ashmead ! c2020_Other
+ir(X, r157) :- in(c2020_Diologaster_Ashmead, X), in(c2020_Other, X).
+:- #count {X : vrs(X), in(c2020_Diologaster_Ashmead,X), out(c2020_Other,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Diologaster_Ashmead,X), in(c2020_Other,X)} <= 0, pw.
+pie(r157, A, 1) :- ir(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Other, X), ix.
+c(r157, A, 1) :- vr(X, A), in(c2020_Diologaster_Ashmead, X), out(c2020_Other, X), ix.
+pie(r157, A, 2) :- ir(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Other, X), ix.
+c(r157, A, 2) :- vr(X, A), out(c2020_Diologaster_Ashmead, X), in(c2020_Other, X), ix.
+
+% c2020_Xanthomicrogaster_Cameron ! c2020_Promicrogaster_Brues_and_Richardson
+ir(X, r158) :- in(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Promicrogaster_Brues_and_Richardson, X).
+:- #count {X : vrs(X), in(c2020_Xanthomicrogaster_Cameron,X), out(c2020_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Xanthomicrogaster_Cameron,X), in(c2020_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+pie(r158, A, 1) :- ir(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r158, A, 1) :- vr(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+pie(r158, A, 2) :- ir(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r158, A, 2) :- vr(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Promicrogaster_Brues_and_Richardson, X), ix.
+
+% c2020_Xanthomicrogaster_Cameron ! c2020_Buluka_De_Saeger
+ir(X, r159) :- in(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Buluka_De_Saeger, X).
+:- #count {X : vrs(X), in(c2020_Xanthomicrogaster_Cameron,X), out(c2020_Buluka_De_Saeger,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Xanthomicrogaster_Cameron,X), in(c2020_Buluka_De_Saeger,X)} <= 0, pw.
+pie(r159, A, 1) :- ir(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Buluka_De_Saeger, X), ix.
+c(r159, A, 1) :- vr(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Buluka_De_Saeger, X), ix.
+pie(r159, A, 2) :- ir(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Buluka_De_Saeger, X), ix.
+c(r159, A, 2) :- vr(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Buluka_De_Saeger, X), ix.
+
+% c2020_Xanthomicrogaster_Cameron ! c2020_Dasylagon_Muesebeck
+ir(X, r160) :- in(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Dasylagon_Muesebeck, X).
+:- #count {X : vrs(X), in(c2020_Xanthomicrogaster_Cameron,X), out(c2020_Dasylagon_Muesebeck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Xanthomicrogaster_Cameron,X), in(c2020_Dasylagon_Muesebeck,X)} <= 0, pw.
+pie(r160, A, 1) :- ir(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Dasylagon_Muesebeck, X), ix.
+c(r160, A, 1) :- vr(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Dasylagon_Muesebeck, X), ix.
+pie(r160, A, 2) :- ir(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Dasylagon_Muesebeck, X), ix.
+c(r160, A, 2) :- vr(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Dasylagon_Muesebeck, X), ix.
+
+% c2020_Xanthomicrogaster_Cameron ! c2020_Larissimus_Nixon
+ir(X, r161) :- in(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Xanthomicrogaster_Cameron,X), out(c2020_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Xanthomicrogaster_Cameron,X), in(c2020_Larissimus_Nixon,X)} <= 0, pw.
+pie(r161, A, 1) :- ir(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Larissimus_Nixon, X), ix.
+c(r161, A, 1) :- vr(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Larissimus_Nixon, X), ix.
+pie(r161, A, 2) :- ir(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Larissimus_Nixon, X), ix.
+c(r161, A, 2) :- vr(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Larissimus_Nixon, X), ix.
+
+% c2020_Xanthomicrogaster_Cameron ! c2020_Alloplitis_Nixon
+ir(X, r162) :- in(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Xanthomicrogaster_Cameron,X), out(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Xanthomicrogaster_Cameron,X), in(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r162, A, 1) :- ir(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Alloplitis_Nixon, X), ix.
+c(r162, A, 1) :- vr(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Alloplitis_Nixon, X), ix.
+pie(r162, A, 2) :- ir(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Alloplitis_Nixon, X), ix.
+c(r162, A, 2) :- vr(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Alloplitis_Nixon, X), ix.
+
+% c2020_Xanthomicrogaster_Cameron ! c2020_Philoplitis_Nixon
+ir(X, r163) :- in(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Xanthomicrogaster_Cameron,X), out(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Xanthomicrogaster_Cameron,X), in(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r163, A, 1) :- ir(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Philoplitis_Nixon, X), ix.
+c(r163, A, 1) :- vr(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Philoplitis_Nixon, X), ix.
+pie(r163, A, 2) :- ir(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Philoplitis_Nixon, X), ix.
+c(r163, A, 2) :- vr(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Philoplitis_Nixon, X), ix.
+
+% c2020_Xanthomicrogaster_Cameron ! c2020_Prasmodon_Nixon
+ir(X, r164) :- in(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Xanthomicrogaster_Cameron,X), out(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Xanthomicrogaster_Cameron,X), in(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r164, A, 1) :- ir(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Prasmodon_Nixon, X), ix.
+c(r164, A, 1) :- vr(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Prasmodon_Nixon, X), ix.
+pie(r164, A, 2) :- ir(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Prasmodon_Nixon, X), ix.
+c(r164, A, 2) :- vr(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Prasmodon_Nixon, X), ix.
+
+% c2020_Xanthomicrogaster_Cameron ! c2020_Semionis_Nixon
+ir(X, r165) :- in(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Xanthomicrogaster_Cameron,X), out(c2020_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Xanthomicrogaster_Cameron,X), in(c2020_Semionis_Nixon,X)} <= 0, pw.
+pie(r165, A, 1) :- ir(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Semionis_Nixon, X), ix.
+c(r165, A, 1) :- vr(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Semionis_Nixon, X), ix.
+pie(r165, A, 2) :- ir(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Semionis_Nixon, X), ix.
+c(r165, A, 2) :- vr(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Semionis_Nixon, X), ix.
+
+% c2020_Xanthomicrogaster_Cameron ! c2020_Sendaphne_Nixon
+ir(X, r166) :- in(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Xanthomicrogaster_Cameron,X), out(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Xanthomicrogaster_Cameron,X), in(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r166, A, 1) :- ir(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Sendaphne_Nixon, X), ix.
+c(r166, A, 1) :- vr(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Sendaphne_Nixon, X), ix.
+pie(r166, A, 2) :- ir(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Sendaphne_Nixon, X), ix.
+c(r166, A, 2) :- vr(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Sendaphne_Nixon, X), ix.
+
+% c2020_Xanthomicrogaster_Cameron ! c2020_Other
+ir(X, r167) :- in(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Other, X).
+:- #count {X : vrs(X), in(c2020_Xanthomicrogaster_Cameron,X), out(c2020_Other,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Xanthomicrogaster_Cameron,X), in(c2020_Other,X)} <= 0, pw.
+pie(r167, A, 1) :- ir(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Other, X), ix.
+c(r167, A, 1) :- vr(X, A), in(c2020_Xanthomicrogaster_Cameron, X), out(c2020_Other, X), ix.
+pie(r167, A, 2) :- ir(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Other, X), ix.
+c(r167, A, 2) :- vr(X, A), out(c2020_Xanthomicrogaster_Cameron, X), in(c2020_Other, X), ix.
+
+% c2020_Promicrogaster_Brues_and_Richardson ! c2020_Buluka_De_Saeger
+ir(X, r168) :- in(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Buluka_De_Saeger, X).
+:- #count {X : vrs(X), in(c2020_Promicrogaster_Brues_and_Richardson,X), out(c2020_Buluka_De_Saeger,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Promicrogaster_Brues_and_Richardson,X), in(c2020_Buluka_De_Saeger,X)} <= 0, pw.
+pie(r168, A, 1) :- ir(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Buluka_De_Saeger, X), ix.
+c(r168, A, 1) :- vr(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Buluka_De_Saeger, X), ix.
+pie(r168, A, 2) :- ir(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Buluka_De_Saeger, X), ix.
+c(r168, A, 2) :- vr(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Buluka_De_Saeger, X), ix.
+
+% c2020_Promicrogaster_Brues_and_Richardson ! c2020_Dasylagon_Muesebeck
+ir(X, r169) :- in(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Dasylagon_Muesebeck, X).
+:- #count {X : vrs(X), in(c2020_Promicrogaster_Brues_and_Richardson,X), out(c2020_Dasylagon_Muesebeck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Promicrogaster_Brues_and_Richardson,X), in(c2020_Dasylagon_Muesebeck,X)} <= 0, pw.
+pie(r169, A, 1) :- ir(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Dasylagon_Muesebeck, X), ix.
+c(r169, A, 1) :- vr(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Dasylagon_Muesebeck, X), ix.
+pie(r169, A, 2) :- ir(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Dasylagon_Muesebeck, X), ix.
+c(r169, A, 2) :- vr(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Dasylagon_Muesebeck, X), ix.
+
+% c2020_Promicrogaster_Brues_and_Richardson ! c2020_Larissimus_Nixon
+ir(X, r170) :- in(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Promicrogaster_Brues_and_Richardson,X), out(c2020_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Promicrogaster_Brues_and_Richardson,X), in(c2020_Larissimus_Nixon,X)} <= 0, pw.
+pie(r170, A, 1) :- ir(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Larissimus_Nixon, X), ix.
+c(r170, A, 1) :- vr(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Larissimus_Nixon, X), ix.
+pie(r170, A, 2) :- ir(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Larissimus_Nixon, X), ix.
+c(r170, A, 2) :- vr(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Larissimus_Nixon, X), ix.
+
+% c2020_Promicrogaster_Brues_and_Richardson ! c2020_Alloplitis_Nixon
+ir(X, r171) :- in(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Promicrogaster_Brues_and_Richardson,X), out(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Promicrogaster_Brues_and_Richardson,X), in(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r171, A, 1) :- ir(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Alloplitis_Nixon, X), ix.
+c(r171, A, 1) :- vr(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Alloplitis_Nixon, X), ix.
+pie(r171, A, 2) :- ir(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Alloplitis_Nixon, X), ix.
+c(r171, A, 2) :- vr(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Alloplitis_Nixon, X), ix.
+
+% c2020_Promicrogaster_Brues_and_Richardson ! c2020_Philoplitis_Nixon
+ir(X, r172) :- in(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Promicrogaster_Brues_and_Richardson,X), out(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Promicrogaster_Brues_and_Richardson,X), in(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r172, A, 1) :- ir(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Philoplitis_Nixon, X), ix.
+c(r172, A, 1) :- vr(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Philoplitis_Nixon, X), ix.
+pie(r172, A, 2) :- ir(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Philoplitis_Nixon, X), ix.
+c(r172, A, 2) :- vr(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Philoplitis_Nixon, X), ix.
+
+% c2020_Promicrogaster_Brues_and_Richardson ! c2020_Prasmodon_Nixon
+ir(X, r173) :- in(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Promicrogaster_Brues_and_Richardson,X), out(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Promicrogaster_Brues_and_Richardson,X), in(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r173, A, 1) :- ir(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Prasmodon_Nixon, X), ix.
+c(r173, A, 1) :- vr(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Prasmodon_Nixon, X), ix.
+pie(r173, A, 2) :- ir(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Prasmodon_Nixon, X), ix.
+c(r173, A, 2) :- vr(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Prasmodon_Nixon, X), ix.
+
+% c2020_Promicrogaster_Brues_and_Richardson ! c2020_Semionis_Nixon
+ir(X, r174) :- in(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Promicrogaster_Brues_and_Richardson,X), out(c2020_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Promicrogaster_Brues_and_Richardson,X), in(c2020_Semionis_Nixon,X)} <= 0, pw.
+pie(r174, A, 1) :- ir(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Semionis_Nixon, X), ix.
+c(r174, A, 1) :- vr(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Semionis_Nixon, X), ix.
+pie(r174, A, 2) :- ir(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Semionis_Nixon, X), ix.
+c(r174, A, 2) :- vr(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Semionis_Nixon, X), ix.
+
+% c2020_Promicrogaster_Brues_and_Richardson ! c2020_Sendaphne_Nixon
+ir(X, r175) :- in(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Promicrogaster_Brues_and_Richardson,X), out(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Promicrogaster_Brues_and_Richardson,X), in(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r175, A, 1) :- ir(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Sendaphne_Nixon, X), ix.
+c(r175, A, 1) :- vr(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Sendaphne_Nixon, X), ix.
+pie(r175, A, 2) :- ir(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Sendaphne_Nixon, X), ix.
+c(r175, A, 2) :- vr(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Sendaphne_Nixon, X), ix.
+
+% c2020_Promicrogaster_Brues_and_Richardson ! c2020_Other
+ir(X, r176) :- in(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Other, X).
+:- #count {X : vrs(X), in(c2020_Promicrogaster_Brues_and_Richardson,X), out(c2020_Other,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Promicrogaster_Brues_and_Richardson,X), in(c2020_Other,X)} <= 0, pw.
+pie(r176, A, 1) :- ir(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Other, X), ix.
+c(r176, A, 1) :- vr(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), out(c2020_Other, X), ix.
+pie(r176, A, 2) :- ir(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Other, X), ix.
+c(r176, A, 2) :- vr(X, A), out(c2020_Promicrogaster_Brues_and_Richardson, X), in(c2020_Other, X), ix.
+
+% c2020_Buluka_De_Saeger ! c2020_Dasylagon_Muesebeck
+ir(X, r177) :- in(c2020_Buluka_De_Saeger, X), in(c2020_Dasylagon_Muesebeck, X).
+:- #count {X : vrs(X), in(c2020_Buluka_De_Saeger,X), out(c2020_Dasylagon_Muesebeck,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Buluka_De_Saeger,X), in(c2020_Dasylagon_Muesebeck,X)} <= 0, pw.
+pie(r177, A, 1) :- ir(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Dasylagon_Muesebeck, X), ix.
+c(r177, A, 1) :- vr(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Dasylagon_Muesebeck, X), ix.
+pie(r177, A, 2) :- ir(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Dasylagon_Muesebeck, X), ix.
+c(r177, A, 2) :- vr(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Dasylagon_Muesebeck, X), ix.
+
+% c2020_Buluka_De_Saeger ! c2020_Larissimus_Nixon
+ir(X, r178) :- in(c2020_Buluka_De_Saeger, X), in(c2020_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Buluka_De_Saeger,X), out(c2020_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Buluka_De_Saeger,X), in(c2020_Larissimus_Nixon,X)} <= 0, pw.
+pie(r178, A, 1) :- ir(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Larissimus_Nixon, X), ix.
+c(r178, A, 1) :- vr(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Larissimus_Nixon, X), ix.
+pie(r178, A, 2) :- ir(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Larissimus_Nixon, X), ix.
+c(r178, A, 2) :- vr(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Larissimus_Nixon, X), ix.
+
+% c2020_Buluka_De_Saeger ! c2020_Alloplitis_Nixon
+ir(X, r179) :- in(c2020_Buluka_De_Saeger, X), in(c2020_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Buluka_De_Saeger,X), out(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Buluka_De_Saeger,X), in(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r179, A, 1) :- ir(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Alloplitis_Nixon, X), ix.
+c(r179, A, 1) :- vr(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Alloplitis_Nixon, X), ix.
+pie(r179, A, 2) :- ir(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Alloplitis_Nixon, X), ix.
+c(r179, A, 2) :- vr(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Alloplitis_Nixon, X), ix.
+
+% c2020_Buluka_De_Saeger ! c2020_Philoplitis_Nixon
+ir(X, r180) :- in(c2020_Buluka_De_Saeger, X), in(c2020_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Buluka_De_Saeger,X), out(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Buluka_De_Saeger,X), in(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r180, A, 1) :- ir(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Philoplitis_Nixon, X), ix.
+c(r180, A, 1) :- vr(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Philoplitis_Nixon, X), ix.
+pie(r180, A, 2) :- ir(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Philoplitis_Nixon, X), ix.
+c(r180, A, 2) :- vr(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Philoplitis_Nixon, X), ix.
+
+% c2020_Buluka_De_Saeger ! c2020_Prasmodon_Nixon
+ir(X, r181) :- in(c2020_Buluka_De_Saeger, X), in(c2020_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Buluka_De_Saeger,X), out(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Buluka_De_Saeger,X), in(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r181, A, 1) :- ir(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Prasmodon_Nixon, X), ix.
+c(r181, A, 1) :- vr(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Prasmodon_Nixon, X), ix.
+pie(r181, A, 2) :- ir(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Prasmodon_Nixon, X), ix.
+c(r181, A, 2) :- vr(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Prasmodon_Nixon, X), ix.
+
+% c2020_Buluka_De_Saeger ! c2020_Semionis_Nixon
+ir(X, r182) :- in(c2020_Buluka_De_Saeger, X), in(c2020_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Buluka_De_Saeger,X), out(c2020_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Buluka_De_Saeger,X), in(c2020_Semionis_Nixon,X)} <= 0, pw.
+pie(r182, A, 1) :- ir(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Semionis_Nixon, X), ix.
+c(r182, A, 1) :- vr(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Semionis_Nixon, X), ix.
+pie(r182, A, 2) :- ir(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Semionis_Nixon, X), ix.
+c(r182, A, 2) :- vr(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Semionis_Nixon, X), ix.
+
+% c2020_Buluka_De_Saeger ! c2020_Sendaphne_Nixon
+ir(X, r183) :- in(c2020_Buluka_De_Saeger, X), in(c2020_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Buluka_De_Saeger,X), out(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Buluka_De_Saeger,X), in(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r183, A, 1) :- ir(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Sendaphne_Nixon, X), ix.
+c(r183, A, 1) :- vr(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Sendaphne_Nixon, X), ix.
+pie(r183, A, 2) :- ir(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Sendaphne_Nixon, X), ix.
+c(r183, A, 2) :- vr(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Sendaphne_Nixon, X), ix.
+
+% c2020_Buluka_De_Saeger ! c2020_Other
+ir(X, r184) :- in(c2020_Buluka_De_Saeger, X), in(c2020_Other, X).
+:- #count {X : vrs(X), in(c2020_Buluka_De_Saeger,X), out(c2020_Other,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Buluka_De_Saeger,X), in(c2020_Other,X)} <= 0, pw.
+pie(r184, A, 1) :- ir(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Other, X), ix.
+c(r184, A, 1) :- vr(X, A), in(c2020_Buluka_De_Saeger, X), out(c2020_Other, X), ix.
+pie(r184, A, 2) :- ir(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Other, X), ix.
+c(r184, A, 2) :- vr(X, A), out(c2020_Buluka_De_Saeger, X), in(c2020_Other, X), ix.
+
+% c2020_Dasylagon_Muesebeck ! c2020_Larissimus_Nixon
+ir(X, r185) :- in(c2020_Dasylagon_Muesebeck, X), in(c2020_Larissimus_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Dasylagon_Muesebeck,X), out(c2020_Larissimus_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Dasylagon_Muesebeck,X), in(c2020_Larissimus_Nixon,X)} <= 0, pw.
+pie(r185, A, 1) :- ir(X, A), in(c2020_Dasylagon_Muesebeck, X), out(c2020_Larissimus_Nixon, X), ix.
+c(r185, A, 1) :- vr(X, A), in(c2020_Dasylagon_Muesebeck, X), out(c2020_Larissimus_Nixon, X), ix.
+pie(r185, A, 2) :- ir(X, A), out(c2020_Dasylagon_Muesebeck, X), in(c2020_Larissimus_Nixon, X), ix.
+c(r185, A, 2) :- vr(X, A), out(c2020_Dasylagon_Muesebeck, X), in(c2020_Larissimus_Nixon, X), ix.
+
+% c2020_Dasylagon_Muesebeck ! c2020_Alloplitis_Nixon
+ir(X, r186) :- in(c2020_Dasylagon_Muesebeck, X), in(c2020_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Dasylagon_Muesebeck,X), out(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Dasylagon_Muesebeck,X), in(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r186, A, 1) :- ir(X, A), in(c2020_Dasylagon_Muesebeck, X), out(c2020_Alloplitis_Nixon, X), ix.
+c(r186, A, 1) :- vr(X, A), in(c2020_Dasylagon_Muesebeck, X), out(c2020_Alloplitis_Nixon, X), ix.
+pie(r186, A, 2) :- ir(X, A), out(c2020_Dasylagon_Muesebeck, X), in(c2020_Alloplitis_Nixon, X), ix.
+c(r186, A, 2) :- vr(X, A), out(c2020_Dasylagon_Muesebeck, X), in(c2020_Alloplitis_Nixon, X), ix.
+
+% c2020_Dasylagon_Muesebeck ! c2020_Philoplitis_Nixon
+ir(X, r187) :- in(c2020_Dasylagon_Muesebeck, X), in(c2020_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Dasylagon_Muesebeck,X), out(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Dasylagon_Muesebeck,X), in(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r187, A, 1) :- ir(X, A), in(c2020_Dasylagon_Muesebeck, X), out(c2020_Philoplitis_Nixon, X), ix.
+c(r187, A, 1) :- vr(X, A), in(c2020_Dasylagon_Muesebeck, X), out(c2020_Philoplitis_Nixon, X), ix.
+pie(r187, A, 2) :- ir(X, A), out(c2020_Dasylagon_Muesebeck, X), in(c2020_Philoplitis_Nixon, X), ix.
+c(r187, A, 2) :- vr(X, A), out(c2020_Dasylagon_Muesebeck, X), in(c2020_Philoplitis_Nixon, X), ix.
+
+% c2020_Dasylagon_Muesebeck ! c2020_Prasmodon_Nixon
+ir(X, r188) :- in(c2020_Dasylagon_Muesebeck, X), in(c2020_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Dasylagon_Muesebeck,X), out(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Dasylagon_Muesebeck,X), in(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r188, A, 1) :- ir(X, A), in(c2020_Dasylagon_Muesebeck, X), out(c2020_Prasmodon_Nixon, X), ix.
+c(r188, A, 1) :- vr(X, A), in(c2020_Dasylagon_Muesebeck, X), out(c2020_Prasmodon_Nixon, X), ix.
+pie(r188, A, 2) :- ir(X, A), out(c2020_Dasylagon_Muesebeck, X), in(c2020_Prasmodon_Nixon, X), ix.
+c(r188, A, 2) :- vr(X, A), out(c2020_Dasylagon_Muesebeck, X), in(c2020_Prasmodon_Nixon, X), ix.
+
+% c2020_Dasylagon_Muesebeck ! c2020_Semionis_Nixon
+ir(X, r189) :- in(c2020_Dasylagon_Muesebeck, X), in(c2020_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Dasylagon_Muesebeck,X), out(c2020_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Dasylagon_Muesebeck,X), in(c2020_Semionis_Nixon,X)} <= 0, pw.
+pie(r189, A, 1) :- ir(X, A), in(c2020_Dasylagon_Muesebeck, X), out(c2020_Semionis_Nixon, X), ix.
+c(r189, A, 1) :- vr(X, A), in(c2020_Dasylagon_Muesebeck, X), out(c2020_Semionis_Nixon, X), ix.
+pie(r189, A, 2) :- ir(X, A), out(c2020_Dasylagon_Muesebeck, X), in(c2020_Semionis_Nixon, X), ix.
+c(r189, A, 2) :- vr(X, A), out(c2020_Dasylagon_Muesebeck, X), in(c2020_Semionis_Nixon, X), ix.
+
+% c2020_Dasylagon_Muesebeck ! c2020_Sendaphne_Nixon
+ir(X, r190) :- in(c2020_Dasylagon_Muesebeck, X), in(c2020_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Dasylagon_Muesebeck,X), out(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Dasylagon_Muesebeck,X), in(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r190, A, 1) :- ir(X, A), in(c2020_Dasylagon_Muesebeck, X), out(c2020_Sendaphne_Nixon, X), ix.
+c(r190, A, 1) :- vr(X, A), in(c2020_Dasylagon_Muesebeck, X), out(c2020_Sendaphne_Nixon, X), ix.
+pie(r190, A, 2) :- ir(X, A), out(c2020_Dasylagon_Muesebeck, X), in(c2020_Sendaphne_Nixon, X), ix.
+c(r190, A, 2) :- vr(X, A), out(c2020_Dasylagon_Muesebeck, X), in(c2020_Sendaphne_Nixon, X), ix.
+
+% c2020_Dasylagon_Muesebeck ! c2020_Other
+ir(X, r191) :- in(c2020_Dasylagon_Muesebeck, X), in(c2020_Other, X).
+:- #count {X : vrs(X), in(c2020_Dasylagon_Muesebeck,X), out(c2020_Other,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Dasylagon_Muesebeck,X), in(c2020_Other,X)} <= 0, pw.
+pie(r191, A, 1) :- ir(X, A), in(c2020_Dasylagon_Muesebeck, X), out(c2020_Other, X), ix.
+c(r191, A, 1) :- vr(X, A), in(c2020_Dasylagon_Muesebeck, X), out(c2020_Other, X), ix.
+pie(r191, A, 2) :- ir(X, A), out(c2020_Dasylagon_Muesebeck, X), in(c2020_Other, X), ix.
+c(r191, A, 2) :- vr(X, A), out(c2020_Dasylagon_Muesebeck, X), in(c2020_Other, X), ix.
+
+% c2020_Larissimus_Nixon ! c2020_Alloplitis_Nixon
+ir(X, r192) :- in(c2020_Larissimus_Nixon, X), in(c2020_Alloplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Larissimus_Nixon,X), out(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Larissimus_Nixon,X), in(c2020_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r192, A, 1) :- ir(X, A), in(c2020_Larissimus_Nixon, X), out(c2020_Alloplitis_Nixon, X), ix.
+c(r192, A, 1) :- vr(X, A), in(c2020_Larissimus_Nixon, X), out(c2020_Alloplitis_Nixon, X), ix.
+pie(r192, A, 2) :- ir(X, A), out(c2020_Larissimus_Nixon, X), in(c2020_Alloplitis_Nixon, X), ix.
+c(r192, A, 2) :- vr(X, A), out(c2020_Larissimus_Nixon, X), in(c2020_Alloplitis_Nixon, X), ix.
+
+% c2020_Larissimus_Nixon ! c2020_Philoplitis_Nixon
+ir(X, r193) :- in(c2020_Larissimus_Nixon, X), in(c2020_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Larissimus_Nixon,X), out(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Larissimus_Nixon,X), in(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r193, A, 1) :- ir(X, A), in(c2020_Larissimus_Nixon, X), out(c2020_Philoplitis_Nixon, X), ix.
+c(r193, A, 1) :- vr(X, A), in(c2020_Larissimus_Nixon, X), out(c2020_Philoplitis_Nixon, X), ix.
+pie(r193, A, 2) :- ir(X, A), out(c2020_Larissimus_Nixon, X), in(c2020_Philoplitis_Nixon, X), ix.
+c(r193, A, 2) :- vr(X, A), out(c2020_Larissimus_Nixon, X), in(c2020_Philoplitis_Nixon, X), ix.
+
+% c2020_Larissimus_Nixon ! c2020_Prasmodon_Nixon
+ir(X, r194) :- in(c2020_Larissimus_Nixon, X), in(c2020_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Larissimus_Nixon,X), out(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Larissimus_Nixon,X), in(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r194, A, 1) :- ir(X, A), in(c2020_Larissimus_Nixon, X), out(c2020_Prasmodon_Nixon, X), ix.
+c(r194, A, 1) :- vr(X, A), in(c2020_Larissimus_Nixon, X), out(c2020_Prasmodon_Nixon, X), ix.
+pie(r194, A, 2) :- ir(X, A), out(c2020_Larissimus_Nixon, X), in(c2020_Prasmodon_Nixon, X), ix.
+c(r194, A, 2) :- vr(X, A), out(c2020_Larissimus_Nixon, X), in(c2020_Prasmodon_Nixon, X), ix.
+
+% c2020_Larissimus_Nixon ! c2020_Semionis_Nixon
+ir(X, r195) :- in(c2020_Larissimus_Nixon, X), in(c2020_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Larissimus_Nixon,X), out(c2020_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Larissimus_Nixon,X), in(c2020_Semionis_Nixon,X)} <= 0, pw.
+pie(r195, A, 1) :- ir(X, A), in(c2020_Larissimus_Nixon, X), out(c2020_Semionis_Nixon, X), ix.
+c(r195, A, 1) :- vr(X, A), in(c2020_Larissimus_Nixon, X), out(c2020_Semionis_Nixon, X), ix.
+pie(r195, A, 2) :- ir(X, A), out(c2020_Larissimus_Nixon, X), in(c2020_Semionis_Nixon, X), ix.
+c(r195, A, 2) :- vr(X, A), out(c2020_Larissimus_Nixon, X), in(c2020_Semionis_Nixon, X), ix.
+
+% c2020_Larissimus_Nixon ! c2020_Sendaphne_Nixon
+ir(X, r196) :- in(c2020_Larissimus_Nixon, X), in(c2020_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Larissimus_Nixon,X), out(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Larissimus_Nixon,X), in(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r196, A, 1) :- ir(X, A), in(c2020_Larissimus_Nixon, X), out(c2020_Sendaphne_Nixon, X), ix.
+c(r196, A, 1) :- vr(X, A), in(c2020_Larissimus_Nixon, X), out(c2020_Sendaphne_Nixon, X), ix.
+pie(r196, A, 2) :- ir(X, A), out(c2020_Larissimus_Nixon, X), in(c2020_Sendaphne_Nixon, X), ix.
+c(r196, A, 2) :- vr(X, A), out(c2020_Larissimus_Nixon, X), in(c2020_Sendaphne_Nixon, X), ix.
+
+% c2020_Larissimus_Nixon ! c2020_Other
+ir(X, r197) :- in(c2020_Larissimus_Nixon, X), in(c2020_Other, X).
+:- #count {X : vrs(X), in(c2020_Larissimus_Nixon,X), out(c2020_Other,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Larissimus_Nixon,X), in(c2020_Other,X)} <= 0, pw.
+pie(r197, A, 1) :- ir(X, A), in(c2020_Larissimus_Nixon, X), out(c2020_Other, X), ix.
+c(r197, A, 1) :- vr(X, A), in(c2020_Larissimus_Nixon, X), out(c2020_Other, X), ix.
+pie(r197, A, 2) :- ir(X, A), out(c2020_Larissimus_Nixon, X), in(c2020_Other, X), ix.
+c(r197, A, 2) :- vr(X, A), out(c2020_Larissimus_Nixon, X), in(c2020_Other, X), ix.
+
+% c2020_Alloplitis_Nixon ! c2020_Philoplitis_Nixon
+ir(X, r198) :- in(c2020_Alloplitis_Nixon, X), in(c2020_Philoplitis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Alloplitis_Nixon,X), out(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Alloplitis_Nixon,X), in(c2020_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r198, A, 1) :- ir(X, A), in(c2020_Alloplitis_Nixon, X), out(c2020_Philoplitis_Nixon, X), ix.
+c(r198, A, 1) :- vr(X, A), in(c2020_Alloplitis_Nixon, X), out(c2020_Philoplitis_Nixon, X), ix.
+pie(r198, A, 2) :- ir(X, A), out(c2020_Alloplitis_Nixon, X), in(c2020_Philoplitis_Nixon, X), ix.
+c(r198, A, 2) :- vr(X, A), out(c2020_Alloplitis_Nixon, X), in(c2020_Philoplitis_Nixon, X), ix.
+
+% c2020_Alloplitis_Nixon ! c2020_Prasmodon_Nixon
+ir(X, r199) :- in(c2020_Alloplitis_Nixon, X), in(c2020_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Alloplitis_Nixon,X), out(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Alloplitis_Nixon,X), in(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r199, A, 1) :- ir(X, A), in(c2020_Alloplitis_Nixon, X), out(c2020_Prasmodon_Nixon, X), ix.
+c(r199, A, 1) :- vr(X, A), in(c2020_Alloplitis_Nixon, X), out(c2020_Prasmodon_Nixon, X), ix.
+pie(r199, A, 2) :- ir(X, A), out(c2020_Alloplitis_Nixon, X), in(c2020_Prasmodon_Nixon, X), ix.
+c(r199, A, 2) :- vr(X, A), out(c2020_Alloplitis_Nixon, X), in(c2020_Prasmodon_Nixon, X), ix.
+
+% c2020_Alloplitis_Nixon ! c2020_Semionis_Nixon
+ir(X, r200) :- in(c2020_Alloplitis_Nixon, X), in(c2020_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Alloplitis_Nixon,X), out(c2020_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Alloplitis_Nixon,X), in(c2020_Semionis_Nixon,X)} <= 0, pw.
+pie(r200, A, 1) :- ir(X, A), in(c2020_Alloplitis_Nixon, X), out(c2020_Semionis_Nixon, X), ix.
+c(r200, A, 1) :- vr(X, A), in(c2020_Alloplitis_Nixon, X), out(c2020_Semionis_Nixon, X), ix.
+pie(r200, A, 2) :- ir(X, A), out(c2020_Alloplitis_Nixon, X), in(c2020_Semionis_Nixon, X), ix.
+c(r200, A, 2) :- vr(X, A), out(c2020_Alloplitis_Nixon, X), in(c2020_Semionis_Nixon, X), ix.
+
+% c2020_Alloplitis_Nixon ! c2020_Sendaphne_Nixon
+ir(X, r201) :- in(c2020_Alloplitis_Nixon, X), in(c2020_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Alloplitis_Nixon,X), out(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Alloplitis_Nixon,X), in(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r201, A, 1) :- ir(X, A), in(c2020_Alloplitis_Nixon, X), out(c2020_Sendaphne_Nixon, X), ix.
+c(r201, A, 1) :- vr(X, A), in(c2020_Alloplitis_Nixon, X), out(c2020_Sendaphne_Nixon, X), ix.
+pie(r201, A, 2) :- ir(X, A), out(c2020_Alloplitis_Nixon, X), in(c2020_Sendaphne_Nixon, X), ix.
+c(r201, A, 2) :- vr(X, A), out(c2020_Alloplitis_Nixon, X), in(c2020_Sendaphne_Nixon, X), ix.
+
+% c2020_Alloplitis_Nixon ! c2020_Other
+ir(X, r202) :- in(c2020_Alloplitis_Nixon, X), in(c2020_Other, X).
+:- #count {X : vrs(X), in(c2020_Alloplitis_Nixon,X), out(c2020_Other,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Alloplitis_Nixon,X), in(c2020_Other,X)} <= 0, pw.
+pie(r202, A, 1) :- ir(X, A), in(c2020_Alloplitis_Nixon, X), out(c2020_Other, X), ix.
+c(r202, A, 1) :- vr(X, A), in(c2020_Alloplitis_Nixon, X), out(c2020_Other, X), ix.
+pie(r202, A, 2) :- ir(X, A), out(c2020_Alloplitis_Nixon, X), in(c2020_Other, X), ix.
+c(r202, A, 2) :- vr(X, A), out(c2020_Alloplitis_Nixon, X), in(c2020_Other, X), ix.
+
+% c2020_Philoplitis_Nixon ! c2020_Prasmodon_Nixon
+ir(X, r203) :- in(c2020_Philoplitis_Nixon, X), in(c2020_Prasmodon_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Philoplitis_Nixon,X), out(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Philoplitis_Nixon,X), in(c2020_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r203, A, 1) :- ir(X, A), in(c2020_Philoplitis_Nixon, X), out(c2020_Prasmodon_Nixon, X), ix.
+c(r203, A, 1) :- vr(X, A), in(c2020_Philoplitis_Nixon, X), out(c2020_Prasmodon_Nixon, X), ix.
+pie(r203, A, 2) :- ir(X, A), out(c2020_Philoplitis_Nixon, X), in(c2020_Prasmodon_Nixon, X), ix.
+c(r203, A, 2) :- vr(X, A), out(c2020_Philoplitis_Nixon, X), in(c2020_Prasmodon_Nixon, X), ix.
+
+% c2020_Philoplitis_Nixon ! c2020_Semionis_Nixon
+ir(X, r204) :- in(c2020_Philoplitis_Nixon, X), in(c2020_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Philoplitis_Nixon,X), out(c2020_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Philoplitis_Nixon,X), in(c2020_Semionis_Nixon,X)} <= 0, pw.
+pie(r204, A, 1) :- ir(X, A), in(c2020_Philoplitis_Nixon, X), out(c2020_Semionis_Nixon, X), ix.
+c(r204, A, 1) :- vr(X, A), in(c2020_Philoplitis_Nixon, X), out(c2020_Semionis_Nixon, X), ix.
+pie(r204, A, 2) :- ir(X, A), out(c2020_Philoplitis_Nixon, X), in(c2020_Semionis_Nixon, X), ix.
+c(r204, A, 2) :- vr(X, A), out(c2020_Philoplitis_Nixon, X), in(c2020_Semionis_Nixon, X), ix.
+
+% c2020_Philoplitis_Nixon ! c2020_Sendaphne_Nixon
+ir(X, r205) :- in(c2020_Philoplitis_Nixon, X), in(c2020_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Philoplitis_Nixon,X), out(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Philoplitis_Nixon,X), in(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r205, A, 1) :- ir(X, A), in(c2020_Philoplitis_Nixon, X), out(c2020_Sendaphne_Nixon, X), ix.
+c(r205, A, 1) :- vr(X, A), in(c2020_Philoplitis_Nixon, X), out(c2020_Sendaphne_Nixon, X), ix.
+pie(r205, A, 2) :- ir(X, A), out(c2020_Philoplitis_Nixon, X), in(c2020_Sendaphne_Nixon, X), ix.
+c(r205, A, 2) :- vr(X, A), out(c2020_Philoplitis_Nixon, X), in(c2020_Sendaphne_Nixon, X), ix.
+
+% c2020_Philoplitis_Nixon ! c2020_Other
+ir(X, r206) :- in(c2020_Philoplitis_Nixon, X), in(c2020_Other, X).
+:- #count {X : vrs(X), in(c2020_Philoplitis_Nixon,X), out(c2020_Other,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Philoplitis_Nixon,X), in(c2020_Other,X)} <= 0, pw.
+pie(r206, A, 1) :- ir(X, A), in(c2020_Philoplitis_Nixon, X), out(c2020_Other, X), ix.
+c(r206, A, 1) :- vr(X, A), in(c2020_Philoplitis_Nixon, X), out(c2020_Other, X), ix.
+pie(r206, A, 2) :- ir(X, A), out(c2020_Philoplitis_Nixon, X), in(c2020_Other, X), ix.
+c(r206, A, 2) :- vr(X, A), out(c2020_Philoplitis_Nixon, X), in(c2020_Other, X), ix.
+
+% c2020_Prasmodon_Nixon ! c2020_Semionis_Nixon
+ir(X, r207) :- in(c2020_Prasmodon_Nixon, X), in(c2020_Semionis_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Prasmodon_Nixon,X), out(c2020_Semionis_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Prasmodon_Nixon,X), in(c2020_Semionis_Nixon,X)} <= 0, pw.
+pie(r207, A, 1) :- ir(X, A), in(c2020_Prasmodon_Nixon, X), out(c2020_Semionis_Nixon, X), ix.
+c(r207, A, 1) :- vr(X, A), in(c2020_Prasmodon_Nixon, X), out(c2020_Semionis_Nixon, X), ix.
+pie(r207, A, 2) :- ir(X, A), out(c2020_Prasmodon_Nixon, X), in(c2020_Semionis_Nixon, X), ix.
+c(r207, A, 2) :- vr(X, A), out(c2020_Prasmodon_Nixon, X), in(c2020_Semionis_Nixon, X), ix.
+
+% c2020_Prasmodon_Nixon ! c2020_Sendaphne_Nixon
+ir(X, r208) :- in(c2020_Prasmodon_Nixon, X), in(c2020_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Prasmodon_Nixon,X), out(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Prasmodon_Nixon,X), in(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r208, A, 1) :- ir(X, A), in(c2020_Prasmodon_Nixon, X), out(c2020_Sendaphne_Nixon, X), ix.
+c(r208, A, 1) :- vr(X, A), in(c2020_Prasmodon_Nixon, X), out(c2020_Sendaphne_Nixon, X), ix.
+pie(r208, A, 2) :- ir(X, A), out(c2020_Prasmodon_Nixon, X), in(c2020_Sendaphne_Nixon, X), ix.
+c(r208, A, 2) :- vr(X, A), out(c2020_Prasmodon_Nixon, X), in(c2020_Sendaphne_Nixon, X), ix.
+
+% c2020_Prasmodon_Nixon ! c2020_Other
+ir(X, r209) :- in(c2020_Prasmodon_Nixon, X), in(c2020_Other, X).
+:- #count {X : vrs(X), in(c2020_Prasmodon_Nixon,X), out(c2020_Other,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Prasmodon_Nixon,X), in(c2020_Other,X)} <= 0, pw.
+pie(r209, A, 1) :- ir(X, A), in(c2020_Prasmodon_Nixon, X), out(c2020_Other, X), ix.
+c(r209, A, 1) :- vr(X, A), in(c2020_Prasmodon_Nixon, X), out(c2020_Other, X), ix.
+pie(r209, A, 2) :- ir(X, A), out(c2020_Prasmodon_Nixon, X), in(c2020_Other, X), ix.
+c(r209, A, 2) :- vr(X, A), out(c2020_Prasmodon_Nixon, X), in(c2020_Other, X), ix.
+
+% c2020_Semionis_Nixon ! c2020_Sendaphne_Nixon
+ir(X, r210) :- in(c2020_Semionis_Nixon, X), in(c2020_Sendaphne_Nixon, X).
+:- #count {X : vrs(X), in(c2020_Semionis_Nixon,X), out(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Semionis_Nixon,X), in(c2020_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r210, A, 1) :- ir(X, A), in(c2020_Semionis_Nixon, X), out(c2020_Sendaphne_Nixon, X), ix.
+c(r210, A, 1) :- vr(X, A), in(c2020_Semionis_Nixon, X), out(c2020_Sendaphne_Nixon, X), ix.
+pie(r210, A, 2) :- ir(X, A), out(c2020_Semionis_Nixon, X), in(c2020_Sendaphne_Nixon, X), ix.
+c(r210, A, 2) :- vr(X, A), out(c2020_Semionis_Nixon, X), in(c2020_Sendaphne_Nixon, X), ix.
+
+% c2020_Semionis_Nixon ! c2020_Other
+ir(X, r211) :- in(c2020_Semionis_Nixon, X), in(c2020_Other, X).
+:- #count {X : vrs(X), in(c2020_Semionis_Nixon,X), out(c2020_Other,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Semionis_Nixon,X), in(c2020_Other,X)} <= 0, pw.
+pie(r211, A, 1) :- ir(X, A), in(c2020_Semionis_Nixon, X), out(c2020_Other, X), ix.
+c(r211, A, 1) :- vr(X, A), in(c2020_Semionis_Nixon, X), out(c2020_Other, X), ix.
+pie(r211, A, 2) :- ir(X, A), out(c2020_Semionis_Nixon, X), in(c2020_Other, X), ix.
+c(r211, A, 2) :- vr(X, A), out(c2020_Semionis_Nixon, X), in(c2020_Other, X), ix.
+
+% c2020_Sendaphne_Nixon ! c2020_Other
+ir(X, r212) :- in(c2020_Sendaphne_Nixon, X), in(c2020_Other, X).
+:- #count {X : vrs(X), in(c2020_Sendaphne_Nixon,X), out(c2020_Other,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Sendaphne_Nixon,X), in(c2020_Other,X)} <= 0, pw.
+pie(r212, A, 1) :- ir(X, A), in(c2020_Sendaphne_Nixon, X), out(c2020_Other, X), ix.
+c(r212, A, 1) :- vr(X, A), in(c2020_Sendaphne_Nixon, X), out(c2020_Other, X), ix.
+pie(r212, A, 2) :- ir(X, A), out(c2020_Sendaphne_Nixon, X), in(c2020_Other, X), ix.
+c(r212, A, 2) :- vr(X, A), out(c2020_Sendaphne_Nixon, X), in(c2020_Other, X), ix.
+
+
+%%% Articulations
+% 2020.Microplitis_Foerster equals 1965.Microplitis_Forster
+ir(X, r213) :- out(c2020_Microplitis_Foerster,X), in(c1965_Microplitis_Forster,X).
+ir(X, r213) :- in(c2020_Microplitis_Foerster,X), out(c1965_Microplitis_Forster,X).
+ir(X, prod(r213,R)) :- out3(c2020_Microplitis_Foerster, X, R), in(c1965_Microplitis_Forster,X), ix.
+ir(X, prod(r213,R)) :- in(c2020_Microplitis_Foerster,X), out3(c1965_Microplitis_Forster, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Microplitis_Foerster,X), in(c1965_Microplitis_Forster,X)} <= 0, pw.
+pie(r213, A, 1) :- ir(X, A), in(c2020_Microplitis_Foerster, X), in(c1965_Microplitis_Forster, X), ix.
+c(r213, A, 1) :- vr(X, A), in(c2020_Microplitis_Foerster, X), in(c1965_Microplitis_Forster, X), ix.
+
+
+% 2020.Snellenius_Westwood equals 1965.Snellenius_Westwood
+ir(X, r214) :- out(c2020_Snellenius_Westwood,X), in(c1965_Snellenius_Westwood,X).
+ir(X, r214) :- in(c2020_Snellenius_Westwood,X), out(c1965_Snellenius_Westwood,X).
+ir(X, prod(r214,R)) :- out3(c2020_Snellenius_Westwood, X, R), in(c1965_Snellenius_Westwood,X), ix.
+ir(X, prod(r214,R)) :- in(c2020_Snellenius_Westwood,X), out3(c1965_Snellenius_Westwood, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Snellenius_Westwood,X), in(c1965_Snellenius_Westwood,X)} <= 0, pw.
+pie(r214, A, 1) :- ir(X, A), in(c2020_Snellenius_Westwood, X), in(c1965_Snellenius_Westwood, X), ix.
+c(r214, A, 1) :- vr(X, A), in(c2020_Snellenius_Westwood, X), in(c1965_Snellenius_Westwood, X), ix.
+
+
+% 2020.Protomicroplitis_Ashmead is_included_in 1965.Protomicroplitis_Ashmead
+:- #count {X : vrs(X), in(c2020_Protomicroplitis_Ashmead,X), in(c1965_Protomicroplitis_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protomicroplitis_Ashmead,X), in(c1965_Protomicroplitis_Ashmead,X)} <= 0, pw.
+ir(X, r215) :- in(c2020_Protomicroplitis_Ashmead,X), out(c1965_Protomicroplitis_Ashmead,X), pw.
+pie(r215, A, 1) :- ir(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c1965_Protomicroplitis_Ashmead, X), ix.
+c(r215, A, 1) :- vr(X, A), out(c2020_Protomicroplitis_Ashmead, X), in(c1965_Protomicroplitis_Ashmead, X), ix.
+
+pie(r215, A, 2) :- ir(X, A), in(c2020_Protomicroplitis_Ashmead, X), in(c1965_Protomicroplitis_Ashmead, X), ix.
+c(r215, A, 2) :- vr(X, A), in(c2020_Protomicroplitis_Ashmead, X), in(c1965_Protomicroplitis_Ashmead, X), ix.
+
+
+% 2020.Diologaster_Ashmead is_included_in 1965.Protomicroplitis_Ashmead
+:- #count {X : vrs(X), in(c2020_Diologaster_Ashmead,X), in(c1965_Protomicroplitis_Ashmead,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Diologaster_Ashmead,X), in(c1965_Protomicroplitis_Ashmead,X)} <= 0, pw.
+ir(X, r216) :- in(c2020_Diologaster_Ashmead,X), out(c1965_Protomicroplitis_Ashmead,X), pw.
+pie(r216, A, 1) :- ir(X, A), out(c2020_Diologaster_Ashmead, X), in(c1965_Protomicroplitis_Ashmead, X), ix.
+c(r216, A, 1) :- vr(X, A), out(c2020_Diologaster_Ashmead, X), in(c1965_Protomicroplitis_Ashmead, X), ix.
+
+pie(r216, A, 2) :- ir(X, A), in(c2020_Diologaster_Ashmead, X), in(c1965_Protomicroplitis_Ashmead, X), ix.
+c(r216, A, 2) :- vr(X, A), in(c2020_Diologaster_Ashmead, X), in(c1965_Protomicroplitis_Ashmead, X), ix.
+
+
+% 2020.Xanthomicrogaster_Cameron equals 1965.Xanthomicrogaster_Cameron
+ir(X, r217) :- out(c2020_Xanthomicrogaster_Cameron,X), in(c1965_Xanthomicrogaster_Cameron,X).
+ir(X, r217) :- in(c2020_Xanthomicrogaster_Cameron,X), out(c1965_Xanthomicrogaster_Cameron,X).
+ir(X, prod(r217,R)) :- out3(c2020_Xanthomicrogaster_Cameron, X, R), in(c1965_Xanthomicrogaster_Cameron,X), ix.
+ir(X, prod(r217,R)) :- in(c2020_Xanthomicrogaster_Cameron,X), out3(c1965_Xanthomicrogaster_Cameron, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Xanthomicrogaster_Cameron,X), in(c1965_Xanthomicrogaster_Cameron,X)} <= 0, pw.
+pie(r217, A, 1) :- ir(X, A), in(c2020_Xanthomicrogaster_Cameron, X), in(c1965_Xanthomicrogaster_Cameron, X), ix.
+c(r217, A, 1) :- vr(X, A), in(c2020_Xanthomicrogaster_Cameron, X), in(c1965_Xanthomicrogaster_Cameron, X), ix.
+
+
+% 2020.Promicrogaster_Brues_and_Richardson equals 1965.Promicrogaster_Brues_and_Richardson
+ir(X, r218) :- out(c2020_Promicrogaster_Brues_and_Richardson,X), in(c1965_Promicrogaster_Brues_and_Richardson,X).
+ir(X, r218) :- in(c2020_Promicrogaster_Brues_and_Richardson,X), out(c1965_Promicrogaster_Brues_and_Richardson,X).
+ir(X, prod(r218,R)) :- out3(c2020_Promicrogaster_Brues_and_Richardson, X, R), in(c1965_Promicrogaster_Brues_and_Richardson,X), ix.
+ir(X, prod(r218,R)) :- in(c2020_Promicrogaster_Brues_and_Richardson,X), out3(c1965_Promicrogaster_Brues_and_Richardson, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Promicrogaster_Brues_and_Richardson,X), in(c1965_Promicrogaster_Brues_and_Richardson,X)} <= 0, pw.
+pie(r218, A, 1) :- ir(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), in(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+c(r218, A, 1) :- vr(X, A), in(c2020_Promicrogaster_Brues_and_Richardson, X), in(c1965_Promicrogaster_Brues_and_Richardson, X), ix.
+
+
+% 2020.Buluka_De_Saeger equals 1965.Buluka_De_Saeger
+ir(X, r219) :- out(c2020_Buluka_De_Saeger,X), in(c1965_Buluka_De_Saeger,X).
+ir(X, r219) :- in(c2020_Buluka_De_Saeger,X), out(c1965_Buluka_De_Saeger,X).
+ir(X, prod(r219,R)) :- out3(c2020_Buluka_De_Saeger, X, R), in(c1965_Buluka_De_Saeger,X), ix.
+ir(X, prod(r219,R)) :- in(c2020_Buluka_De_Saeger,X), out3(c1965_Buluka_De_Saeger, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Buluka_De_Saeger,X), in(c1965_Buluka_De_Saeger,X)} <= 0, pw.
+pie(r219, A, 1) :- ir(X, A), in(c2020_Buluka_De_Saeger, X), in(c1965_Buluka_De_Saeger, X), ix.
+c(r219, A, 1) :- vr(X, A), in(c2020_Buluka_De_Saeger, X), in(c1965_Buluka_De_Saeger, X), ix.
+
+
+% 2020.Dasylagon_Muesebeck equals 1965.Dasylagon_Muesebeck
+ir(X, r220) :- out(c2020_Dasylagon_Muesebeck,X), in(c1965_Dasylagon_Muesebeck,X).
+ir(X, r220) :- in(c2020_Dasylagon_Muesebeck,X), out(c1965_Dasylagon_Muesebeck,X).
+ir(X, prod(r220,R)) :- out3(c2020_Dasylagon_Muesebeck, X, R), in(c1965_Dasylagon_Muesebeck,X), ix.
+ir(X, prod(r220,R)) :- in(c2020_Dasylagon_Muesebeck,X), out3(c1965_Dasylagon_Muesebeck, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Dasylagon_Muesebeck,X), in(c1965_Dasylagon_Muesebeck,X)} <= 0, pw.
+pie(r220, A, 1) :- ir(X, A), in(c2020_Dasylagon_Muesebeck, X), in(c1965_Dasylagon_Muesebeck, X), ix.
+c(r220, A, 1) :- vr(X, A), in(c2020_Dasylagon_Muesebeck, X), in(c1965_Dasylagon_Muesebeck, X), ix.
+
+
+% 2020.Larissimus_Nixon equals 1965.Larissimus_Nixon
+ir(X, r221) :- out(c2020_Larissimus_Nixon,X), in(c1965_Larissimus_Nixon,X).
+ir(X, r221) :- in(c2020_Larissimus_Nixon,X), out(c1965_Larissimus_Nixon,X).
+ir(X, prod(r221,R)) :- out3(c2020_Larissimus_Nixon, X, R), in(c1965_Larissimus_Nixon,X), ix.
+ir(X, prod(r221,R)) :- in(c2020_Larissimus_Nixon,X), out3(c1965_Larissimus_Nixon, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Larissimus_Nixon,X), in(c1965_Larissimus_Nixon,X)} <= 0, pw.
+pie(r221, A, 1) :- ir(X, A), in(c2020_Larissimus_Nixon, X), in(c1965_Larissimus_Nixon, X), ix.
+c(r221, A, 1) :- vr(X, A), in(c2020_Larissimus_Nixon, X), in(c1965_Larissimus_Nixon, X), ix.
+
+
+% 2020.Alloplitis_Nixon equals 1965.Alloplitis_Nixon
+ir(X, r222) :- out(c2020_Alloplitis_Nixon,X), in(c1965_Alloplitis_Nixon,X).
+ir(X, r222) :- in(c2020_Alloplitis_Nixon,X), out(c1965_Alloplitis_Nixon,X).
+ir(X, prod(r222,R)) :- out3(c2020_Alloplitis_Nixon, X, R), in(c1965_Alloplitis_Nixon,X), ix.
+ir(X, prod(r222,R)) :- in(c2020_Alloplitis_Nixon,X), out3(c1965_Alloplitis_Nixon, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Alloplitis_Nixon,X), in(c1965_Alloplitis_Nixon,X)} <= 0, pw.
+pie(r222, A, 1) :- ir(X, A), in(c2020_Alloplitis_Nixon, X), in(c1965_Alloplitis_Nixon, X), ix.
+c(r222, A, 1) :- vr(X, A), in(c2020_Alloplitis_Nixon, X), in(c1965_Alloplitis_Nixon, X), ix.
+
+
+% 2020.Philoplitis_Nixon equals 1965.Philoplitis_Nixon
+ir(X, r223) :- out(c2020_Philoplitis_Nixon,X), in(c1965_Philoplitis_Nixon,X).
+ir(X, r223) :- in(c2020_Philoplitis_Nixon,X), out(c1965_Philoplitis_Nixon,X).
+ir(X, prod(r223,R)) :- out3(c2020_Philoplitis_Nixon, X, R), in(c1965_Philoplitis_Nixon,X), ix.
+ir(X, prod(r223,R)) :- in(c2020_Philoplitis_Nixon,X), out3(c1965_Philoplitis_Nixon, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Philoplitis_Nixon,X), in(c1965_Philoplitis_Nixon,X)} <= 0, pw.
+pie(r223, A, 1) :- ir(X, A), in(c2020_Philoplitis_Nixon, X), in(c1965_Philoplitis_Nixon, X), ix.
+c(r223, A, 1) :- vr(X, A), in(c2020_Philoplitis_Nixon, X), in(c1965_Philoplitis_Nixon, X), ix.
+
+
+% 2020.Prasmodon_Nixon equals 1965.Prasmodon_Nixon
+ir(X, r224) :- out(c2020_Prasmodon_Nixon,X), in(c1965_Prasmodon_Nixon,X).
+ir(X, r224) :- in(c2020_Prasmodon_Nixon,X), out(c1965_Prasmodon_Nixon,X).
+ir(X, prod(r224,R)) :- out3(c2020_Prasmodon_Nixon, X, R), in(c1965_Prasmodon_Nixon,X), ix.
+ir(X, prod(r224,R)) :- in(c2020_Prasmodon_Nixon,X), out3(c1965_Prasmodon_Nixon, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Prasmodon_Nixon,X), in(c1965_Prasmodon_Nixon,X)} <= 0, pw.
+pie(r224, A, 1) :- ir(X, A), in(c2020_Prasmodon_Nixon, X), in(c1965_Prasmodon_Nixon, X), ix.
+c(r224, A, 1) :- vr(X, A), in(c2020_Prasmodon_Nixon, X), in(c1965_Prasmodon_Nixon, X), ix.
+
+
+% 2020.Semionis_Nixon equals 1965.Semionis_Nixon
+ir(X, r225) :- out(c2020_Semionis_Nixon,X), in(c1965_Semionis_Nixon,X).
+ir(X, r225) :- in(c2020_Semionis_Nixon,X), out(c1965_Semionis_Nixon,X).
+ir(X, prod(r225,R)) :- out3(c2020_Semionis_Nixon, X, R), in(c1965_Semionis_Nixon,X), ix.
+ir(X, prod(r225,R)) :- in(c2020_Semionis_Nixon,X), out3(c1965_Semionis_Nixon, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Semionis_Nixon,X), in(c1965_Semionis_Nixon,X)} <= 0, pw.
+pie(r225, A, 1) :- ir(X, A), in(c2020_Semionis_Nixon, X), in(c1965_Semionis_Nixon, X), ix.
+c(r225, A, 1) :- vr(X, A), in(c2020_Semionis_Nixon, X), in(c1965_Semionis_Nixon, X), ix.
+
+
+% 2020.Sendaphne_Nixon equals 1965.Sendaphne_Nixon
+ir(X, r226) :- out(c2020_Sendaphne_Nixon,X), in(c1965_Sendaphne_Nixon,X).
+ir(X, r226) :- in(c2020_Sendaphne_Nixon,X), out(c1965_Sendaphne_Nixon,X).
+ir(X, prod(r226,R)) :- out3(c2020_Sendaphne_Nixon, X, R), in(c1965_Sendaphne_Nixon,X), ix.
+ir(X, prod(r226,R)) :- in(c2020_Sendaphne_Nixon,X), out3(c1965_Sendaphne_Nixon, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Sendaphne_Nixon,X), in(c1965_Sendaphne_Nixon,X)} <= 0, pw.
+pie(r226, A, 1) :- ir(X, A), in(c2020_Sendaphne_Nixon, X), in(c1965_Sendaphne_Nixon, X), ix.
+c(r226, A, 1) :- vr(X, A), in(c2020_Sendaphne_Nixon, X), in(c1965_Sendaphne_Nixon, X), ix.
+
+
+% 2020.Microgastrine	includes 1965.Microgastrine
+ir(X, r227) :- out(c2020_Microgastrine,X), in(c1965_Microgastrine,X), pw.
+ir(X, prod(r227,R)) :- out3(c2020_Microgastrine, X, R), in(c1965_Microgastrine,X), ix.
+:- #count {X : vrs(X), in(c2020_Microgastrine,X), in(c1965_Microgastrine,X)} <= 0, pw.
+:- #count {X : vrs(X), in(c2020_Microgastrine,X), out(c1965_Microgastrine,X)} <= 0, pw.
+pie(r227, A, 1) :- ir(X, A), in(c2020_Microgastrine, X), out(c1965_Microgastrine, X), ix.
+c(r227, A, 1) :- vr(X, A), in(c2020_Microgastrine, X), out(c1965_Microgastrine, X), ix.
+
+pie(r227, A, 2) :- ir(X, A), in(c2020_Microgastrine, X), in(c1965_Microgastrine, X), ix.
+c(r227, A, 2) :- vr(X, A), in(c2020_Microgastrine, X), in(c1965_Microgastrine, X), ix.
+
+
+%%% Decoding now
+:- rel(X, Y, "="), rel(X, Y, "<"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "="), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "="), rel(X, Y, "><"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "="), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "<"), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "<"), rel(X, Y, "><"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "<"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, ">"), rel(X, Y, "><"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, ">"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "><"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- not rel(X, Y, "="), not rel(X, Y, "<"), not rel(X, Y, ">"), not rel(X, Y, "><"), not rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), N1 < N2, not ncf(X), not ncf(Y), pw.
+
+rel(X, Y, "=") :- not hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2), pw.
+rel(X, Y, "<") :- not hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2), pw.
+rel(X, Y, ">") :- hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2), pw.
+rel(X, Y, "><") :- hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2), pw.
+rel(X, Y, "!") :- hint(X, Y, 0), not hint(X, Y, 1), hint(X, Y, 2), pw.
+
+
+hint(X, Y, 0) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), out(Y, R), not ncf(X), not ncf(Y), pw.
+hint(X, Y, 1) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), in(Y, R), not ncf(X), not ncf(Y), pw.
+hint(X, Y, 2) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), out(X, R), in(Y, R), not ncf(X), not ncf(Y), pw.
+

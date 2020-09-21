@@ -1,0 +1,61 @@
+digraph{
+rankdir=RL
+node[shape=box style="filled,rounded" fillcolor="#EEEEEE" fontname="helvetica"] 
+"2020.Protomicroplitis_Ashmead\n1804.Protomicroplitis_Ashmead"
+"2020.Diologaster_Ashmead\n1804.Diologaster_Ashmead"
+"2020.Promicrogaster_Brues_and_Richardson\n1804.Promicrogaster_Brues_and_Richardson"
+"2020.Snellenius_Westwood\n1804.Snellenius_Westwood"
+"2020.Pseudapanteles_Ashmead\n1804.Pseudapanteles_Ashmead"
+"2020.Microplitis_Foerster\n1804.Microplitis_Forster"
+"2020.Buluka_De_Saeger\n1804.Buluka_De_Saeger"
+"2020.Dasylagon_Muesebeck\n1804.Dasylagon_Muesebeck"
+"2020.Xanthomicrogaster_Cameron\n1804.Xanthomicrogaster_Cameron"
+"2020.Parapanteles_Ashmead\n1804.Parapanteles_Ashmead"
+node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"] 
+"1804.Glyptapanteles_Ashmead"
+"1804.Microgastrine"
+node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"] 
+"2020.Microgastrine"
+"2020.Glyptapanteles_Ashmead"
+"2020.Rasivalva_Mason"
+"2020.Other"
+edge[arrowhead=normal style=solid color="#000000" constraint=true penwidth=1]
+"2020.Microplitis_Foerster\n1804.Microplitis_Forster" -> "1804.Microgastrine"
+"2020.Parapanteles_Ashmead\n1804.Parapanteles_Ashmead" -> "1804.Microgastrine"
+"2020.Snellenius_Westwood\n1804.Snellenius_Westwood" -> "1804.Microgastrine"
+"2020.Dasylagon_Muesebeck\n1804.Dasylagon_Muesebeck" -> "1804.Microgastrine"
+"2020.Xanthomicrogaster_Cameron\n1804.Xanthomicrogaster_Cameron" -> "1804.Microgastrine"
+"1804.Glyptapanteles_Ashmead" -> "1804.Microgastrine"
+"2020.Protomicroplitis_Ashmead\n1804.Protomicroplitis_Ashmead" -> "1804.Microgastrine"
+"2020.Diologaster_Ashmead\n1804.Diologaster_Ashmead" -> "1804.Microgastrine"
+"2020.Other" -> "2020.Microgastrine"
+"2020.Buluka_De_Saeger\n1804.Buluka_De_Saeger" -> "1804.Microgastrine"
+"2020.Promicrogaster_Brues_and_Richardson\n1804.Promicrogaster_Brues_and_Richardson" -> "1804.Microgastrine"
+"1804.Microgastrine" -> "2020.Microgastrine"
+"2020.Glyptapanteles_Ashmead" -> "1804.Glyptapanteles_Ashmead"
+"2020.Rasivalva_Mason" -> "1804.Glyptapanteles_Ashmead"
+"2020.Pseudapanteles_Ashmead\n1804.Pseudapanteles_Ashmead" -> "1804.Microgastrine"
+edge[arrowhead=normal style=dotted color="#000000" constraint=true penwidth=1]
+node[shape=box] 
+{rank=source Legend [fillcolor= white margin=0 label=< 
+ <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> 
+<TR> <TD COLSPAN="2"><font face="Arial Black"> Nodes</font></TD> </TR> 
+<TR> 
+ <TD bgcolor="#EEEEEE" fontname="helvetica">congruent</TD> 
+ <TD>10</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#FFFFCC" fontname="helvetica">1804</TD> 
+ <TD>2</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#CCFFCC" fontname="helvetica">2020</TD> 
+ <TD>4</TD> 
+ </TR> 
+<TR> <TD COLSPAN="2"><font face = "Arial Black"> Edges </font></TD> </TR> 
+<TR> 
+ <TD><font color ="#000000">is_a (input)</font></TD><TD>15</TD>
+</TR>
+</TABLE> 
+ >] } 
+}
