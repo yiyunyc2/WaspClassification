@@ -1,0 +1,59 @@
+digraph{
+rankdir=RL
+node[shape=box style=filled fillcolor="#CCCCFF" fontname="helvetica"] 
+"2003.Protapanteles"
+"2003.Apanteles"
+node[shape=box style="filled,rounded" fillcolor="#EEEEEE" fontname="helvetica"] 
+"2020.Illidops\n2018.Illidops"
+"2020.Protapanteles\n2018.Protapanteles"
+"2020.Glyptapanteles\n2018.Glyptapanteles"
+"2020.Rasivalva\n2018.Rasivalva"
+"2020.Nyereria\n2018.Nyereria"
+"2020.Teremys\n2003.Teremys"
+"2020.Apanteles\n2018.Apanteles"
+"2003.Microgastrinae\n2018.Microgastrinae\n2020.Microgastrinae"
+"2020.Sathon\n2018.Sathon"
+"2020.Iconella\n2018.Iconella"
+"2020.Pholetesor\n2003.Pholetesor"
+"2020.Exoryza\n2018.Exoryza"
+node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"] 
+"2018.Pholetesor"
+edge[arrowhead=normal style=solid color="#000000" constraint=true penwidth=1]
+"2020.Protapanteles\n2018.Protapanteles" -> "2003.Protapanteles"
+"2020.Pholetesor\n2003.Pholetesor" -> "2018.Pholetesor"
+"2020.Exoryza\n2018.Exoryza" -> "2003.Apanteles"
+"2020.Nyereria\n2018.Nyereria" -> "2003.Protapanteles"
+"2020.Iconella\n2018.Iconella" -> "2003.Apanteles"
+"2020.Rasivalva\n2018.Rasivalva" -> "2003.Protapanteles"
+"2003.Protapanteles" -> "2003.Microgastrinae\n2018.Microgastrinae\n2020.Microgastrinae"
+"2020.Apanteles\n2018.Apanteles" -> "2003.Apanteles"
+"2003.Apanteles" -> "2003.Microgastrinae\n2018.Microgastrinae\n2020.Microgastrinae"
+"2018.Pholetesor" -> "2003.Microgastrinae\n2018.Microgastrinae\n2020.Microgastrinae"
+"2020.Illidops\n2018.Illidops" -> "2003.Apanteles"
+"2020.Glyptapanteles\n2018.Glyptapanteles" -> "2003.Protapanteles"
+"2020.Teremys\n2003.Teremys" -> "2018.Pholetesor"
+"2020.Sathon\n2018.Sathon" -> "2003.Protapanteles"
+edge[arrowhead=normal style=dotted color="#000000" constraint=true penwidth=1]
+node[shape=box] 
+{rank=source Legend [fillcolor= white margin=0 label=< 
+ <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> 
+<TR> <TD COLSPAN="2"><font face="Arial Black"> Nodes</font></TD> </TR> 
+<TR> 
+ <TD bgcolor="#CCCCFF" fontname="helvetica">2003</TD> 
+ <TD>2</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#EEEEEE" fontname="helvetica">congruent</TD> 
+ <TD>12</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#FFFFCC" fontname="helvetica">2018</TD> 
+ <TD>1</TD> 
+ </TR> 
+<TR> <TD COLSPAN="2"><font face = "Arial Black"> Edges </font></TD> </TR> 
+<TR> 
+ <TD><font color ="#000000">is_a (input)</font></TD><TD>14</TD>
+</TR>
+</TABLE> 
+ >] } 
+}
