@@ -1,0 +1,42 @@
+taxonomy 2020 Current
+(Microgastrinae Apanteles Exoryza Iconella Illidops Pholetesor Teremys Protapanteles Sathon Nyereria Glyptapanteles Rasivalva)
+(Apanteles)
+(Exoryza) 
+(Iconella) 
+(Illidops) 
+(Pholetesor) 
+(Teremys) 
+(Protapanteles) 
+(Sathon) 
+(Nyereria) 
+(Glyptapanteles) 
+(Rasivalva) 
+
+taxonomy 2018 Whitfield
+(Microgastrinae Apanteles Exoryza Iconella Illidops Pholetesor Protapanteles Sathon Nyereria Glyptapanteles Rasivalva)
+(Apanteles)
+(Exoryza) 
+(Iconella) 
+(Illidops) 
+(Pholetesor) 
+(Protapanteles) 
+(Sathon) 
+(Nyereria) 
+(Glyptapanteles) 
+(Rasivalva) 
+
+articulations 2020 2018
+[2020.Apanteles = 2018.Apanteles]
+[2020.Exoryza = 2018.Exoryza]
+[2020.Iconella = 2018.Iconella]
+[2020.Illidops = 2018.Illidops]
+[2020.Pholetesor < 2018.Pholetesor]
+[2020.Teremys < 2018.Pholetesor]
+[2020.Protapanteles = 2018.Protapanteles]
+[2020.Sathon = 2018.Sathon]
+[2020.Nyereria = 2018.Nyereria]
+[2020.Glyptapanteles = 2018.Glyptapanteles]
+[2020.Rasivalva = 2018.Rasivalva]
+
+#inferred
+[2020.Microgastrinae > 2018.Pholetesor]

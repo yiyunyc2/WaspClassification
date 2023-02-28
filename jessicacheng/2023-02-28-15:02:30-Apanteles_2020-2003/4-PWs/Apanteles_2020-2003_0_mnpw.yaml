@@ -1,0 +1,94 @@
+2003.Apanteles:
+  concept: Apanteles
+  group: '2003'
+2003.Protapanteles:
+  concept: Protapanteles
+  group: '2003'
+2020.Apanteles:
+  concept: Apanteles
+  group: '2020'
+2020.Exoryza:
+  concept: Exoryza
+  group: '2020'
+2020.Glyptapanteles:
+  concept: Glyptapanteles
+  group: '2020'
+2020.Iconella:
+  concept: Iconella
+  group: '2020'
+2020.Illidops:
+  concept: Illidops
+  group: '2020'
+2020.Nyereria:
+  concept: Nyereria
+  group: '2020'
+2020.Protapanteles:
+  concept: Protapanteles
+  group: '2020'
+2020.Rasivalva:
+  concept: Rasivalva
+  group: '2020'
+2020.Sathon:
+  concept: Sathon
+  group: '2020'
+congruent.2020.Microgastrinae\n2003.Microgastrinae:
+  concept: 2020.Microgastrinae\n2003.Microgastrinae
+  group: congruent
+congruent.2020.Pholetesor\n2003.Pholetesor:
+  concept: 2020.Pholetesor\n2003.Pholetesor
+  group: congruent
+congruent.2020.Teremys\n2003.Teremys:
+  concept: 2020.Teremys\n2003.Teremys
+  group: congruent
+2003.Apanteles_2020.Microgastrinae\n2003.Microgastrinae:
+  label: is_a (input)
+  s: 2003.Apanteles
+  t: 2020.Microgastrinae\n2003.Microgastrinae
+2003.Protapanteles_2020.Microgastrinae\n2003.Microgastrinae:
+  label: is_a (input)
+  s: 2003.Protapanteles
+  t: 2020.Microgastrinae\n2003.Microgastrinae
+2020.Apanteles_2003.Apanteles:
+  label: is_a (input)
+  s: 2020.Apanteles
+  t: 2003.Apanteles
+2020.Exoryza_2003.Apanteles:
+  label: is_a (input)
+  s: 2020.Exoryza
+  t: 2003.Apanteles
+2020.Glyptapanteles_2003.Protapanteles:
+  label: is_a (input)
+  s: 2020.Glyptapanteles
+  t: 2003.Protapanteles
+2020.Iconella_2003.Apanteles:
+  label: is_a (input)
+  s: 2020.Iconella
+  t: 2003.Apanteles
+2020.Illidops_2003.Apanteles:
+  label: is_a (input)
+  s: 2020.Illidops
+  t: 2003.Apanteles
+2020.Nyereria_2003.Protapanteles:
+  label: is_a (input)
+  s: 2020.Nyereria
+  t: 2003.Protapanteles
+2020.Pholetesor\n2003.Pholetesor_2020.Microgastrinae\n2003.Microgastrinae:
+  label: is_a (input)
+  s: 2020.Pholetesor\n2003.Pholetesor
+  t: 2020.Microgastrinae\n2003.Microgastrinae
+2020.Protapanteles_2003.Protapanteles:
+  label: is_a (input)
+  s: 2020.Protapanteles
+  t: 2003.Protapanteles
+2020.Rasivalva_2003.Protapanteles:
+  label: is_a (input)
+  s: 2020.Rasivalva
+  t: 2003.Protapanteles
+2020.Sathon_2003.Protapanteles:
+  label: is_a (input)
+  s: 2020.Sathon
+  t: 2003.Protapanteles
+2020.Teremys\n2003.Teremys_2020.Microgastrinae\n2003.Microgastrinae:
+  label: is_a (input)
+  s: 2020.Teremys\n2003.Teremys
+  t: 2020.Microgastrinae\n2003.Microgastrinae

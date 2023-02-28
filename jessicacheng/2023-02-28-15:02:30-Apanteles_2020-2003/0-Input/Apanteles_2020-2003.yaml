@@ -1,0 +1,163 @@
+2003.Apanteles:
+  concept: Apanteles
+  group: '2003'
+2003.Microgastrinae:
+  concept: Microgastrinae
+  group: '2003'
+2003.Pholetesor:
+  concept: Pholetesor
+  group: '2003'
+2003.Protapanteles:
+  concept: Protapanteles
+  group: '2003'
+2003.Teremys:
+  concept: Teremys
+  group: '2003'
+2020.Apanteles:
+  concept: Apanteles
+  group: '2020'
+2020.Exoryza:
+  concept: Exoryza
+  group: '2020'
+2020.Glyptapanteles:
+  concept: Glyptapanteles
+  group: '2020'
+2020.Iconella:
+  concept: Iconella
+  group: '2020'
+2020.Illidops:
+  concept: Illidops
+  group: '2020'
+2020.Microgastrinae:
+  concept: Microgastrinae
+  group: '2020'
+2020.Nyereria:
+  concept: Nyereria
+  group: '2020'
+2020.Pholetesor:
+  concept: Pholetesor
+  group: '2020'
+2020.Protapanteles:
+  concept: Protapanteles
+  group: '2020'
+2020.Rasivalva:
+  concept: Rasivalva
+  group: '2020'
+2020.Sathon:
+  concept: Sathon
+  group: '2020'
+2020.Teremys:
+  concept: Teremys
+  group: '2020'
+2003.Apanteles_2003.Microgastrinae:
+  label: isa
+  s: 2003.Apanteles
+  t: 2003.Microgastrinae
+2003.Pholetesor_2003.Microgastrinae:
+  label: isa
+  s: 2003.Pholetesor
+  t: 2003.Microgastrinae
+2003.Protapanteles_2003.Microgastrinae:
+  label: isa
+  s: 2003.Protapanteles
+  t: 2003.Microgastrinae
+2003.Teremys_2003.Microgastrinae:
+  label: isa
+  s: 2003.Teremys
+  t: 2003.Microgastrinae
+2020.Apanteles_2003.Apanteles:
+  label: <
+  s: 2020.Apanteles
+  t: 2003.Apanteles
+2020.Apanteles_2020.Microgastrinae:
+  label: isa
+  s: 2020.Apanteles
+  t: 2020.Microgastrinae
+2020.Exoryza_2003.Apanteles:
+  label: <
+  s: 2020.Exoryza
+  t: 2003.Apanteles
+2020.Exoryza_2020.Microgastrinae:
+  label: isa
+  s: 2020.Exoryza
+  t: 2020.Microgastrinae
+2020.Glyptapanteles_2003.Protapanteles:
+  label: <
+  s: 2020.Glyptapanteles
+  t: 2003.Protapanteles
+2020.Glyptapanteles_2020.Microgastrinae:
+  label: isa
+  s: 2020.Glyptapanteles
+  t: 2020.Microgastrinae
+2020.Iconella_2003.Apanteles:
+  label: <
+  s: 2020.Iconella
+  t: 2003.Apanteles
+2020.Iconella_2020.Microgastrinae:
+  label: isa
+  s: 2020.Iconella
+  t: 2020.Microgastrinae
+2020.Illidops_2003.Apanteles:
+  label: <
+  s: 2020.Illidops
+  t: 2003.Apanteles
+2020.Illidops_2020.Microgastrinae:
+  label: isa
+  s: 2020.Illidops
+  t: 2020.Microgastrinae
+2020.Microgastrinae_2003.Apanteles:
+  label: '>'
+  s: 2020.Microgastrinae
+  t: 2003.Apanteles
+2020.Microgastrinae_2003.Protapanteles:
+  label: '>'
+  s: 2020.Microgastrinae
+  t: 2003.Protapanteles
+2020.Nyereria_2003.Protapanteles:
+  label: <
+  s: 2020.Nyereria
+  t: 2003.Protapanteles
+2020.Nyereria_2020.Microgastrinae:
+  label: isa
+  s: 2020.Nyereria
+  t: 2020.Microgastrinae
+2020.Pholetesor_2003.Pholetesor:
+  label: '='
+  s: 2020.Pholetesor
+  t: 2003.Pholetesor
+2020.Pholetesor_2020.Microgastrinae:
+  label: isa
+  s: 2020.Pholetesor
+  t: 2020.Microgastrinae
+2020.Protapanteles_2003.Protapanteles:
+  label: <
+  s: 2020.Protapanteles
+  t: 2003.Protapanteles
+2020.Protapanteles_2020.Microgastrinae:
+  label: isa
+  s: 2020.Protapanteles
+  t: 2020.Microgastrinae
+2020.Rasivalva_2003.Protapanteles:
+  label: <
+  s: 2020.Rasivalva
+  t: 2003.Protapanteles
+2020.Rasivalva_2020.Microgastrinae:
+  label: isa
+  s: 2020.Rasivalva
+  t: 2020.Microgastrinae
+2020.Sathon_2003.Protapanteles:
+  label: <
+  s: 2020.Sathon
+  t: 2003.Protapanteles
+2020.Sathon_2020.Microgastrinae:
+  label: isa
+  s: 2020.Sathon
+  t: 2020.Microgastrinae
+2020.Teremys_2003.Teremys:
+  label: '='
+  s: 2020.Teremys
+  t: 2003.Teremys
+2020.Teremys_2020.Microgastrinae:
+  label: isa
+  s: 2020.Teremys
+  t: 2020.Microgastrinae

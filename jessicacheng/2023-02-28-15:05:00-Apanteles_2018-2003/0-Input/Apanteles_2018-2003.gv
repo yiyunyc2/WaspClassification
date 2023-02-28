@@ -1,0 +1,83 @@
+digraph{
+rankdir=LR
+node[shape=circle style=filled fillcolor="#FFFFFF"] 
+node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"] 
+"2003.Microgastrinae"
+"2003.Teremys"
+"2003.Pholetesor"
+"2003.Protapanteles"
+"2003.Apanteles"
+node[shape=circle style=filled fillcolor="#FFFFFF"] 
+node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"] 
+"2018.Microgastrinae"
+"2018.Iconella"
+"2018.Glyptapanteles"
+"2018.Nyereria"
+"2018.Rasivalva"
+"2018.Pholetesor"
+"2018.Illidops"
+"2018.Apanteles"
+"2018.Sathon"
+"2018.Exoryza"
+"2018.Protapanteles"
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+"2003.Pholetesor" -> "2003.Microgastrinae"
+"2003.Protapanteles" -> "2003.Microgastrinae"
+"2003.Apanteles" -> "2003.Microgastrinae"
+"2003.Teremys" -> "2003.Microgastrinae"
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+"2018.Microgastrinae" -> "2018.Pholetesor" [dir=back]
+"2018.Microgastrinae" -> "2018.Exoryza" [dir=back]
+"2018.Microgastrinae" -> "2018.Illidops" [dir=back]
+"2018.Microgastrinae" -> "2018.Nyereria" [dir=back]
+"2018.Microgastrinae" -> "2018.Rasivalva" [dir=back]
+"2018.Microgastrinae" -> "2018.Iconella" [dir=back]
+"2018.Microgastrinae" -> "2018.Glyptapanteles" [dir=back]
+"2018.Microgastrinae" -> "2018.Protapanteles" [dir=back]
+"2018.Microgastrinae" -> "2018.Apanteles" [dir=back]
+"2018.Microgastrinae" -> "2018.Sathon" [dir=back]
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+edge[style=dashed color="#AA00FF" constraint=true penwidth=2 dir=both]
+"2018.Microgastrinae" -> "2003.Protapanteles" [label=">"]
+"2018.Exoryza" -> "2003.Apanteles" [label="<"]
+"2018.Illidops" -> "2003.Apanteles" [label="<"]
+"2018.Glyptapanteles" -> "2003.Protapanteles" [label="<"]
+"2018.Sathon" -> "2003.Protapanteles" [label="<"]
+"2018.Pholetesor" -> "2003.Microgastrinae" [label="<"]
+"2018.Rasivalva" -> "2003.Protapanteles" [label="<"]
+"2018.Pholetesor" -> "2003.Apanteles" [label="!"]
+"2018.Protapanteles" -> "2003.Protapanteles" [label="<"]
+"2018.Pholetesor" -> "2003.Protapanteles" [label="!"]
+"2018.Iconella" -> "2003.Apanteles" [label="<"]
+"2018.Apanteles" -> "2003.Apanteles" [label="<"]
+"2018.Microgastrinae" -> "2003.Apanteles" [label=">"]
+"2018.Pholetesor" -> "2003.Teremys" [label=">"]
+"2018.Nyereria" -> "2003.Protapanteles" [label="<"]
+"2018.Pholetesor" -> "2003.Pholetesor" [label=">"]
+node[shape=box] 
+{rank=source Legend [fillcolor= white margin=0 label=< 
+ <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> 
+<TR> <TD COLSPAN="2"><font face="Arial Black"> Nodes</font></TD> </TR> 
+<TR> 
+ <TD bgcolor="#FFFFCC" fontname="helvetica">2003</TD> 
+ <TD>5</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#CCFFCC" fontname="helvetica">2018</TD> 
+ <TD>11</TD> 
+ </TR> 
+<TR> <TD COLSPAN="2"><font face = "Arial Black"> Edges </font></TD> </TR> 
+<TR> 
+ <TD><font color ="#000000">is_a (2003)</font></TD><TD>4</TD>
+</TR>
+<TR> 
+ <TD><font color ="#000000">is_a (2018)</font></TD><TD>10</TD>
+</TR>
+<TR> 
+ <TD><font color ="#AA00FF">articulations</font></TD><TD>16</TD>
+</TR>
+</TABLE> 
+ >] } 
+}

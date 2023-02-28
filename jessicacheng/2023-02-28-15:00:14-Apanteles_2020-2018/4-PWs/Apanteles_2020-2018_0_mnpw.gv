@@ -1,0 +1,55 @@
+digraph{
+rankdir=RL
+node[shape=box style="filled,rounded" fillcolor="#EEEEEE" fontname="helvetica"] 
+"2020.Glyptapanteles\n2018.Glyptapanteles"
+"2020.Illidops\n2018.Illidops"
+"2020.Protapanteles\n2018.Protapanteles"
+"2020.Rasivalva\n2018.Rasivalva"
+"2020.Nyereria\n2018.Nyereria"
+"2020.Microgastrinae\n2018.Microgastrinae"
+"2020.Apanteles\n2018.Apanteles"
+"2020.Iconella\n2018.Iconella"
+"2020.Sathon\n2018.Sathon"
+"2020.Exoryza\n2018.Exoryza"
+node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"] 
+"2020.Pholetesor"
+"2020.Teremys"
+node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"] 
+"2018.Pholetesor"
+edge[arrowhead=normal style=solid color="#000000" constraint=true penwidth=1]
+"2020.Exoryza\n2018.Exoryza" -> "2020.Microgastrinae\n2018.Microgastrinae"
+"2018.Pholetesor" -> "2020.Microgastrinae\n2018.Microgastrinae"
+"2020.Rasivalva\n2018.Rasivalva" -> "2020.Microgastrinae\n2018.Microgastrinae"
+"2020.Nyereria\n2018.Nyereria" -> "2020.Microgastrinae\n2018.Microgastrinae"
+"2020.Glyptapanteles\n2018.Glyptapanteles" -> "2020.Microgastrinae\n2018.Microgastrinae"
+"2020.Sathon\n2018.Sathon" -> "2020.Microgastrinae\n2018.Microgastrinae"
+"2020.Iconella\n2018.Iconella" -> "2020.Microgastrinae\n2018.Microgastrinae"
+"2020.Illidops\n2018.Illidops" -> "2020.Microgastrinae\n2018.Microgastrinae"
+"2020.Apanteles\n2018.Apanteles" -> "2020.Microgastrinae\n2018.Microgastrinae"
+"2020.Pholetesor" -> "2018.Pholetesor"
+"2020.Protapanteles\n2018.Protapanteles" -> "2020.Microgastrinae\n2018.Microgastrinae"
+"2020.Teremys" -> "2018.Pholetesor"
+edge[arrowhead=normal style=dotted color="#000000" constraint=true penwidth=1]
+node[shape=box] 
+{rank=source Legend [fillcolor= white margin=0 label=< 
+ <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> 
+<TR> <TD COLSPAN="2"><font face="Arial Black"> Nodes</font></TD> </TR> 
+<TR> 
+ <TD bgcolor="#EEEEEE" fontname="helvetica">congruent</TD> 
+ <TD>10</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#CCFFCC" fontname="helvetica">2020</TD> 
+ <TD>2</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#FFFFCC" fontname="helvetica">2018</TD> 
+ <TD>1</TD> 
+ </TR> 
+<TR> <TD COLSPAN="2"><font face = "Arial Black"> Edges </font></TD> </TR> 
+<TR> 
+ <TD><font color ="#000000">is_a (input)</font></TD><TD>12</TD>
+</TR>
+</TABLE> 
+ >] } 
+}

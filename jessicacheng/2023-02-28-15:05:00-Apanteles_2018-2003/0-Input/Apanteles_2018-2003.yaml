@@ -1,0 +1,168 @@
+2003.Apanteles:
+  concept: Apanteles
+  group: '2003'
+2003.Microgastrinae:
+  concept: Microgastrinae
+  group: '2003'
+2003.Pholetesor:
+  concept: Pholetesor
+  group: '2003'
+2003.Protapanteles:
+  concept: Protapanteles
+  group: '2003'
+2003.Teremys:
+  concept: Teremys
+  group: '2003'
+2018.Apanteles:
+  concept: Apanteles
+  group: '2018'
+2018.Exoryza:
+  concept: Exoryza
+  group: '2018'
+2018.Glyptapanteles:
+  concept: Glyptapanteles
+  group: '2018'
+2018.Iconella:
+  concept: Iconella
+  group: '2018'
+2018.Illidops:
+  concept: Illidops
+  group: '2018'
+2018.Microgastrinae:
+  concept: Microgastrinae
+  group: '2018'
+2018.Nyereria:
+  concept: Nyereria
+  group: '2018'
+2018.Pholetesor:
+  concept: Pholetesor
+  group: '2018'
+2018.Protapanteles:
+  concept: Protapanteles
+  group: '2018'
+2018.Rasivalva:
+  concept: Rasivalva
+  group: '2018'
+2018.Sathon:
+  concept: Sathon
+  group: '2018'
+2003.Apanteles_2003.Microgastrinae:
+  label: isa
+  s: 2003.Apanteles
+  t: 2003.Microgastrinae
+2003.Pholetesor_2003.Microgastrinae:
+  label: isa
+  s: 2003.Pholetesor
+  t: 2003.Microgastrinae
+2003.Protapanteles_2003.Microgastrinae:
+  label: isa
+  s: 2003.Protapanteles
+  t: 2003.Microgastrinae
+2003.Teremys_2003.Microgastrinae:
+  label: isa
+  s: 2003.Teremys
+  t: 2003.Microgastrinae
+2018.Apanteles_2003.Apanteles:
+  label: <
+  s: 2018.Apanteles
+  t: 2003.Apanteles
+2018.Apanteles_2018.Microgastrinae:
+  label: isa
+  s: 2018.Apanteles
+  t: 2018.Microgastrinae
+2018.Exoryza_2003.Apanteles:
+  label: <
+  s: 2018.Exoryza
+  t: 2003.Apanteles
+2018.Exoryza_2018.Microgastrinae:
+  label: isa
+  s: 2018.Exoryza
+  t: 2018.Microgastrinae
+2018.Glyptapanteles_2003.Protapanteles:
+  label: <
+  s: 2018.Glyptapanteles
+  t: 2003.Protapanteles
+2018.Glyptapanteles_2018.Microgastrinae:
+  label: isa
+  s: 2018.Glyptapanteles
+  t: 2018.Microgastrinae
+2018.Iconella_2003.Apanteles:
+  label: <
+  s: 2018.Iconella
+  t: 2003.Apanteles
+2018.Iconella_2018.Microgastrinae:
+  label: isa
+  s: 2018.Iconella
+  t: 2018.Microgastrinae
+2018.Illidops_2003.Apanteles:
+  label: <
+  s: 2018.Illidops
+  t: 2003.Apanteles
+2018.Illidops_2018.Microgastrinae:
+  label: isa
+  s: 2018.Illidops
+  t: 2018.Microgastrinae
+2018.Microgastrinae_2003.Apanteles:
+  label: '>'
+  s: 2018.Microgastrinae
+  t: 2003.Apanteles
+2018.Microgastrinae_2003.Protapanteles:
+  label: '>'
+  s: 2018.Microgastrinae
+  t: 2003.Protapanteles
+2018.Nyereria_2003.Protapanteles:
+  label: <
+  s: 2018.Nyereria
+  t: 2003.Protapanteles
+2018.Nyereria_2018.Microgastrinae:
+  label: isa
+  s: 2018.Nyereria
+  t: 2018.Microgastrinae
+2018.Pholetesor_2003.Apanteles:
+  label: '!'
+  s: 2018.Pholetesor
+  t: 2003.Apanteles
+2018.Pholetesor_2003.Microgastrinae:
+  label: <
+  s: 2018.Pholetesor
+  t: 2003.Microgastrinae
+2018.Pholetesor_2003.Pholetesor:
+  label: '>'
+  s: 2018.Pholetesor
+  t: 2003.Pholetesor
+2018.Pholetesor_2003.Protapanteles:
+  label: '!'
+  s: 2018.Pholetesor
+  t: 2003.Protapanteles
+2018.Pholetesor_2003.Teremys:
+  label: '>'
+  s: 2018.Pholetesor
+  t: 2003.Teremys
+2018.Pholetesor_2018.Microgastrinae:
+  label: isa
+  s: 2018.Pholetesor
+  t: 2018.Microgastrinae
+2018.Protapanteles_2003.Protapanteles:
+  label: <
+  s: 2018.Protapanteles
+  t: 2003.Protapanteles
+2018.Protapanteles_2018.Microgastrinae:
+  label: isa
+  s: 2018.Protapanteles
+  t: 2018.Microgastrinae
+2018.Rasivalva_2003.Protapanteles:
+  label: <
+  s: 2018.Rasivalva
+  t: 2003.Protapanteles
+2018.Rasivalva_2018.Microgastrinae:
+  label: isa
+  s: 2018.Rasivalva
+  t: 2018.Microgastrinae
+2018.Sathon_2003.Protapanteles:
+  label: <
+  s: 2018.Sathon
+  t: 2003.Protapanteles
+2018.Sathon_2018.Microgastrinae:
+  label: isa
+  s: 2018.Sathon
+  t: 2018.Microgastrinae

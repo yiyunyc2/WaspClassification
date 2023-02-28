@@ -1,0 +1,57 @@
+digraph{
+rankdir=RL
+node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"] 
+"2003.Protapanteles"
+"2003.Apanteles"
+node[shape=box style="filled,rounded" fillcolor="#EEEEEE" fontname="helvetica"] 
+"2020.Teremys\n2003.Teremys"
+"2020.Pholetesor\n2003.Pholetesor"
+"2020.Microgastrinae\n2003.Microgastrinae"
+node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"] 
+"2020.Illidops"
+"2020.Nyereria"
+"2020.Protapanteles"
+"2020.Sathon"
+"2020.Apanteles"
+"2020.Glyptapanteles"
+"2020.Exoryza"
+"2020.Rasivalva"
+"2020.Iconella"
+edge[arrowhead=normal style=solid color="#000000" constraint=true penwidth=1]
+"2020.Teremys\n2003.Teremys" -> "2020.Microgastrinae\n2003.Microgastrinae"
+"2020.Illidops" -> "2003.Apanteles"
+"2003.Apanteles" -> "2020.Microgastrinae\n2003.Microgastrinae"
+"2020.Nyereria" -> "2003.Protapanteles"
+"2020.Iconella" -> "2003.Apanteles"
+"2020.Glyptapanteles" -> "2003.Protapanteles"
+"2020.Sathon" -> "2003.Protapanteles"
+"2020.Rasivalva" -> "2003.Protapanteles"
+"2020.Protapanteles" -> "2003.Protapanteles"
+"2003.Protapanteles" -> "2020.Microgastrinae\n2003.Microgastrinae"
+"2020.Exoryza" -> "2003.Apanteles"
+"2020.Pholetesor\n2003.Pholetesor" -> "2020.Microgastrinae\n2003.Microgastrinae"
+"2020.Apanteles" -> "2003.Apanteles"
+edge[arrowhead=normal style=dotted color="#000000" constraint=true penwidth=1]
+node[shape=box] 
+{rank=source Legend [fillcolor= white margin=0 label=< 
+ <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> 
+<TR> <TD COLSPAN="2"><font face="Arial Black"> Nodes</font></TD> </TR> 
+<TR> 
+ <TD bgcolor="#FFFFCC" fontname="helvetica">2003</TD> 
+ <TD>2</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#EEEEEE" fontname="helvetica">congruent</TD> 
+ <TD>3</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#CCFFCC" fontname="helvetica">2020</TD> 
+ <TD>9</TD> 
+ </TR> 
+<TR> <TD COLSPAN="2"><font face = "Arial Black"> Edges </font></TD> </TR> 
+<TR> 
+ <TD><font color ="#000000">is_a (input)</font></TD><TD>13</TD>
+</TR>
+</TABLE> 
+ >] } 
+}

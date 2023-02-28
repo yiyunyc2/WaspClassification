@@ -1,0 +1,887 @@
+%%% Max Number of Euler Regions
+#maxint=59.
+
+%%% Euler Regions
+r(M):- #int(M),M>=1,M<=#maxint.
+
+%%% Concepts
+tax(t2003,0).
+concept2(A, B) :- concept(A,B,_).
+concept(c2003_Apanteles,0,0).
+concept(c2003_Teremys,0,1).
+concept2(c2003_Microgastrinae,0).
+concept(c2003_Protapanteles,0,2).
+concept(c2003_Pholetesor,0,3).
+tax(t2020,1).
+concept2(A, B) :- concept(A,B,_).
+concept(c2020_Apanteles,1,0).
+concept(c2020_Exoryza,1,1).
+concept(c2020_Protapanteles,1,2).
+concept(c2020_Rasivalva,1,3).
+concept(c2020_Illidops,1,4).
+concept(c2020_Nyereria,1,5).
+concept(c2020_Glyptapanteles,1,6).
+concept(c2020_Teremys,1,7).
+concept2(c2020_Microgastrinae,1).
+concept(c2020_Pholetesor,1,8).
+concept(c2020_Sathon,1,9).
+concept(c2020_Iconella,1,10).
+
+%%% Euler Bit
+bit(M, 0, V):-r(M),M1=M/1, #mod(M1,5,V).
+bit(M, 1, V):-r(M),M1=M/5, #mod(M1,12,V).
+
+
+%%% Meaning of regions
+in(X, M) :- r(M),concept(X,T,N),N1=N+1,bit(M,T,N1).
+out(X, M) :- r(M),concept(X,T,N),N1=N+1,not bit(M,T,N1).
+in(X, M) :- r(M),concept2(X,_),not out(X, M).
+out(X, M) :- out3(X, M, _), ix.
+irs(M) :- in(X, M), out(X, M), r(M), concept2(X,_).
+
+%%% Constraints of regions.
+irs(X) :- ir(X, _).
+vrs(X) :- vr(X, _).
+vr(X, X) :- not irs(X), r(X).
+ir(X, X) :- not vrs(X), r(X), pw.
+ie(prod(A,B)) :- vr(X, A), ir(X, B), ix.
+:- vrs(X), irs(X), pw.
+
+%%% Inconsistency Explanation.
+ie(s(R, A, Y)) :- pie(R, A, Y), not cc(R, Y), ix.
+cc(R, Y) :- c(R, _, Y), ix.
+
+%%% Parent-Child relations
+%% ISA
+% c2003_Apanteles isa c2003_Microgastrinae
+ir(X, r0) :- in(c2003_Apanteles, X), out(c2003_Microgastrinae, X), pw.
+ir(X, prod(r0,R)) :- in(c2003_Apanteles,X), out3(c2003_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2003_Apanteles,X), in(c2003_Microgastrinae,X)} <= 0, pw.
+pie(r0, A, 1) :- ir(X, A), in(c2003_Apanteles, X), in(c2003_Microgastrinae, X), ix.
+c(r0, A, 1) :- vr(X, A), in(c2003_Apanteles, X), in(c2003_Microgastrinae, X), ix.
+
+% c2003_Pholetesor isa c2003_Microgastrinae
+ir(X, r1) :- in(c2003_Pholetesor, X), out(c2003_Microgastrinae, X), pw.
+ir(X, prod(r1,R)) :- in(c2003_Pholetesor,X), out3(c2003_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2003_Pholetesor,X), in(c2003_Microgastrinae,X)} <= 0, pw.
+pie(r1, A, 1) :- ir(X, A), in(c2003_Pholetesor, X), in(c2003_Microgastrinae, X), ix.
+c(r1, A, 1) :- vr(X, A), in(c2003_Pholetesor, X), in(c2003_Microgastrinae, X), ix.
+
+% c2003_Teremys isa c2003_Microgastrinae
+ir(X, r2) :- in(c2003_Teremys, X), out(c2003_Microgastrinae, X), pw.
+ir(X, prod(r2,R)) :- in(c2003_Teremys,X), out3(c2003_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2003_Teremys,X), in(c2003_Microgastrinae,X)} <= 0, pw.
+pie(r2, A, 1) :- ir(X, A), in(c2003_Teremys, X), in(c2003_Microgastrinae, X), ix.
+c(r2, A, 1) :- vr(X, A), in(c2003_Teremys, X), in(c2003_Microgastrinae, X), ix.
+
+% c2003_Protapanteles isa c2003_Microgastrinae
+ir(X, r3) :- in(c2003_Protapanteles, X), out(c2003_Microgastrinae, X), pw.
+ir(X, prod(r3,R)) :- in(c2003_Protapanteles,X), out3(c2003_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2003_Protapanteles,X), in(c2003_Microgastrinae,X)} <= 0, pw.
+pie(r3, A, 1) :- ir(X, A), in(c2003_Protapanteles, X), in(c2003_Microgastrinae, X), ix.
+c(r3, A, 1) :- vr(X, A), in(c2003_Protapanteles, X), in(c2003_Microgastrinae, X), ix.
+
+%% coverage
+out3(c2003_Microgastrinae, X, r4) :- out(c2003_Apanteles, X), out(c2003_Pholetesor, X), out(c2003_Teremys, X), out(c2003_Protapanteles, X), ix.
+out(c2003_Microgastrinae, X) :- out(c2003_Apanteles, X), out(c2003_Pholetesor, X), out(c2003_Teremys, X), out(c2003_Protapanteles, X), pw.
+%% sibling disjointness
+% c2003_Apanteles ! c2003_Pholetesor
+ir(X, r5) :- in(c2003_Apanteles, X), in(c2003_Pholetesor, X).
+:- #count {X : vrs(X), in(c2003_Apanteles,X), out(c2003_Pholetesor,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Apanteles,X), in(c2003_Pholetesor,X)} <= 0, pw.
+pie(r5, A, 1) :- ir(X, A), in(c2003_Apanteles, X), out(c2003_Pholetesor, X), ix.
+c(r5, A, 1) :- vr(X, A), in(c2003_Apanteles, X), out(c2003_Pholetesor, X), ix.
+pie(r5, A, 2) :- ir(X, A), out(c2003_Apanteles, X), in(c2003_Pholetesor, X), ix.
+c(r5, A, 2) :- vr(X, A), out(c2003_Apanteles, X), in(c2003_Pholetesor, X), ix.
+
+% c2003_Apanteles ! c2003_Teremys
+ir(X, r6) :- in(c2003_Apanteles, X), in(c2003_Teremys, X).
+:- #count {X : vrs(X), in(c2003_Apanteles,X), out(c2003_Teremys,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Apanteles,X), in(c2003_Teremys,X)} <= 0, pw.
+pie(r6, A, 1) :- ir(X, A), in(c2003_Apanteles, X), out(c2003_Teremys, X), ix.
+c(r6, A, 1) :- vr(X, A), in(c2003_Apanteles, X), out(c2003_Teremys, X), ix.
+pie(r6, A, 2) :- ir(X, A), out(c2003_Apanteles, X), in(c2003_Teremys, X), ix.
+c(r6, A, 2) :- vr(X, A), out(c2003_Apanteles, X), in(c2003_Teremys, X), ix.
+
+% c2003_Apanteles ! c2003_Protapanteles
+ir(X, r7) :- in(c2003_Apanteles, X), in(c2003_Protapanteles, X).
+:- #count {X : vrs(X), in(c2003_Apanteles,X), out(c2003_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Apanteles,X), in(c2003_Protapanteles,X)} <= 0, pw.
+pie(r7, A, 1) :- ir(X, A), in(c2003_Apanteles, X), out(c2003_Protapanteles, X), ix.
+c(r7, A, 1) :- vr(X, A), in(c2003_Apanteles, X), out(c2003_Protapanteles, X), ix.
+pie(r7, A, 2) :- ir(X, A), out(c2003_Apanteles, X), in(c2003_Protapanteles, X), ix.
+c(r7, A, 2) :- vr(X, A), out(c2003_Apanteles, X), in(c2003_Protapanteles, X), ix.
+
+% c2003_Pholetesor ! c2003_Teremys
+ir(X, r8) :- in(c2003_Pholetesor, X), in(c2003_Teremys, X).
+:- #count {X : vrs(X), in(c2003_Pholetesor,X), out(c2003_Teremys,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Pholetesor,X), in(c2003_Teremys,X)} <= 0, pw.
+pie(r8, A, 1) :- ir(X, A), in(c2003_Pholetesor, X), out(c2003_Teremys, X), ix.
+c(r8, A, 1) :- vr(X, A), in(c2003_Pholetesor, X), out(c2003_Teremys, X), ix.
+pie(r8, A, 2) :- ir(X, A), out(c2003_Pholetesor, X), in(c2003_Teremys, X), ix.
+c(r8, A, 2) :- vr(X, A), out(c2003_Pholetesor, X), in(c2003_Teremys, X), ix.
+
+% c2003_Pholetesor ! c2003_Protapanteles
+ir(X, r9) :- in(c2003_Pholetesor, X), in(c2003_Protapanteles, X).
+:- #count {X : vrs(X), in(c2003_Pholetesor,X), out(c2003_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Pholetesor,X), in(c2003_Protapanteles,X)} <= 0, pw.
+pie(r9, A, 1) :- ir(X, A), in(c2003_Pholetesor, X), out(c2003_Protapanteles, X), ix.
+c(r9, A, 1) :- vr(X, A), in(c2003_Pholetesor, X), out(c2003_Protapanteles, X), ix.
+pie(r9, A, 2) :- ir(X, A), out(c2003_Pholetesor, X), in(c2003_Protapanteles, X), ix.
+c(r9, A, 2) :- vr(X, A), out(c2003_Pholetesor, X), in(c2003_Protapanteles, X), ix.
+
+% c2003_Teremys ! c2003_Protapanteles
+ir(X, r10) :- in(c2003_Teremys, X), in(c2003_Protapanteles, X).
+:- #count {X : vrs(X), in(c2003_Teremys,X), out(c2003_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2003_Teremys,X), in(c2003_Protapanteles,X)} <= 0, pw.
+pie(r10, A, 1) :- ir(X, A), in(c2003_Teremys, X), out(c2003_Protapanteles, X), ix.
+c(r10, A, 1) :- vr(X, A), in(c2003_Teremys, X), out(c2003_Protapanteles, X), ix.
+pie(r10, A, 2) :- ir(X, A), out(c2003_Teremys, X), in(c2003_Protapanteles, X), ix.
+c(r10, A, 2) :- vr(X, A), out(c2003_Teremys, X), in(c2003_Protapanteles, X), ix.
+
+%% ISA
+% c2020_Apanteles isa c2020_Microgastrinae
+ir(X, r11) :- in(c2020_Apanteles, X), out(c2020_Microgastrinae, X), pw.
+ir(X, prod(r11,R)) :- in(c2020_Apanteles,X), out3(c2020_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Apanteles,X), in(c2020_Microgastrinae,X)} <= 0, pw.
+pie(r11, A, 1) :- ir(X, A), in(c2020_Apanteles, X), in(c2020_Microgastrinae, X), ix.
+c(r11, A, 1) :- vr(X, A), in(c2020_Apanteles, X), in(c2020_Microgastrinae, X), ix.
+
+% c2020_Exoryza isa c2020_Microgastrinae
+ir(X, r12) :- in(c2020_Exoryza, X), out(c2020_Microgastrinae, X), pw.
+ir(X, prod(r12,R)) :- in(c2020_Exoryza,X), out3(c2020_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Exoryza,X), in(c2020_Microgastrinae,X)} <= 0, pw.
+pie(r12, A, 1) :- ir(X, A), in(c2020_Exoryza, X), in(c2020_Microgastrinae, X), ix.
+c(r12, A, 1) :- vr(X, A), in(c2020_Exoryza, X), in(c2020_Microgastrinae, X), ix.
+
+% c2020_Iconella isa c2020_Microgastrinae
+ir(X, r13) :- in(c2020_Iconella, X), out(c2020_Microgastrinae, X), pw.
+ir(X, prod(r13,R)) :- in(c2020_Iconella,X), out3(c2020_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Iconella,X), in(c2020_Microgastrinae,X)} <= 0, pw.
+pie(r13, A, 1) :- ir(X, A), in(c2020_Iconella, X), in(c2020_Microgastrinae, X), ix.
+c(r13, A, 1) :- vr(X, A), in(c2020_Iconella, X), in(c2020_Microgastrinae, X), ix.
+
+% c2020_Illidops isa c2020_Microgastrinae
+ir(X, r14) :- in(c2020_Illidops, X), out(c2020_Microgastrinae, X), pw.
+ir(X, prod(r14,R)) :- in(c2020_Illidops,X), out3(c2020_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Illidops,X), in(c2020_Microgastrinae,X)} <= 0, pw.
+pie(r14, A, 1) :- ir(X, A), in(c2020_Illidops, X), in(c2020_Microgastrinae, X), ix.
+c(r14, A, 1) :- vr(X, A), in(c2020_Illidops, X), in(c2020_Microgastrinae, X), ix.
+
+% c2020_Pholetesor isa c2020_Microgastrinae
+ir(X, r15) :- in(c2020_Pholetesor, X), out(c2020_Microgastrinae, X), pw.
+ir(X, prod(r15,R)) :- in(c2020_Pholetesor,X), out3(c2020_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Pholetesor,X), in(c2020_Microgastrinae,X)} <= 0, pw.
+pie(r15, A, 1) :- ir(X, A), in(c2020_Pholetesor, X), in(c2020_Microgastrinae, X), ix.
+c(r15, A, 1) :- vr(X, A), in(c2020_Pholetesor, X), in(c2020_Microgastrinae, X), ix.
+
+% c2020_Teremys isa c2020_Microgastrinae
+ir(X, r16) :- in(c2020_Teremys, X), out(c2020_Microgastrinae, X), pw.
+ir(X, prod(r16,R)) :- in(c2020_Teremys,X), out3(c2020_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Teremys,X), in(c2020_Microgastrinae,X)} <= 0, pw.
+pie(r16, A, 1) :- ir(X, A), in(c2020_Teremys, X), in(c2020_Microgastrinae, X), ix.
+c(r16, A, 1) :- vr(X, A), in(c2020_Teremys, X), in(c2020_Microgastrinae, X), ix.
+
+% c2020_Protapanteles isa c2020_Microgastrinae
+ir(X, r17) :- in(c2020_Protapanteles, X), out(c2020_Microgastrinae, X), pw.
+ir(X, prod(r17,R)) :- in(c2020_Protapanteles,X), out3(c2020_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Protapanteles,X), in(c2020_Microgastrinae,X)} <= 0, pw.
+pie(r17, A, 1) :- ir(X, A), in(c2020_Protapanteles, X), in(c2020_Microgastrinae, X), ix.
+c(r17, A, 1) :- vr(X, A), in(c2020_Protapanteles, X), in(c2020_Microgastrinae, X), ix.
+
+% c2020_Sathon isa c2020_Microgastrinae
+ir(X, r18) :- in(c2020_Sathon, X), out(c2020_Microgastrinae, X), pw.
+ir(X, prod(r18,R)) :- in(c2020_Sathon,X), out3(c2020_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Sathon,X), in(c2020_Microgastrinae,X)} <= 0, pw.
+pie(r18, A, 1) :- ir(X, A), in(c2020_Sathon, X), in(c2020_Microgastrinae, X), ix.
+c(r18, A, 1) :- vr(X, A), in(c2020_Sathon, X), in(c2020_Microgastrinae, X), ix.
+
+% c2020_Nyereria isa c2020_Microgastrinae
+ir(X, r19) :- in(c2020_Nyereria, X), out(c2020_Microgastrinae, X), pw.
+ir(X, prod(r19,R)) :- in(c2020_Nyereria,X), out3(c2020_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Nyereria,X), in(c2020_Microgastrinae,X)} <= 0, pw.
+pie(r19, A, 1) :- ir(X, A), in(c2020_Nyereria, X), in(c2020_Microgastrinae, X), ix.
+c(r19, A, 1) :- vr(X, A), in(c2020_Nyereria, X), in(c2020_Microgastrinae, X), ix.
+
+% c2020_Glyptapanteles isa c2020_Microgastrinae
+ir(X, r20) :- in(c2020_Glyptapanteles, X), out(c2020_Microgastrinae, X), pw.
+ir(X, prod(r20,R)) :- in(c2020_Glyptapanteles,X), out3(c2020_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Glyptapanteles,X), in(c2020_Microgastrinae,X)} <= 0, pw.
+pie(r20, A, 1) :- ir(X, A), in(c2020_Glyptapanteles, X), in(c2020_Microgastrinae, X), ix.
+c(r20, A, 1) :- vr(X, A), in(c2020_Glyptapanteles, X), in(c2020_Microgastrinae, X), ix.
+
+% c2020_Rasivalva isa c2020_Microgastrinae
+ir(X, r21) :- in(c2020_Rasivalva, X), out(c2020_Microgastrinae, X), pw.
+ir(X, prod(r21,R)) :- in(c2020_Rasivalva,X), out3(c2020_Microgastrinae, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Rasivalva,X), in(c2020_Microgastrinae,X)} <= 0, pw.
+pie(r21, A, 1) :- ir(X, A), in(c2020_Rasivalva, X), in(c2020_Microgastrinae, X), ix.
+c(r21, A, 1) :- vr(X, A), in(c2020_Rasivalva, X), in(c2020_Microgastrinae, X), ix.
+
+%% coverage
+out3(c2020_Microgastrinae, X, r22) :- out(c2020_Apanteles, X), out(c2020_Exoryza, X), out(c2020_Iconella, X), out(c2020_Illidops, X), out(c2020_Pholetesor, X), out(c2020_Teremys, X), out(c2020_Protapanteles, X), out(c2020_Sathon, X), out(c2020_Nyereria, X), out(c2020_Glyptapanteles, X), out(c2020_Rasivalva, X), ix.
+out(c2020_Microgastrinae, X) :- out(c2020_Apanteles, X), out(c2020_Exoryza, X), out(c2020_Iconella, X), out(c2020_Illidops, X), out(c2020_Pholetesor, X), out(c2020_Teremys, X), out(c2020_Protapanteles, X), out(c2020_Sathon, X), out(c2020_Nyereria, X), out(c2020_Glyptapanteles, X), out(c2020_Rasivalva, X), pw.
+%% sibling disjointness
+% c2020_Apanteles ! c2020_Exoryza
+ir(X, r23) :- in(c2020_Apanteles, X), in(c2020_Exoryza, X).
+:- #count {X : vrs(X), in(c2020_Apanteles,X), out(c2020_Exoryza,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles,X), in(c2020_Exoryza,X)} <= 0, pw.
+pie(r23, A, 1) :- ir(X, A), in(c2020_Apanteles, X), out(c2020_Exoryza, X), ix.
+c(r23, A, 1) :- vr(X, A), in(c2020_Apanteles, X), out(c2020_Exoryza, X), ix.
+pie(r23, A, 2) :- ir(X, A), out(c2020_Apanteles, X), in(c2020_Exoryza, X), ix.
+c(r23, A, 2) :- vr(X, A), out(c2020_Apanteles, X), in(c2020_Exoryza, X), ix.
+
+% c2020_Apanteles ! c2020_Iconella
+ir(X, r24) :- in(c2020_Apanteles, X), in(c2020_Iconella, X).
+:- #count {X : vrs(X), in(c2020_Apanteles,X), out(c2020_Iconella,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles,X), in(c2020_Iconella,X)} <= 0, pw.
+pie(r24, A, 1) :- ir(X, A), in(c2020_Apanteles, X), out(c2020_Iconella, X), ix.
+c(r24, A, 1) :- vr(X, A), in(c2020_Apanteles, X), out(c2020_Iconella, X), ix.
+pie(r24, A, 2) :- ir(X, A), out(c2020_Apanteles, X), in(c2020_Iconella, X), ix.
+c(r24, A, 2) :- vr(X, A), out(c2020_Apanteles, X), in(c2020_Iconella, X), ix.
+
+% c2020_Apanteles ! c2020_Illidops
+ir(X, r25) :- in(c2020_Apanteles, X), in(c2020_Illidops, X).
+:- #count {X : vrs(X), in(c2020_Apanteles,X), out(c2020_Illidops,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles,X), in(c2020_Illidops,X)} <= 0, pw.
+pie(r25, A, 1) :- ir(X, A), in(c2020_Apanteles, X), out(c2020_Illidops, X), ix.
+c(r25, A, 1) :- vr(X, A), in(c2020_Apanteles, X), out(c2020_Illidops, X), ix.
+pie(r25, A, 2) :- ir(X, A), out(c2020_Apanteles, X), in(c2020_Illidops, X), ix.
+c(r25, A, 2) :- vr(X, A), out(c2020_Apanteles, X), in(c2020_Illidops, X), ix.
+
+% c2020_Apanteles ! c2020_Pholetesor
+ir(X, r26) :- in(c2020_Apanteles, X), in(c2020_Pholetesor, X).
+:- #count {X : vrs(X), in(c2020_Apanteles,X), out(c2020_Pholetesor,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles,X), in(c2020_Pholetesor,X)} <= 0, pw.
+pie(r26, A, 1) :- ir(X, A), in(c2020_Apanteles, X), out(c2020_Pholetesor, X), ix.
+c(r26, A, 1) :- vr(X, A), in(c2020_Apanteles, X), out(c2020_Pholetesor, X), ix.
+pie(r26, A, 2) :- ir(X, A), out(c2020_Apanteles, X), in(c2020_Pholetesor, X), ix.
+c(r26, A, 2) :- vr(X, A), out(c2020_Apanteles, X), in(c2020_Pholetesor, X), ix.
+
+% c2020_Apanteles ! c2020_Teremys
+ir(X, r27) :- in(c2020_Apanteles, X), in(c2020_Teremys, X).
+:- #count {X : vrs(X), in(c2020_Apanteles,X), out(c2020_Teremys,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles,X), in(c2020_Teremys,X)} <= 0, pw.
+pie(r27, A, 1) :- ir(X, A), in(c2020_Apanteles, X), out(c2020_Teremys, X), ix.
+c(r27, A, 1) :- vr(X, A), in(c2020_Apanteles, X), out(c2020_Teremys, X), ix.
+pie(r27, A, 2) :- ir(X, A), out(c2020_Apanteles, X), in(c2020_Teremys, X), ix.
+c(r27, A, 2) :- vr(X, A), out(c2020_Apanteles, X), in(c2020_Teremys, X), ix.
+
+% c2020_Apanteles ! c2020_Protapanteles
+ir(X, r28) :- in(c2020_Apanteles, X), in(c2020_Protapanteles, X).
+:- #count {X : vrs(X), in(c2020_Apanteles,X), out(c2020_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles,X), in(c2020_Protapanteles,X)} <= 0, pw.
+pie(r28, A, 1) :- ir(X, A), in(c2020_Apanteles, X), out(c2020_Protapanteles, X), ix.
+c(r28, A, 1) :- vr(X, A), in(c2020_Apanteles, X), out(c2020_Protapanteles, X), ix.
+pie(r28, A, 2) :- ir(X, A), out(c2020_Apanteles, X), in(c2020_Protapanteles, X), ix.
+c(r28, A, 2) :- vr(X, A), out(c2020_Apanteles, X), in(c2020_Protapanteles, X), ix.
+
+% c2020_Apanteles ! c2020_Sathon
+ir(X, r29) :- in(c2020_Apanteles, X), in(c2020_Sathon, X).
+:- #count {X : vrs(X), in(c2020_Apanteles,X), out(c2020_Sathon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles,X), in(c2020_Sathon,X)} <= 0, pw.
+pie(r29, A, 1) :- ir(X, A), in(c2020_Apanteles, X), out(c2020_Sathon, X), ix.
+c(r29, A, 1) :- vr(X, A), in(c2020_Apanteles, X), out(c2020_Sathon, X), ix.
+pie(r29, A, 2) :- ir(X, A), out(c2020_Apanteles, X), in(c2020_Sathon, X), ix.
+c(r29, A, 2) :- vr(X, A), out(c2020_Apanteles, X), in(c2020_Sathon, X), ix.
+
+% c2020_Apanteles ! c2020_Nyereria
+ir(X, r30) :- in(c2020_Apanteles, X), in(c2020_Nyereria, X).
+:- #count {X : vrs(X), in(c2020_Apanteles,X), out(c2020_Nyereria,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles,X), in(c2020_Nyereria,X)} <= 0, pw.
+pie(r30, A, 1) :- ir(X, A), in(c2020_Apanteles, X), out(c2020_Nyereria, X), ix.
+c(r30, A, 1) :- vr(X, A), in(c2020_Apanteles, X), out(c2020_Nyereria, X), ix.
+pie(r30, A, 2) :- ir(X, A), out(c2020_Apanteles, X), in(c2020_Nyereria, X), ix.
+c(r30, A, 2) :- vr(X, A), out(c2020_Apanteles, X), in(c2020_Nyereria, X), ix.
+
+% c2020_Apanteles ! c2020_Glyptapanteles
+ir(X, r31) :- in(c2020_Apanteles, X), in(c2020_Glyptapanteles, X).
+:- #count {X : vrs(X), in(c2020_Apanteles,X), out(c2020_Glyptapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles,X), in(c2020_Glyptapanteles,X)} <= 0, pw.
+pie(r31, A, 1) :- ir(X, A), in(c2020_Apanteles, X), out(c2020_Glyptapanteles, X), ix.
+c(r31, A, 1) :- vr(X, A), in(c2020_Apanteles, X), out(c2020_Glyptapanteles, X), ix.
+pie(r31, A, 2) :- ir(X, A), out(c2020_Apanteles, X), in(c2020_Glyptapanteles, X), ix.
+c(r31, A, 2) :- vr(X, A), out(c2020_Apanteles, X), in(c2020_Glyptapanteles, X), ix.
+
+% c2020_Apanteles ! c2020_Rasivalva
+ir(X, r32) :- in(c2020_Apanteles, X), in(c2020_Rasivalva, X).
+:- #count {X : vrs(X), in(c2020_Apanteles,X), out(c2020_Rasivalva,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles,X), in(c2020_Rasivalva,X)} <= 0, pw.
+pie(r32, A, 1) :- ir(X, A), in(c2020_Apanteles, X), out(c2020_Rasivalva, X), ix.
+c(r32, A, 1) :- vr(X, A), in(c2020_Apanteles, X), out(c2020_Rasivalva, X), ix.
+pie(r32, A, 2) :- ir(X, A), out(c2020_Apanteles, X), in(c2020_Rasivalva, X), ix.
+c(r32, A, 2) :- vr(X, A), out(c2020_Apanteles, X), in(c2020_Rasivalva, X), ix.
+
+% c2020_Exoryza ! c2020_Iconella
+ir(X, r33) :- in(c2020_Exoryza, X), in(c2020_Iconella, X).
+:- #count {X : vrs(X), in(c2020_Exoryza,X), out(c2020_Iconella,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exoryza,X), in(c2020_Iconella,X)} <= 0, pw.
+pie(r33, A, 1) :- ir(X, A), in(c2020_Exoryza, X), out(c2020_Iconella, X), ix.
+c(r33, A, 1) :- vr(X, A), in(c2020_Exoryza, X), out(c2020_Iconella, X), ix.
+pie(r33, A, 2) :- ir(X, A), out(c2020_Exoryza, X), in(c2020_Iconella, X), ix.
+c(r33, A, 2) :- vr(X, A), out(c2020_Exoryza, X), in(c2020_Iconella, X), ix.
+
+% c2020_Exoryza ! c2020_Illidops
+ir(X, r34) :- in(c2020_Exoryza, X), in(c2020_Illidops, X).
+:- #count {X : vrs(X), in(c2020_Exoryza,X), out(c2020_Illidops,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exoryza,X), in(c2020_Illidops,X)} <= 0, pw.
+pie(r34, A, 1) :- ir(X, A), in(c2020_Exoryza, X), out(c2020_Illidops, X), ix.
+c(r34, A, 1) :- vr(X, A), in(c2020_Exoryza, X), out(c2020_Illidops, X), ix.
+pie(r34, A, 2) :- ir(X, A), out(c2020_Exoryza, X), in(c2020_Illidops, X), ix.
+c(r34, A, 2) :- vr(X, A), out(c2020_Exoryza, X), in(c2020_Illidops, X), ix.
+
+% c2020_Exoryza ! c2020_Pholetesor
+ir(X, r35) :- in(c2020_Exoryza, X), in(c2020_Pholetesor, X).
+:- #count {X : vrs(X), in(c2020_Exoryza,X), out(c2020_Pholetesor,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exoryza,X), in(c2020_Pholetesor,X)} <= 0, pw.
+pie(r35, A, 1) :- ir(X, A), in(c2020_Exoryza, X), out(c2020_Pholetesor, X), ix.
+c(r35, A, 1) :- vr(X, A), in(c2020_Exoryza, X), out(c2020_Pholetesor, X), ix.
+pie(r35, A, 2) :- ir(X, A), out(c2020_Exoryza, X), in(c2020_Pholetesor, X), ix.
+c(r35, A, 2) :- vr(X, A), out(c2020_Exoryza, X), in(c2020_Pholetesor, X), ix.
+
+% c2020_Exoryza ! c2020_Teremys
+ir(X, r36) :- in(c2020_Exoryza, X), in(c2020_Teremys, X).
+:- #count {X : vrs(X), in(c2020_Exoryza,X), out(c2020_Teremys,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exoryza,X), in(c2020_Teremys,X)} <= 0, pw.
+pie(r36, A, 1) :- ir(X, A), in(c2020_Exoryza, X), out(c2020_Teremys, X), ix.
+c(r36, A, 1) :- vr(X, A), in(c2020_Exoryza, X), out(c2020_Teremys, X), ix.
+pie(r36, A, 2) :- ir(X, A), out(c2020_Exoryza, X), in(c2020_Teremys, X), ix.
+c(r36, A, 2) :- vr(X, A), out(c2020_Exoryza, X), in(c2020_Teremys, X), ix.
+
+% c2020_Exoryza ! c2020_Protapanteles
+ir(X, r37) :- in(c2020_Exoryza, X), in(c2020_Protapanteles, X).
+:- #count {X : vrs(X), in(c2020_Exoryza,X), out(c2020_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exoryza,X), in(c2020_Protapanteles,X)} <= 0, pw.
+pie(r37, A, 1) :- ir(X, A), in(c2020_Exoryza, X), out(c2020_Protapanteles, X), ix.
+c(r37, A, 1) :- vr(X, A), in(c2020_Exoryza, X), out(c2020_Protapanteles, X), ix.
+pie(r37, A, 2) :- ir(X, A), out(c2020_Exoryza, X), in(c2020_Protapanteles, X), ix.
+c(r37, A, 2) :- vr(X, A), out(c2020_Exoryza, X), in(c2020_Protapanteles, X), ix.
+
+% c2020_Exoryza ! c2020_Sathon
+ir(X, r38) :- in(c2020_Exoryza, X), in(c2020_Sathon, X).
+:- #count {X : vrs(X), in(c2020_Exoryza,X), out(c2020_Sathon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exoryza,X), in(c2020_Sathon,X)} <= 0, pw.
+pie(r38, A, 1) :- ir(X, A), in(c2020_Exoryza, X), out(c2020_Sathon, X), ix.
+c(r38, A, 1) :- vr(X, A), in(c2020_Exoryza, X), out(c2020_Sathon, X), ix.
+pie(r38, A, 2) :- ir(X, A), out(c2020_Exoryza, X), in(c2020_Sathon, X), ix.
+c(r38, A, 2) :- vr(X, A), out(c2020_Exoryza, X), in(c2020_Sathon, X), ix.
+
+% c2020_Exoryza ! c2020_Nyereria
+ir(X, r39) :- in(c2020_Exoryza, X), in(c2020_Nyereria, X).
+:- #count {X : vrs(X), in(c2020_Exoryza,X), out(c2020_Nyereria,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exoryza,X), in(c2020_Nyereria,X)} <= 0, pw.
+pie(r39, A, 1) :- ir(X, A), in(c2020_Exoryza, X), out(c2020_Nyereria, X), ix.
+c(r39, A, 1) :- vr(X, A), in(c2020_Exoryza, X), out(c2020_Nyereria, X), ix.
+pie(r39, A, 2) :- ir(X, A), out(c2020_Exoryza, X), in(c2020_Nyereria, X), ix.
+c(r39, A, 2) :- vr(X, A), out(c2020_Exoryza, X), in(c2020_Nyereria, X), ix.
+
+% c2020_Exoryza ! c2020_Glyptapanteles
+ir(X, r40) :- in(c2020_Exoryza, X), in(c2020_Glyptapanteles, X).
+:- #count {X : vrs(X), in(c2020_Exoryza,X), out(c2020_Glyptapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exoryza,X), in(c2020_Glyptapanteles,X)} <= 0, pw.
+pie(r40, A, 1) :- ir(X, A), in(c2020_Exoryza, X), out(c2020_Glyptapanteles, X), ix.
+c(r40, A, 1) :- vr(X, A), in(c2020_Exoryza, X), out(c2020_Glyptapanteles, X), ix.
+pie(r40, A, 2) :- ir(X, A), out(c2020_Exoryza, X), in(c2020_Glyptapanteles, X), ix.
+c(r40, A, 2) :- vr(X, A), out(c2020_Exoryza, X), in(c2020_Glyptapanteles, X), ix.
+
+% c2020_Exoryza ! c2020_Rasivalva
+ir(X, r41) :- in(c2020_Exoryza, X), in(c2020_Rasivalva, X).
+:- #count {X : vrs(X), in(c2020_Exoryza,X), out(c2020_Rasivalva,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exoryza,X), in(c2020_Rasivalva,X)} <= 0, pw.
+pie(r41, A, 1) :- ir(X, A), in(c2020_Exoryza, X), out(c2020_Rasivalva, X), ix.
+c(r41, A, 1) :- vr(X, A), in(c2020_Exoryza, X), out(c2020_Rasivalva, X), ix.
+pie(r41, A, 2) :- ir(X, A), out(c2020_Exoryza, X), in(c2020_Rasivalva, X), ix.
+c(r41, A, 2) :- vr(X, A), out(c2020_Exoryza, X), in(c2020_Rasivalva, X), ix.
+
+% c2020_Iconella ! c2020_Illidops
+ir(X, r42) :- in(c2020_Iconella, X), in(c2020_Illidops, X).
+:- #count {X : vrs(X), in(c2020_Iconella,X), out(c2020_Illidops,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Iconella,X), in(c2020_Illidops,X)} <= 0, pw.
+pie(r42, A, 1) :- ir(X, A), in(c2020_Iconella, X), out(c2020_Illidops, X), ix.
+c(r42, A, 1) :- vr(X, A), in(c2020_Iconella, X), out(c2020_Illidops, X), ix.
+pie(r42, A, 2) :- ir(X, A), out(c2020_Iconella, X), in(c2020_Illidops, X), ix.
+c(r42, A, 2) :- vr(X, A), out(c2020_Iconella, X), in(c2020_Illidops, X), ix.
+
+% c2020_Iconella ! c2020_Pholetesor
+ir(X, r43) :- in(c2020_Iconella, X), in(c2020_Pholetesor, X).
+:- #count {X : vrs(X), in(c2020_Iconella,X), out(c2020_Pholetesor,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Iconella,X), in(c2020_Pholetesor,X)} <= 0, pw.
+pie(r43, A, 1) :- ir(X, A), in(c2020_Iconella, X), out(c2020_Pholetesor, X), ix.
+c(r43, A, 1) :- vr(X, A), in(c2020_Iconella, X), out(c2020_Pholetesor, X), ix.
+pie(r43, A, 2) :- ir(X, A), out(c2020_Iconella, X), in(c2020_Pholetesor, X), ix.
+c(r43, A, 2) :- vr(X, A), out(c2020_Iconella, X), in(c2020_Pholetesor, X), ix.
+
+% c2020_Iconella ! c2020_Teremys
+ir(X, r44) :- in(c2020_Iconella, X), in(c2020_Teremys, X).
+:- #count {X : vrs(X), in(c2020_Iconella,X), out(c2020_Teremys,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Iconella,X), in(c2020_Teremys,X)} <= 0, pw.
+pie(r44, A, 1) :- ir(X, A), in(c2020_Iconella, X), out(c2020_Teremys, X), ix.
+c(r44, A, 1) :- vr(X, A), in(c2020_Iconella, X), out(c2020_Teremys, X), ix.
+pie(r44, A, 2) :- ir(X, A), out(c2020_Iconella, X), in(c2020_Teremys, X), ix.
+c(r44, A, 2) :- vr(X, A), out(c2020_Iconella, X), in(c2020_Teremys, X), ix.
+
+% c2020_Iconella ! c2020_Protapanteles
+ir(X, r45) :- in(c2020_Iconella, X), in(c2020_Protapanteles, X).
+:- #count {X : vrs(X), in(c2020_Iconella,X), out(c2020_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Iconella,X), in(c2020_Protapanteles,X)} <= 0, pw.
+pie(r45, A, 1) :- ir(X, A), in(c2020_Iconella, X), out(c2020_Protapanteles, X), ix.
+c(r45, A, 1) :- vr(X, A), in(c2020_Iconella, X), out(c2020_Protapanteles, X), ix.
+pie(r45, A, 2) :- ir(X, A), out(c2020_Iconella, X), in(c2020_Protapanteles, X), ix.
+c(r45, A, 2) :- vr(X, A), out(c2020_Iconella, X), in(c2020_Protapanteles, X), ix.
+
+% c2020_Iconella ! c2020_Sathon
+ir(X, r46) :- in(c2020_Iconella, X), in(c2020_Sathon, X).
+:- #count {X : vrs(X), in(c2020_Iconella,X), out(c2020_Sathon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Iconella,X), in(c2020_Sathon,X)} <= 0, pw.
+pie(r46, A, 1) :- ir(X, A), in(c2020_Iconella, X), out(c2020_Sathon, X), ix.
+c(r46, A, 1) :- vr(X, A), in(c2020_Iconella, X), out(c2020_Sathon, X), ix.
+pie(r46, A, 2) :- ir(X, A), out(c2020_Iconella, X), in(c2020_Sathon, X), ix.
+c(r46, A, 2) :- vr(X, A), out(c2020_Iconella, X), in(c2020_Sathon, X), ix.
+
+% c2020_Iconella ! c2020_Nyereria
+ir(X, r47) :- in(c2020_Iconella, X), in(c2020_Nyereria, X).
+:- #count {X : vrs(X), in(c2020_Iconella,X), out(c2020_Nyereria,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Iconella,X), in(c2020_Nyereria,X)} <= 0, pw.
+pie(r47, A, 1) :- ir(X, A), in(c2020_Iconella, X), out(c2020_Nyereria, X), ix.
+c(r47, A, 1) :- vr(X, A), in(c2020_Iconella, X), out(c2020_Nyereria, X), ix.
+pie(r47, A, 2) :- ir(X, A), out(c2020_Iconella, X), in(c2020_Nyereria, X), ix.
+c(r47, A, 2) :- vr(X, A), out(c2020_Iconella, X), in(c2020_Nyereria, X), ix.
+
+% c2020_Iconella ! c2020_Glyptapanteles
+ir(X, r48) :- in(c2020_Iconella, X), in(c2020_Glyptapanteles, X).
+:- #count {X : vrs(X), in(c2020_Iconella,X), out(c2020_Glyptapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Iconella,X), in(c2020_Glyptapanteles,X)} <= 0, pw.
+pie(r48, A, 1) :- ir(X, A), in(c2020_Iconella, X), out(c2020_Glyptapanteles, X), ix.
+c(r48, A, 1) :- vr(X, A), in(c2020_Iconella, X), out(c2020_Glyptapanteles, X), ix.
+pie(r48, A, 2) :- ir(X, A), out(c2020_Iconella, X), in(c2020_Glyptapanteles, X), ix.
+c(r48, A, 2) :- vr(X, A), out(c2020_Iconella, X), in(c2020_Glyptapanteles, X), ix.
+
+% c2020_Iconella ! c2020_Rasivalva
+ir(X, r49) :- in(c2020_Iconella, X), in(c2020_Rasivalva, X).
+:- #count {X : vrs(X), in(c2020_Iconella,X), out(c2020_Rasivalva,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Iconella,X), in(c2020_Rasivalva,X)} <= 0, pw.
+pie(r49, A, 1) :- ir(X, A), in(c2020_Iconella, X), out(c2020_Rasivalva, X), ix.
+c(r49, A, 1) :- vr(X, A), in(c2020_Iconella, X), out(c2020_Rasivalva, X), ix.
+pie(r49, A, 2) :- ir(X, A), out(c2020_Iconella, X), in(c2020_Rasivalva, X), ix.
+c(r49, A, 2) :- vr(X, A), out(c2020_Iconella, X), in(c2020_Rasivalva, X), ix.
+
+% c2020_Illidops ! c2020_Pholetesor
+ir(X, r50) :- in(c2020_Illidops, X), in(c2020_Pholetesor, X).
+:- #count {X : vrs(X), in(c2020_Illidops,X), out(c2020_Pholetesor,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Illidops,X), in(c2020_Pholetesor,X)} <= 0, pw.
+pie(r50, A, 1) :- ir(X, A), in(c2020_Illidops, X), out(c2020_Pholetesor, X), ix.
+c(r50, A, 1) :- vr(X, A), in(c2020_Illidops, X), out(c2020_Pholetesor, X), ix.
+pie(r50, A, 2) :- ir(X, A), out(c2020_Illidops, X), in(c2020_Pholetesor, X), ix.
+c(r50, A, 2) :- vr(X, A), out(c2020_Illidops, X), in(c2020_Pholetesor, X), ix.
+
+% c2020_Illidops ! c2020_Teremys
+ir(X, r51) :- in(c2020_Illidops, X), in(c2020_Teremys, X).
+:- #count {X : vrs(X), in(c2020_Illidops,X), out(c2020_Teremys,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Illidops,X), in(c2020_Teremys,X)} <= 0, pw.
+pie(r51, A, 1) :- ir(X, A), in(c2020_Illidops, X), out(c2020_Teremys, X), ix.
+c(r51, A, 1) :- vr(X, A), in(c2020_Illidops, X), out(c2020_Teremys, X), ix.
+pie(r51, A, 2) :- ir(X, A), out(c2020_Illidops, X), in(c2020_Teremys, X), ix.
+c(r51, A, 2) :- vr(X, A), out(c2020_Illidops, X), in(c2020_Teremys, X), ix.
+
+% c2020_Illidops ! c2020_Protapanteles
+ir(X, r52) :- in(c2020_Illidops, X), in(c2020_Protapanteles, X).
+:- #count {X : vrs(X), in(c2020_Illidops,X), out(c2020_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Illidops,X), in(c2020_Protapanteles,X)} <= 0, pw.
+pie(r52, A, 1) :- ir(X, A), in(c2020_Illidops, X), out(c2020_Protapanteles, X), ix.
+c(r52, A, 1) :- vr(X, A), in(c2020_Illidops, X), out(c2020_Protapanteles, X), ix.
+pie(r52, A, 2) :- ir(X, A), out(c2020_Illidops, X), in(c2020_Protapanteles, X), ix.
+c(r52, A, 2) :- vr(X, A), out(c2020_Illidops, X), in(c2020_Protapanteles, X), ix.
+
+% c2020_Illidops ! c2020_Sathon
+ir(X, r53) :- in(c2020_Illidops, X), in(c2020_Sathon, X).
+:- #count {X : vrs(X), in(c2020_Illidops,X), out(c2020_Sathon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Illidops,X), in(c2020_Sathon,X)} <= 0, pw.
+pie(r53, A, 1) :- ir(X, A), in(c2020_Illidops, X), out(c2020_Sathon, X), ix.
+c(r53, A, 1) :- vr(X, A), in(c2020_Illidops, X), out(c2020_Sathon, X), ix.
+pie(r53, A, 2) :- ir(X, A), out(c2020_Illidops, X), in(c2020_Sathon, X), ix.
+c(r53, A, 2) :- vr(X, A), out(c2020_Illidops, X), in(c2020_Sathon, X), ix.
+
+% c2020_Illidops ! c2020_Nyereria
+ir(X, r54) :- in(c2020_Illidops, X), in(c2020_Nyereria, X).
+:- #count {X : vrs(X), in(c2020_Illidops,X), out(c2020_Nyereria,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Illidops,X), in(c2020_Nyereria,X)} <= 0, pw.
+pie(r54, A, 1) :- ir(X, A), in(c2020_Illidops, X), out(c2020_Nyereria, X), ix.
+c(r54, A, 1) :- vr(X, A), in(c2020_Illidops, X), out(c2020_Nyereria, X), ix.
+pie(r54, A, 2) :- ir(X, A), out(c2020_Illidops, X), in(c2020_Nyereria, X), ix.
+c(r54, A, 2) :- vr(X, A), out(c2020_Illidops, X), in(c2020_Nyereria, X), ix.
+
+% c2020_Illidops ! c2020_Glyptapanteles
+ir(X, r55) :- in(c2020_Illidops, X), in(c2020_Glyptapanteles, X).
+:- #count {X : vrs(X), in(c2020_Illidops,X), out(c2020_Glyptapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Illidops,X), in(c2020_Glyptapanteles,X)} <= 0, pw.
+pie(r55, A, 1) :- ir(X, A), in(c2020_Illidops, X), out(c2020_Glyptapanteles, X), ix.
+c(r55, A, 1) :- vr(X, A), in(c2020_Illidops, X), out(c2020_Glyptapanteles, X), ix.
+pie(r55, A, 2) :- ir(X, A), out(c2020_Illidops, X), in(c2020_Glyptapanteles, X), ix.
+c(r55, A, 2) :- vr(X, A), out(c2020_Illidops, X), in(c2020_Glyptapanteles, X), ix.
+
+% c2020_Illidops ! c2020_Rasivalva
+ir(X, r56) :- in(c2020_Illidops, X), in(c2020_Rasivalva, X).
+:- #count {X : vrs(X), in(c2020_Illidops,X), out(c2020_Rasivalva,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Illidops,X), in(c2020_Rasivalva,X)} <= 0, pw.
+pie(r56, A, 1) :- ir(X, A), in(c2020_Illidops, X), out(c2020_Rasivalva, X), ix.
+c(r56, A, 1) :- vr(X, A), in(c2020_Illidops, X), out(c2020_Rasivalva, X), ix.
+pie(r56, A, 2) :- ir(X, A), out(c2020_Illidops, X), in(c2020_Rasivalva, X), ix.
+c(r56, A, 2) :- vr(X, A), out(c2020_Illidops, X), in(c2020_Rasivalva, X), ix.
+
+% c2020_Pholetesor ! c2020_Teremys
+ir(X, r57) :- in(c2020_Pholetesor, X), in(c2020_Teremys, X).
+:- #count {X : vrs(X), in(c2020_Pholetesor,X), out(c2020_Teremys,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Pholetesor,X), in(c2020_Teremys,X)} <= 0, pw.
+pie(r57, A, 1) :- ir(X, A), in(c2020_Pholetesor, X), out(c2020_Teremys, X), ix.
+c(r57, A, 1) :- vr(X, A), in(c2020_Pholetesor, X), out(c2020_Teremys, X), ix.
+pie(r57, A, 2) :- ir(X, A), out(c2020_Pholetesor, X), in(c2020_Teremys, X), ix.
+c(r57, A, 2) :- vr(X, A), out(c2020_Pholetesor, X), in(c2020_Teremys, X), ix.
+
+% c2020_Pholetesor ! c2020_Protapanteles
+ir(X, r58) :- in(c2020_Pholetesor, X), in(c2020_Protapanteles, X).
+:- #count {X : vrs(X), in(c2020_Pholetesor,X), out(c2020_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Pholetesor,X), in(c2020_Protapanteles,X)} <= 0, pw.
+pie(r58, A, 1) :- ir(X, A), in(c2020_Pholetesor, X), out(c2020_Protapanteles, X), ix.
+c(r58, A, 1) :- vr(X, A), in(c2020_Pholetesor, X), out(c2020_Protapanteles, X), ix.
+pie(r58, A, 2) :- ir(X, A), out(c2020_Pholetesor, X), in(c2020_Protapanteles, X), ix.
+c(r58, A, 2) :- vr(X, A), out(c2020_Pholetesor, X), in(c2020_Protapanteles, X), ix.
+
+% c2020_Pholetesor ! c2020_Sathon
+ir(X, r59) :- in(c2020_Pholetesor, X), in(c2020_Sathon, X).
+:- #count {X : vrs(X), in(c2020_Pholetesor,X), out(c2020_Sathon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Pholetesor,X), in(c2020_Sathon,X)} <= 0, pw.
+pie(r59, A, 1) :- ir(X, A), in(c2020_Pholetesor, X), out(c2020_Sathon, X), ix.
+c(r59, A, 1) :- vr(X, A), in(c2020_Pholetesor, X), out(c2020_Sathon, X), ix.
+pie(r59, A, 2) :- ir(X, A), out(c2020_Pholetesor, X), in(c2020_Sathon, X), ix.
+c(r59, A, 2) :- vr(X, A), out(c2020_Pholetesor, X), in(c2020_Sathon, X), ix.
+
+% c2020_Pholetesor ! c2020_Nyereria
+ir(X, r60) :- in(c2020_Pholetesor, X), in(c2020_Nyereria, X).
+:- #count {X : vrs(X), in(c2020_Pholetesor,X), out(c2020_Nyereria,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Pholetesor,X), in(c2020_Nyereria,X)} <= 0, pw.
+pie(r60, A, 1) :- ir(X, A), in(c2020_Pholetesor, X), out(c2020_Nyereria, X), ix.
+c(r60, A, 1) :- vr(X, A), in(c2020_Pholetesor, X), out(c2020_Nyereria, X), ix.
+pie(r60, A, 2) :- ir(X, A), out(c2020_Pholetesor, X), in(c2020_Nyereria, X), ix.
+c(r60, A, 2) :- vr(X, A), out(c2020_Pholetesor, X), in(c2020_Nyereria, X), ix.
+
+% c2020_Pholetesor ! c2020_Glyptapanteles
+ir(X, r61) :- in(c2020_Pholetesor, X), in(c2020_Glyptapanteles, X).
+:- #count {X : vrs(X), in(c2020_Pholetesor,X), out(c2020_Glyptapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Pholetesor,X), in(c2020_Glyptapanteles,X)} <= 0, pw.
+pie(r61, A, 1) :- ir(X, A), in(c2020_Pholetesor, X), out(c2020_Glyptapanteles, X), ix.
+c(r61, A, 1) :- vr(X, A), in(c2020_Pholetesor, X), out(c2020_Glyptapanteles, X), ix.
+pie(r61, A, 2) :- ir(X, A), out(c2020_Pholetesor, X), in(c2020_Glyptapanteles, X), ix.
+c(r61, A, 2) :- vr(X, A), out(c2020_Pholetesor, X), in(c2020_Glyptapanteles, X), ix.
+
+% c2020_Pholetesor ! c2020_Rasivalva
+ir(X, r62) :- in(c2020_Pholetesor, X), in(c2020_Rasivalva, X).
+:- #count {X : vrs(X), in(c2020_Pholetesor,X), out(c2020_Rasivalva,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Pholetesor,X), in(c2020_Rasivalva,X)} <= 0, pw.
+pie(r62, A, 1) :- ir(X, A), in(c2020_Pholetesor, X), out(c2020_Rasivalva, X), ix.
+c(r62, A, 1) :- vr(X, A), in(c2020_Pholetesor, X), out(c2020_Rasivalva, X), ix.
+pie(r62, A, 2) :- ir(X, A), out(c2020_Pholetesor, X), in(c2020_Rasivalva, X), ix.
+c(r62, A, 2) :- vr(X, A), out(c2020_Pholetesor, X), in(c2020_Rasivalva, X), ix.
+
+% c2020_Teremys ! c2020_Protapanteles
+ir(X, r63) :- in(c2020_Teremys, X), in(c2020_Protapanteles, X).
+:- #count {X : vrs(X), in(c2020_Teremys,X), out(c2020_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Teremys,X), in(c2020_Protapanteles,X)} <= 0, pw.
+pie(r63, A, 1) :- ir(X, A), in(c2020_Teremys, X), out(c2020_Protapanteles, X), ix.
+c(r63, A, 1) :- vr(X, A), in(c2020_Teremys, X), out(c2020_Protapanteles, X), ix.
+pie(r63, A, 2) :- ir(X, A), out(c2020_Teremys, X), in(c2020_Protapanteles, X), ix.
+c(r63, A, 2) :- vr(X, A), out(c2020_Teremys, X), in(c2020_Protapanteles, X), ix.
+
+% c2020_Teremys ! c2020_Sathon
+ir(X, r64) :- in(c2020_Teremys, X), in(c2020_Sathon, X).
+:- #count {X : vrs(X), in(c2020_Teremys,X), out(c2020_Sathon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Teremys,X), in(c2020_Sathon,X)} <= 0, pw.
+pie(r64, A, 1) :- ir(X, A), in(c2020_Teremys, X), out(c2020_Sathon, X), ix.
+c(r64, A, 1) :- vr(X, A), in(c2020_Teremys, X), out(c2020_Sathon, X), ix.
+pie(r64, A, 2) :- ir(X, A), out(c2020_Teremys, X), in(c2020_Sathon, X), ix.
+c(r64, A, 2) :- vr(X, A), out(c2020_Teremys, X), in(c2020_Sathon, X), ix.
+
+% c2020_Teremys ! c2020_Nyereria
+ir(X, r65) :- in(c2020_Teremys, X), in(c2020_Nyereria, X).
+:- #count {X : vrs(X), in(c2020_Teremys,X), out(c2020_Nyereria,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Teremys,X), in(c2020_Nyereria,X)} <= 0, pw.
+pie(r65, A, 1) :- ir(X, A), in(c2020_Teremys, X), out(c2020_Nyereria, X), ix.
+c(r65, A, 1) :- vr(X, A), in(c2020_Teremys, X), out(c2020_Nyereria, X), ix.
+pie(r65, A, 2) :- ir(X, A), out(c2020_Teremys, X), in(c2020_Nyereria, X), ix.
+c(r65, A, 2) :- vr(X, A), out(c2020_Teremys, X), in(c2020_Nyereria, X), ix.
+
+% c2020_Teremys ! c2020_Glyptapanteles
+ir(X, r66) :- in(c2020_Teremys, X), in(c2020_Glyptapanteles, X).
+:- #count {X : vrs(X), in(c2020_Teremys,X), out(c2020_Glyptapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Teremys,X), in(c2020_Glyptapanteles,X)} <= 0, pw.
+pie(r66, A, 1) :- ir(X, A), in(c2020_Teremys, X), out(c2020_Glyptapanteles, X), ix.
+c(r66, A, 1) :- vr(X, A), in(c2020_Teremys, X), out(c2020_Glyptapanteles, X), ix.
+pie(r66, A, 2) :- ir(X, A), out(c2020_Teremys, X), in(c2020_Glyptapanteles, X), ix.
+c(r66, A, 2) :- vr(X, A), out(c2020_Teremys, X), in(c2020_Glyptapanteles, X), ix.
+
+% c2020_Teremys ! c2020_Rasivalva
+ir(X, r67) :- in(c2020_Teremys, X), in(c2020_Rasivalva, X).
+:- #count {X : vrs(X), in(c2020_Teremys,X), out(c2020_Rasivalva,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Teremys,X), in(c2020_Rasivalva,X)} <= 0, pw.
+pie(r67, A, 1) :- ir(X, A), in(c2020_Teremys, X), out(c2020_Rasivalva, X), ix.
+c(r67, A, 1) :- vr(X, A), in(c2020_Teremys, X), out(c2020_Rasivalva, X), ix.
+pie(r67, A, 2) :- ir(X, A), out(c2020_Teremys, X), in(c2020_Rasivalva, X), ix.
+c(r67, A, 2) :- vr(X, A), out(c2020_Teremys, X), in(c2020_Rasivalva, X), ix.
+
+% c2020_Protapanteles ! c2020_Sathon
+ir(X, r68) :- in(c2020_Protapanteles, X), in(c2020_Sathon, X).
+:- #count {X : vrs(X), in(c2020_Protapanteles,X), out(c2020_Sathon,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protapanteles,X), in(c2020_Sathon,X)} <= 0, pw.
+pie(r68, A, 1) :- ir(X, A), in(c2020_Protapanteles, X), out(c2020_Sathon, X), ix.
+c(r68, A, 1) :- vr(X, A), in(c2020_Protapanteles, X), out(c2020_Sathon, X), ix.
+pie(r68, A, 2) :- ir(X, A), out(c2020_Protapanteles, X), in(c2020_Sathon, X), ix.
+c(r68, A, 2) :- vr(X, A), out(c2020_Protapanteles, X), in(c2020_Sathon, X), ix.
+
+% c2020_Protapanteles ! c2020_Nyereria
+ir(X, r69) :- in(c2020_Protapanteles, X), in(c2020_Nyereria, X).
+:- #count {X : vrs(X), in(c2020_Protapanteles,X), out(c2020_Nyereria,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protapanteles,X), in(c2020_Nyereria,X)} <= 0, pw.
+pie(r69, A, 1) :- ir(X, A), in(c2020_Protapanteles, X), out(c2020_Nyereria, X), ix.
+c(r69, A, 1) :- vr(X, A), in(c2020_Protapanteles, X), out(c2020_Nyereria, X), ix.
+pie(r69, A, 2) :- ir(X, A), out(c2020_Protapanteles, X), in(c2020_Nyereria, X), ix.
+c(r69, A, 2) :- vr(X, A), out(c2020_Protapanteles, X), in(c2020_Nyereria, X), ix.
+
+% c2020_Protapanteles ! c2020_Glyptapanteles
+ir(X, r70) :- in(c2020_Protapanteles, X), in(c2020_Glyptapanteles, X).
+:- #count {X : vrs(X), in(c2020_Protapanteles,X), out(c2020_Glyptapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protapanteles,X), in(c2020_Glyptapanteles,X)} <= 0, pw.
+pie(r70, A, 1) :- ir(X, A), in(c2020_Protapanteles, X), out(c2020_Glyptapanteles, X), ix.
+c(r70, A, 1) :- vr(X, A), in(c2020_Protapanteles, X), out(c2020_Glyptapanteles, X), ix.
+pie(r70, A, 2) :- ir(X, A), out(c2020_Protapanteles, X), in(c2020_Glyptapanteles, X), ix.
+c(r70, A, 2) :- vr(X, A), out(c2020_Protapanteles, X), in(c2020_Glyptapanteles, X), ix.
+
+% c2020_Protapanteles ! c2020_Rasivalva
+ir(X, r71) :- in(c2020_Protapanteles, X), in(c2020_Rasivalva, X).
+:- #count {X : vrs(X), in(c2020_Protapanteles,X), out(c2020_Rasivalva,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protapanteles,X), in(c2020_Rasivalva,X)} <= 0, pw.
+pie(r71, A, 1) :- ir(X, A), in(c2020_Protapanteles, X), out(c2020_Rasivalva, X), ix.
+c(r71, A, 1) :- vr(X, A), in(c2020_Protapanteles, X), out(c2020_Rasivalva, X), ix.
+pie(r71, A, 2) :- ir(X, A), out(c2020_Protapanteles, X), in(c2020_Rasivalva, X), ix.
+c(r71, A, 2) :- vr(X, A), out(c2020_Protapanteles, X), in(c2020_Rasivalva, X), ix.
+
+% c2020_Sathon ! c2020_Nyereria
+ir(X, r72) :- in(c2020_Sathon, X), in(c2020_Nyereria, X).
+:- #count {X : vrs(X), in(c2020_Sathon,X), out(c2020_Nyereria,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Sathon,X), in(c2020_Nyereria,X)} <= 0, pw.
+pie(r72, A, 1) :- ir(X, A), in(c2020_Sathon, X), out(c2020_Nyereria, X), ix.
+c(r72, A, 1) :- vr(X, A), in(c2020_Sathon, X), out(c2020_Nyereria, X), ix.
+pie(r72, A, 2) :- ir(X, A), out(c2020_Sathon, X), in(c2020_Nyereria, X), ix.
+c(r72, A, 2) :- vr(X, A), out(c2020_Sathon, X), in(c2020_Nyereria, X), ix.
+
+% c2020_Sathon ! c2020_Glyptapanteles
+ir(X, r73) :- in(c2020_Sathon, X), in(c2020_Glyptapanteles, X).
+:- #count {X : vrs(X), in(c2020_Sathon,X), out(c2020_Glyptapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Sathon,X), in(c2020_Glyptapanteles,X)} <= 0, pw.
+pie(r73, A, 1) :- ir(X, A), in(c2020_Sathon, X), out(c2020_Glyptapanteles, X), ix.
+c(r73, A, 1) :- vr(X, A), in(c2020_Sathon, X), out(c2020_Glyptapanteles, X), ix.
+pie(r73, A, 2) :- ir(X, A), out(c2020_Sathon, X), in(c2020_Glyptapanteles, X), ix.
+c(r73, A, 2) :- vr(X, A), out(c2020_Sathon, X), in(c2020_Glyptapanteles, X), ix.
+
+% c2020_Sathon ! c2020_Rasivalva
+ir(X, r74) :- in(c2020_Sathon, X), in(c2020_Rasivalva, X).
+:- #count {X : vrs(X), in(c2020_Sathon,X), out(c2020_Rasivalva,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Sathon,X), in(c2020_Rasivalva,X)} <= 0, pw.
+pie(r74, A, 1) :- ir(X, A), in(c2020_Sathon, X), out(c2020_Rasivalva, X), ix.
+c(r74, A, 1) :- vr(X, A), in(c2020_Sathon, X), out(c2020_Rasivalva, X), ix.
+pie(r74, A, 2) :- ir(X, A), out(c2020_Sathon, X), in(c2020_Rasivalva, X), ix.
+c(r74, A, 2) :- vr(X, A), out(c2020_Sathon, X), in(c2020_Rasivalva, X), ix.
+
+% c2020_Nyereria ! c2020_Glyptapanteles
+ir(X, r75) :- in(c2020_Nyereria, X), in(c2020_Glyptapanteles, X).
+:- #count {X : vrs(X), in(c2020_Nyereria,X), out(c2020_Glyptapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Nyereria,X), in(c2020_Glyptapanteles,X)} <= 0, pw.
+pie(r75, A, 1) :- ir(X, A), in(c2020_Nyereria, X), out(c2020_Glyptapanteles, X), ix.
+c(r75, A, 1) :- vr(X, A), in(c2020_Nyereria, X), out(c2020_Glyptapanteles, X), ix.
+pie(r75, A, 2) :- ir(X, A), out(c2020_Nyereria, X), in(c2020_Glyptapanteles, X), ix.
+c(r75, A, 2) :- vr(X, A), out(c2020_Nyereria, X), in(c2020_Glyptapanteles, X), ix.
+
+% c2020_Nyereria ! c2020_Rasivalva
+ir(X, r76) :- in(c2020_Nyereria, X), in(c2020_Rasivalva, X).
+:- #count {X : vrs(X), in(c2020_Nyereria,X), out(c2020_Rasivalva,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Nyereria,X), in(c2020_Rasivalva,X)} <= 0, pw.
+pie(r76, A, 1) :- ir(X, A), in(c2020_Nyereria, X), out(c2020_Rasivalva, X), ix.
+c(r76, A, 1) :- vr(X, A), in(c2020_Nyereria, X), out(c2020_Rasivalva, X), ix.
+pie(r76, A, 2) :- ir(X, A), out(c2020_Nyereria, X), in(c2020_Rasivalva, X), ix.
+c(r76, A, 2) :- vr(X, A), out(c2020_Nyereria, X), in(c2020_Rasivalva, X), ix.
+
+% c2020_Glyptapanteles ! c2020_Rasivalva
+ir(X, r77) :- in(c2020_Glyptapanteles, X), in(c2020_Rasivalva, X).
+:- #count {X : vrs(X), in(c2020_Glyptapanteles,X), out(c2020_Rasivalva,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Glyptapanteles,X), in(c2020_Rasivalva,X)} <= 0, pw.
+pie(r77, A, 1) :- ir(X, A), in(c2020_Glyptapanteles, X), out(c2020_Rasivalva, X), ix.
+c(r77, A, 1) :- vr(X, A), in(c2020_Glyptapanteles, X), out(c2020_Rasivalva, X), ix.
+pie(r77, A, 2) :- ir(X, A), out(c2020_Glyptapanteles, X), in(c2020_Rasivalva, X), ix.
+c(r77, A, 2) :- vr(X, A), out(c2020_Glyptapanteles, X), in(c2020_Rasivalva, X), ix.
+
+
+%%% Articulations
+% 2020.Apanteles < 2003.Apanteles
+:- #count {X : vrs(X), in(c2020_Apanteles,X), in(c2003_Apanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Apanteles,X), in(c2003_Apanteles,X)} <= 0, pw.
+ir(X, r78) :- in(c2020_Apanteles,X), out(c2003_Apanteles,X), pw.
+pie(r78, A, 1) :- ir(X, A), out(c2020_Apanteles, X), in(c2003_Apanteles, X), ix.
+c(r78, A, 1) :- vr(X, A), out(c2020_Apanteles, X), in(c2003_Apanteles, X), ix.
+
+pie(r78, A, 2) :- ir(X, A), in(c2020_Apanteles, X), in(c2003_Apanteles, X), ix.
+c(r78, A, 2) :- vr(X, A), in(c2020_Apanteles, X), in(c2003_Apanteles, X), ix.
+
+
+% 2020.Exoryza < 2003.Apanteles
+:- #count {X : vrs(X), in(c2020_Exoryza,X), in(c2003_Apanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Exoryza,X), in(c2003_Apanteles,X)} <= 0, pw.
+ir(X, r79) :- in(c2020_Exoryza,X), out(c2003_Apanteles,X), pw.
+pie(r79, A, 1) :- ir(X, A), out(c2020_Exoryza, X), in(c2003_Apanteles, X), ix.
+c(r79, A, 1) :- vr(X, A), out(c2020_Exoryza, X), in(c2003_Apanteles, X), ix.
+
+pie(r79, A, 2) :- ir(X, A), in(c2020_Exoryza, X), in(c2003_Apanteles, X), ix.
+c(r79, A, 2) :- vr(X, A), in(c2020_Exoryza, X), in(c2003_Apanteles, X), ix.
+
+
+% 2020.Iconella < 2003.Apanteles
+:- #count {X : vrs(X), in(c2020_Iconella,X), in(c2003_Apanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Iconella,X), in(c2003_Apanteles,X)} <= 0, pw.
+ir(X, r80) :- in(c2020_Iconella,X), out(c2003_Apanteles,X), pw.
+pie(r80, A, 1) :- ir(X, A), out(c2020_Iconella, X), in(c2003_Apanteles, X), ix.
+c(r80, A, 1) :- vr(X, A), out(c2020_Iconella, X), in(c2003_Apanteles, X), ix.
+
+pie(r80, A, 2) :- ir(X, A), in(c2020_Iconella, X), in(c2003_Apanteles, X), ix.
+c(r80, A, 2) :- vr(X, A), in(c2020_Iconella, X), in(c2003_Apanteles, X), ix.
+
+
+% 2020.Illidops < 2003.Apanteles
+:- #count {X : vrs(X), in(c2020_Illidops,X), in(c2003_Apanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Illidops,X), in(c2003_Apanteles,X)} <= 0, pw.
+ir(X, r81) :- in(c2020_Illidops,X), out(c2003_Apanteles,X), pw.
+pie(r81, A, 1) :- ir(X, A), out(c2020_Illidops, X), in(c2003_Apanteles, X), ix.
+c(r81, A, 1) :- vr(X, A), out(c2020_Illidops, X), in(c2003_Apanteles, X), ix.
+
+pie(r81, A, 2) :- ir(X, A), in(c2020_Illidops, X), in(c2003_Apanteles, X), ix.
+c(r81, A, 2) :- vr(X, A), in(c2020_Illidops, X), in(c2003_Apanteles, X), ix.
+
+
+% 2020.Pholetesor = 2003.Pholetesor
+ir(X, r82) :- out(c2020_Pholetesor,X), in(c2003_Pholetesor,X).
+ir(X, r82) :- in(c2020_Pholetesor,X), out(c2003_Pholetesor,X).
+ir(X, prod(r82,R)) :- out3(c2020_Pholetesor, X, R), in(c2003_Pholetesor,X), ix.
+ir(X, prod(r82,R)) :- in(c2020_Pholetesor,X), out3(c2003_Pholetesor, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Pholetesor,X), in(c2003_Pholetesor,X)} <= 0, pw.
+pie(r82, A, 1) :- ir(X, A), in(c2020_Pholetesor, X), in(c2003_Pholetesor, X), ix.
+c(r82, A, 1) :- vr(X, A), in(c2020_Pholetesor, X), in(c2003_Pholetesor, X), ix.
+
+
+% 2020.Teremys = 2003.Teremys
+ir(X, r83) :- out(c2020_Teremys,X), in(c2003_Teremys,X).
+ir(X, r83) :- in(c2020_Teremys,X), out(c2003_Teremys,X).
+ir(X, prod(r83,R)) :- out3(c2020_Teremys, X, R), in(c2003_Teremys,X), ix.
+ir(X, prod(r83,R)) :- in(c2020_Teremys,X), out3(c2003_Teremys, X, R), ix.
+:- #count {X : vrs(X), in(c2020_Teremys,X), in(c2003_Teremys,X)} <= 0, pw.
+pie(r83, A, 1) :- ir(X, A), in(c2020_Teremys, X), in(c2003_Teremys, X), ix.
+c(r83, A, 1) :- vr(X, A), in(c2020_Teremys, X), in(c2003_Teremys, X), ix.
+
+
+% 2020.Protapanteles < 2003.Protapanteles
+:- #count {X : vrs(X), in(c2020_Protapanteles,X), in(c2003_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Protapanteles,X), in(c2003_Protapanteles,X)} <= 0, pw.
+ir(X, r84) :- in(c2020_Protapanteles,X), out(c2003_Protapanteles,X), pw.
+pie(r84, A, 1) :- ir(X, A), out(c2020_Protapanteles, X), in(c2003_Protapanteles, X), ix.
+c(r84, A, 1) :- vr(X, A), out(c2020_Protapanteles, X), in(c2003_Protapanteles, X), ix.
+
+pie(r84, A, 2) :- ir(X, A), in(c2020_Protapanteles, X), in(c2003_Protapanteles, X), ix.
+c(r84, A, 2) :- vr(X, A), in(c2020_Protapanteles, X), in(c2003_Protapanteles, X), ix.
+
+
+% 2020.Sathon < 2003.Protapanteles
+:- #count {X : vrs(X), in(c2020_Sathon,X), in(c2003_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Sathon,X), in(c2003_Protapanteles,X)} <= 0, pw.
+ir(X, r85) :- in(c2020_Sathon,X), out(c2003_Protapanteles,X), pw.
+pie(r85, A, 1) :- ir(X, A), out(c2020_Sathon, X), in(c2003_Protapanteles, X), ix.
+c(r85, A, 1) :- vr(X, A), out(c2020_Sathon, X), in(c2003_Protapanteles, X), ix.
+
+pie(r85, A, 2) :- ir(X, A), in(c2020_Sathon, X), in(c2003_Protapanteles, X), ix.
+c(r85, A, 2) :- vr(X, A), in(c2020_Sathon, X), in(c2003_Protapanteles, X), ix.
+
+
+% 2020.Nyereria < 2003.Protapanteles
+:- #count {X : vrs(X), in(c2020_Nyereria,X), in(c2003_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Nyereria,X), in(c2003_Protapanteles,X)} <= 0, pw.
+ir(X, r86) :- in(c2020_Nyereria,X), out(c2003_Protapanteles,X), pw.
+pie(r86, A, 1) :- ir(X, A), out(c2020_Nyereria, X), in(c2003_Protapanteles, X), ix.
+c(r86, A, 1) :- vr(X, A), out(c2020_Nyereria, X), in(c2003_Protapanteles, X), ix.
+
+pie(r86, A, 2) :- ir(X, A), in(c2020_Nyereria, X), in(c2003_Protapanteles, X), ix.
+c(r86, A, 2) :- vr(X, A), in(c2020_Nyereria, X), in(c2003_Protapanteles, X), ix.
+
+
+% 2020.Glyptapanteles < 2003.Protapanteles
+:- #count {X : vrs(X), in(c2020_Glyptapanteles,X), in(c2003_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Glyptapanteles,X), in(c2003_Protapanteles,X)} <= 0, pw.
+ir(X, r87) :- in(c2020_Glyptapanteles,X), out(c2003_Protapanteles,X), pw.
+pie(r87, A, 1) :- ir(X, A), out(c2020_Glyptapanteles, X), in(c2003_Protapanteles, X), ix.
+c(r87, A, 1) :- vr(X, A), out(c2020_Glyptapanteles, X), in(c2003_Protapanteles, X), ix.
+
+pie(r87, A, 2) :- ir(X, A), in(c2020_Glyptapanteles, X), in(c2003_Protapanteles, X), ix.
+c(r87, A, 2) :- vr(X, A), in(c2020_Glyptapanteles, X), in(c2003_Protapanteles, X), ix.
+
+
+% 2020.Rasivalva < 2003.Protapanteles
+:- #count {X : vrs(X), in(c2020_Rasivalva,X), in(c2003_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2020_Rasivalva,X), in(c2003_Protapanteles,X)} <= 0, pw.
+ir(X, r88) :- in(c2020_Rasivalva,X), out(c2003_Protapanteles,X), pw.
+pie(r88, A, 1) :- ir(X, A), out(c2020_Rasivalva, X), in(c2003_Protapanteles, X), ix.
+c(r88, A, 1) :- vr(X, A), out(c2020_Rasivalva, X), in(c2003_Protapanteles, X), ix.
+
+pie(r88, A, 2) :- ir(X, A), in(c2020_Rasivalva, X), in(c2003_Protapanteles, X), ix.
+c(r88, A, 2) :- vr(X, A), in(c2020_Rasivalva, X), in(c2003_Protapanteles, X), ix.
+
+
+% 2020.Microgastrinae > 2003.Apanteles
+ir(X, r89) :- out(c2020_Microgastrinae,X), in(c2003_Apanteles,X), pw.
+ir(X, prod(r89,R)) :- out3(c2020_Microgastrinae, X, R), in(c2003_Apanteles,X), ix.
+:- #count {X : vrs(X), in(c2020_Microgastrinae,X), in(c2003_Apanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), in(c2020_Microgastrinae,X), out(c2003_Apanteles,X)} <= 0, pw.
+pie(r89, A, 1) :- ir(X, A), in(c2020_Microgastrinae, X), out(c2003_Apanteles, X), ix.
+c(r89, A, 1) :- vr(X, A), in(c2020_Microgastrinae, X), out(c2003_Apanteles, X), ix.
+
+pie(r89, A, 2) :- ir(X, A), in(c2020_Microgastrinae, X), in(c2003_Apanteles, X), ix.
+c(r89, A, 2) :- vr(X, A), in(c2020_Microgastrinae, X), in(c2003_Apanteles, X), ix.
+
+
+% 2020.Microgastrinae > 2003.Protapanteles
+ir(X, r90) :- out(c2020_Microgastrinae,X), in(c2003_Protapanteles,X), pw.
+ir(X, prod(r90,R)) :- out3(c2020_Microgastrinae, X, R), in(c2003_Protapanteles,X), ix.
+:- #count {X : vrs(X), in(c2020_Microgastrinae,X), in(c2003_Protapanteles,X)} <= 0, pw.
+:- #count {X : vrs(X), in(c2020_Microgastrinae,X), out(c2003_Protapanteles,X)} <= 0, pw.
+pie(r90, A, 1) :- ir(X, A), in(c2020_Microgastrinae, X), out(c2003_Protapanteles, X), ix.
+c(r90, A, 1) :- vr(X, A), in(c2020_Microgastrinae, X), out(c2003_Protapanteles, X), ix.
+
+pie(r90, A, 2) :- ir(X, A), in(c2020_Microgastrinae, X), in(c2003_Protapanteles, X), ix.
+c(r90, A, 2) :- vr(X, A), in(c2020_Microgastrinae, X), in(c2003_Protapanteles, X), ix.
+
+
+%%% Decoding now
+:- rel(X, Y, "="), rel(X, Y, "<"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "="), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "="), rel(X, Y, "><"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "="), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "<"), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "<"), rel(X, Y, "><"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "<"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, ">"), rel(X, Y, "><"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, ">"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "><"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- not rel(X, Y, "="), not rel(X, Y, "<"), not rel(X, Y, ">"), not rel(X, Y, "><"), not rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), N1 < N2, not ncf(X), not ncf(Y), pw.
+
+rel(X, Y, "=") :- not hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2), pw.
+rel(X, Y, "<") :- not hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2), pw.
+rel(X, Y, ">") :- hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2), pw.
+rel(X, Y, "><") :- hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2), pw.
+rel(X, Y, "!") :- hint(X, Y, 0), not hint(X, Y, 1), hint(X, Y, 2), pw.
+
+
+hint(X, Y, 0) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), out(Y, R), not ncf(X), not ncf(Y), pw.
+hint(X, Y, 1) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), in(Y, R), not ncf(X), not ncf(Y), pw.
+hint(X, Y, 2) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), out(X, R), in(Y, R), not ncf(X), not ncf(Y), pw.
+

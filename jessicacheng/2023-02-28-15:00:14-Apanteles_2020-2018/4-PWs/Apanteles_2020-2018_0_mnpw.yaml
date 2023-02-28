@@ -1,0 +1,87 @@
+2018.Pholetesor:
+  concept: Pholetesor
+  group: '2018'
+2020.Pholetesor:
+  concept: Pholetesor
+  group: '2020'
+2020.Teremys:
+  concept: Teremys
+  group: '2020'
+congruent.2020.Apanteles\n2018.Apanteles:
+  concept: 2020.Apanteles\n2018.Apanteles
+  group: congruent
+congruent.2020.Exoryza\n2018.Exoryza:
+  concept: 2020.Exoryza\n2018.Exoryza
+  group: congruent
+congruent.2020.Glyptapanteles\n2018.Glyptapanteles:
+  concept: 2020.Glyptapanteles\n2018.Glyptapanteles
+  group: congruent
+congruent.2020.Iconella\n2018.Iconella:
+  concept: 2020.Iconella\n2018.Iconella
+  group: congruent
+congruent.2020.Illidops\n2018.Illidops:
+  concept: 2020.Illidops\n2018.Illidops
+  group: congruent
+congruent.2020.Microgastrinae\n2018.Microgastrinae:
+  concept: 2020.Microgastrinae\n2018.Microgastrinae
+  group: congruent
+congruent.2020.Nyereria\n2018.Nyereria:
+  concept: 2020.Nyereria\n2018.Nyereria
+  group: congruent
+congruent.2020.Protapanteles\n2018.Protapanteles:
+  concept: 2020.Protapanteles\n2018.Protapanteles
+  group: congruent
+congruent.2020.Rasivalva\n2018.Rasivalva:
+  concept: 2020.Rasivalva\n2018.Rasivalva
+  group: congruent
+congruent.2020.Sathon\n2018.Sathon:
+  concept: 2020.Sathon\n2018.Sathon
+  group: congruent
+2018.Pholetesor_2020.Microgastrinae\n2018.Microgastrinae:
+  label: is_a (input)
+  s: 2018.Pholetesor
+  t: 2020.Microgastrinae\n2018.Microgastrinae
+2020.Apanteles\n2018.Apanteles_2020.Microgastrinae\n2018.Microgastrinae:
+  label: is_a (input)
+  s: 2020.Apanteles\n2018.Apanteles
+  t: 2020.Microgastrinae\n2018.Microgastrinae
+2020.Exoryza\n2018.Exoryza_2020.Microgastrinae\n2018.Microgastrinae:
+  label: is_a (input)
+  s: 2020.Exoryza\n2018.Exoryza
+  t: 2020.Microgastrinae\n2018.Microgastrinae
+2020.Glyptapanteles\n2018.Glyptapanteles_2020.Microgastrinae\n2018.Microgastrinae:
+  label: is_a (input)
+  s: 2020.Glyptapanteles\n2018.Glyptapanteles
+  t: 2020.Microgastrinae\n2018.Microgastrinae
+2020.Iconella\n2018.Iconella_2020.Microgastrinae\n2018.Microgastrinae:
+  label: is_a (input)
+  s: 2020.Iconella\n2018.Iconella
+  t: 2020.Microgastrinae\n2018.Microgastrinae
+2020.Illidops\n2018.Illidops_2020.Microgastrinae\n2018.Microgastrinae:
+  label: is_a (input)
+  s: 2020.Illidops\n2018.Illidops
+  t: 2020.Microgastrinae\n2018.Microgastrinae
+2020.Nyereria\n2018.Nyereria_2020.Microgastrinae\n2018.Microgastrinae:
+  label: is_a (input)
+  s: 2020.Nyereria\n2018.Nyereria
+  t: 2020.Microgastrinae\n2018.Microgastrinae
+2020.Pholetesor_2018.Pholetesor:
+  label: is_a (input)
+  s: 2020.Pholetesor
+  t: 2018.Pholetesor
+2020.Protapanteles\n2018.Protapanteles_2020.Microgastrinae\n2018.Microgastrinae:
+  label: is_a (input)
+  s: 2020.Protapanteles\n2018.Protapanteles
+  t: 2020.Microgastrinae\n2018.Microgastrinae
+2020.Rasivalva\n2018.Rasivalva_2020.Microgastrinae\n2018.Microgastrinae:
+  label: is_a (input)
+  s: 2020.Rasivalva\n2018.Rasivalva
+  t: 2020.Microgastrinae\n2018.Microgastrinae
+2020.Sathon\n2018.Sathon_2020.Microgastrinae\n2018.Microgastrinae:
+  label: is_a (input)
+  s: 2020.Sathon\n2018.Sathon
+  t: 2020.Microgastrinae\n2018.Microgastrinae
+2020.Teremys_2018.Pholetesor:
+  label: is_a (input)
+  s: 2020.Teremys
+  t: 2018.Pholetesor

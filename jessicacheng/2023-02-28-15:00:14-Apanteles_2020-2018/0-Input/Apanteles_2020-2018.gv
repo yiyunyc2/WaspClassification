@@ -1,0 +1,93 @@
+digraph{
+rankdir=LR
+node[shape=circle style=filled fillcolor="#FFFFFF"] 
+node[shape=box style=filled fillcolor="#CCFFCC" fontname="helvetica"] 
+"2020.Apanteles"
+"2020.Glyptapanteles"
+"2020.Exoryza"
+"2020.Rasivalva"
+"2020.Teremys"
+"2020.Illidops"
+"2020.Protapanteles"
+"2020.Sathon"
+"2020.Microgastrinae"
+"2020.Nyereria"
+"2020.Pholetesor"
+"2020.Iconella"
+node[shape=circle style=filled fillcolor="#FFFFFF"] 
+node[shape=note style=filled fillcolor="#FFFFCC" fontname="helvetica"] 
+"2018.Microgastrinae"
+"2018.Iconella"
+"2018.Glyptapanteles"
+"2018.Nyereria"
+"2018.Sathon"
+"2018.Rasivalva"
+"2018.Pholetesor"
+"2018.Illidops"
+"2018.Apanteles"
+"2018.Exoryza"
+"2018.Protapanteles"
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+"2020.Microgastrinae" -> "2020.Apanteles" [dir=back]
+"2020.Microgastrinae" -> "2020.Iconella" [dir=back]
+"2020.Microgastrinae" -> "2020.Illidops" [dir=back]
+"2020.Microgastrinae" -> "2020.Sathon" [dir=back]
+"2020.Microgastrinae" -> "2020.Protapanteles" [dir=back]
+"2020.Microgastrinae" -> "2020.Pholetesor" [dir=back]
+"2020.Microgastrinae" -> "2020.Nyereria" [dir=back]
+"2020.Microgastrinae" -> "2020.Exoryza" [dir=back]
+"2020.Microgastrinae" -> "2020.Teremys" [dir=back]
+"2020.Microgastrinae" -> "2020.Rasivalva" [dir=back]
+"2020.Microgastrinae" -> "2020.Glyptapanteles" [dir=back]
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+"2018.Pholetesor" -> "2018.Microgastrinae"
+"2018.Exoryza" -> "2018.Microgastrinae"
+"2018.Illidops" -> "2018.Microgastrinae"
+"2018.Nyereria" -> "2018.Microgastrinae"
+"2018.Iconella" -> "2018.Microgastrinae"
+"2018.Glyptapanteles" -> "2018.Microgastrinae"
+"2018.Protapanteles" -> "2018.Microgastrinae"
+"2018.Apanteles" -> "2018.Microgastrinae"
+"2018.Rasivalva" -> "2018.Microgastrinae"
+"2018.Sathon" -> "2018.Microgastrinae"
+edge[style=solid color="#000000" constraint=true penwidth=1 dir=forward]
+edge[style=dashed color="#AA00FF" constraint=true penwidth=2 dir=both]
+"2020.Sathon" -> "2018.Sathon" [label="="]
+"2020.Exoryza" -> "2018.Exoryza" [label="="]
+"2020.Illidops" -> "2018.Illidops" [label="="]
+"2020.Protapanteles" -> "2018.Protapanteles" [label="="]
+"2020.Teremys" -> "2018.Pholetesor" [label="<"]
+"2020.Glyptapanteles" -> "2018.Glyptapanteles" [label="="]
+"2020.Apanteles" -> "2018.Apanteles" [label="="]
+"2020.Iconella" -> "2018.Iconella" [label="="]
+"2020.Rasivalva" -> "2018.Rasivalva" [label="="]
+"2020.Microgastrinae" -> "2018.Pholetesor" [label=">"]
+"2020.Pholetesor" -> "2018.Pholetesor" [label="<"]
+"2020.Nyereria" -> "2018.Nyereria" [label="="]
+node[shape=box] 
+{rank=source Legend [fillcolor= white margin=0 label=< 
+ <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> 
+<TR> <TD COLSPAN="2"><font face="Arial Black"> Nodes</font></TD> </TR> 
+<TR> 
+ <TD bgcolor="#CCFFCC" fontname="helvetica">2020</TD> 
+ <TD>12</TD> 
+ </TR> 
+<TR> 
+ <TD bgcolor="#FFFFCC" fontname="helvetica">2018</TD> 
+ <TD>11</TD> 
+ </TR> 
+<TR> <TD COLSPAN="2"><font face = "Arial Black"> Edges </font></TD> </TR> 
+<TR> 
+ <TD><font color ="#000000">is_a (2020)</font></TD><TD>11</TD>
+</TR>
+<TR> 
+ <TD><font color ="#000000">is_a (2018)</font></TD><TD>10</TD>
+</TR>
+<TR> 
+ <TD><font color ="#AA00FF">articulations</font></TD><TD>12</TD>
+</TR>
+</TABLE> 
+ >] } 
+}
