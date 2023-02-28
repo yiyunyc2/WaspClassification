@@ -1,0 +1,42 @@
+taxonomy 2018 Whitfield
+(Microgastrinae Apanteles Exoryza Iconella Illidops Pholetesor Protapanteles Sathon Nyereria Glyptapanteles Rasivalva)
+(Apanteles)
+(Exoryza) 
+(Iconella) 
+(Illidops) 
+(Pholetesor) 
+(Protapanteles) 
+(Sathon) 
+(Nyereria) 
+(Glyptapanteles) 
+(Rasivalva) 
+
+taxonomy 2003 Van_Achterberg
+(Microgastrinae Apanteles Pholetesor Teremys Protapanteles)
+(Apanteles)
+(Pholetesor) 
+(Teremys) 
+(Protapanteles) 
+
+articulations 2018 2003
+[2018.Apanteles < 2003.Apanteles]
+[2018.Exoryza < 2003.Apanteles]
+[2018.Iconella < 2003.Apanteles]
+[2018.Illidops < 2003.Apanteles]
+[2018.Pholetesor > 2003.Pholetesor]
+[2018.Pholetesor > 2003.Teremys]
+[2018.Protapanteles < 2003.Protapanteles]
+[2018.Sathon < 2003.Protapanteles]
+[2018.Nyereria < 2003.Protapanteles]
+[2018.Glyptapanteles < 2003.Protapanteles]
+[2018.Rasivalva < 2003.Protapanteles]
+
+#inferred
+[2018.Pholetesor ! 2003.Apanteles]
+[2018.Pholetesor ! 2003.Protapanteles]
+[2018.Microgastrinae > 2003.Apanteles]
+[2018.Microgastrinae > 2003.Protapanteles]
+[2018.Pholetesor < 2003.Microgastrinae]
+
+
+
